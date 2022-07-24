@@ -60,16 +60,23 @@ export default {
 
 <style scoped>
 a {
-  text-decoration: none;
   color: #666;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-decoration: none;
 }
 
 ul {
   display: flex;
+  height: 10vh;
   justify-content: space-evenly;
 }
 
 li {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
   list-style: none;
   margin: 0 10px;
   text-align: center;

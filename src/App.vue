@@ -21,13 +21,21 @@ const currentState = ref(State.Initial)
 const changeState = (state) => {
   currentState.value = state;
 };
+
+const backToInitial = () => {
+  currentState.value = State.Initial;
+};
 </script>
 
 <template>
   <div class="common-layout">
     <el-container>
       <el-main>
-        <LanguageSelect />
+        <el-row>
+          <el-col :span="24">
+            <LanguageSelect />
+          </el-col>
+        </el-row>
         <el-row>
           <el-col :span="6">
             <BookingShortInfo :booking="booking" v-if="currentState === State.Confirmation" />
@@ -36,8 +44,12 @@ const changeState = (state) => {
             <HotelAddress />
           </el-col>
         </el-row>
-        <SelectBooking v-if="currentState === State.Initial" @change-state="changeState" />
-        <Confirmation v-if="currentState === State.Confirmation" />
+        <el-row>
+          <el-col :span="24">
+            <SelectBooking v-if="currentState === State.Initial" @change-state="changeState" />
+            <Confirmation v-if="currentState === State.Confirmation" @back-to-initial="backToInitial" />
+          </el-col>
+        </el-row>
       </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
@@ -51,5 +63,13 @@ const changeState = (state) => {
 
   body {
     font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  .el-row {
+    margin-bottom: 20px;
+  }
+
+  .el-row:last-child {
+    margin-bottom: 0;
   }
 </style>

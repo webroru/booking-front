@@ -8,6 +8,11 @@
   const data = ref(null);
   const loading = ref(false);
   const error = ref(null);
+  const emit = defineEmits(['selectBooking'])
+
+  const selectBooking = (booking) => {
+    emit('selectBooking', booking);
+  };
 
   const onSubmit = () => {
     let queryIsOrderNumber = /[0-9]+/.test(query.value);
@@ -21,10 +26,6 @@
     ElMessageBox.alert('An error occurred please contact support', 'Error', {
       confirmButtonText: 'OK',
     });
-  };
-
-  const selectBooking = (booking) => {
-    console.log(booking);
   };
 
   function fetchData(url) {
@@ -75,6 +76,11 @@
   </el-form>
   <div v-if="data">
     <h2>Choose your Booking</h2>
-    <Result v-for="item in data" :key="item.orderId" :booking="item" @select-booking="selectBooking" />
+    <Result
+      v-for="item in data"
+      :key="item.orderId"
+      :booking="item"
+      @select-booking="selectBooking"
+    />
   </div>
 </template>

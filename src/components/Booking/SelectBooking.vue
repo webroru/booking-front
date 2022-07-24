@@ -1,6 +1,6 @@
 <script setup>
-import State from './../../State';
-const emit = defineEmits(['changeState']);
+  import State from './../../State';
+  const emit = defineEmits(['changeState']);
 </script>
 
 <template>
