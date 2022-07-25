@@ -1,8 +1,10 @@
 <script setup>
+  // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     booking: Object,
   });
 
+  // eslint-disable-next-line no-unused-vars
   const emit = defineEmits(['selectBooking']);
 </script>
 

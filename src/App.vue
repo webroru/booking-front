@@ -1,30 +1,29 @@
 <script setup>
-import { ref } from 'vue';
-import BookingShortInfo from './components/BookingShortInfo.vue';
-import Confirmation from './components/Confirmation/Confirmation.vue';
-import LanguageSelect from './components/LanguageSelect.vue';
-import HotelAddress from './components/HotelAddress.vue';
-import State from './State';
-import SelectBooking from './components/Booking/SelectBooking.vue';
+  import { ref, reactive } from 'vue';
+  import BookingShortInfo from './components/BookingShortInfo.vue';
+  import Confirmation from './components/Confirmation/Confirmation.vue';
+  import LanguageSelect from './components/LanguageSelect.vue';
+  import HotelAddress from './components/HotelAddress.vue';
+  import State from './State';
+  import SelectBooking from './components/Booking/SelectBooking.vue';
 
-const booking = {
-  propertyName: 'Foo Bar',
-  room: 'Super Supreme 4',
-  checkInDate: '2022-08-01 14:00',
-  checkOutDate: '2022-08-05 12:00',
-  fullName: 'John Smith',
-  originalReferrer: 'My Funny Referrer',
-};
+  const selectedBooking = reactive({});
+  const currentState = ref(State.Initial)
 
-const currentState = ref(State.Initial)
+  const changeState = (state) => {
+    currentState.value = state;
+  };
 
-const changeState = (state) => {
-  currentState.value = state;
-};
+  const backToInitial = () => {
+    currentState.value = State.Initial;
+    Object.keys(selectedBooking).forEach(key => {
+      delete selectedBooking[key]
+    })
+  };
 
-const backToInitial = () => {
-  currentState.value = State.Initial;
-};
+  const selectBooking = (booking) => {
+    Object.assign(selectedBooking, booking);
+  };
 </script>
 
 <template>
@@ -38,7 +37,7 @@ const backToInitial = () => {
         </el-row>
         <el-row>
           <el-col :span="6">
-            <BookingShortInfo :booking="booking" v-if="currentState === State.Confirmation" />
+            <BookingShortInfo :booking="selectedBooking" v-if="Object.keys(selectedBooking).length" />
           </el-col>
           <el-col :span="12">
             <HotelAddress />
@@ -47,7 +46,8 @@ const backToInitial = () => {
         <el-row>
           <el-col :span="24">
             <SelectBooking v-if="currentState === State.Initial" @change-state="changeState" />
-            <Confirmation v-if="currentState === State.Confirmation" @back-to-initial="backToInitial" />
+            <Confirmation v-if="currentState === State.Confirmation" @back-to-initial="backToInitial"
+              @select-booking="selectBooking" />
           </el-col>
         </el-row>
       </el-main>

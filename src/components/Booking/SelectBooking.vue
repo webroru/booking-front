@@ -1,5 +1,6 @@
 <script setup>
   import State from './../../State';
+  // eslint-disable-next-line no-unused-vars
   const emit = defineEmits(['changeState']);
 </script>
 

@@ -8,11 +8,8 @@
   const data = ref(null);
   const loading = ref(false);
   const error = ref(null);
+  // eslint-disable-next-line no-unused-vars
   const emit = defineEmits(['selectBooking'])
-
-  const selectBooking = (booking) => {
-    emit('selectBooking', booking);
-  };
 
   const onSubmit = () => {
     let queryIsOrderNumber = /[0-9]+/.test(query.value);
@@ -80,7 +77,7 @@
       v-for="item in data"
       :key="item.orderId"
       :booking="item"
-      @select-booking="selectBooking"
+      @select-booking="$emit('selectBooking', $event)"
     />
   </div>
 </template>
