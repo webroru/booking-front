@@ -2,8 +2,10 @@
   import { ref, reactive, computed } from 'vue';
   import { ElMessageBox } from 'element-plus';
   import Upload from './Upload.vue';
+  import MakePhoto from './MakePhoto.vue';
 
-  const dialogVisible = ref(false);
+  const showTaxNotification = ref(false);
+  const showMakePhoto = ref(false);
 
   // eslint-disable-next-line no-unused-vars
   const props = defineProps({
@@ -27,7 +29,7 @@
 
   const prepareToSubmit = () => {
     if (props.booking.guestsAmount !== totalGuests.value) {
-      dialogVisible.value = true;
+      showTaxNotification.value = true;
       return;
     }
     submitForm();
@@ -85,12 +87,21 @@
   </el-row>
   <el-row>
   </el-row>
-  <el-dialog v-model="dialogVisible" title="Tips" width="30%" :before-close="handleClose">
+  <el-dialog v-model="showTaxNotification" title="Tips" width="30%" :before-close="handleClose">
     <span>This is a message</span>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+        <el-button @click="showTaxNotification = false">Cancel</el-button>
+        <el-button type="primary" @click="showTaxNotification = false">Confirm</el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <el-dialog v-model="showMakePhoto" title="Tips" width="30%" :before-close="handleClose">
+    <MakePhoto />
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="showMakePhoto = false">Cancel</el-button>
+        <el-button type="primary" @click="showMakePhoto = false">Confirm</el-button>
       </span>
     </template>
   </el-dialog>
