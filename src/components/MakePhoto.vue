@@ -5,8 +5,8 @@
   const height = ref(0);
   let streaming = false;
   const canvas = ref(null);
-  const photo = ref(null);
   const video = ref(null);
+  const photos = ref([]);
 
   navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(function (stream) {
@@ -35,8 +35,6 @@
     const context = canvas.value.getContext('2d');
     context.fillStyle = "#AAA";
     context.fillRect(0, 0, canvas.value.width, canvas.value.height);
-
-    photo.value = canvas.value.toDataURL('image/png');
   }
 
   const takepicture = () => {
@@ -48,25 +46,33 @@
     }
 
     context.drawImage(video.value, 0, 0, width, height.value);
-    photo.value = canvas.value.toDataURL('image/png');
+    photos.value.push(canvas.value.toDataURL('image/png'));
   }
+
+const removePhoto = (inxex) => {
+  photos.value.splice(inxex, 1);
+};
 </script>
 
 <template>
-  <div class="camera">
-    <video
-      ref="video"
-      autoplay
-      @canplay="adjustVideoSize"
-      :with="width"
-      :height="height">
-    </video>
-    <el-button @click="takepicture">Take photo</el-button>
-  </div>
-  <canvas ref="canvas" :with="width" :height="height"></canvas>
-  <div class="output">
-    <el-image id="photo" :src="photo" :fit="contain" />
-  </div>
+  <el-row>
+    <el-col :span="12">
+      <div class="camera">
+        <video ref="video" autoplay @canplay="adjustVideoSize">
+        </video>
+        <el-button @click="takepicture" type="primary">Take photo</el-button>
+      </div>
+      <canvas ref="canvas" :with="width" :height="height"></canvas>
+    </el-col>
+    <el-col :span="12">
+      <div class="output">
+        <div class="image-wraper" v-for="(photo, index) in photos" :key="'photo' + index">
+          <el-image :src="photo" :preview-src-list="photos" :initial-index="index" :fit="contain" />
+          <el-button type="danger" @click="removePhoto(index)">Remove</el-button>
+        </div>
+      </div>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>
@@ -74,18 +80,10 @@
     display: none;
   }
 
-  video {
-    border: 1px solid black;
-    box-shadow: 2px 2px 3px black;
-    height: 240px;
-    width: 320px;
-  }
-
-  #photo {
-    /* border: 1px solid black;
-    box-shadow: 2px 2px 3px black; */
-    height: 240px;
-    width: 320px;
+  .image-wraper {
+    margin: 0 10px 10px;
+    text-align: center;
+    width: 128px;
   }
 
   .camera {
@@ -94,8 +92,7 @@
   }
 
   .output {
-    display: inline-block;
-    vertical-align: top;
-    width: 340px;
+    display: flex;
+    flex-wrap: wrap;
   }
 </style>
