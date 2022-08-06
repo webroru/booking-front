@@ -1,12 +1,13 @@
 <script setup>
   import { ref } from 'vue';
+  import ShowPhotos from './ShowPhotos.vue';
 
-  const width = 320;
-  const height = ref(0);
-  let streaming = false;
+  // eslint-disable-next-line no-unused-vars
+  const emit = defineEmits(['updatePhotos'])
   const canvas = ref(null);
   const video = ref(null);
   const photos = ref([]);
+
 
   navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(function (stream) {
@@ -16,21 +17,6 @@
       console.error(`An error occurred: ${err}`);
     });
 
-
-  const adjustVideoSize = (event) => {
-    if (streaming) {
-      return;
-    }
-
-    height.value = event.currentTarget.videoHeight / (event.currentTarget.videoWidth / width);
-
-    if (isNaN(height.value)) {
-      height.value = width / (4 / 3);
-    }
-
-    streaming = true;
-  };
-
   const clearphoto = () => {
     const context = canvas.value.getContext('2d');
     context.fillStyle = "#AAA";
@@ -38,20 +24,31 @@
   }
 
   const takepicture = () => {
+    canvas.value.height = video.value.clientHeight;
+    canvas.value.width = video.value.clientWidth;
     const context = canvas.value.getContext('2d');
     
-    if (!width || !height.value) {
+    if (!canvas.value.height || !canvas.value.width) {
       clearphoto();
       return;
     }
 
-    context.drawImage(video.value, 0, 0, width, height.value);
-    photos.value.push(canvas.value.toDataURL('image/png'));
+    context.drawImage(video.value, 0, 0, canvas.value.width, canvas.value.height);
+    //photos.value.push(canvas.value.toDataURL('image/png'));
+    canvas.value.toBlob((blob) => {
+      if (blob === null) {
+        console.log("Failed to convert canvas to blob");
+        return;
+      }
+      photos.value.push(blob);
+    });
+    emit('updatePhotos', photos.value);
   }
 
-const removePhoto = (inxex) => {
-  photos.value.splice(inxex, 1);
-};
+  const removePhoto = (inxex) => {
+    photos.value.splice(inxex, 1);
+    emit('updatePhotos', photos.value);
+  };
 </script>
 
 <template>
@@ -62,14 +59,11 @@ const removePhoto = (inxex) => {
         </video>
         <el-button @click="takepicture" type="primary">Take photo</el-button>
       </div>
-      <canvas ref="canvas" :with="width" :height="height"></canvas>
+      <canvas ref="canvas"></canvas>
     </el-col>
     <el-col :span="12">
       <div class="output">
-        <div class="image-wraper" v-for="(photo, index) in photos" :key="'photo' + index">
-          <el-image :src="photo" :preview-src-list="photos" :initial-index="index" :fit="contain" />
-          <el-button type="danger" @click="removePhoto(index)">Remove</el-button>
-        </div>
+        <ShowPhotos :photos="photos" @remove-photo="removePhoto" />
       </div>
     </el-col>
   </el-row>
@@ -80,15 +74,12 @@ const removePhoto = (inxex) => {
     display: none;
   }
 
-  .image-wraper {
-    margin: 0 10px 10px;
-    text-align: center;
-    width: 128px;
+  video {
+    width: 100%;
   }
 
   .camera {
     display: inline-block;
-    width: 340px;
   }
 
   .output {
