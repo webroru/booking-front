@@ -1,24 +1,15 @@
 <script setup>
-  import { ref, reactive, computed } from 'vue';
-  import { ElMessageBox } from 'element-plus';
+  import { ref, computed } from 'vue';
+  import { useBookingStore } from '@/stores/booking';
   import MakePhoto from './Photos/MakePhoto.vue';
   import ShowPhotos from './Photos/ShowPhotos.vue';
 
-  const showTaxNotification = ref(false);
+  const store = useBookingStore();
+  const { booking, setBooking } = store;
   const showMakePhoto = ref(false);
   const photos = ref([]);
   const formRef = ref();
-
-  // eslint-disable-next-line no-unused-vars
-  const props = defineProps({
-    booking: Object,
-  });
-
-  const form = reactive({
-    adults: 0,
-    children: 0,
-    babies: 0,
-  });
+  const isCameraEnabled = ref(false);
 
   const tax = {
     adult: 3.13,
@@ -26,16 +17,20 @@
     baby: 0,
   };
 
-  const totalTax = computed(() => form.adults * tax.adult + form.children * tax.children + form.babies * tax.baby);
-  const totalGuests = computed(() => form.adults + form.children + form.babies);
+  const bookedNights = Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
+  const totalTax = computed(() => bookedNights * (booking.adults * tax.adult + booking.children * tax.children + booking.babies * tax.baby));
 
-  const prepareToSubmit = () => {
-    if (props.booking.guestsAmount !== totalGuests.value) {
-      showTaxNotification.value = true;
-      return;
-    }
-    submitForm();
-  }
+  const closeMakePhoto = () => {
+    isCameraEnabled.value = false;
+    showMakePhoto.value = false;
+  };
+
+  const openMakePhoto = () => {
+    isCameraEnabled.value = true;
+    showMakePhoto.value = true;
+  };
+
+  setBooking({ ...booking, adults: 0, children: 0, babies: 0 });
 
   const submitForm = () => {
     const formData = new FormData();
@@ -54,56 +49,28 @@
         alert(err);
       });
   }
-
-  const handleClose = () => {
-    ElMessageBox.confirm('Are you sure to close this dialog?')
-      .then(() => {
-        submitForm();
-      });
-  }
-
-  const updatePhotos = (updatedPhotos) => {
-    photos.value = updatedPhotos;
-  };
-
-  const removePhoto = (inxex) => {
-    photos.value.splice(inxex, 1);
-  };
-
-  const resetForm = (formRef) => {
-    if (!formRef) {
-        return;
-    }
-
-    formRef.resetFields();
-    photos.value = [];
-  }
 </script>
 
 <template>
   <el-row :gutter="20">
     <el-col :span="16">
-      <el-form :model="form" label-width="50%" ref="formRef">
+      <el-form :model="booking" label-width="50%" ref="formRef">
         <el-form-item label="Enter amount of Addults (18 years and older)" prop="adults">
-          <el-input-number v-model="form.adults" :min="0" :max="10" />
+          <el-input-number v-model="booking.adults" :min="0" :max="10" />
         </el-form-item>
         <el-form-item label="Enter amount of Children (from 7 years up to 18 years)" prop="children">
-          <el-input-number v-model="form.children" :min="0" :max="10" />
+          <el-input-number v-model="booking.children" :min="0" :max="10" />
         </el-form-item>
         <el-form-item label="Enter amount of Children (7 years and younger)" prop="babies">
-          <el-input-number v-model="form.babies" :min="0" :max="10" />
+          <el-input-number v-model="booking.babies" :min="0" :max="10" />
         </el-form-item>
         <el-form-item>
           <div class="output">
-            <ShowPhotos :photos="photos" @remove-photo="removePhoto" />
+            <ShowPhotos />
           </div>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="showMakePhoto = true">Make photos of yours Pasports or Card IDs</el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="danger" @click="resetForm(formRef)">Reset</el-button>
-          <el-button type="primary" @click="submitForm">Submit</el-button>
+          <el-button type="primary" @click="openMakePhoto">Make photos of yours Pasports or Card IDs</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -125,20 +92,12 @@
   </el-row>
   <el-row>
   </el-row>
-  <el-dialog v-model="showTaxNotification" title="Tips" width="30%" :before-close="handleClose">
-    <span>This is a message</span>
+  <el-dialog v-model="showMakePhoto" title="Make photos of yours Pasports or Card IDs" width="80%"
+    :before-close="closeMakePhoto">
+    <MakePhoto :is-camera-enabled="isCameraEnabled" />
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="showTaxNotification = false">Cancel</el-button>
-        <el-button type="primary" @click="showTaxNotification = false">Confirm</el-button>
-      </span>
-    </template>
-  </el-dialog>
-  <el-dialog v-model="showMakePhoto" title="Make photos of yours Pasports or Card IDs" width="80%">
-    <MakePhoto @update-photos="updatePhotos" />
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button type="primary" @click="showMakePhoto = false">Done</el-button>
+        <el-button type="primary" @click="closeMakePhoto">Done</el-button>
       </span>
     </template>
   </el-dialog>

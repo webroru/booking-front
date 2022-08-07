@@ -1,8 +1,8 @@
 <script setup>
-  // eslint-disable-next-line no-unused-vars
-  const props = defineProps({
-    booking: Object,
-  });
+  import { useBookingStore } from '@/stores/booking';
+
+  const store = useBookingStore();
+  const booking = store.booking;
 </script>
 
 <template>
@@ -10,7 +10,7 @@
     <template #header>
       <div class="card-header">
         <span>Property: {{ booking.propertyName }}</span>
-        <span>Room: {{ booking.room }}</span>
+        <span style="white-space: nowrap;">Room: {{ booking.room }}</span>
       </div>
     </template>
     <div class="text item">Check-in: {{ booking.checkInDate }}</div>

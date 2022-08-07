@@ -1,30 +1,48 @@
 <script setup>
-  import { ref, reactive } from 'vue';
+  import { ref, computed } from 'vue';
+  import { useBookingStore } from '@/stores/booking';
+  import { usePhotosStore } from '@/stores/photos';
   import Search from '../Search/Search.vue';
   import Instruction from './Instruction.vue';
   import Tax from '../Tax.vue';
 
-  const active = ref(1);
+  const active = ref(0);
   const emit = defineEmits(['backToInitial', 'selectBooking']);
-  const isNextDisabled = ref(true);
-  const selectedBooking = reactive({});
+  const bookingStore = useBookingStore();
+  const { booking } = bookingStore;
+  const photosStore = usePhotosStore();
+  const { photosBlobs } = photosStore;
+  const isNextDisabled = computed(() => !Object.keys(booking).length);
+  const showTaxNotification = ref(false);
 
   const next = () => {
-    if (active.value++ > 2) active.value = 1;
-  }
+    if (active.value === 2 && !areGuestsEqual()) {
+      showTaxNotification.value = true;
+      return;
+    }
 
-  const back = () => {
-    if (--active.value < 1) {
-      emit('backToInitial');
-      isNextDisabled.value = true;
+    if (active.value++ > 2) {
+      active.value = 0;
     }
   }
 
-  const selectBooking = (booking) => {
-    isNextDisabled.value = Object.keys(booking).length === 0 && active.value === 1;
-    Object.assign(selectedBooking, booking);
-    emit('selectBooking', booking);
+  const areGuestsEqual = () => {
+    const confirmedGuests = booking.adult + booking.children + booking.babies;
+    return booking.guestsAmount === confirmedGuests === photosBlobs.length;
   };
+
+  const goToPayment = () => {
+    showTaxNotification.value = false;
+    active.value = 3;
+  };
+
+  const back = () => {
+    if (active.value === 0) {
+      emit('backToInitial');
+    } else {
+      --active.value;
+    }
+  }
 </script>
 
 <template>
@@ -35,14 +53,24 @@
     <el-step title="Step 4" />
   </el-steps>
 
-  <Search v-if="active === 1" @select-booking="selectBooking" />
-  <Instruction v-if="active === 2" />
-  <Tax v-if="active === 3" :booking="selectedBooking" />
+  <Search v-if="active === 0" />
+  <Instruction v-if="active === 1" />
+  <Tax v-if="active === 2" />
 
   <div class="navigation">
     <el-button style="margin-top: 12px" @click="back">Back</el-button>
     <el-button style="margin-top: 12px" @click="next" :disabled="isNextDisabled">Next step</el-button>
   </div>
+  <el-dialog v-model="showTaxNotification" title="Extra Tax" width="30%">
+    <p>The number of guests entered or the number of photos uploaded does not match the number of guests in the booking.</p>
+    <p>You will be required to pay for an additional guest or send all documents.</p>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="showTaxNotification = false">Cancel</el-button>
+        <el-button type="primary" @click="goToPayment">Confirm</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped>

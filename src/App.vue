@@ -1,5 +1,7 @@
 <script setup>
-  import { ref, reactive } from 'vue';
+  import { ref } from 'vue';
+  import { useBookingStore } from '@/stores/booking';
+  import { usePhotosStore } from '@/stores/photos';
   import BookingShortInfo from './components/BookingShortInfo.vue';
   import Confirmation from './components/Confirmation/Confirmation.vue';
   import LanguageSelect from './components/LanguageSelect.vue';
@@ -7,7 +9,10 @@
   import State from './State';
   import SelectBooking from './components/Booking/SelectBooking.vue';
 
-  const selectedBooking = reactive({});
+  const bookingStore = useBookingStore();
+  const { booking, resetBooking } = bookingStore;
+  const photosStore = usePhotosStore();
+  const { clearPhotos } = photosStore;
   const currentState = ref(State.Initial)
 
   const changeState = (state) => {
@@ -16,13 +21,8 @@
 
   const backToInitial = () => {
     currentState.value = State.Initial;
-    Object.keys(selectedBooking).forEach(key => {
-      delete selectedBooking[key]
-    })
-  };
-
-  const selectBooking = (booking) => {
-    Object.assign(selectedBooking, booking);
+    resetBooking();
+    clearPhotos();
   };
 </script>
 
@@ -37,17 +37,16 @@
         </el-row>
         <el-row>
           <el-col :span="6">
-            <BookingShortInfo :booking="selectedBooking" v-if="Object.keys(selectedBooking).length" />
+            <BookingShortInfo v-if="Object.keys(booking).length" />
           </el-col>
           <el-col :span="12">
             <HotelAddress />
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="24">
+        <el-row justify="center">
+          <el-col :span="18">
             <SelectBooking v-if="currentState === State.Initial" @change-state="changeState" />
-            <Confirmation v-if="currentState === State.Confirmation" @back-to-initial="backToInitial"
-              @select-booking="selectBooking" />
+            <Confirmation v-if="currentState === State.Confirmation" @back-to-initial="backToInitial" />
           </el-col>
         </el-row>
       </el-main>

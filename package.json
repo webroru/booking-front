@@ -11,6 +11,7 @@
     "element-plus": "^2.2.8",
     "flag-icons": "^6.6.4",
     "normalize.css": "^8.0.1",
+    "pinia": "^2.0.17",
     "vue": "^3.2.37"
   },
   "devDependencies": {

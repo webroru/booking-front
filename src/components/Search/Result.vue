@@ -1,15 +1,16 @@
 <script setup>
+  import { useBookingStore } from '@/stores/booking';
+  
   // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     booking: Object,
   });
-
-  // eslint-disable-next-line no-unused-vars
-  const emit = defineEmits(['selectBooking']);
+  const store = useBookingStore();
+  const { setBooking } = store;
 </script>
 
 <template>
-  <el-descriptions :title="booking.fullName" @click="$emit('selectBooking', booking)" border :column="3" class="item">
+  <el-descriptions :title="booking.fullName" @click="setBooking(booking)" border :column="3" class="item">
     <el-descriptions-item label="Property">{{ booking.propertyName }}</el-descriptions-item>
     <el-descriptions-item label="Room">{{ booking.room }}</el-descriptions-item>
     <el-descriptions-item label="Check-in">{{ booking.checkInDate }}</el-descriptions-item>

@@ -7,16 +7,13 @@
   const query = ref();
   const data = ref(null);
   const loading = ref(false);
-  const error = ref(null);
-  // eslint-disable-next-line no-unused-vars
-  const emit = defineEmits(['selectBooking'])
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     let queryIsOrderNumber = /[0-9]+/.test(query.value);
     let url = queryIsOrderNumber ?
       'https://jsonblob.com/api/jsonBlob/1000746296369496064' :
       'https://jsonblob.com/api/jsonBlob/1000746296369496064';
-    fetchData(url);
+    data.value = await fetchData(url);
   };
 
   const showError = () => {
@@ -25,39 +22,24 @@
     });
   };
 
-  function fetchData(url) {
+  const fetchData = async (url) => {
     loading.value = true;
+    let json = [];
 
-    return fetch(url, {
-      method: 'get',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-      .then(res => {
-        if (!res.ok) {
-          const error = new Error(res.statusText);
-          error.json = res.json();
-          throw error;
+    try {
+      const response = await fetch(url, {
+        method: 'get',
+        headers: {
+          'content-type': 'application/json'
         }
-
-        return res.json();
-      })
-      .then(json => {
-        data.value = json.data;
-      })
-      .catch(err => {
-        error.value = err;
-        if (err.json) {
-          return err.json.then(json => {
-            error.value.message = json.message;
-          });
-        }
-        showError();
-      })
-      .then(() => {
-        loading.value = false;
       });
+      json = await response.json();
+    } catch (err) {
+      showError();
+    }
+
+    loading.value = false;
+    return json.data;
   }
 </script>
 
@@ -77,7 +59,6 @@
       v-for="item in data"
       :key="item.orderId"
       :booking="item"
-      @select-booking="$emit('selectBooking', $event)"
     />
   </div>
 </template>

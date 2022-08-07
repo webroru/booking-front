@@ -1,22 +1,21 @@
 <script setup>
-  // eslint-disable-next-line no-unused-vars
-  const emit = defineEmits(['removePhoto']);
+  import { usePhotosStore } from '@/stores/photos';
 
-  // eslint-disable-next-line no-unused-vars
-  const props = defineProps({
-    photos: Array,
-  });
+  const photosStore = usePhotosStore();
+  const { photosBlobs, removePhoto } = photosStore;
 
   const getBlobUrl = (blob) => {
     return window.URL.createObjectURL(blob);
   };
+
+  const getPhotos = () => photosBlobs.map(getBlobUrl);
 </script>
 
 <template>
   <div class="output">
-    <div class="image-wraper" v-for="(blob, index) in photos" :key="'photo' + index">
-      <el-image :src="getBlobUrl(blob)" :preview-src-list="photos" :initial-index="index" fit="contain" />
-      <el-button type="danger" @click="$emit('removePhoto', index)">Remove</el-button>
+    <div class="image-wraper" v-for="(blob, index) in photosBlobs" :key="'photo' + index">
+      <el-image :src="getBlobUrl(blob)" :preview-src-list="getPhotos()" :initial-index="index" fit="contain" />
+      <el-button type="danger" @click="removePhoto(index)">Remove</el-button>
     </div>
   </div>
 </template>

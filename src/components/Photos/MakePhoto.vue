@@ -1,21 +1,27 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
+  import { usePhotosStore } from '@/stores/photos';
   import ShowPhotos from './ShowPhotos.vue';
 
   // eslint-disable-next-line no-unused-vars
-  const emit = defineEmits(['updatePhotos'])
+  const props = defineProps({
+    isCameraEnabled: Boolean,
+  });
+
+  const photosStore = usePhotosStore();
+  const { addPhoto } = photosStore;
   const canvas = ref(null);
   const video = ref(null);
-  const photos = ref([]);
+  let localStream = null
 
-
-  navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-    .then(function (stream) {
-      video.value.srcObject = stream;
-    })
-    .catch((err) => {
+  const startStreaming = async () => {
+    try {
+      localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      video.value.srcObject = localStream;
+    } catch (err) {
       console.error(`An error occurred: ${err}`);
-    });
+    }
+  };
 
   const clearphoto = () => {
     const context = canvas.value.getContext('2d');
@@ -34,21 +40,32 @@
     }
 
     context.drawImage(video.value, 0, 0, canvas.value.width, canvas.value.height);
-    //photos.value.push(canvas.value.toDataURL('image/png'));
     canvas.value.toBlob((blob) => {
       if (blob === null) {
-        console.log("Failed to convert canvas to blob");
+        console.log('Failed to convert canvas to blob');
         return;
       }
-      photos.value.push(blob);
+      addPhoto(blob);
     });
-    emit('updatePhotos', photos.value);
   }
 
-  const removePhoto = (inxex) => {
-    photos.value.splice(inxex, 1);
-    emit('updatePhotos', photos.value);
+  const stopStreaming = () => {
+    if (localStream !== null) {
+      const track = localStream.getTracks()[0];
+      track.stop();
+      localStream = null;
+    }
   };
+
+  startStreaming();
+
+  watch(() => props.isCameraEnabled, (value) => {
+    if (value) {
+      startStreaming();
+    } else {
+      stopStreaming();
+    }
+  });
 </script>
 
 <template>
@@ -63,7 +80,7 @@
     </el-col>
     <el-col :span="12">
       <div class="output">
-        <ShowPhotos :photos="photos" @remove-photo="removePhoto" />
+        <ShowPhotos />
       </div>
     </el-col>
   </el-row>
