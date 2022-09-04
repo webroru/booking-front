@@ -5,6 +5,7 @@
   import Search from '../Search/Search.vue';
   import Instruction from './Instruction.vue';
   import Tax from '../Tax.vue';
+  import Payment from '../Payment/Payment.vue';
 
   const active = ref(0);
   const emit = defineEmits(['backToInitial', 'selectBooking']);
@@ -12,8 +13,14 @@
   const { booking } = bookingStore;
   const photosStore = usePhotosStore();
   const { photosBlobs } = photosStore;
-  const isNextDisabled = computed(() => !Object.keys(booking).length);
+  const isNextDisabled = computed(() => isNextDisabledCondition());
   const showTaxNotification = ref(false);
+
+  const isNextDisabledCondition = () => {
+    const hasBeenBookingSelected = Object.keys(booking).length;
+    const hasNotBeenBookingPaid = active.value === 3 && booking.status !== 'paid';
+    return !hasBeenBookingSelected || hasNotBeenBookingPaid;
+  };
 
   const next = () => {
     if (active.value === 2 && !areGuestsEqual()) {
@@ -56,6 +63,7 @@
   <Search v-if="active === 0" />
   <Instruction v-if="active === 1" />
   <Tax v-if="active === 2" />
+  <Payment v-if="active === 3" />
 
   <div class="navigation">
     <el-button style="margin-top: 12px" @click="back">Back</el-button>

@@ -56,6 +56,10 @@
 </template>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
   html {
     font-size: 16px;
   }
