@@ -40,7 +40,7 @@
 
     loading.value = false;
     return json.data;
-  }
+  };
 </script>
 
 <template>

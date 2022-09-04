@@ -8,11 +8,13 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.35.0",
     "element-plus": "^2.2.8",
     "flag-icons": "^6.6.4",
     "normalize.css": "^8.0.1",
     "pinia": "^2.0.17",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue-stripe-js": "^1.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
