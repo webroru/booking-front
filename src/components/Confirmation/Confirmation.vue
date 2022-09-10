@@ -19,8 +19,8 @@
 
   const isNextDisabledCondition = () => {
     const bookingHasNotBeenSelected = Object.keys(booking).length === 0;
-    const bookingHasNotBeenPaid = active.value === 3 && booking.status !== 'paid';
-    const bookingRuleHasNotBeenAccepted = active.value === 4 && booking.isRuleAccepted;
+    const bookingHasNotBeenPaid = active.value === 3 && !(booking.status === 'paid' || booking.status === 'payByCashe');
+    const bookingRuleHasNotBeenAccepted = active.value === 4 && !booking.isRuleAccepted;
 
     return bookingHasNotBeenSelected || bookingHasNotBeenPaid || bookingRuleHasNotBeenAccepted;
   };
