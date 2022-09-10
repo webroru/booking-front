@@ -4,6 +4,7 @@
   import { loadStripe } from '@stripe/stripe-js';
   import { StripeElements, StripeElement } from 'vue-stripe-js';
   import { ElMessageBox } from 'element-plus';
+  import PayByCashe from './PayByCashe.vue';
 
   const bookingStore = useBookingStore();
   const { booking, updateBooking } = bookingStore;
@@ -126,6 +127,7 @@
     </StripeElements>
     <button @click="pay" :disabled="isButtonDissabled">Pay</button>
     <p class="card-error" role="alert">{{errorText}}</p>
+    <PayByCashe />
   </div>
 </template>
 
