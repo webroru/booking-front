@@ -6,7 +6,7 @@
   import { ElMessageBox } from 'element-plus';
 
   const bookingStore = useBookingStore();
-  const { booking } = bookingStore;
+  const { booking, updateBooking } = bookingStore;
 
   const stripeKey = 'pk_test_51KlDhBGT2BPFfMCDGsKJRjDzrAS1poMsp8QLwL2vfpL1NOjvKIRaoJFseGQEiUECvA9JodSOhLMOE3Vwk4fWvhup00joqB3GX5'; // test key
   const instanceOptions = ref({
@@ -53,6 +53,7 @@
       showError();
     } else {
       booking.status = 'paid';
+      updateBooking(booking);
       showSuccess();
     }
     isButtonDissabled.value = false;

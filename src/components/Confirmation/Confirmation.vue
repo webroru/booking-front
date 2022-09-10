@@ -6,6 +6,7 @@
   import Instruction from './Instruction.vue';
   import Tax from '../Tax.vue';
   import Payment from '../Payment/Payment.vue';
+  import Rules from '../Rules.vue';
 
   const active = ref(0);
   const emit = defineEmits(['backToInitial', 'selectBooking']);
@@ -17,9 +18,11 @@
   const showTaxNotification = ref(false);
 
   const isNextDisabledCondition = () => {
-    const hasBeenBookingSelected = Object.keys(booking).length;
-    const hasNotBeenBookingPaid = active.value === 3 && booking.status !== 'paid';
-    return !hasBeenBookingSelected || hasNotBeenBookingPaid;
+    const bookingHasNotBeenSelected = Object.keys(booking).length === 0;
+    const bookingHasNotBeenPaid = active.value === 3 && booking.status !== 'paid';
+    const bookingRuleHasNotBeenAccepted = active.value === 4 && booking.isRuleAccepted;
+
+    return bookingHasNotBeenSelected || bookingHasNotBeenPaid || bookingRuleHasNotBeenAccepted;
   };
 
   const next = () => {
@@ -28,9 +31,7 @@
       return;
     }
 
-    if (active.value++ > 2) {
-      active.value = 0;
-    }
+    active.value++;
   };
 
   const areGuestsEqual = () => {
@@ -57,13 +58,14 @@
     <el-step title="Search" />
     <el-step title="Information" />
     <el-step title="Tax" />
-    <el-step title="Step 4" />
+    <el-step title="Rules" />
   </el-steps>
 
   <Search v-if="active === 0" />
   <Instruction v-if="active === 1" />
   <Tax v-if="active === 2" />
   <Payment v-if="active === 3" />
+  <Rules v-if="active === 4" />
 
   <div class="navigation">
     <el-button style="margin-top: 12px" @click="back">Back</el-button>
