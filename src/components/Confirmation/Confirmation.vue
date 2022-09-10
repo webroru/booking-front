@@ -31,7 +31,7 @@
     if (active.value++ > 2) {
       active.value = 0;
     }
-  }
+  };
 
   const areGuestsEqual = () => {
     const confirmedGuests = booking.adult + booking.children + booking.babies;
@@ -49,7 +49,7 @@
     } else {
       --active.value;
     }
-  }
+  };
 </script>
 
 <template>

@@ -25,9 +25,14 @@ export const useBookingStore = defineStore('booking', () => {
     Object.assign(booking, newBooking);
   };
 
+  const updateBooking = (newBooking) => {
+    setBooking(newBooking);
+    
+  };
+
   const resetBooking = () => {
     Object.keys(booking).forEach(key => {
-      delete booking[key]
+      delete booking[key];
     });
   };
 

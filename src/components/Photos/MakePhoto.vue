@@ -12,7 +12,7 @@
   const { addPhoto } = photosStore;
   const canvas = ref(null);
   const video = ref(null);
-  let localStream = null
+  let localStream = null;
 
   const startStreaming = async () => {
     try {
@@ -27,7 +27,7 @@
     const context = canvas.value.getContext('2d');
     context.fillStyle = "#AAA";
     context.fillRect(0, 0, canvas.value.width, canvas.value.height);
-  }
+  };
 
   const takepicture = () => {
     canvas.value.height = video.value.clientHeight;
@@ -47,7 +47,7 @@
       }
       addPhoto(blob);
     });
-  }
+  };
 
   const stopStreaming = () => {
     if (localStream !== null) {

@@ -1,4 +1,10 @@
 <script setup>
+  /**
+   * TODO:
+   * Загрузка фото на сервер перед переходом к следующему шагу.
+   * Либо сохранение в сторадж и загрузка от туда..
+   * Но нужно продумать механизм удаления с бэка.
+   */
   import { ref, computed } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import MakePhoto from './Photos/MakePhoto.vue';
@@ -48,7 +54,7 @@
       .catch(err => {
         alert(err);
       });
-  }
+  };
 </script>
 
 <template>

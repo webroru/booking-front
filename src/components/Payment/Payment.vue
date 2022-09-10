@@ -28,7 +28,7 @@
 
   const pay = async () => {
     isButtonDissabled.value = true;
-    const cardElement = card.value.stripeElement
+    const cardElement = card.value.stripeElement;
 
     const purchase = {
       bookingId: booking.orderId,
@@ -97,10 +97,10 @@
   };
 
   onBeforeMount(() => {
-    const stripePromise = loadStripe(stripeKey)
+    const stripePromise = loadStripe(stripeKey);
     stripePromise.then(() => {
-      stripeLoaded.value = true
-    })
+      stripeLoaded.value = true;
+    });
   });
 </script>
 
@@ -111,7 +111,7 @@
   <div class="container" v-loading="loading">
     <StripeElements
       v-if="stripeLoaded"
-      v-slot="{ elements, instance }"
+      v-slot="{ elements }"
       ref="elms"
       :stripe-key="stripeKey"
       :instance-options="instanceOptions"
