@@ -10,12 +10,8 @@
 </script>
 
 <template>
-  <el-descriptions :title="booking.fullName" @click="setBooking(booking)" border :column="3" class="item">
-    <el-descriptions-item label="Property">{{ booking.propertyName }}</el-descriptions-item>
-    <el-descriptions-item label="Room">{{ booking.room }}</el-descriptions-item>
-    <el-descriptions-item label="Check-in">{{ booking.checkInDate }}</el-descriptions-item>
-    <el-descriptions-item label="Check-out">{{ booking.checkOutDate }}</el-descriptions-item>
-    <el-descriptions-item label="Original Referrer">{{ booking.originalReferrer }}</el-descriptions-item>
-  </el-descriptions>
+    <div>
+      <el-link :underline="false" @click="setBooking(booking)">{{ booking.fullName }}, Booring Order № {{ booking.orderId }}</el-link>
+    </div>
   <el-divider />
 </template>
