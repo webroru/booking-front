@@ -13,7 +13,7 @@
   const { booking, resetBooking } = bookingStore;
   const photosStore = usePhotosStore();
   const { clearPhotos } = photosStore;
-  const currentState = ref(State.Initial)
+  const currentState = ref(State.Initial);
 
   const changeState = (state) => {
     currentState.value = state;

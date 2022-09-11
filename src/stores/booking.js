@@ -20,6 +20,7 @@ export const useBookingStore = defineStore('booking', () => {
    *   babies: number,
    *   passCode: number,
    *   dept: number,
+   *   extraPerson: number,
    * }}
    */
   const booking = reactive({});

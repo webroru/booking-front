@@ -24,7 +24,9 @@
   };
 
   const bookedNights = Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
-  const totalTax = computed(() => bookedNights * (booking.adults * tax.adult + booking.children * tax.children + booking.babies * tax.baby));
+  const totalTax = computed(() => strip(bookedNights * (booking.adults * tax.adult + booking.children * tax.children + booking.babies * tax.baby)));
+  const showExtraPay = computed(() => isExtraGuest());
+  const strip = (number) => parseFloat(number).toPrecision(4);
 
   const closeMakePhoto = () => {
     isCameraEnabled.value = false;
@@ -36,7 +38,15 @@
     showMakePhoto.value = true;
   };
 
-  setBooking({ ...booking, adults: 0, children: 0, babies: 0 });
+  setBooking({ ...booking, adults: 0, children: 0, babies: 0, sucklings: 0 });
+
+  const isExtraGuest = () => {
+    let confirmedGuests = booking.adults + booking.children + booking.babies;
+    if (booking.sucklings > 1) {
+      confirmedGuests += booking.sucklings - 1;
+    }
+    return booking.guestsAmount < confirmedGuests;
+  };
 
   const submitForm = () => {
     const formData = new FormData();
@@ -47,8 +57,11 @@
 
     fetch('https://example.com/upload.php', { method: 'POST', body: formData })
       .then(response => {
-        if (response.ok) return response;
-        else throw Error(`Server returned ${response.status}: ${response.statusText}`)
+        if (response.ok) {
+          return response;
+        } else {
+          throw Error(`Server returned ${response.status}: ${response.statusText}`);
+        }
       })
       .then(response => console.log(response.text()))
       .catch(err => {
@@ -61,14 +74,17 @@
   <el-row :gutter="20">
     <el-col :span="16">
       <el-form :model="booking" label-width="50%" ref="formRef">
-        <el-form-item label="Enter amount of Addults (18 years and older)" prop="adults">
+        <el-form-item label="Enter amount of Addults (18 years and older)">
           <el-input-number v-model="booking.adults" :min="0" :max="10" />
         </el-form-item>
-        <el-form-item label="Enter amount of Children (from 7 years up to 18 years)" prop="children">
+        <el-form-item label="Enter amount of Children (from 7 years up to 18 years)">
           <el-input-number v-model="booking.children" :min="0" :max="10" />
         </el-form-item>
-        <el-form-item label="Enter amount of Children (7 years and younger)" prop="babies">
+        <el-form-item label="Enter amount of Children (from 4 years up to 7)">
           <el-input-number v-model="booking.babies" :min="0" :max="10" />
+        </el-form-item>
+        <el-form-item label="Enter amount of Children (4 years and younger)">
+          <el-input-number v-model="booking.sucklings" :min="0" :max="10" />
         </el-form-item>
         <el-form-item>
           <div class="output">
@@ -94,6 +110,7 @@
           Total Tax: {{ totalTax }} &euro;
         </div>
       </el-card>
+      <p v-if="showExtraPay"><strong>Дополнительная плата за дополнительного гостя: {{ bookedNights * booking.extraPerson}} &euro;</strong></p>
     </el-col>
   </el-row>
   <el-row>

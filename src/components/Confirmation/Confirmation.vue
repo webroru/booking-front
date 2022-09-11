@@ -27,7 +27,7 @@
   };
 
   const next = () => {
-    if (active.value === 2 && !areGuestsEqual()) {
+    if (active.value === 2 && !isExtraGuest()) {
       showTaxNotification.value = true;
       return;
     }
@@ -35,9 +35,12 @@
     active.value++;
   };
 
-  const areGuestsEqual = () => {
-    const confirmedGuests = booking.adult + booking.children + booking.babies;
-    return booking.guestsAmount === confirmedGuests === photosBlobs.length;
+  const isExtraGuest = () => {
+    let confirmedGuests = booking.adults + booking.children + booking.babies;
+    if (booking.sucklings > 1) {
+      confirmedGuests += booking.sucklings - 1;
+    }
+    return booking.guestsAmount < confirmedGuests;
   };
 
   const goToPayment = () => {
