@@ -1,11 +1,14 @@
 <script setup>
-  const tax = true;
+  import { useBookingStore } from '@/stores/booking';
+
+  const bookingStore = useBookingStore();
+  const { booking } = bookingStore;
 </script>
 
 <template>
   <h2>
     You should register your guests
-    <span v-if="tax">and pay the city tax</span>
+    <span v-if="booking.dept">and pay the city tax</span>
   </h2>
 
   <p>
