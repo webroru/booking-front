@@ -7,6 +7,7 @@
   import Tax from '../Tax.vue';
   import Payment from '../Payment/Payment.vue';
   import Rules from '../Rules.vue';
+  import CheckInDetailsVue from '../CheckInDetails/CheckInDetails.vue';
 
   const active = ref(0);
   const emit = defineEmits(['backToInitial', 'selectBooking']);
@@ -59,6 +60,7 @@
     <el-step title="Information" />
     <el-step title="Tax" />
     <el-step title="Rules" />
+    <el-step title="CheckIn Details" />
   </el-steps>
 
   <Search v-if="active === 0" />
@@ -66,6 +68,7 @@
   <Tax v-if="active === 2" />
   <Payment v-if="active === 3" />
   <Rules v-if="active === 4" />
+  <CheckInDetailsVue v-if="active === 5" />
 
   <div class="navigation">
     <el-button style="margin-top: 12px" @click="back">Back</el-button>
