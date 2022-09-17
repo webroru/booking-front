@@ -2,7 +2,6 @@
   import { ref } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { usePhotosStore } from '@/stores/photos';
-  import BookingShortInfo from './components/BookingShortInfo.vue';
   import Confirmation from './components/Confirmation/Confirmation.vue';
   import LanguageSelect from './components/LanguageSelect.vue';
   import HotelAddress from './components/HotelAddress.vue';
@@ -37,7 +36,9 @@
         </el-row>
         <el-row>
           <el-col :span="6">
-            <BookingShortInfo v-if="Object.keys(booking).length" />
+            <el-card v-if="Object.keys(booking).length">
+              Брониование для {{ booking.fullName }}
+            </el-card>
           </el-col>
           <el-col :span="12">
             <HotelAddress />
