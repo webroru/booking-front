@@ -1,21 +1,20 @@
 <script setup>
+  import { computed } from 'vue';
   import { usePhotosStore } from '@/stores/photos';
 
   const photosStore = usePhotosStore();
   const { photosBlobs, removePhoto } = photosStore;
 
-  const getBlobUrl = (blob) => {
-    return window.URL.createObjectURL(blob);
-  };
-
-  const getPhotos = () => photosBlobs.map(getBlobUrl);
+  const getBlobUrl = (blob) => window.URL.createObjectURL(blob);
+  const getIdByIndex = (index) => Object.keys(photosBlobs)[index];
+  const photos = computed(() => Object.values(photosBlobs).map(getBlobUrl));
 </script>
 
 <template>
   <div class="output">
-    <div class="image-wraper" v-for="(blob, index) in photosBlobs" :key="'photo' + index">
-      <el-image :src="getBlobUrl(blob)" :preview-src-list="getPhotos()" :initial-index="index" fit="contain" />
-      <el-button type="danger" @click="removePhoto(index)">Remove</el-button>
+    <div class="image-wraper" v-for="(img, index) in photos" :key="'photo' + index">
+      <el-image :src="img" :preview-src-list="photos" :initial-index="index" fit="contain" />
+      <el-button type="danger" @click="removePhoto(getIdByIndex(index))">Remove</el-button>
     </div>
   </div>
 </template>

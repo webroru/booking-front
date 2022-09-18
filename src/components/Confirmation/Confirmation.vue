@@ -1,7 +1,6 @@
 <script setup>
   import { ref, computed } from 'vue';
   import { useBookingStore } from '@/stores/booking';
-  import { usePhotosStore } from '@/stores/photos';
   import Search from '../Search/Search.vue';
   import Instruction from './Instruction.vue';
   import Tax from '../Tax.vue';
@@ -13,8 +12,6 @@
   const emit = defineEmits(['backToInitial', 'selectBooking']);
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;
-  const photosStore = usePhotosStore();
-  const { photosBlobs } = photosStore;
   const isNextDisabled = computed(() => isNextDisabledCondition());
   const showTaxNotification = ref(false);
 

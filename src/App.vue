@@ -11,7 +11,7 @@
   const bookingStore = useBookingStore();
   const { booking, resetBooking } = bookingStore;
   const photosStore = usePhotosStore();
-  const { clearPhotos } = photosStore;
+  const { clearPhotosStore } = photosStore;
   const currentState = ref(State.Initial);
 
   const changeState = (state) => {
@@ -21,7 +21,7 @@
   const backToInitial = () => {
     currentState.value = State.Initial;
     resetBooking();
-    clearPhotos();
+    clearPhotosStore();
   };
 </script>
 

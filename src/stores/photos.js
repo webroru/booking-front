@@ -1,22 +1,25 @@
+import { reactive } from 'vue';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { addPhotoApi, removePhotoApi } from './api/photos';
 
 export const usePhotosStore = defineStore('photos', () => {
-
-  /** @type {Blob[]} */
-  const photosBlobs = ref([]);
+  const photosBlobs = reactive({});
   
-  const addPhoto = (photoBlob) => {
-    photosBlobs.value.push(photoBlob);
+  const addPhoto = async (photoBlob) => {
+    const { id } = await addPhotoApi(photoBlob);
+    photosBlobs[id] = photoBlob;
   };
 
-  const removePhoto = (index) => {
-    photosBlobs.value.splice(index, 1);
+  const removePhoto = (photoId) => {
+    delete photosBlobs[photoId];
+    removePhotoApi(photoId);
   };
 
-  const clearPhotos = () => {
-    photosBlobs.value = [];
+  const clearPhotosStore = () => {
+    Object.keys(photosBlobs).forEach(key => {
+      delete photosBlobs[key];
+    });
   };
 
-  return { photosBlobs, addPhoto, removePhoto, clearPhotos };
+  return { photosBlobs, addPhoto, removePhoto, clearPhotosStore };
 });

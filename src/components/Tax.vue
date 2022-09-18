@@ -1,9 +1,7 @@
 <script setup>
   /**
    * TODO:
-   * Загрузка фото на сервер перед переходом к следующему шагу.
-   * Либо сохранение в сторадж и загрузка от туда..
-   * Но нужно продумать механизм удаления с бэка.
+   * Загрузка и удаление для конкретной брони
    */
   import { ref, computed } from 'vue';
   import { useBookingStore } from '@/stores/booking';
@@ -13,19 +11,18 @@
   const store = useBookingStore();
   const { booking, setBooking } = store;
   const showMakePhoto = ref(false);
-  const photos = ref([]);
   const formRef = ref();
   const isCameraEnabled = ref(false);
 
-  const tax = {
+  const TAX = {
     adult: 3.13,
     children: 1.57,
     baby: 0,
   };
 
   const bookedNights = Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
-  const totalTax = computed(() => strip(bookedNights * (booking.adults * tax.adult + booking.children * tax.children + booking.babies * tax.baby)));
-  const showExtraPay = computed(() => isExtraGuest());
+  const totalTax = computed(() => strip(bookedNights * (booking.adults * TAX.adult + booking.children * TAX.children + booking.babies * TAX.baby)));
+  const showExtraPay = computed(() => extraGuests() > 0);
   const strip = (number) => parseFloat(number).toPrecision(4);
 
   const closeMakePhoto = () => {
@@ -40,33 +37,12 @@
 
   setBooking({ ...booking, adults: 0, children: 0, babies: 0, sucklings: 0 });
 
-  const isExtraGuest = () => {
+  const extraGuests = () => {
     let confirmedGuests = booking.adults + booking.children + booking.babies;
     if (booking.sucklings > 1) {
       confirmedGuests += booking.sucklings - 1;
     }
-    return booking.guestsAmount < confirmedGuests;
-  };
-
-  const submitForm = () => {
-    const formData = new FormData();
-
-    for (const photoBlob of photos.value) {
-      formData.append('photos[]', photoBlob);
-    }
-
-    fetch('https://example.com/upload.php', { method: 'POST', body: formData })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          throw Error(`Server returned ${response.status}: ${response.statusText}`);
-        }
-      })
-      .then(response => console.log(response.text()))
-      .catch(err => {
-        alert(err);
-      });
+    return confirmedGuests - booking.guestsAmount;
   };
 </script>
 
@@ -103,9 +79,9 @@
             <span>The city tax for a person per night</span>
           </div>
         </template>
-        <div class="text item">18 years and older: {{ tax.adult }} &euro;</div>
-        <div class="text item">from 7 years to 18 years: {{ tax.children }} &euro;</div>
-        <div class="text item">6 years and younger: {{ tax.baby }} &euro;</div>
+        <div class="text item">18 years and older: {{ TAX.adult }} &euro;</div>
+        <div class="text item">from 7 years to 18 years: {{ TAX.children }} &euro;</div>
+        <div class="text item">6 years and younger: {{ TAX.baby }} &euro;</div>
         <div class="bottom">
           Total Tax: {{ totalTax }} &euro;
         </div>
