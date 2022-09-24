@@ -1,18 +1,23 @@
 import { reactive } from 'vue';
 import { defineStore } from 'pinia';
 import { addPhotoApi, removePhotoApi } from './api/photos';
+import { useBookingStore } from '@/stores/booking';
+
+
 
 export const usePhotosStore = defineStore('photos', () => {
   const photosBlobs = reactive({});
+  const bookingStore = useBookingStore();
+  const { booking } = bookingStore;
   
   const addPhoto = async (photoBlob) => {
-    const { id } = await addPhotoApi(photoBlob);
+    const { id } = await addPhotoApi(booking.orderId, photoBlob);
     photosBlobs[id] = photoBlob;
   };
 
   const removePhoto = (photoId) => {
     delete photosBlobs[photoId];
-    removePhotoApi(photoId);
+    removePhotoApi(booking.orderId, photoId);
   };
 
   const clearPhotosStore = () => {

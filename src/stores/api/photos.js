@@ -1,4 +1,6 @@
-const addPhotoApi = async (data) => {
+
+
+const addPhotoApi = async (bookingId, data) => {
   const url = 'https://run.mocky.io/v3/29818e11-36cf-456e-aaaf-be067fac9018';
 
   let json = [];
@@ -16,7 +18,7 @@ const addPhotoApi = async (data) => {
   return json;
 };
 
-const removePhotoApi = async (data) => {
+const removePhotoApi = async (bookingId, data) => {
   const url = 'https://run.mocky.io/v3/6f22b652-258e-4388-827e-98e0ad85565e';
 
   let json = [];
