@@ -1,6 +1,7 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import { ref, reactive, computed } from 'vue';
   import { useBookingStore } from '@/stores/booking';
+  import { usePhotosStore } from '@/stores/photos';
   import Search from '../Search/Search.vue';
   import Instruction from './Instruction.vue';
   import Tax from '../Tax.vue';
@@ -12,9 +13,11 @@
   const emit = defineEmits(['backToInitial', 'selectBooking']);
   const bookingStore = useBookingStore();
   const { booking, updateBooking } = bookingStore;
+  const photosStore = usePhotosStore();
+  const { photosBlobs } = photosStore;
   const isNextDisabled = computed(() => isNextDisabledCondition());
-  const showTaxNotification = ref(false);
-  const showGuestsLimitNotification = ref(false);
+  const showNotification = ref(false);
+  const notifications = reactive([]);
 
   const isNextDisabledCondition = () => {
     const bookingHasNotBeenSelected = Object.keys(booking).length === 0;
@@ -27,24 +30,20 @@
   const next = () => {
     if (active.value === 2) {
       if (isGuestLimit()) {
-        showGuestsLimitNotification.value = true;
-        return;
+        notifications.push(`Нет возможности принять больше чем ${booking.capacity}`);
       }
       if (isExtraGuest()) {
-        showTaxNotification.value = true;
+        notifications.push('You will be required to pay for an additional guest');
+      }
+      if (isLessDocs()) {
+        notifications.push('Нужно дослать потом фото');
+      }
+      if (notifications.length) {
+        showNotification.value = true;
         return;
       }
     }
-
     active.value++;
-  };
-
-  const isExtraGuest = () => {
-    let confirmedGuests = booking.adults + booking.children + booking.babies;
-    if (booking.sucklings > 1) {
-      confirmedGuests += booking.sucklings - 1;
-    }
-    return booking.guestsAmount < confirmedGuests;
   };
 
   const confirmedGuests = () => {
@@ -55,18 +54,29 @@
     return confirmedGuests;
   };
 
+  const isExtraGuest = () => confirmedGuests() > booking.guestsAmount;
   const isGuestLimit = () => confirmedGuests() > booking.capacity;
+  const isLessDocs = () => Object.keys(photosBlobs).length < booking.adults + booking.children;
 
   const goNext = () => {
-    showTaxNotification.value = false;
+    if (isGuestLimit()) {
+      booking.overmax = confirmedGuests();
+    }
+    if (isExtraGuest()) {
+      booking.plusGuest = true;
+    }
+    if (isLessDocs()) {
+      booking.LessDocs = true;
+    }
+    updateBooking(booking);
+
+    showNotification.value = false;
     active.value++;
   };
 
-  const setOvermaxCodeAndGoNext = () => {
-    booking.overmax = confirmedGuests();
-    updateBooking(booking);
-    showGuestsLimitNotification.value = false;
-    active.value++;
+  const cancelNotification = () => {
+    notifications.length = 0;
+    showNotification.value = false;
   };
 
   const back = () => {
@@ -98,22 +108,12 @@
     <el-button style="margin-top: 12px" @click="back">Back</el-button>
     <el-button style="margin-top: 12px" @click="next" :disabled="isNextDisabled">Next step</el-button>
   </div>
-  <el-dialog v-model="showTaxNotification" title="Extra Tax" width="30%">
-    <p>The number of guests entered or the number of photos uploaded does not match the number of guests in the booking.</p>
-    <p>You will be required to pay for an additional guest or send all documents.</p>
+  <el-dialog v-model="showNotification" title="Warning" width="30%">
+    <p v-for="note in notifications" :key="note">{{ note }}</p>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="showTaxNotification = false">Cancel</el-button>
+        <el-button @click="cancelNotification">Cancel</el-button>
         <el-button type="primary" @click="goNext">Confirm</el-button>
-      </span>
-    </template>
-  </el-dialog>
-  <el-dialog v-model="showGuestsLimitNotification" title="Guests Limit" width="30%">
-    <p>Нет возможности принять больше чем {{ booking.capacity }}</p>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="showGuestsLimitNotification = false">Cancel</el-button>
-        <el-button type="primary" @click="setOvermaxCodeAndGoNext">Confirm</el-button>
       </span>
     </template>
   </el-dialog>

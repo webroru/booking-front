@@ -3,8 +3,6 @@ import { defineStore } from 'pinia';
 import { addPhotoApi, removePhotoApi } from './api/photos';
 import { useBookingStore } from '@/stores/booking';
 
-
-
 export const usePhotosStore = defineStore('photos', () => {
   const photosBlobs = reactive({});
   const bookingStore = useBookingStore();

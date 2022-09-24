@@ -108,7 +108,7 @@
 
 <template>
   <p>
-    You should pay {{ booking.dept }} &euro;
+    You should pay {{ booking.debt }} &euro;
   </p>
   <div class="container" v-loading="loading">
     <StripeElements

@@ -8,7 +8,7 @@
 <template>
   <h2>
     You should register your guests
-    <span v-if="booking.dept">and pay the city tax</span>
+    <span v-if="booking.debt">and pay the city tax</span>
   </h2>
 
   <p>
