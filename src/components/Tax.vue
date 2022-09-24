@@ -1,8 +1,4 @@
 <script setup>
-  /**
-   * TODO:
-   * Загрузка и удаление для конкретной брони
-   */
   import { ref, computed } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import MakePhoto from './Photos/MakePhoto.vue';

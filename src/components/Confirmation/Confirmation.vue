@@ -11,9 +11,10 @@
   const active = ref(0);
   const emit = defineEmits(['backToInitial', 'selectBooking']);
   const bookingStore = useBookingStore();
-  const { booking } = bookingStore;
+  const { booking, updateBooking } = bookingStore;
   const isNextDisabled = computed(() => isNextDisabledCondition());
   const showTaxNotification = ref(false);
+  const showGuestsLimitNotification = ref(false);
 
   const isNextDisabledCondition = () => {
     const bookingHasNotBeenSelected = Object.keys(booking).length === 0;
@@ -24,9 +25,15 @@
   };
 
   const next = () => {
-    if (active.value === 2 && !isExtraGuest()) {
-      showTaxNotification.value = true;
-      return;
+    if (active.value === 2) {
+      if (isGuestLimit()) {
+        showGuestsLimitNotification.value = true;
+        return;
+      }
+      if (isExtraGuest()) {
+        showTaxNotification.value = true;
+        return;
+      }
     }
 
     active.value++;
@@ -40,9 +47,26 @@
     return booking.guestsAmount < confirmedGuests;
   };
 
-  const goToPayment = () => {
+  const confirmedGuests = () => {
+    let confirmedGuests = booking.adults + booking.children + booking.babies;
+    if (booking.sucklings > 1) {
+      confirmedGuests += booking.sucklings - 1;
+    }
+    return confirmedGuests;
+  };
+
+  const isGuestLimit = () => confirmedGuests() > booking.capacity;
+
+  const goNext = () => {
     showTaxNotification.value = false;
-    active.value = 3;
+    active.value++;
+  };
+
+  const setOvermaxCodeAndGoNext = () => {
+    booking.overmax = confirmedGuests();
+    updateBooking(booking);
+    showGuestsLimitNotification.value = false;
+    active.value++;
   };
 
   const back = () => {
@@ -80,7 +104,16 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="showTaxNotification = false">Cancel</el-button>
-        <el-button type="primary" @click="goToPayment">Confirm</el-button>
+        <el-button type="primary" @click="goNext">Confirm</el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <el-dialog v-model="showGuestsLimitNotification" title="Guests Limit" width="30%">
+    <p>Нет возможности принять больше чем {{ booking.capacity }}</p>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="showGuestsLimitNotification = false">Cancel</el-button>
+        <el-button type="primary" @click="setOvermaxCodeAndGoNext">Confirm</el-button>
       </span>
     </template>
   </el-dialog>
