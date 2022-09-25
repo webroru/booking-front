@@ -3,6 +3,7 @@
   import { useBookingStore } from '@/stores/booking';
   import MakePhoto from './Photos/MakePhoto.vue';
   import ShowPhotos from './Photos/ShowPhotos.vue';
+  import UploadPhoto from './Photos/UploadPhoto.vue';
 
   const store = useBookingStore();
   const { booking, setBooking } = store;
@@ -63,10 +64,10 @@
             <ShowPhotos />
           </div>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="openMakePhoto">Make photos of yours Pasports or Card IDs</el-button>
-        </el-form-item>
       </el-form>
+      <p>Please provide Pasport or Card ID for every guest</p>
+      <UploadPhoto />
+      <el-button type="primary" @click="openMakePhoto">Use Camera</el-button>
     </el-col>
     <el-col :span="8">
       <el-card class="box-card">

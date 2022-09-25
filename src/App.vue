@@ -46,6 +46,7 @@
         </el-row>
         <el-row justify="center">
           <el-col :span="18">
+            <UploadPhoto />
             <SelectBooking v-if="currentState === State.Initial" @change-state="changeState" />
             <Confirmation v-if="currentState === State.Confirmation" @back-to-initial="backToInitial" />
           </el-col>
