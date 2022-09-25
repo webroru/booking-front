@@ -55,6 +55,7 @@
   };
 
   const isExtraGuest = () => confirmedGuests() > booking.guestsAmount;
+  const extraGuests = () => confirmedGuests() - booking.guestsAmount;
   const isGuestLimit = () => confirmedGuests() > booking.capacity;
   const isLessDocs = () => Object.keys(photosBlobs).length < booking.adults + booking.children;
 
@@ -67,6 +68,9 @@
     }
     if (isLessDocs()) {
       booking.LessDocs = true;
+    }
+    if (extraGuests() > 0) {
+      booking.extraGuests = isGuestLimit() ? booking.capacity : extraGuests();
     }
     updateBooking(booking);
 
