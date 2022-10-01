@@ -100,7 +100,7 @@
 </script>
 
 <template>
-  <el-steps :active="active" finish-status="success">
+  <el-steps :active="active" finish-status="success" class="steps">
     <el-step title="Search" />
     <el-step title="Information" />
     <el-step title="Rules" />
@@ -132,8 +132,12 @@
 </template>
 
 <style scoped>
-  .navigation {
+.navigation {
     display: flex;
     justify-content: space-between;
+  }
+
+  .steps {
+    margin: 0 0 40px;
   }
 </style>
