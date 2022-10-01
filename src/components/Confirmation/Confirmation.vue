@@ -132,10 +132,10 @@
 </template>
 
 <style scoped>
-.navigation {
-    display: flex;
-    justify-content: space-between;
-  }
+  .navigation {
+      display: flex;
+      justify-content: space-between;
+    }
 
   .steps {
     margin: 0 0 40px;
