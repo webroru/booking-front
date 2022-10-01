@@ -21,14 +21,14 @@
 
   const isNextDisabledCondition = () => {
     const bookingHasNotBeenSelected = Object.keys(booking).length === 0;
-    const bookingHasNotBeenPaid = active.value === 3 && !(booking.status === 'paid' || booking.status === 'payByCashe');
-    const bookingRuleHasNotBeenAccepted = active.value === 4 && !booking.isRuleAccepted;
+    const bookingHasNotBeenPaid = active.value === 4 && !(booking.status === 'paid' || booking.status === 'payByCashe');
+    const bookingRuleHasNotBeenAccepted = active.value === 2 && !booking.isRuleAccepted;
 
     return bookingHasNotBeenSelected || bookingHasNotBeenPaid || bookingRuleHasNotBeenAccepted;
   };
 
   const next = () => {
-    if (active.value === 2) {
+    if (active.value === 3) {
       if (isGuestLimit()) {
         notifications.push(`Нет возможности принять больше чем ${booking.capacity}`);
       }
@@ -84,6 +84,7 @@
   };
 
   const back = () => {
+    notifications.length = 0;
     if (active.value === 0) {
       emit('backToInitial');
     } else {
@@ -96,16 +97,16 @@
   <el-steps :active="active" finish-status="success">
     <el-step title="Search" />
     <el-step title="Information" />
-    <el-step title="Tax" />
     <el-step title="Rules" />
+    <el-step title="Tax" />
     <el-step title="CheckIn Details" />
   </el-steps>
 
   <Search v-if="active === 0" />
   <Instruction v-if="active === 1" />
-  <Tax v-if="active === 2" />
-  <Payment v-if="active === 3" />
-  <Rules v-if="active === 4" />
+  <Rules v-if="active === 2" />
+  <Tax v-if="active === 3" />
+  <Payment v-if="active === 4" />
   <CheckInDetailsVue v-if="active === 5" />
 
   <div class="navigation">

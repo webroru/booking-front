@@ -6,7 +6,7 @@
   import UploadPhoto from './Photos/UploadPhoto.vue';
 
   const store = useBookingStore();
-  const { booking, setBooking } = store;
+  const { booking } = store;
   const showMakePhoto = ref(false);
   const formRef = ref();
   const isCameraEnabled = ref(false);
@@ -31,8 +31,6 @@
     isCameraEnabled.value = true;
     showMakePhoto.value = true;
   };
-
-  setBooking({ ...booking, adults: 0, children: 0, babies: 0, sucklings: 0 });
 
   const extraGuests = () => {
     let confirmedGuests = booking.adults + booking.children + booking.babies;
