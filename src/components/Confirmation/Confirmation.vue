@@ -42,6 +42,9 @@
         showNotification.value = true;
         return;
       }
+      if (booking.debt === 0) {
+        active.value++;
+      }
     }
     active.value++;
   };
@@ -85,6 +88,9 @@
 
   const back = () => {
     notifications.length = 0;
+    if (active.value === 5 && booking.debt === 0) {
+      --active.value;
+    }
     if (active.value === 0) {
       emit('backToInitial');
     } else {
@@ -99,6 +105,7 @@
     <el-step title="Information" />
     <el-step title="Rules" />
     <el-step title="Tax" />
+    <el-step title="Payment" />
     <el-step title="CheckIn Details" />
   </el-steps>
 
