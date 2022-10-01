@@ -75,6 +75,7 @@
     if (extraGuests() > 0) {
       booking.extraGuests = isGuestLimit() ? booking.capacity : extraGuests();
     }
+    booking.checkIn = true;
     updateBooking(booking);
 
     showNotification.value = false;
