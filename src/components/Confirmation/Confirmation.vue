@@ -7,8 +7,8 @@
   import Tax from '../Tax.vue';
   import Payment from '../Payment/Payment.vue';
   import Rules from '../Rules.vue';
-  import CheckInDetailsVue from '../CheckInDetails/CheckInDetails.vue';
-  import BookingInfo from '../CheckInDetails/BookingInfo.vue';
+  import CheckInDetailsVue from '../CheckInDetails.vue';
+  import BookingInfo from '../BookingInfo.vue';
 
   const active = ref(0);
   const emit = defineEmits(['backToInitial', 'selectBooking']);

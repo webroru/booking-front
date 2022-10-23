@@ -1,30 +1,61 @@
 <script setup>
   import { ref } from 'vue';
+  import { ElMessage, ElMessageBox } from 'element-plus';
   import { useBookingStore } from '@/stores/booking';
   import Feedback from './Feedback.vue';
-  import Rules from '../Rules.vue';
+  import Rules from './Rules.vue';
 
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;
   const showFeedbackDialog = ref(false);
   const showRulesDialog = ref(false);
-  const showHowToMakeInDialog = ref(false);
-  const showFacilitiesDialog = ref(false);
-  const showextrasDialog = ref(false);
 
   const hotelInfo = {
     callTime: '9:00 — 23:00',
-    contactInformation: '+420 123 456 789',
-    howToMakeIt: 'Информацию о том, как добраться',
-    facilities: 'Информацию об удобствах',
-    extras: 'Информацию об дополнительных услугах',
+    contactInformation: '+420 123 456 789'
+  };
+
+  const openSendInformation = async () => {
+    const value = await ElMessageBox.prompt('Please input your e-mail', 'Tip', {
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      inputPattern:
+        /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+      inputErrorMessage: 'Invalid Email',
+    });
+
+    fetchData({ orderId: booking.orderId, mail: value });
+    ElMessage({
+      type: 'success',
+      message: `Information has been sent to: ${value}`,
+    });
+  };
+
+  const fetchData = async (data) => {
+    const url = 'https://run.mocky.io/v3/6f22b652-258e-4388-827e-98e0ad85565e';
+    let json = [];
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      });
+      json = await response.json();
+    } catch (err) {
+      console.log(err);
+    }
+
+    return json;
   };
 </script>
 
 <template>
   <el-row>
     <el-col :span="16">
-      <h2>Информация о Вашем номере</h2>
+      <h2>Информация для заезда</h2>
       <el-descriptions :title="booking.propertyName">
         <el-descriptions-item label="Номер комнаты">{{ booking.room }}</el-descriptions-item>
         <el-descriptions-item label="CheckIn">{{ booking.checkInDate }}</el-descriptions-item>
@@ -34,11 +65,9 @@
         <el-descriptions-item label="Код на входную дверь">{{ booking.passCode }}</el-descriptions-item>
       </el-descriptions>
 
+      <el-button type="primary" @click="showFeedbackDialog = true">Отправьте запрос или вопрос</el-button>
       <a href="tel:{{ hotelInfo.contactInformation }}" class="el-button el-button--primary">Позвонить {{ hotelInfo.callTime }}</a>
       <el-button type="primary" @click="showRulesDialog = true">Правила проживания</el-button>
-      <el-button type="primary" @click="showHowToMakeInDialog = true">Как добраться из</el-button>
-      <el-button type="primary" @click="showFacilitiesDialog = true">Удобства</el-button>
-      <el-button type="primary" @click="showextrasDialog = true">Доб услуги</el-button>
 
       <el-dialog v-model="showFeedbackDialog" title="Send Feedback" width="30%">
         <Feedback />
@@ -53,34 +82,15 @@
           <el-button @click="showRulesDialog = false">Close</el-button>
         </template>
       </el-dialog>
-
-      <el-dialog v-model="showHowToMakeInDialog" title="Rules" width="30%">
-        {{ hotelInfo.howToMakeIt }}
-        <template #footer>
-          <el-button @click="showHowToMakeInDialog = false">Close</el-button>
-        </template>
-      </el-dialog>
-
-      <el-dialog v-model="showFacilitiesDialog" title="Rules" width="30%">
-        {{ hotelInfo.facilities }}
-        <template #footer>
-          <el-button @click="showFacilitiesDialog = false">Close</el-button>
-        </template>
-      </el-dialog>
-
-      <el-dialog v-model="showextrasDialog" title="Rules" width="30%">
-        {{ hotelInfo.extras }}
-        <template #footer>
-          <el-button @click="showextrasDialog = false">Close</el-button>
-        </template>
-      </el-dialog>
+    </el-col>
+    <el-col :span="8">
+      <el-button type="primary" @click="openSendInformation">Отправить информацию на электронную почту</el-button>
     </el-col>
   </el-row>
 </template>
 
 <style scoped>
   .el-button {
-    margin-bottom: 20px;
     text-decoration: none;
   }
 </style>
