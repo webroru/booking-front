@@ -2,11 +2,6 @@
   import State from './../../State';
   // eslint-disable-next-line no-unused-vars
   const emit = defineEmits(['changeState']);
-  const registrationUrl = 'https://beds24.com/booking2.php?ownerid=85787&width=960&page=book3&limitstart=0&ownerid=85787';
-  const goToRegistration = () => {
-    window.location = registrationUrl;
-  };
-
 </script>
 
 <template>
@@ -21,7 +16,7 @@
     </el-button>
   </div>
   <div>
-    <el-button type="primary" size="large" :fill="true" @click="goToRegistration">
+    <el-button type="primary" size="large" :fill="true" @click="$emit('changeState', State.Registration)">
       I want to book
     </el-button>
   </div>

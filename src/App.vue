@@ -8,6 +8,7 @@
   import State from './State';
   import SelectBooking from './components/Booking/SelectBooking.vue';
   import Checkout from './components/Checkout.vue';
+  import Registration from "./components/Registration.vue";
 
   const bookingStore = useBookingStore();
   const { booking, resetBooking } = bookingStore;
@@ -62,6 +63,7 @@
             <SelectBooking v-if="currentState === State.Initial" @change-state="changeState" />
             <Confirmation v-if="currentState === State.Confirmation" @back-to-initial="backToInitial" />
             <Checkout v-if="currentState === State.Checkout" @back-to-initial="backToInitial" />
+            <Registration v-if="currentState === State.Registration" @back-to-initial="backToInitial" />
           </el-col>
         </el-row>
       </el-main>
