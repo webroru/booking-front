@@ -8,6 +8,7 @@
   import Payment from '../Payment/Payment.vue';
   import Rules from '../Rules.vue';
   import CheckInDetailsVue from '../CheckInDetails/CheckInDetails.vue';
+  import BookingInfo from '../CheckInDetails/BookingInfo.vue';
 
   const active = ref(0);
   const emit = defineEmits(['backToInitial', 'selectBooking']);
@@ -45,6 +46,10 @@
       if (booking.debt === 0) {
         active.value++;
       }
+    }
+    if (active.value === 0 && booking.checkIn === true) {
+      active.value = 6;
+      return;
     }
     active.value++;
   };
@@ -116,10 +121,12 @@
   <Tax v-if="active === 3" />
   <Payment v-if="active === 4" />
   <CheckInDetailsVue v-if="active === 5" />
+  <BookingInfo v-if="active === 6" />
 
   <div class="navigation">
-    <el-button style="margin-top: 12px" @click="back">Back</el-button>
-    <el-button style="margin-top: 12px" @click="next" :disabled="isNextDisabled">Next step</el-button>
+    <el-button v-if="active < 5" style="margin-top: 12px" @click="back">Back</el-button>
+    <el-button v-if="active < 5" style="margin-top: 12px" @click="next" :disabled="isNextDisabled">Next step</el-button>
+    <el-button v-else style="margin-top: 12px" @click="$emit('backToInitial')">Exit</el-button>
   </div>
   <el-dialog v-model="showNotification" title="Warning" width="30%">
     <p v-for="note in notifications" :key="note">{{ note }}</p>
