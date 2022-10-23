@@ -1,12 +1,10 @@
 <script setup>
   import { ref } from 'vue';
   import { useBookingStore } from '@/stores/booking';
-  import Feedback from './Feedback.vue';
   import Rules from './Rules.vue';
 
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;
-  const showFeedbackDialog = ref(false);
   const showRulesDialog = ref(false);
   const showHowToMakeInDialog = ref(false);
   const showFacilitiesDialog = ref(false);
@@ -39,13 +37,6 @@
       <el-button type="primary" @click="showHowToMakeInDialog = true">Как добраться из</el-button>
       <el-button type="primary" @click="showFacilitiesDialog = true">Удобства</el-button>
       <el-button type="primary" @click="showextrasDialog = true">Доб услуги</el-button>
-
-      <el-dialog v-model="showFeedbackDialog" title="Send Feedback" width="30%">
-        <Feedback />
-        <template #footer>
-          <el-button @click="showFeedbackDialog = false">Close</el-button>
-        </template>
-      </el-dialog>
 
       <el-dialog v-model="showRulesDialog" title="Rules" width="30%">
         <Rules />

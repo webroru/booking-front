@@ -11,6 +11,11 @@
     </el-button>
   </div>
   <div>
+    <el-button type="primary" size="large" :fill="true" @click="$emit('changeState', State.Checkout)">
+      Check out
+    </el-button>
+  </div>
+  <div>
     <el-button type="primary" size="large" :fill="true" @click="$emit('changeState', State.Registration)">
       I want to book
     </el-button>

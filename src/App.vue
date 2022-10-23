@@ -7,6 +7,7 @@
   import HotelAddress from './components/HotelAddress.vue';
   import State from './State';
   import SelectBooking from './components/Booking/SelectBooking.vue';
+  import Checkout from './components/Checkout.vue';
 
   const bookingStore = useBookingStore();
   const { booking, resetBooking } = bookingStore;
@@ -58,9 +59,9 @@
         </el-row>
         <el-row justify="center">
           <el-col :span="18">
-            <UploadPhoto />
             <SelectBooking v-if="currentState === State.Initial" @change-state="changeState" />
             <Confirmation v-if="currentState === State.Confirmation" @back-to-initial="backToInitial" />
+            <Checkout v-if="currentState === State.Checkout" @back-to-initial="backToInitial" />
           </el-col>
         </el-row>
       </el-main>
