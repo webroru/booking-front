@@ -31,12 +31,6 @@
     });
   };
 
-  const showCallInfo = () => {
-    ElMessageBox.alert(`Hote contact information: ${hotelInfo.contactInformation}`, 'Info', {
-      confirmButtonText: 'OK',
-    });
-  };
-
   const fetchData = async (data) => {
     const url = 'https://run.mocky.io/v3/6f22b652-258e-4388-827e-98e0ad85565e';
     let json = [];
@@ -71,8 +65,8 @@
         <el-descriptions-item label="Код на входную дверь">{{ booking.passCode }}</el-descriptions-item>
       </el-descriptions>
 
-      <el-button type="primary" @click="showFeedbackDialog = true">click to open the Dialog</el-button>
-      <el-button type="primary" @click="showCallInfo">Позвонить {{ hotelInfo.callTime }}</el-button>
+      <el-button type="primary" @click="showFeedbackDialog = true">Отправьте запрос или вопрос</el-button>
+      <a href="tel:{{ hotelInfo.contactInformation }}" class="el-button el-button--primary">Позвонить {{ hotelInfo.callTime }}</a>
       <el-button type="primary" @click="showRulesDialog = true">Правила проживания</el-button>
 
       <el-dialog v-model="showFeedbackDialog" title="Send Feedback" width="30%">
@@ -94,3 +88,9 @@
     </el-col>
   </el-row>
 </template>
+
+<style scoped>
+  .el-button {
+    text-decoration: none;
+  }
+</style>
