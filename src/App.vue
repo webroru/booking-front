@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { usePhotosStore } from '@/stores/photos';
   import Confirmation from './components/Confirmation/Confirmation.vue';
@@ -13,6 +13,13 @@
   const photosStore = usePhotosStore();
   const { clearPhotosStore } = photosStore;
   const currentState = ref(State.Initial);
+  const date = ref('');
+
+  onMounted(() => {
+    setInterval(function () {
+      date.value = new Date().toLocaleTimeString();
+    }, 100);
+  });
 
   const changeState = (state) => {
     currentState.value = state;
@@ -29,6 +36,11 @@
   <div class="common-layout">
     <el-container>
       <el-main>
+        <el-row>
+          <el-col style="text-align: center">
+            {{ date }}
+          </el-col>
+        </el-row>
         <el-row>
           <el-col :span="24">
             <LanguageSelect />
