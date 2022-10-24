@@ -10,6 +10,7 @@
   const showMakePhoto = ref(false);
   const formRef = ref();
   const isCameraEnabled = ref(false);
+  const doesShowUpload = window.location !== 'https://test.smartlock.ovh/';
 
   const TAX = {
     adult: 3.13,
@@ -64,8 +65,8 @@
         </el-form-item>
       </el-form>
       <p>Please provide Pasport or Card ID for every guest</p>
-      <UploadPhoto />
-      <el-button type="primary" @click="openMakePhoto">Use Camera</el-button>
+      <UploadPhoto v-if="doesShowUpload" />
+      <el-button type="primary" @click="openMakePhoto">Сфотограцироват документ</el-button>
     </el-col>
     <el-col :span="8">
       <el-card class="box-card">
