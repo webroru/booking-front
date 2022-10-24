@@ -3,7 +3,6 @@
   import { ElMessage } from 'element-plus';
 
   const form = reactive({
-    email: '',
     message: '',
   });
 
@@ -39,20 +38,6 @@
 
 <template>
   <el-form :model="form" label-width="120px">
-    <el-form-item prop="email" label="Email" required :rules="[
-      {
-        required: true,
-        message: 'Please input email address',
-        trigger: 'blur',
-      },
-      {
-        type: 'email',
-        message: 'Please input correct email address',
-        trigger: ['blur', 'change'],
-      },
-    ]">
-      <el-input v-model="form.email" />
-    </el-form-item>
     <el-form-item label="Message" required>
       <el-input v-model="form.message" type="textarea" />
     </el-form-item>
