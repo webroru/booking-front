@@ -7,7 +7,7 @@
   import Tax from '../Tax.vue';
   import Payment from '../Payment/Payment.vue';
   import Rules from '../Rules.vue';
-  import CheckInDetailsVue from '../CheckInDetails.vue';
+  import CheckInDetails from '../CheckInDetails.vue';
   import BookingInfo from '../BookingInfo.vue';
 
   const active = ref(0);
@@ -120,7 +120,7 @@
   <Rules v-if="active === 2" />
   <Tax v-if="active === 3" />
   <Payment v-if="active === 4" />
-  <CheckInDetailsVue v-if="active === 5" />
+  <CheckInDetails v-if="active === 5" />
   <BookingInfo v-if="active === 6" />
 
   <div class="navigation">

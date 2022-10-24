@@ -77,7 +77,7 @@
       </el-dialog>
 
       <el-dialog v-model="showRulesDialog" title="Rules" width="30%">
-        <Rules />
+        <Rules show-checkbox="false" />
         <template #footer>
           <el-button @click="showRulesDialog = false">Close</el-button>
         </template>
