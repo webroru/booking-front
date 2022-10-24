@@ -45,7 +45,7 @@
 
 <template>
   <el-form v-loading="loading" label-width="auto" label-position="top" @submit.prevent="onSubmit">
-    <el-form-item label="Enter the name who has created the booking or order number">
+    <el-form-item label="Enter the surname who has created the booking or order number">
       <el-input v-model="query">
         <template #append>
           <el-button :icon="Search" @click="onSubmit" />
