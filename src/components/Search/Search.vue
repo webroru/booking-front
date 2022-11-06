@@ -3,7 +3,7 @@
   import { Search } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus';
   import Result from './Result.vue';
-  import { apiUrl } from '@/config';
+  import config from '@/config';
 
   const query = ref();
   const data = ref(null);
@@ -12,8 +12,8 @@
   const onSubmit = async () => {
     let queryIsOrderNumber = /[0-9]+/.test(query.value);
     let url = queryIsOrderNumber ?
-      `${apiUrl}//api/booking?originalReferer=${query.value}` :
-      `${apiUrl}//api/booking?surame=${query.value}`;
+      `${config.apiUrl}//api/booking?originalReferer=${query.value}` :
+      `${config.apiUrl}//api/booking?surame=${query.value}`;
     data.value = await fetchData(url);
   };
 
