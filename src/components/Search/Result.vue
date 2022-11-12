@@ -27,7 +27,7 @@
       <el-descriptions-item label="Room">{{ booking.room }}</el-descriptions-item>
       <el-descriptions-item label="Check-in">{{ booking.checkInDate }}</el-descriptions-item>
       <el-descriptions-item label="Check-out">{{ booking.checkOutDate }}</el-descriptions-item>
-      <el-descriptions-item label="Original Referrer">{{ booking.originalReferrer }}</el-descriptions-item>
+      <el-descriptions-item label="Original Referrer">{{ booking.originalReferer }}</el-descriptions-item>
     </el-descriptions>
 </template>
 
