@@ -2,7 +2,7 @@
   import { useBookingStore } from '@/stores/booking';
 
   const bookingStore = useBookingStore();
-  const { booking, updateBooking } = bookingStore;
+  const { booking, acceptRule } = bookingStore;
   // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     showCheckbox: {
@@ -26,7 +26,7 @@
     <el-checkbox
       v-if="showCheckbox === true"
       v-model="booking.isRuleAccepted"
-      @change="updateBooking(booking)"
+      @change="acceptRule(booking.orderId, booking.isRuleAccepted)"
       label="I am agree"
       size="large" />
   </div>
