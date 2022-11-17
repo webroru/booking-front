@@ -66,7 +66,7 @@
       </el-form>
       <p>Please provide Pasport or Card ID for every guest</p>
       <UploadPhoto v-if="doesShowUpload" />
-      <el-button type="primary" @click="openMakePhoto">Сфотограцироват документ</el-button>
+      <el-button type="primary" @click="openMakePhoto">Сфотографировать документ</el-button>
     </el-col>
     <el-col :span="8">
       <el-card class="box-card">
