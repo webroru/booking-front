@@ -9,8 +9,8 @@ export const usePhotosStore = defineStore('photos', () => {
   const { booking } = bookingStore;
   
   const addPhoto = async (photoBlob) => {
-    const { id } = await addPhotoApi(booking.orderId, photoBlob);
-    photosBlobs[id] = photoBlob;
+    const { data } = await addPhotoApi(booking.orderId, photoBlob);
+    photosBlobs[data] = photoBlob;
   };
 
   const removePhoto = (photoId) => {

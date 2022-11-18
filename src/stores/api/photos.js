@@ -1,14 +1,16 @@
-
+import config from '@/config';
 
 const addPhotoApi = async (bookingId, data) => {
-  const url = 'https://run.mocky.io/v3/29818e11-36cf-456e-aaaf-be067fac9018';
+  const url = `${config.apiUrl}/api/booking/${bookingId}/photo`;
 
   let json = [];
+  const formData = new FormData();
+  formData.append('photo', data);
 
   try {
     const response = await fetch(url, {
       method: 'POST',
-      body: data,
+      body: formData,
     });
     json = await response.json();
   } catch (err) {
@@ -19,13 +21,13 @@ const addPhotoApi = async (bookingId, data) => {
 };
 
 const removePhotoApi = async (bookingId, data) => {
-  const url = 'https://run.mocky.io/v3/6f22b652-258e-4388-827e-98e0ad85565e';
+  const url = `${config.apiUrl}/api/booing/${bookingId}/photo`;
 
   let json = [];
 
   try {
     const response = await fetch(url, {
-      method: 'DELET',
+      method: 'DELETE',
       headers: {
         'content-type': 'application/json'
       },
