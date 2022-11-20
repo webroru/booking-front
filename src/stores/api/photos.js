@@ -20,8 +20,8 @@ const addPhotoApi = async (bookingId, data) => {
   return json;
 };
 
-const removePhotoApi = async (bookingId, data) => {
-  const url = `${config.apiUrl}/api/booing/${bookingId}/photo`;
+const removePhotoApi = async (bookingId, photoId) => {
+  const url = `${config.apiUrl}/api/booking/${bookingId}/photo/${photoId}`;
 
   let json = [];
 
@@ -31,7 +31,6 @@ const removePhotoApi = async (bookingId, data) => {
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify(data),
     });
     json = await response.json();
   } catch (err) {
