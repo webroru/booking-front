@@ -5,11 +5,12 @@
   import { StripeElements, StripeElement } from 'vue-stripe-js';
   import { ElMessageBox } from 'element-plus';
   import PayByCashe from './PayByCashe.vue';
+  import config from '@/config';
 
   const bookingStore = useBookingStore();
   const { booking, updateBooking } = bookingStore;
 
-  const stripeKey = 'pk_test_51KlDhBGT2BPFfMCDGsKJRjDzrAS1poMsp8QLwL2vfpL1NOjvKIRaoJFseGQEiUECvA9JodSOhLMOE3Vwk4fWvhup00joqB3GX5'; // test key
+  //const stripeKey = 'pk_test_51KlDhBGT2BPFfMCDGsKJRjDzrAS1poMsp8QLwL2vfpL1NOjvKIRaoJFseGQEiUECvA9JodSOhLMOE3Vwk4fWvhup00joqB3GX5'; // test key
   const instanceOptions = ref({
     // https://stripe.com/docs/js/initializing#init_stripe_js-options
   });
@@ -35,10 +36,10 @@
       bookingId: booking.orderId,
     };
 
-    const url = 'https://run.mocky.io/v3/a1c888c3-5725-43d0-9744-1519442d38ff';
-    const { clientSecret } = await fetchData(url, purchase);
+    const url = `${config.apiUrl}/api/payment`;
+    const { token } = await fetchData(url, purchase);
     const result = await elms.value.instance.confirmCardPayment(
-      clientSecret,
+      token,
       {
         payment_method: {
           card: cardElement,
@@ -99,7 +100,7 @@
   };
 
   onBeforeMount(() => {
-    const stripePromise = loadStripe(stripeKey);
+    const stripePromise = loadStripe(config.stripePublicKey);
     stripePromise.then(() => {
       stripeLoaded.value = true;
     });
@@ -115,7 +116,7 @@
       v-if="stripeLoaded"
       v-slot="{ elements }"
       ref="elms"
-      :stripe-key="stripeKey"
+      :stripe-key="config.stripePublicKey"
       :instance-options="instanceOptions"
       :elements-options="elementsOptions">
       <StripeElement
