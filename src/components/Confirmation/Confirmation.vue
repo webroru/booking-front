@@ -43,7 +43,7 @@
         showNotification.value = true;
         return;
       }
-      if (booking.debt === 0) {
+      if (booking.debt <= 0) {
         active.value++;
       }
     }
@@ -84,6 +84,9 @@
     updateBooking(booking);
 
     showNotification.value = false;
+    if (booking.debt <= 0) {
+      active.value++;
+    }
     active.value++;
   };
 
