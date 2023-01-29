@@ -6,7 +6,7 @@
   import UploadPhoto from './Photos/UploadPhoto.vue';
 
   const store = useBookingStore();
-  const { booking } = store;
+  const { booking, updateGuests } = store;
   const showMakePhoto = ref(false);
   const formRef = ref();
   const isCameraEnabled = ref(false);
@@ -47,16 +47,16 @@
     <el-col :span="16">
       <el-form :model="booking" label-width="50%" ref="formRef">
         <el-form-item label="Enter amount of Addults (18 years and older)">
-          <el-input-number v-model="booking.adults" :min="0" :max="10" />
+          <el-input-number v-model="booking.adults" :min="0" :max="10" @change="updateGuests(booking)" />
         </el-form-item>
         <el-form-item label="Enter amount of Children (from 7 years up to 18 years)">
-          <el-input-number v-model="booking.children" :min="0" :max="10" />
+          <el-input-number v-model="booking.children" :min="0" :max="10" @change="updateGuests(booking)" />
         </el-form-item>
         <el-form-item label="Enter amount of Children (from 4 years up to 7)">
-          <el-input-number v-model="booking.babies" :min="0" :max="10" />
+          <el-input-number v-model="booking.babies" :min="0" :max="10" @change="updateGuests(booking)" />
         </el-form-item>
         <el-form-item label="Enter amount of Children (4 years and younger)">
-          <el-input-number v-model="booking.sucklings" :min="0" :max="10" />
+          <el-input-number v-model="booking.sucklings" :min="0" :max="10" @change="updateGuests(booking)" />
         </el-form-item>
         <el-form-item>
           <div class="output">

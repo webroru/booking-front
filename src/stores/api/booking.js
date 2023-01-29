@@ -42,4 +42,25 @@ const acceptRuleApi = async (orderId, isRuleAccepted) => {
   return json;
 };
 
-export { updateBookingApi, acceptRuleApi };
+const updateGuestsApi = async (orderId, data) => {
+  const url = `${config.apiUrl}/api/booking/${orderId}/guests`;
+
+  let json = [];
+
+  try {
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    });
+    json = await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+
+  return json;
+};
+
+export { updateBookingApi, acceptRuleApi, updateGuestsApi };
