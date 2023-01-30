@@ -55,6 +55,7 @@
       showError();
     } else {
       booking.status = 'paid';
+      booking.checkIn = true;
       updateBooking(booking);
       showSuccess();
     }

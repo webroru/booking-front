@@ -27,6 +27,7 @@ export const useBookingStore = defineStore('booking', () => {
    *   isRuleAccepted,
    *   checkIn: bool,
    *   status: string,
+   *   lessDocs: bool,
    * }}
    */
   const booking = reactive({});

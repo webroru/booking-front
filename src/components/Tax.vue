@@ -1,12 +1,16 @@
 <script setup>
   import { ref, computed } from 'vue';
+  import { ElNotification } from 'element-plus';
   import { useBookingStore } from '@/stores/booking';
+  import { usePhotosStore } from '@/stores/photos';
   import MakePhoto from './Photos/MakePhoto.vue';
   import ShowPhotos from './Photos/ShowPhotos.vue';
   import UploadPhoto from './Photos/UploadPhoto.vue';
 
   const store = useBookingStore();
   const { booking, updateGuests } = store;
+  const photosStore = usePhotosStore();
+  const { photosBlobs } = photosStore;
   const showMakePhoto = ref(false);
   const formRef = ref();
   const isCameraEnabled = ref(false);
@@ -33,12 +37,68 @@
     showMakePhoto.value = true;
   };
 
-  const extraGuests = () => {
+  const confirmedGuests = () => {
     let confirmedGuests = booking.adults + booking.children + booking.babies;
     if (booking.sucklings > 1) {
       confirmedGuests += booking.sucklings - 1;
     }
-    return confirmedGuests - booking.guestsAmount;
+    return confirmedGuests;
+  };
+
+  const isExtraGuest = () => confirmedGuests() > booking.guestsAmount;
+  const extraGuests = () => confirmedGuests() - booking.guestsAmount;
+  const isGuestLimit = () => confirmedGuests() > booking.capacity;
+  const isLessDocs = () => Object.keys(photosBlobs).length < booking.adults + booking.children;
+
+  let isGuestLimitShow = false;
+  let isExtraGuestShow = false;
+  let isLessDocsShow = false;
+
+  const update = () => {
+    booking.overmax = isGuestLimit() ? confirmedGuests() : 0;
+    booking.plusGuest = isExtraGuest();
+    booking.lessDocs = isLessDocs();
+    booking.extraGuests = Math.max(extraGuests(), 0);
+    //booking.checkIn = true;
+
+    if (isGuestLimit() && !isGuestLimitShow) {
+      isGuestLimitShow = true;
+      setTimeout(() => {
+        ElNotification({
+          title: 'Warning',
+          message: `Нет возможности принять больше, чем ${booking.capacity} гостя`,
+          type: 'warning',
+          onClose: () => isGuestLimitShow = false,
+        });
+
+      }, 0);
+    }
+    if (isExtraGuest() && !isExtraGuestShow) {
+      isExtraGuestShow = true;
+      setTimeout(() => {
+        ElNotification({
+          title: 'Warning',
+          message: 'You will be required to pay for an additional guest',
+          type: 'warning',
+          onClose: () => isExtraGuestShow = false,
+        });
+
+      }, 0);
+    }
+    if (isLessDocs() && !isLessDocsShow) {
+      isLessDocsShow = true;
+      setTimeout(() => {
+        ElNotification({
+          title: 'Info',
+          message: 'Не забудте добавить фото документов каждого гостя',
+          type: 'info',
+          onClose: () => isLessDocsShow = false,
+        });
+      }, 0);
+
+    }
+
+    updateGuests(booking);
   };
 </script>
 
@@ -46,17 +106,17 @@
   <el-row :gutter="20">
     <el-col :span="16">
       <el-form :model="booking" label-width="50%" ref="formRef">
-        <el-form-item label="Enter amount of Addults (18 years and older)">
-          <el-input-number v-model="booking.adults" :min="0" :max="10" @change="updateGuests(booking)" />
+        <el-form-item label="Enter amount of Adults (18 years and older)">
+          <el-input-number v-model="booking.adults" :min="0" :max="10" @change="update" />
         </el-form-item>
         <el-form-item label="Enter amount of Children (from 7 years up to 18 years)">
-          <el-input-number v-model="booking.children" :min="0" :max="10" @change="updateGuests(booking)" />
+          <el-input-number v-model="booking.children" :min="0" :max="10" @change="update" />
         </el-form-item>
         <el-form-item label="Enter amount of Children (from 4 years up to 7)">
-          <el-input-number v-model="booking.babies" :min="0" :max="10" @change="updateGuests(booking)" />
+          <el-input-number v-model="booking.babies" :min="0" :max="10" @change="update" />
         </el-form-item>
         <el-form-item label="Enter amount of Children (4 years and younger)">
-          <el-input-number v-model="booking.sucklings" :min="0" :max="10" @change="updateGuests(booking)" />
+          <el-input-number v-model="booking.sucklings" :min="0" :max="10" @change="update" />
         </el-form-item>
         <el-form-item>
           <div class="output">
