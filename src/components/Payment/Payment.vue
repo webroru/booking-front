@@ -54,7 +54,7 @@
       errorText.value = result.error.message;
       showError();
     } else {
-      booking.status = 'paid';
+      booking.paymentStatus = 'paid';
       booking.checkIn = true;
       updateBooking(booking);
       showSuccess();

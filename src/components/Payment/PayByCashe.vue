@@ -3,15 +3,15 @@
   import { useBookingStore } from '@/stores/booking';
 
   const bookingStore = useBookingStore();
-  const { booking, updateBooking } = bookingStore;
+  const { booking, payByCash } = bookingStore;
 
   const open = () => {
     ElMessageBox.alert('.... The guide how to pay by Cashe...', 'Info', {
       confirmButtonText: 'OK',
     });
 
-    booking.status = 'payByCashe';
-    updateBooking(booking);
+    booking.paymentStatus = 'payByCashe';
+    payByCash(booking.orderId);
   };
 </script>
 

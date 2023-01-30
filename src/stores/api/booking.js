@@ -63,4 +63,24 @@ const updateGuestsApi = async (orderId, data) => {
   return json;
 };
 
-export { updateBookingApi, acceptRuleApi, updateGuestsApi };
+const payByCashApi = async (orderId) => {
+  const url = `${config.apiUrl}/api/booking/${orderId}/pay-by-cash`;
+
+  let json = [];
+
+  try {
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+    });
+    json = await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+
+  return json;
+};
+
+export { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi };
