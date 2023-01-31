@@ -42,6 +42,27 @@ const acceptRuleApi = async (orderId, isRuleAccepted) => {
   return json;
 };
 
+const checkInApi = async (orderId, checkIn) => {
+  const url = `${config.apiUrl}/api/booking/${orderId}/check-in`;
+
+  let json = [];
+
+  try {
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ checkIn }),
+    });
+    json = await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+
+  return json;
+};
+
 const updateGuestsApi = async (orderId, data) => {
   const url = `${config.apiUrl}/api/booking/${orderId}/guests`;
 
@@ -83,4 +104,4 @@ const payByCashApi = async (orderId) => {
   return json;
 };
 
-export { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi };
+export { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi };

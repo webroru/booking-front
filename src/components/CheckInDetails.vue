@@ -6,7 +6,7 @@
   import Rules from './Rules.vue';
 
   const bookingStore = useBookingStore();
-  const { booking } = bookingStore;
+  const { booking, checkIn } = bookingStore;
   const showFeedbackDialog = ref(false);
   const showRulesDialog = ref(false);
 
@@ -30,6 +30,8 @@
       message: `Information has been sent to: ${value}`,
     });
   };
+
+  checkIn(booking.orderId, true);
 
   const fetchData = async (data) => {
     const url = 'https://run.mocky.io/v3/6f22b652-258e-4388-827e-98e0ad85565e';
