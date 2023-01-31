@@ -23,7 +23,6 @@ export const useBookingStore = defineStore('booking', () => {
    *   extraPerson: number,
    *   capacity: number,
    *   overmax: number,
-   *   extraGuests: number,
    *   isRuleAccepted,
    *   checkIn: bool,
    *   paymentStatus: string,

@@ -49,6 +49,7 @@
   const extraGuests = () => confirmedGuests() - booking.guestsAmount;
   const isGuestLimit = () => confirmedGuests() > booking.capacity;
   const isLessDocs = () => Object.keys(photosBlobs).length < booking.adults + booking.children;
+  const extraPayment = computed(() => (Math.min(booking.capacity, confirmedGuests()) - booking.guestsAmount) * bookedNights * booking.extraPerson);
 
   let isGuestLimitShow = false;
   let isExtraGuestShow = false;
@@ -58,8 +59,6 @@
     booking.overmax = isGuestLimit() ? confirmedGuests() : 0;
     booking.plusGuest = isExtraGuest();
     booking.lessDocs = isLessDocs();
-    booking.extraGuests = Math.max(extraGuests(), 0);
-    //booking.checkIn = true;
 
     if (isGuestLimit() && !isGuestLimitShow) {
       isGuestLimitShow = true;
@@ -95,7 +94,6 @@
           onClose: () => isLessDocsShow = false,
         });
       }, 0);
-
     }
 
     updateGuests(booking);
@@ -142,7 +140,7 @@
           Total Tax: {{ totalTax }} &euro;
         </div>
       </el-card>
-      <p v-if="showExtraPay"><strong>Дополнительная плата за дополнительного гостя: {{ bookedNights * booking.extraPerson}} &euro;</strong></p>
+      <p v-if="showExtraPay"><strong>Дополнительная плата за дополнительного гостя: {{ extraPayment }} &euro;</strong></p>
     </el-col>
   </el-row>
   <el-row>
