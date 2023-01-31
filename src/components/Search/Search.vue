@@ -6,7 +6,7 @@
   import config from '@/config';
 
   const query = ref();
-  const data = ref(null);
+  const data = ref([]);
   const loading = ref(false);
 
   const onSubmit = async () => {
@@ -54,7 +54,7 @@
       </el-input>
     </el-form-item>
   </el-form>
-  <div v-if="data">
+  <div v-if="data.length">
     <h2>Choose your Booking</h2>
     <Result
       v-for="item in data"
@@ -62,4 +62,5 @@
       :booking="item"
     />
   </div>
+  <p v-else>Registration is open 4 days before check-in only</p>
 </template>

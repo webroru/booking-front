@@ -1,17 +1,10 @@
-<script>
-  export default {
-    data() {
-      return {
-        title: 'Apartments* GreenSLO (free Parking)',
-        address: 'Podlimbarskega ulica 43, Ljubljana, Slovenia',
-      };
-    },
-  };
+<script setup>
+  import config from '@/config';
 </script>
 
 <template>
-  <h1>{{ title }}</h1>
-  <p>{{ address }}</p>
+  <h1>{{ config.title }}</h1>
+  <p>{{ config.address }}</p>
 </template>
 
 <style scoped>
