@@ -44,7 +44,7 @@
         payment_method: {
           card: cardElement,
           billing_details: {
-            name: booking.fullName,
+            name: `${booking.firstName} ${booking.lastName}`,
           },
         },
       }

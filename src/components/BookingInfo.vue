@@ -22,7 +22,7 @@
         <el-descriptions-item label="Номер комнаты">{{ booking.room }}</el-descriptions-item>
         <el-descriptions-item label="CheckIn">{{ booking.checkInDate }}</el-descriptions-item>
         <el-descriptions-item label="CheckOut">{{ booking.checkOutDate }}</el-descriptions-item>
-        <el-descriptions-item label="Full Name">{{ booking.fullName }}</el-descriptions-item>
+        <el-descriptions-item label="Full Name">{{ booking.firstName }} {{ booking.lastName }}</el-descriptions-item>
         <el-descriptions-item label="Original Referrer">{{ booking.originalReferer }}</el-descriptions-item>
         <el-descriptions-item label="Код на входную дверь">{{ booking.passCode }}</el-descriptions-item>
       </el-descriptions>

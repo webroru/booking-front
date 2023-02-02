@@ -14,7 +14,7 @@
 </script>
 
 <template>
-    <el-descriptions :title="booking.fullName" @click="setBooking(booking)" border :column="3" class="item">
+    <el-descriptions :title="`${booking.firstName} ${booking.lastName}`" @click="setBooking(booking)" border :column="3" class="item">
       <el-descriptions-item>
         <template #label>
           <el-icon class="el-icon--left">

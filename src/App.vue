@@ -53,7 +53,7 @@
         <el-row>
           <el-col :span="6">
             <el-card v-if="Object.keys(booking).length">
-              Брониование для {{ booking.fullName }}
+              Брониование для {{ booking.firstName }}
             </el-card>
           </el-col>
           <el-col :span="12">
