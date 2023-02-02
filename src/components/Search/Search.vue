@@ -10,11 +10,7 @@
   const loading = ref(false);
 
   const onSubmit = async () => {
-    let queryIsOrderNumber = /[0-9]+/.test(query.value);
-    let url = queryIsOrderNumber ?
-      `${config.apiUrl}/api/booking?originalReferer=${query.value}` :
-      `${config.apiUrl}/api/booking?surname=${query.value}`;
-    data.value = await fetchData(url);
+    data.value = await fetchData(`${config.apiUrl}/api/booking?search=${query.value}`);
   };
 
   const showError = () => {
