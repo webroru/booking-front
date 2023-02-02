@@ -1,8 +1,11 @@
 <script setup>
   import { useBookingStore } from '@/stores/booking';
+  import { useInfoStore } from '@/stores/info';
 
   const bookingStore = useBookingStore();
   const { booking, acceptRule } = bookingStore;
+  const infoStore = useInfoStore();
+  const { info } = infoStore;
   // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     showCheckbox: {
@@ -12,16 +15,11 @@
   });
 </script>
 
-
 <template>
   <h1>
     Living Rules
   </h1>
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda incidunt praesentium itaque cupiditate aperiam,
-    quia eligendi impedit dolor mollitia doloribus? Id blanditiis voluptas eius fugiat voluptatum provident minima minus
-    sed!
-  </p>
+  <div v-html="info.rules"></div>
   <div>
     <el-checkbox
       v-if="showCheckbox === true"

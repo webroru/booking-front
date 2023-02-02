@@ -45,7 +45,7 @@ export const useBookingStore = defineStore('booking', () => {
   };
 
   const checkIn = (orderId, checkIn) => {
-    acceptRuleApi(orderId, checkIn);
+    checkInApi(orderId, checkIn);
   };
 
   const updateGuests = (booking) => {

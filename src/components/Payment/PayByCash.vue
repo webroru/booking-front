@@ -1,16 +1,20 @@
 <script setup>
   import { ElMessageBox } from 'element-plus';
   import { useBookingStore } from '@/stores/booking';
+  import { useInfoStore } from '@/stores/info';
 
   const bookingStore = useBookingStore();
   const { booking, payByCash } = bookingStore;
+  const infoStore = useInfoStore();
+  const { info } = infoStore;
 
   const open = () => {
-    ElMessageBox.alert('.... The guide how to pay by Cashe...', 'Info', {
+    ElMessageBox.alert(info.cashPaymentInstruction, 'Info', {
       confirmButtonText: 'OK',
+      dangerouslyUseHTMLString: true,
     });
 
-    booking.paymentStatus = 'payByCashe';
+    booking.paymentStatus = 'payByCash';
     payByCash(booking.orderId);
   };
 </script>

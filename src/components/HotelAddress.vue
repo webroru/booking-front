@@ -1,10 +1,13 @@
 <script setup>
-  import config from '@/config';
+  import { useInfoStore } from '@/stores/info';
+
+  const infoStore = useInfoStore();
+  const { info } = infoStore;
 </script>
 
 <template>
-  <h1>{{ config.title }}</h1>
-  <p>{{ config.address }}</p>
+  <h1>{{ info.hotelName }}</h1>
+  <p>{{ info.address }}</p>
 </template>
 
 <style scoped>

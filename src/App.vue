@@ -1,6 +1,7 @@
 <script setup>
   import { ref, onMounted } from 'vue';
   import { useBookingStore } from '@/stores/booking';
+  import { useInfoStore } from '@/stores/info';
   import { usePhotosStore } from '@/stores/photos';
   import Confirmation from './components/Confirmation/Confirmation.vue';
   import LanguageSelect from './components/LanguageSelect.vue';
@@ -12,15 +13,16 @@
 
   const bookingStore = useBookingStore();
   const { booking, resetBooking } = bookingStore;
+  const infoStore = useInfoStore();
+  const { getInfo } = infoStore;
   const photosStore = usePhotosStore();
   const { clearPhotosStore } = photosStore;
   const currentState = ref(State.Initial);
   const date = ref('');
 
   onMounted(() => {
-    setInterval(function () {
-      date.value = new Date().toLocaleTimeString();
-    }, 100);
+    setInterval(() => date.value = new Date().toLocaleTimeString(), 100);
+    getInfo();
   });
 
   const changeState = (state) => {

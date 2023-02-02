@@ -2,18 +2,16 @@
   import { ref } from 'vue';
   import { ElMessage, ElMessageBox } from 'element-plus';
   import { useBookingStore } from '@/stores/booking';
+  import { useInfoStore } from '@/stores/info';
   import Feedback from './Feedback.vue';
   import Rules from './Rules.vue';
 
   const bookingStore = useBookingStore();
   const { booking, checkIn } = bookingStore;
+  const infoStore = useInfoStore();
+  const { info } = infoStore;
   const showFeedbackDialog = ref(false);
   const showRulesDialog = ref(false);
-
-  const hotelInfo = {
-    callTime: '9:00 — 23:00',
-    contactInformation: '+420 123 456 789'
-  };
 
   const openSendInformation = async () => {
     const value = await ElMessageBox.prompt('Please input your e-mail', 'Tip', {
@@ -68,7 +66,7 @@
       </el-descriptions>
 
       <el-button type="primary" @click="showFeedbackDialog = true">Отправьте запрос или вопрос</el-button>
-      <a href="tel:{{ hotelInfo.contactInformation }}" class="el-button el-button--primary">Позвонить {{ hotelInfo.callTime }}</a>
+      <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary">Позвонить {{ info.callTime }}</a>
       <el-button type="primary" @click="showRulesDialog = true">Правила проживания</el-button>
 
       <el-dialog v-model="showFeedbackDialog" title="Send Feedback" width="30%">

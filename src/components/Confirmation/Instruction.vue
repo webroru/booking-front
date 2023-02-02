@@ -1,8 +1,11 @@
 <script setup>
   import { useBookingStore } from '@/stores/booking';
+  import { useInfoStore } from '@/stores/info';
 
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;
+  const infoStore = useInfoStore();
+  const { info } = infoStore;
 </script>
 
 <template>
@@ -11,8 +14,5 @@
     <span v-if="booking.debt">and pay the city tax</span>
   </h2>
 
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque eligendi excepturi dolorum exercitationem similique
-    dolorem vel repellat labore quae esse, magnam facilis cum velit ex. Hic consectetur deserunt recusandae debitis!
-  </p>
+  <div v-html="info.instruction"></div>
 </template>

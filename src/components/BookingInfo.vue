@@ -1,22 +1,17 @@
 <script setup>
   import { ref } from 'vue';
   import { useBookingStore } from '@/stores/booking';
+  import { useInfoStore } from '@/stores/info';
   import Rules from './Rules.vue';
 
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;
+  const infoStore = useInfoStore();
+  const { info } = infoStore;
   const showRulesDialog = ref(false);
   const showHowToMakeInDialog = ref(false);
   const showFacilitiesDialog = ref(false);
   const showextrasDialog = ref(false);
-
-  const hotelInfo = {
-    callTime: '9:00 — 23:00',
-    contactInformation: '+420 123 456 789',
-    howToMakeIt: 'Информацию о том, как добраться',
-    facilities: 'Информацию об удобствах',
-    extras: 'Информацию об дополнительных услугах',
-  };
 </script>
 
 <template>
@@ -32,7 +27,7 @@
         <el-descriptions-item label="Код на входную дверь">{{ booking.passCode }}</el-descriptions-item>
       </el-descriptions>
 
-      <a href="tel:{{ hotelInfo.contactInformation }}" class="el-button el-button--primary">Позвонить {{ hotelInfo.callTime }}</a>
+      <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary">Позвонить {{ info.callTime }}</a>
       <el-button type="primary" @click="showRulesDialog = true">Правила проживания</el-button>
       <el-button type="primary" @click="showHowToMakeInDialog = true">Как добраться из</el-button>
       <el-button type="primary" @click="showFacilitiesDialog = true">Удобства</el-button>
@@ -46,21 +41,21 @@
       </el-dialog>
 
       <el-dialog v-model="showHowToMakeInDialog" title="Rules" width="30%">
-        {{ hotelInfo.howToMakeIt }}
+        {{ info.howToMakeIt }}
         <template #footer>
           <el-button @click="showHowToMakeInDialog = false">Close</el-button>
         </template>
       </el-dialog>
 
       <el-dialog v-model="showFacilitiesDialog" title="Rules" width="30%">
-        {{ hotelInfo.facilities }}
+        {{ info.facilities }}
         <template #footer>
           <el-button @click="showFacilitiesDialog = false">Close</el-button>
         </template>
       </el-dialog>
 
       <el-dialog v-model="showextrasDialog" title="Rules" width="30%">
-        {{ hotelInfo.extras }}
+        {{ info.extras }}
         <template #footer>
           <el-button @click="showextrasDialog = false">Close</el-button>
         </template>
