@@ -47,7 +47,7 @@
 
   const isExtraGuest = () => confirmedGuests() > booking.guestsAmount;
   const extraGuests = () => confirmedGuests() - booking.guestsAmount;
-  const isGuestLimit = () => confirmedGuests() > booking.capacity;
+  const isGuestLimit = () => confirmedGuests() > booking.capacity + 2;
   const isLessDocs = () => Object.keys(photosBlobs).length < booking.adults + booking.children;
   const extraPayment = computed(() => (Math.min(booking.capacity, confirmedGuests()) - booking.guestsAmount) * bookedNights * booking.extraPerson);
 

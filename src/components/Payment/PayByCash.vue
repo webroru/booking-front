@@ -7,9 +7,10 @@
   const { booking, payByCash } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
+  const message = `Your debt is ${booking.debt}. ${info.cashPaymentInstruction}`;
 
   const open = () => {
-    ElMessageBox.alert(info.cashPaymentInstruction, 'Info', {
+    ElMessageBox.alert(message, 'Info', {
       confirmButtonText: 'OK',
       dangerouslyUseHTMLString: true,
     });
