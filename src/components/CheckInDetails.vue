@@ -9,47 +9,26 @@
   const bookingStore = useBookingStore();
   const { booking, checkIn } = bookingStore;
   const infoStore = useInfoStore();
-  const { info } = infoStore;
+  const { info, sendToEmail } = infoStore;
   const showFeedbackDialog = ref(false);
   const showRulesDialog = ref(false);
 
   const openSendInformation = async () => {
-    const value = await ElMessageBox.prompt('Please input your e-mail', 'Tip', {
+    const email = await ElMessageBox.prompt('Please input your e-mail', 'Tip', {
       confirmButtonText: 'OK',
       cancelButtonText: 'Cancel',
       inputPattern:
         /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
       inputErrorMessage: 'Invalid Email',
     });
-
-    fetchData({ orderId: booking.orderId, mail: value });
+    sendToEmail(booking, email.value);
     ElMessage({
       type: 'success',
-      message: `Information has been sent to: ${value}`,
+      message: `Information has been sent to: ${email}`,
     });
   };
 
   checkIn(booking.orderId, true);
-
-  const fetchData = async (data) => {
-    const url = 'https://run.mocky.io/v3/6f22b652-258e-4388-827e-98e0ad85565e';
-    let json = [];
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(data),
-      });
-      json = await response.json();
-    } catch (err) {
-      console.log(err);
-    }
-
-    return json;
-  };
 </script>
 
 <template>

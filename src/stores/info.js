@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
-import { getInfoApi } from './api/info';
+import { getInfoApi, sendToEmailApi } from './api/info';
 
 export const useInfoStore = defineStore('info', () => {
 
@@ -15,5 +15,9 @@ export const useInfoStore = defineStore('info', () => {
     setInfo(info.data);
   };
 
-  return { info, getInfo };
+  const sendToEmail = (booking, email) => {
+    sendToEmailApi(booking, email);
+  };
+
+  return { info, getInfo, sendToEmail };
 });

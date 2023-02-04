@@ -1,7 +1,7 @@
 import config from '@/config';
 
 const getInfoApi = async () => {
-  const url = `${config.apiUrl}/api/info/`;
+  const url = `${config.apiUrl}/api/info`;
 
   let json = [];
 
@@ -20,4 +20,25 @@ const getInfoApi = async () => {
   return json;
 };
 
-export { getInfoApi };
+const sendToEmailApi = async (booking, email) => {
+  const url = `${config.apiUrl}/api/send-to-email`;
+
+  let json = [];
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ booking, email }),
+    });
+    json = await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+
+  return json;
+};
+
+export { getInfoApi, sendToEmailApi };
