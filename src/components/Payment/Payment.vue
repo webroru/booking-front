@@ -1,14 +1,16 @@
 <script setup>
   import { ref, onBeforeMount } from 'vue';
-  import { useBookingStore } from '@/stores/booking';
+  import { ElMessageBox } from 'element-plus';
+  import { useI18n } from 'vue-i18n';
   import { loadStripe } from '@stripe/stripe-js';
   import { StripeElements, StripeElement } from 'vue-stripe-js';
-  import { ElMessageBox } from 'element-plus';
+  import { useBookingStore } from '@/stores/booking';
   import PayByCash from './PayByCash.vue';
   import config from '@/config';
 
   const bookingStore = useBookingStore();
   const { booking, updateBooking } = bookingStore;
+  const { t } = useI18n();
 
   //const stripeKey = 'pk_test_51KlDhBGT2BPFfMCDGsKJRjDzrAS1poMsp8QLwL2vfpL1NOjvKIRaoJFseGQEiUECvA9JodSOhLMOE3Vwk4fWvhup00joqB3GX5'; // test key
   const instanceOptions = ref({
@@ -63,13 +65,13 @@
   };
 
   const showError = () => {
-    ElMessageBox.alert('An error occurred please contact support', 'Error', {
+    ElMessageBox.alert(t('common.error'), 'Error', {
       confirmButtonText: 'OK',
     });
   };
 
   const showSuccess = () => {
-    ElMessageBox.alert('Thank you for your payment. You can go to the next step.', 'Success', {
+    ElMessageBox.alert(t('payment.success'), 'Success', {
       confirmButtonText: 'OK',
     });
   };
@@ -109,9 +111,7 @@
 </script>
 
 <template>
-  <p>
-    You should pay {{ booking.debt }} &euro;
-  </p>
+  <p>{{ $t('payment.debt', { debt: booking.debt }) }}</p>
   <div class="container" v-loading="loading">
     <StripeElements
       v-if="stripeLoaded"
@@ -127,7 +127,7 @@
         :options="cardOptions"
         @change="handleChange" />
     </StripeElements>
-    <button @click="pay" :disabled="isButtonDissabled">Pay</button>
+    <button @click="pay" :disabled="isButtonDissabled">{{ $t('payment.pay') }}</button>
     <p class="card-error" role="alert">{{errorText}}</p>
     <PayByCash />
   </div>

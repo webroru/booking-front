@@ -10,7 +10,7 @@
 
   const store = useBookingStore();
   const { booking: selectedBooking, setBooking } = store;
-  const showIcon = computed(() => props.booking.orderId === selectedBooking.orderId ? 'Edit' : null);
+  const showIcon = computed(() => props.booking.orderId === selectedBooking.orderId);
 </script>
 
 <template>
@@ -24,10 +24,10 @@
         </template>
         {{ booking.propertyName }}
       </el-descriptions-item>
-      <el-descriptions-item label="Room">{{ booking.room }}</el-descriptions-item>
-      <el-descriptions-item label="Check-in">{{ booking.checkInDate }}</el-descriptions-item>
-      <el-descriptions-item label="Check-out">{{ booking.checkOutDate }}</el-descriptions-item>
-      <el-descriptions-item label="Original Referrer">{{ booking.originalReferer }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('search.room')">{{ booking.room }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('search.checkIn')">{{ booking.checkInDate }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('search.checkOut')">{{ booking.checkOutDate }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('search.originalReferrer')">{{ booking.originalReferer }}</el-descriptions-item>
     </el-descriptions>
 </template>
 

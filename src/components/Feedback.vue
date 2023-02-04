@@ -1,7 +1,9 @@
 <script setup>
   import { reactive } from 'vue';
   import { ElMessage } from 'element-plus';
+  import { useI18n } from 'vue-i18n';
 
+  const { t } = useI18n();
   const form = reactive({
     message: '',
   });
@@ -9,7 +11,7 @@
   const onSubmit = () => {
     fetchData(form.value);
     ElMessage({
-      message: 'Your messge has been sent.',
+      message: t('feedback.sent'),
       type: 'success',
     });
   };

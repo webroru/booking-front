@@ -17,47 +17,47 @@
 <template>
   <el-row>
     <el-col :span="16">
-      <h2>Информация о Вашем номере</h2>
+      <h2>{{ $t('bookingInfo.header') }}</h2>
       <el-descriptions :title="booking.propertyName">
-        <el-descriptions-item label="Номер комнаты">{{ booking.room }}</el-descriptions-item>
-        <el-descriptions-item label="CheckIn">{{ booking.checkInDate }}</el-descriptions-item>
-        <el-descriptions-item label="CheckOut">{{ booking.checkOutDate }}</el-descriptions-item>
-        <el-descriptions-item label="Full Name">{{ booking.firstName }} {{ booking.lastName }}</el-descriptions-item>
-        <el-descriptions-item label="Original Referrer">{{ booking.originalReferer }}</el-descriptions-item>
-        <el-descriptions-item label="Код на входную дверь">{{ booking.passCode }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.roomNumber')">{{ booking.room }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.checkIn')">{{ booking.checkInDate }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.checkOut')">{{ booking.checkOutDate }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.fullName')">{{ booking.firstName }} {{ booking.lastName }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.originalReferrer')">{{ booking.originalReferer }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.smartLockCode')">{{ booking.passCode }}</el-descriptions-item>
       </el-descriptions>
 
-      <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary">Позвонить {{ info.callTime }}</a>
-      <el-button type="primary" @click="showRulesDialog = true">Правила проживания</el-button>
-      <el-button type="primary" @click="showHowToMakeInDialog = true">Как добраться из</el-button>
-      <el-button type="primary" @click="showFacilitiesDialog = true">Удобства</el-button>
-      <el-button type="primary" @click="showextrasDialog = true">Доб услуги</el-button>
+      <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary">{{ $t('bookingInfo.call') }} {{ info.callTime }}</a>
+      <el-button type="primary" @click="showRulesDialog = true">{{ $t('bookingInfo.rules') }}</el-button>
+      <el-button type="primary" @click="showHowToMakeInDialog = true">{{ $t('bookingInfo.howToMakeIn') }}</el-button>
+      <el-button type="primary" @click="showFacilitiesDialog = true">{{ $t('bookingInfo.facilities') }}</el-button>
+      <el-button type="primary" @click="showextrasDialog = true">{{ $t('bookingInfo.extras') }}</el-button>
 
-      <el-dialog v-model="showRulesDialog" title="Rules" width="30%">
+      <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="30%">
         <Rules />
         <template #footer>
-          <el-button @click="showRulesDialog = false">Close</el-button>
+          <el-button @click="showRulesDialog = false">{{ $t('common.close') }}</el-button>
         </template>
       </el-dialog>
 
-      <el-dialog v-model="showHowToMakeInDialog" title="Rules" width="30%">
-        {{ info.howToMakeIt }}
+      <el-dialog v-model="showHowToMakeInDialog" :title="$t('bookingInfo.rules')" width="30%">
+        <div v-html="info.howToMakeIt"></div>
         <template #footer>
-          <el-button @click="showHowToMakeInDialog = false">Close</el-button>
+          <el-button @click="showHowToMakeInDialog = false">{{ $t('common.close') }}</el-button>
         </template>
       </el-dialog>
 
-      <el-dialog v-model="showFacilitiesDialog" title="Rules" width="30%">
-        {{ info.facilities }}
+      <el-dialog v-model="showFacilitiesDialog" :title="$t('bookingInfo.rules')" width="30%">
+        <div v-html="info.facilities"></div>
         <template #footer>
-          <el-button @click="showFacilitiesDialog = false">Close</el-button>
+          <el-button @click="showFacilitiesDialog = false">{{ $t('common.close') }}</el-button>
         </template>
       </el-dialog>
 
-      <el-dialog v-model="showextrasDialog" title="Rules" width="30%">
-        {{ info.extras }}
+      <el-dialog v-model="showextrasDialog" :title="$t('bookingInfo.rules')" width="30%">
+        <div v-html="info.extras"></div>
         <template #footer>
-          <el-button @click="showextrasDialog = false">Close</el-button>
+          <el-button @click="showextrasDialog = false">{{ $t('common.close') }}</el-button>
         </template>
       </el-dialog>
     </el-col>

@@ -48,12 +48,12 @@
 
 <template>
   <el-steps :active="active" finish-status="success" class="steps">
-    <el-step title="Search" />
-    <el-step title="Information" />
-    <el-step title="Rules" />
-    <el-step title="Tax" />
-    <el-step title="Payment" />
-    <el-step title="CheckIn Details" />
+    <el-step :title="$t('confirmation.search')" />
+    <el-step :title="$t('confirmation.information')" />
+    <el-step :title="$t('confirmation.rules')" />
+    <el-step :title="$t('confirmation.tax')" />
+    <el-step :title="$t('confirmation.payment')" />
+    <el-step :title="$t('confirmation.checkInDetails')" />
   </el-steps>
 
   <Search v-if="active === 0" />
@@ -65,9 +65,9 @@
   <BookingInfo v-if="active === 6" />
 
   <div class="navigation">
-    <el-button v-if="active < 5" style="margin-top: 12px" @click="back">Back</el-button>
-    <el-button v-if="active < 5" style="margin-top: 12px" @click="next" :disabled="isNextDisabled">Next step</el-button>
-    <el-button v-else style="margin-top: 12px" @click="$emit('backToInitial')">Exit</el-button>
+    <el-button v-if="active < 5" style="margin-top: 12px" @click="back">{{ $t('common.back') }}</el-button>
+    <el-button v-if="active < 5" style="margin-top: 12px" @click="next" :disabled="isNextDisabled">{{ $t('common.next') }}</el-button>
+    <el-button v-else style="margin-top: 12px" @click="$emit('backToInitial')">{{ $t('common.exit') }}</el-button>
   </div>
 </template>
 

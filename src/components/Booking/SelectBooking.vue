@@ -7,17 +7,17 @@
 <template>
   <div>
     <el-button type="primary" size="large" :fill="true" @click="$emit('changeState', State.Confirmation)">
-      I have a booking
+      {{ $t('selectBooking.haveBooking') }}
     </el-button>
   </div>
   <div>
     <el-button type="primary" size="large" :fill="true" @click="$emit('changeState', State.Checkout)">
-      Check out
+      {{ $t('selectBooking.checkOut') }}
     </el-button>
   </div>
   <div>
     <el-button type="primary" size="large" :fill="true" @click="$emit('changeState', State.Registration)">
-      I want to book
+      {{ $t('selectBooking.wantToBook') }}
     </el-button>
   </div>
 </template>

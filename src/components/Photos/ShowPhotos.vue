@@ -14,7 +14,7 @@
   <div class="output">
     <div class="image-wraper" v-for="(img, index) in photos" :key="'photo' + index">
       <el-image :src="img" :preview-src-list="photos" :initial-index="index" fit="contain" />
-      <el-button type="danger" @click="removePhoto(getIdByIndex(index))">Remove</el-button>
+      <el-button type="danger" @click="removePhoto(getIdByIndex(index))">{{ $t('photos.takePhoto') }}</el-button>
     </div>
   </div>
 </template>

@@ -16,16 +16,14 @@
 </script>
 
 <template>
-  <h1>
-    Living Rules
-  </h1>
+  <h1>{{ $t('rules.header') }}</h1>
   <div v-html="info.rules"></div>
   <div>
     <el-checkbox
       v-if="showCheckbox === true"
       v-model="booking.isRuleAccepted"
       @change="acceptRule(booking.orderId, booking.isRuleAccepted)"
-      label="I am agree"
+      :label="$t('rules.agree')"
       size="large" />
   </div>
 </template>

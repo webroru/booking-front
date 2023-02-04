@@ -2,9 +2,11 @@
   import { ref } from 'vue';
   import { Search } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus';
+  import { useI18n } from 'vue-i18n';
   import Result from './Result.vue';
   import config from '@/config';
 
+  const { t } = useI18n();
   const query = ref();
   const data = ref([]);
   const loading = ref(false);
@@ -14,7 +16,7 @@
   };
 
   const showError = () => {
-    ElMessageBox.alert('An error occurred please contact support', 'Error', {
+    ElMessageBox.alert(t('common.error'), 'Error', {
       confirmButtonText: 'OK',
     });
   };
@@ -42,7 +44,7 @@
 
 <template>
   <el-form v-loading="loading" label-width="auto" label-position="top" @submit.prevent="onSubmit">
-    <el-form-item label="Enter the surname who has created the booking or order number">
+    <el-form-item :label="$t('search.label')">
       <el-input v-model="query">
         <template #append>
           <el-button :icon="Search" @click="onSubmit" />
@@ -51,12 +53,12 @@
     </el-form-item>
   </el-form>
   <div v-if="data.length">
-    <h2>Choose your Booking</h2>
+    <h2>{{ $t('search.choose') }}</h2>
     <Result
       v-for="item in data"
       :key="item.orderId"
       :booking="item"
     />
   </div>
-  <p v-else>Registration is open 4 days before check-in only</p>
+  <p v-else>{{ $t('search.restriction') }}</p>
 </template>

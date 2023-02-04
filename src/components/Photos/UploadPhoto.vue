@@ -28,5 +28,5 @@
     multiple
     accept="image/*"
   />
-  <el-button type="primary" @click="uploadPhoto">Upload</el-button>
+  <el-button type="primary" @click="uploadPhoto">{{ $t('photos.upload') }}</el-button>
 </template>

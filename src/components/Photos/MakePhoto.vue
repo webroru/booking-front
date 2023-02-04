@@ -74,7 +74,7 @@
       <div class="camera">
         <video ref="video" autoplay @canplay="adjustVideoSize">
         </video>
-        <el-button @click="takepicture" type="primary">Take photo</el-button>
+        <el-button @click="takepicture" type="primary">{{ $t('photos.takePhoto') }}</el-button>
       </div>
       <canvas ref="canvas"></canvas>
     </el-col>

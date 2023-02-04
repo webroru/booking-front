@@ -10,8 +10,8 @@
 
 <template>
   <h2>
-    You should register your guests
-    <span v-if="booking.debt">and pay the city tax</span>
+    {{ $t('instruction.register') }}
+    <span v-if="booking.debt">{{ $t('instruction.pay') }}</span>
   </h2>
 
   <div v-html="info.instruction"></div>

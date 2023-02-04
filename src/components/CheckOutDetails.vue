@@ -11,12 +11,12 @@
 <template>
   <div v-html="info.checkoutInfo"></div>
 
-  <el-button type="primary" @click="showFeedbackDialog = true">Отправьте запрос или вопрос</el-button>
+  <el-button type="primary" @click="showFeedbackDialog = true">{{ $t('checkOutDetails.askQuestion') }}</el-button>
 
-  <el-dialog v-model="showFeedbackDialog" title="Send Feedback" width="30%">
+  <el-dialog v-model="showFeedbackDialog" :title="$t('checkOutDetails.feedback')" width="30%">
     <Feedback />
     <template #footer>
-      <el-button @click="showFeedbackDialog = false">Close</el-button>
+      <el-button @click="showFeedbackDialog = false">{{ $t('common.close') }}</el-button>
     </template>
   </el-dialog>
 </template>
