@@ -2,7 +2,7 @@
   import { ref, computed } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import Search from './Search/Search.vue';
-  import CheckOutDetails from "./CheckOutDetails.vue";
+  import CheckOutDetails from './CheckOutDetails.vue';
 
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;

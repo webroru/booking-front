@@ -16,7 +16,6 @@ const i18n = createI18n({
   messages,
 });
 
-
 app.use(pinia);
 app.use(ElementPlus);
 app.use(i18n);

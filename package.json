@@ -11,6 +11,7 @@
     "@stripe/stripe-js": "^1.35.0",
     "element-plus": "^2.2.8",
     "flag-icons": "^6.6.4",
+    "iso-639-1": "^2.1.15",
     "normalize.css": "^8.0.1",
     "pinia": "^2.0.17",
     "vue": "^3.2.37",

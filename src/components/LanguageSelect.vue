@@ -1,58 +1,18 @@
-<script>
-  import "flag-icons/css/flag-icons.min.css";
+<script setup>
+  import 'flag-icons/css/flag-icons.min.css';
+  import { useI18n } from 'vue-i18n';
+  import ISO6391 from 'iso-639-1';
 
-  export default {
-    data() {
-      return {
-        items: [
-          {
-            title: 'English',
-            iso: 'gb',
-          },
-          {
-            title: 'German',
-            iso: 'de',
-          },
-          {
-            title: 'Spanish',
-            iso: 'es',
-          },
-          {
-            title: 'Croatian',
-            iso: 'hr',
-          },
-          {
-            title: 'Italian',
-            iso: 'it',
-          },
-          {
-            title: 'Polish',
-            iso: 'pl',
-          },
-          {
-            title: 'Slovene',
-            iso: 'si',
-          },
-          {
-            title: 'Chinese',
-            iso: 'cn',
-          },
-          {
-            title: 'Russian',
-            iso: 'ru',
-          },
-        ],
-      };
-    },
-  };
+  const { availableLocales, locale } = useI18n({ useScope: 'global' });
+  const changeLanguage = language => locale.value = language;
 </script>
 
 <template>
   <ul>
-    <li v-for="item in items" :key="item">
-      <a href="#">
-        <span :class="'fi fi-' + item.iso"></span>
-        <p>{{ item.title }}</p>
+    <li v-for="locale in availableLocales" :key="locale">
+      <a href="#" @click="changeLanguage(locale)">
+        <span :class="`fi fi-${locale === 'en' ? 'gb' : locale}`"></span>
+        <p>{{ ISO6391.getName(locale) }}</p>
       </a>
     </li>
   </ul>
