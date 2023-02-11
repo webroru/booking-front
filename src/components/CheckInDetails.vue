@@ -35,7 +35,7 @@
 
 <template>
   <el-row>
-    <el-col :span="16">
+    <el-col :xs="24" :sm="16">
       <h2>{{ $t('checkInDetails.information') }}</h2>
       <el-descriptions :title="booking.propertyName">
         <el-descriptions-item :label="$t('bookingInfo.roomNumber')">{{ booking.room }}</el-descriptions-item>
@@ -46,7 +46,7 @@
         <el-descriptions-item :label="$t('bookingInfo.smartLockCode')">{{ booking.passCode }}</el-descriptions-item>
       </el-descriptions>
 
-      <el-button type="primary" @click="showFeedbackDialog = true">{{ $t('bookingInfo.askQuestion') }}</el-button>
+      <el-button type="primary" @click="showFeedbackDialog = true">{{ $t('checkInDetails.askQuestion') }}</el-button>
       <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary">{{ $t('bookingInfo.call') }} {{ info.callTime }}</a>
       <el-button type="primary" @click="showRulesDialog = true">{{ $t('bookingInfo.rules') }}</el-button>
 
@@ -64,8 +64,8 @@
         </template>
       </el-dialog>
     </el-col>
-    <el-col :span="8">
-      <el-button type="primary" @click="openSendInformation">{{ $t('bookingInfo.sendToEmail') }}</el-button>
+    <el-col :xs="24" :sm="8">
+      <el-button type="primary" @click="openSendInformation">{{ $t('checkInDetails.sendToEmail') }}</el-button>
     </el-col>
   </el-row>
 </template>
@@ -73,5 +73,6 @@
 <style scoped>
   .el-button {
     text-decoration: none;
+    margin-bottom: 20px;
   }
 </style>

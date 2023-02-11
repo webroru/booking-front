@@ -12,7 +12,6 @@
 
 <style scoped>
   h1 {
-    margin: 80px 0 20px;
     text-align: center;
   }
 

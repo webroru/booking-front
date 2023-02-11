@@ -104,7 +104,7 @@
 
 <template>
   <el-row :gutter="20">
-    <el-col :span="16">
+    <el-col :xs="24" :sm="14">
       <el-form :model="booking" label-width="50%" ref="formRef">
         <el-form-item :label="$t('tax.enterAdults')">
           <el-input-number v-model="booking.adults" :min="0" :max="10" @change="update" />
@@ -124,11 +124,8 @@
           </div>
         </el-form-item>
       </el-form>
-      <p>{{ $t('tax.passportOrId') }}</p>
-      <UploadPhoto v-if="doesShowUpload" />
-      <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
     </el-col>
-    <el-col :span="8">
+    <el-col :xs="24" :sm="10">
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
@@ -141,6 +138,13 @@
         <div class="bottom">{{ $t('tax.total', { total: totalTax }) }}</div>
       </el-card>
       <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment }) }}</strong></p>
+    </el-col>
+  </el-row>
+  <el-row>
+    <el-col>
+      <p>{{ $t('tax.passportOrId') }}</p>
+      <UploadPhoto v-if="doesShowUpload" />
+      <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
     </el-col>
   </el-row>
   <el-row>

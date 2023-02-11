@@ -51,12 +51,12 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="6">
+          <el-col :xs="24" :sm="8" :md="6">
             <el-card v-if="Object.keys(booking).length">
               Брониование для {{ booking.firstName }}
             </el-card>
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="12">
             <HotelAddress />
           </el-col>
         </el-row>

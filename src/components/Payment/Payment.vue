@@ -111,38 +111,38 @@
 </script>
 
 <template>
-  <p>{{ $t('payment.debt', { debt: booking.debt }) }}</p>
-  <div class="container" v-loading="loading">
-    <StripeElements
-      v-if="stripeLoaded"
-      v-slot="{ elements }"
-      ref="elms"
-      :stripe-key="config.stripePublicKey"
-      :instance-options="instanceOptions"
-      :elements-options="elementsOptions">
-      <StripeElement
-        class="stripe-element"
-        ref="card"
-        :elements="elements"
-        :options="cardOptions"
-        @change="handleChange" />
-    </StripeElements>
-    <button @click="pay" :disabled="isButtonDissabled">{{ $t('payment.pay') }}</button>
-    <p class="card-error" role="alert">{{errorText}}</p>
-    <PayByCash />
-  </div>
+  <el-row>
+    <el-col :xs="24" :sm="18" :md="8">
+      <p>{{ $t('payment.debt', { debt: booking.debt }) }}</p>
+      <div class="container" v-loading="loading">
+        <StripeElements v-if="stripeLoaded" v-slot="{ elements }" ref="elms" :stripe-key="config.stripePublicKey"
+          :instance-options="instanceOptions" :elements-options="elementsOptions">
+          <StripeElement class="stripe-element" ref="card" :elements="elements" :options="cardOptions"
+            @change="handleChange" />
+        </StripeElements>
+        <button @click="pay" :disabled="isButtonDissabled">{{ $t('payment.pay') }}</button>
+        <p class="card-error" role="alert">{{ errorText }}</p>
+        <PayByCash />
+      </div>
+    </el-col>
+  </el-row>
+  
 </template>
 
 <style scoped>
   .container {
-    width: 30vw;
-      min-width: 500px;
-      align-self: center;
-      box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
-        0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
-      border-radius: 7px;
-      padding: 40px;
-      }
+    align-self: center;
+    box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+      0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+    border-radius: 7px;
+    padding: 40px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  }
 
   .container input {
     border-radius: 6px;

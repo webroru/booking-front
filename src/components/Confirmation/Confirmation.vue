@@ -1,4 +1,5 @@
 <script setup>
+  import 'element-plus/theme-chalk/display.css';
   import { ref, computed } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import Search from '../Search/Search.vue';
@@ -8,6 +9,7 @@
   import Rules from '../Rules.vue';
   import CheckInDetails from '../CheckInDetails.vue';
   import BookingInfo from '../BookingInfo.vue';
+
 
   const active = ref(0);
   const emit = defineEmits(['backToInitial', 'selectBooking']);
@@ -47,7 +49,7 @@
 </script>
 
 <template>
-  <el-steps :active="active" finish-status="success" class="steps">
+  <el-steps :active="active" finish-status="success" class="steps hidden-xs-only">
     <el-step :title="$t('confirmation.search')" />
     <el-step :title="$t('confirmation.information')" />
     <el-step :title="$t('confirmation.rules')" />
