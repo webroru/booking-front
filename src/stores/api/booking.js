@@ -84,7 +84,7 @@ const updateGuestsApi = async (orderId, data) => {
   return json;
 };
 
-const payByCashApi = async (orderId) => {
+const payByCashApi = async (orderId, isPayByCash) => {
   const url = `${config.apiUrl}/api/booking/${orderId}/pay-by-cash`;
 
   let json = [];
@@ -95,6 +95,7 @@ const payByCashApi = async (orderId) => {
       headers: {
         'content-type': 'application/json'
       },
+      body: JSON.stringify({ isPayByCash }),
     });
     json = await response.json();
   } catch (err) {

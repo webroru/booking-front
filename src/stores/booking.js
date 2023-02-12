@@ -54,8 +54,8 @@ export const useBookingStore = defineStore('booking', () => {
     updateGuestsApi(booking.orderId, booking);
   };
 
-  const payByCash = (orderId) => {
-    payByCashApi(orderId);
+  const payByCash = (orderId, isPayByCash) => {
+    payByCashApi(orderId, isPayByCash);
   };
 
   const resetBooking = () => {

@@ -31,6 +31,8 @@ export default Object.freeze({
       cash: 'I can\'t pay by Card',
       success: 'Thank you for your payment. You can go to the next step',
       pay: 'Pay',
+      cashAgree: 'I am agree',
+      payByCash: 'Payment by cash',
     },
     photos: {
       takePhoto: 'Take photo',
