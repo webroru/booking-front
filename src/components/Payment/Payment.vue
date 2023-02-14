@@ -6,6 +6,7 @@
   import { StripeElements, StripeElement } from 'vue-stripe-js';
   import { useBookingStore } from '@/stores/booking';
   import PayByCash from './PayByCash.vue';
+  import Disagree from './Disagree.vue';
   import config from '@/config';
 
   const bookingStore = useBookingStore();
@@ -123,6 +124,7 @@
         <button @click="pay" :disabled="isButtonDissabled">{{ $t('payment.pay') }}</button>
         <p class="card-error" role="alert">{{ errorText }}</p>
         <PayByCash />
+        <Disagree @back-to-initial="$emit('backToInitial')" />
       </div>
     </el-col>
   </el-row>

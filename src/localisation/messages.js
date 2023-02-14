@@ -32,7 +32,10 @@ export default Object.freeze({
       success: 'Thank you for your payment. You can go to the next step',
       pay: 'Pay',
       cashAgree: 'I am agree',
+      disagree: 'I am disagree with payment',
+      disagreeHeader: 'Payment disagree',
       payByCash: 'Payment by cash',
+      cancelAgree: 'I am agree',
     },
     photos: {
       takePhoto: 'Take photo',

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
-import { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi } from './api/booking';
+import { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi, cancelBookingApi } from './api/booking';
 
 export const useBookingStore = defineStore('booking', () => {
 
@@ -64,5 +64,9 @@ export const useBookingStore = defineStore('booking', () => {
     });
   };
 
-  return { booking, setBooking, updateBooking, resetBooking, acceptRule, updateGuests, payByCash, checkIn };
+  const cancelBooking = (orderId) => {
+    cancelBookingApi(orderId);
+  };
+
+  return { booking, setBooking, updateBooking, resetBooking, acceptRule, updateGuests, payByCash, checkIn, cancelBooking };
 });

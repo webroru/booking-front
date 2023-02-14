@@ -105,4 +105,24 @@ const payByCashApi = async (orderId, isPayByCash) => {
   return json;
 };
 
-export { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi };
+const cancelBookingApi = async (orderId) => {
+  const url = `${config.apiUrl}/api/booking/${orderId}/cancel`;
+
+  let json = [];
+
+  try {
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+    });
+    json = await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+
+  return json;
+};
+
+export { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi, cancelBookingApi };

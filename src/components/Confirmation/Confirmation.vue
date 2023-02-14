@@ -62,7 +62,7 @@
   <Instruction v-if="active === 1" />
   <Rules v-if="active === 2" />
   <Tax v-if="active === 3" />
-  <Payment v-if="active === 4" />
+  <Payment v-if="active === 4" @back-to-initial="$emit('backToInitial')" />
   <CheckInDetails v-if="active === 5" />
   <BookingInfo v-if="active === 6" />
 
