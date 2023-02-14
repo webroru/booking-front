@@ -16,7 +16,7 @@
 
   const startStreaming = async () => {
     try {
-      localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
       video.value.srcObject = localStream;
     } catch (err) {
       console.error(`An error occurred: ${err}`);
