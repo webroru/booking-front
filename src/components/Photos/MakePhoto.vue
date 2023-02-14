@@ -72,8 +72,7 @@
   <el-row>
     <el-col :span="12">
       <div class="camera">
-        <video ref="video" autoplay @canplay="adjustVideoSize">
-        </video>
+        <video ref="video" autoplay muted playsinline @canplay="adjustVideoSize"></video>
         <el-button @click="takepicture" type="primary">{{ $t('photos.takePhoto') }}</el-button>
       </div>
       <canvas ref="canvas"></canvas>
