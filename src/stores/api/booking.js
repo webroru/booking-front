@@ -125,4 +125,25 @@ const cancelBookingApi = async (orderId) => {
   return json;
 };
 
-export { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi, cancelBookingApi };
+const sendMessageApi = async (orderId, message) => {
+  const url = `${config.apiUrl}/api/booking/${orderId}/message`;
+
+  let json = [];
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ message }),
+    });
+    json = await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+
+  return json;
+};
+
+export { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi, cancelBookingApi, sendMessageApi };

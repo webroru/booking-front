@@ -105,7 +105,7 @@
 <template>
   <el-row :gutter="20">
     <el-col :xs="24" :sm="14">
-      <el-form :model="booking" label-width="50%" ref="formRef">
+      <el-form :model="booking" label-width="60%" ref="formRef">
         <el-form-item :label="$t('tax.enterAdults')">
           <el-input-number v-model="booking.adults" :min="0" :max="10" @change="update" />
         </el-form-item>

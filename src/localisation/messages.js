@@ -85,6 +85,7 @@ export default Object.freeze({
     },
     feedback: {
       sent: 'Your messge has been sent',
+      validation: 'Message can not be empty',
     },
     rules: {
       header: 'Living Rules',
