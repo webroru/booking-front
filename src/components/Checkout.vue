@@ -34,9 +34,9 @@
     <el-step :title="$t('checkout.search')" />
     <el-step :title="$t('checkout.checkOutDetails')" />
   </el-steps>
-  
+
   <Search v-if="active === 0" />
-  <CheckOutDetails v-if="active === 1" />
+  <CheckOutDetails v-if="active === 1" @back-to-initial="$emit('backToInitial')" />
 
   <div class="navigation">
     <el-button v-if="active < 1" style="margin-top: 12px" @click="back">{{ $t('common.back') }}</el-button>

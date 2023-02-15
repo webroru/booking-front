@@ -4,7 +4,6 @@
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
-  import Feedback from './Feedback.vue';
   import Rules from './Rules.vue';
 
   const bookingStore = useBookingStore();
@@ -12,7 +11,6 @@
   const infoStore = useInfoStore();
   const { info, sendToEmail } = infoStore;
   const { t } = useI18n();
-  const showFeedbackDialog = ref(false);
   const showRulesDialog = ref(false);
 
   const openSendInformation = async () => {
@@ -46,16 +44,8 @@
         <el-descriptions-item :label="$t('bookingInfo.smartLockCode')">{{ booking.passCode }}</el-descriptions-item>
       </el-descriptions>
 
-      <el-button type="primary" @click="showFeedbackDialog = true">{{ $t('checkInDetails.askQuestion') }}</el-button>
       <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary">{{ $t('bookingInfo.call') }} {{ info.callTime }}</a>
       <el-button type="primary" @click="showRulesDialog = true">{{ $t('bookingInfo.rules') }}</el-button>
-
-      <el-dialog v-model="showFeedbackDialog" :title="$t('checkInDetails.feedback')" width="30%">
-        <Feedback />
-        <template #footer>
-          <el-button @click="showFeedbackDialog = false">{{ $t('common.close') }}</el-button>
-        </template>
-      </el-dialog>
 
       <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="30%">
         <Rules show-checkbox="false" />

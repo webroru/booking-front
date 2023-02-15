@@ -82,6 +82,7 @@ export default Object.freeze({
     checkOutDetails: {
       askQuestion: 'Ask a question',
       feedback: 'Send Feedback',
+      checkedOut: 'I am checked out',
     },
     feedback: {
       sent: 'Your messge has been sent',
