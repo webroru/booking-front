@@ -65,6 +65,7 @@ export default Object.freeze({
       howToMakeIn: 'How to make in',
       facilities: 'Facilities',
       extras: 'Extras',
+      debt: 'Debt',
     },
     checkInDetails: {
       email: 'Please input your e-mail',
