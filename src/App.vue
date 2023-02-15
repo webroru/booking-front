@@ -68,7 +68,7 @@
         <el-row>
           <el-col :xs="24" :sm="8" :md="6">
             <el-card v-if="Object.keys(booking).length">
-              Брониование для {{ booking.firstName }}
+            {{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}
             </el-card>
           </el-col>
           <el-col :xs="24" :sm="12">
@@ -84,7 +84,6 @@
           </el-col>
         </el-row>
       </el-main>
-      <el-footer>Footer</el-footer>
     </el-container>
   </div>
 </template>

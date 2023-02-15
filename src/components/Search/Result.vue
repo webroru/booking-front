@@ -27,7 +27,7 @@
       <el-descriptions-item :label="$t('search.room')">{{ booking.room }}</el-descriptions-item>
       <el-descriptions-item :label="$t('search.checkIn')">{{ booking.checkInDate }}</el-descriptions-item>
       <el-descriptions-item :label="$t('search.checkOut')">{{ booking.checkOutDate }}</el-descriptions-item>
-      <el-descriptions-item :label="$t('search.originalReferrer')">{{ booking.originalReferer }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('search.originalReferer')">{{ booking.originalReferer }}</el-descriptions-item>
     </el-descriptions>
 </template>
 

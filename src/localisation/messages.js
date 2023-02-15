@@ -1,5 +1,8 @@
 export default Object.freeze({
   en: {
+    app: {
+      bookingFor: 'The booking for {name}, booking № {orderId}, referer: {referer}'
+    },
     common: {
       back: 'Back',
       next: 'Next step',
@@ -47,7 +50,7 @@ export default Object.freeze({
       room: 'Room',
       checkIn: 'Check-in',
       checkOut: 'Check-out',
-      originalReferrer: 'Original Referrer',
+      originalReferer: 'Original Referer',
       label: 'Enter the surname who has created the booking or order number',
       choose: 'Choose your Booking',
       restriction: 'Registration is open 4 days before check-in only',
@@ -58,7 +61,7 @@ export default Object.freeze({
       checkIn: 'CheckIn',
       checkOut: 'CheckOut',
       fullName: 'Full Name',
-      originalReferrer: 'Original Referrer',
+      originalReferer: 'Original Referer',
       smartLockCode: 'Smart Lock Code',
       call: 'Phone us',
       rules: 'Rules',

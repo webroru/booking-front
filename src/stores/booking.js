@@ -14,7 +14,7 @@ export const useBookingStore = defineStore('booking', () => {
    *   orderId: number,
    *   propertyName: string,
    *   room: number,
-   *   originalReferrer: string,
+   *   originalReferer: string,
    *   guestsAmount: number,
    *   adults: number,
    *   children: number,

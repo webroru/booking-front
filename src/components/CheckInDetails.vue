@@ -40,7 +40,7 @@
         <el-descriptions-item :label="$t('bookingInfo.checkIn')">{{ booking.checkInDate }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.checkOut')">{{ booking.checkOutDate }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.fullName')">{{ booking.firstName }} {{ booking.lastName }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('bookingInfo.originalReferrer')">{{ booking.originalReferer }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.originalReferer')">{{ booking.originalReferer }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.debt')">{{ booking.debt }} €</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.smartLockCode')">{{ booking.passCode }}</el-descriptions-item>
       </el-descriptions>
