@@ -19,9 +19,12 @@
   const { clearPhotosStore } = photosStore;
   const currentState = ref(State.Initial);
   const date = ref('');
+  const inActiveTime = 60000;
+  const lastActivity = new Date();
 
   onMounted(() => {
     setInterval(() => date.value = new Date().toLocaleTimeString(), 100);
+    setInterval(resetInactivePage, inActiveTime);
     getInfo();
   });
 
@@ -34,6 +37,18 @@
     resetBooking();
     clearPhotosStore();
   };
+
+  document.addEventListener('click', () => {
+    lastActivity.setTime(new Date());
+  });
+
+  const resetInactivePage = () => {
+    const currentTime = new Date();
+    if (currentTime.getTime() - lastActivity.getTime() >= inActiveTime) {
+      backToInitial();
+    }
+  };
+
 </script>
 
 <template>
