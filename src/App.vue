@@ -25,7 +25,7 @@
   onMounted(() => {
     setInterval(() => date.value = new Date().toLocaleTimeString(), 100);
     setInterval(resetInactivePage, inActiveTime);
-    getInfo();
+    getInfo('en');
   });
 
   const changeState = (state) => {

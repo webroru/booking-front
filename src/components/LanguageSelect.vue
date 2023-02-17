@@ -2,9 +2,15 @@
   import 'flag-icons/css/flag-icons.min.css';
   import { useI18n } from 'vue-i18n';
   import ISO6391 from 'iso-639-1';
+  import { useInfoStore } from '@/stores/info';
 
+  const infoStore = useInfoStore();
+  const { getInfo } = infoStore;
   const { availableLocales, locale } = useI18n({ useScope: 'global' });
-  const changeLanguage = language => locale.value = language;
+  const changeLanguage = (language) => {
+    locale.value = language;
+    getInfo(language);
+  };
 </script>
 
 <template>

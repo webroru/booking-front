@@ -1,6 +1,6 @@
 import config from '@/config';
 
-const getInfoApi = async () => {
+const getInfoApi = async (locale) => {
   const url = `${config.apiUrl}/api/info`;
 
   let json = [];
@@ -9,7 +9,8 @@ const getInfoApi = async () => {
     const response = await fetch(url, {
       method: 'GET',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Accept-Language': locale,
       },
     });
     json = await response.json();
@@ -29,7 +30,7 @@ const sendToEmailApi = async (booking, email) => {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
       body: JSON.stringify({ booking, email }),
     });

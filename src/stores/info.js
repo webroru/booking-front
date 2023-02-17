@@ -10,8 +10,8 @@ export const useInfoStore = defineStore('info', () => {
     Object.assign(info, newInfo);
   };
 
-  const getInfo = async () => {
-    const info = await getInfoApi();
+  const getInfo = async (locale) => {
+    const info = await getInfoApi(locale);
     setInfo(info.data);
   };
 
