@@ -3,16 +3,22 @@
   import { Search } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus';
   import { useI18n } from 'vue-i18n';
+  import { useBookingStore } from '@/stores/booking';
   import Result from './Result.vue';
   import config from '@/config';
 
   const { t } = useI18n();
+  const store = useBookingStore();
+  const { setBooking } = store;
   const query = ref();
   const data = ref([]);
   const loading = ref(false);
 
   const onSubmit = async () => {
     data.value = await fetchData(`${config.apiUrl}/api/booking?search=${query.value}`);
+    if (data.value.length === 1) {
+      setBooking(data.value[0]);
+    }
   };
 
   const showError = () => {
