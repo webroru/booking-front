@@ -1,15 +1,21 @@
 <script setup>
   import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
-  import Feedback from './Feedback.vue';
+  import Feedback from '../Feedback.vue';
 
   const bookingStore = useBookingStore();
   const { booking, checkOut } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
   const showFeedbackDialog = ref(false);
+  const router = useRouter();
 
+  const handleCheckout = () => {
+    checkOut(booking.orderId);
+    router.push('/');
+  };
 </script>
 
 <template>
@@ -19,7 +25,7 @@
       <Feedback />
     </el-col>
   </el-row>
-  <el-button type="primary" @click="checkOut(booking.orderId); $emit('backToInitial')">{{ $t('checkOutDetails.checkedOut') }}</el-button>
+  <el-button type="primary" @click="handleCheckout">{{ $t('checkOutDetails.checkedOut') }}</el-button>
 
   <el-dialog v-model="showFeedbackDialog" :title="$t('checkOutDetails.feedback')" width="30%">
     <Feedback />

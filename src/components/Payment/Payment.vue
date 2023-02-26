@@ -124,7 +124,7 @@
         <button @click="pay" :disabled="isButtonDissabled">{{ $t('payment.pay') }}</button>
         <p class="card-error" role="alert">{{ errorText }}</p>
         <PayByCash />
-        <Disagree @back-to-initial="$emit('backToInitial')" />
+        <Disagree />
       </div>
     </el-col>
   </el-row>

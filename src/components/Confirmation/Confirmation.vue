@@ -1,21 +1,29 @@
 <script setup>
   import 'element-plus/theme-chalk/display.css';
-  import { ref, computed } from 'vue';
+  import { computed } from 'vue';
+  import { useRoute } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';
-  import Search from '../Search/Search.vue';
-  import Instruction from './Instruction.vue';
-  import Tax from '../Tax.vue';
-  import Payment from '../Payment/Payment.vue';
-  import Rules from '../Rules.vue';
-  import CheckInDetails from '../CheckInDetails.vue';
-  import BookingInfo from '../BookingInfo.vue';
+  import NextButton from './NextButton.vue';
 
-
-  const active = ref(0);
-  const emit = defineEmits(['backToInitial', 'selectBooking']);
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;
+
+  const route = useRoute();
+  const active = computed(() => {
+    const stepIndex = step.findIndex(path => route.path.includes(path));
+    return stepIndex === 6 ? stepIndex - 1 : stepIndex;
+  });
   const isNextDisabled = computed(() => isNextDisabledCondition());
+  
+  const step = [
+    'search',
+    'instruction',
+    'rules',
+    'tax',
+    'payment',
+    'checkin-details',
+    'booking-info',
+  ];
 
   const isNextDisabledCondition = () => {
     const bookingHasNotBeenSelected = Object.keys(booking).length === 0;
@@ -23,28 +31,6 @@
     const bookingRuleHasNotBeenAccepted = active.value === 2 && !booking.isRuleAccepted;
 
     return bookingHasNotBeenSelected || bookingHasNotBeenPaid || bookingRuleHasNotBeenAccepted;
-  };
-
-  const next = () => {
-    if (active.value === 3 && booking.debt <= 0) {
-      active.value++;
-    }
-    if (active.value === 0 && booking.checkIn === true) {
-      active.value = 6;
-      return;
-    }
-    active.value++;
-  };
-
-  const back = () => {
-    if (active.value === 5 && booking.debt <= 0) {
-      --active.value;
-    }
-    if (active.value === 0) {
-      emit('backToInitial');
-    } else {
-      --active.value;
-    }
   };
 </script>
 
@@ -58,18 +44,11 @@
     <el-step :title="$t('confirmation.checkInDetails')" />
   </el-steps>
 
-  <Search v-if="active === 0" />
-  <Instruction v-if="active === 1" />
-  <Rules v-if="active === 2" />
-  <Tax v-if="active === 3" />
-  <Payment v-if="active === 4" @back-to-initial="$emit('backToInitial')" />
-  <CheckInDetails v-if="active === 5" />
-  <BookingInfo v-if="active === 6" />
+  <router-view></router-view>
 
   <div class="navigation">
-    <el-button v-if="active < 5" style="margin-top: 12px" @click="back">{{ $t('common.back') }}</el-button>
-    <el-button v-if="active < 5" style="margin-top: 12px" @click="next" :disabled="isNextDisabled">{{ $t('common.next') }}</el-button>
-    <el-button v-else style="margin-top: 12px" @click="$emit('backToInitial')">{{ $t('common.exit') }}</el-button>
+    <next-button prev/>
+    <next-button :disabled="isNextDisabled "/>
   </div>
 </template>
 

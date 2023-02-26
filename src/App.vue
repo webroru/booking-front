@@ -1,26 +1,25 @@
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, watch, computed } from 'vue';
+  import { useRouter, useRoute } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
   import { usePhotosStore } from '@/stores/photos';
-  import Confirmation from './components/Confirmation/Confirmation.vue';
   import LanguageSelect from './components/LanguageSelect.vue';
   import HotelAddress from './components/HotelAddress.vue';
-  import State from './State';
-  import SelectBooking from './components/Booking/SelectBooking.vue';
-  import Checkout from './components/Checkout.vue';
-  import Registration from "./components/Registration.vue";
 
   const bookingStore = useBookingStore();
-  const { booking, resetBooking } = bookingStore;
+  const { booking, resetBooking, searchBooking, setBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { getInfo } = infoStore;
   const photosStore = usePhotosStore();
   const { clearPhotosStore } = photosStore;
-  const currentState = ref(State.Initial);
   const date = ref('');
   const inActiveTime = 60000;
   const lastActivity = new Date();
+  const router = useRouter();
+  const route = useRoute();
+  const orderId = computed(() => route.params.orderId);
+  const path = computed(() => route.path);
 
   onMounted(() => {
     setInterval(() => date.value = new Date().toLocaleTimeString(), 100);
@@ -28,15 +27,16 @@
     getInfo('en');
   });
 
-  const changeState = (state) => {
-    currentState.value = state;
-  };
-
-  const backToInitial = () => {
-    currentState.value = State.Initial;
-    resetBooking();
-    clearPhotosStore();
-  };
+  watch(
+    [orderId, path],
+    ([orderId, path]) => {
+      fetchBookingByUrlParam(orderId);
+      if (path === '/') {
+        resetBooking();
+        clearPhotosStore();
+      }
+    }
+  );
 
   document.addEventListener('click', () => {
     lastActivity.setTime(new Date());
@@ -45,10 +45,18 @@
   const resetInactivePage = () => {
     const currentTime = new Date();
     if (currentTime.getTime() - lastActivity.getTime() >= inActiveTime) {
-      backToInitial();
+      router.push('/');
     }
   };
 
+  const fetchBookingByUrlParam = async (orderId) => {
+    if (orderId && booking.orderId !== orderId) {
+      const { data } = await searchBooking(orderId);
+      if (data.length) {
+        setBooking(data[0]);
+      }
+    }
+  };
 </script>
 
 <template>
@@ -77,10 +85,7 @@
         </el-row>
         <el-row justify="center">
           <el-col :span="18">
-            <SelectBooking v-if="currentState === State.Initial" @change-state="changeState" />
-            <Confirmation v-if="currentState === State.Confirmation" @back-to-initial="backToInitial" />
-            <Checkout v-if="currentState === State.Checkout" @back-to-initial="backToInitial" />
-            <Registration v-if="currentState === State.Registration" @back-to-initial="backToInitial" />
+            <router-view></router-view>
           </el-col>
         </el-row>
       </el-main>
