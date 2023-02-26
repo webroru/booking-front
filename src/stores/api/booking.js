@@ -1,5 +1,25 @@
 import config from '@/config';
 
+const searchBookingApi = async (string) => {
+  const url = `${config.apiUrl}/api/booking?search=${string}`;
+
+  let json = [];
+
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      },
+    });
+    json = await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+
+  return json;
+};
+
 const updateBookingApi = async (data) => {
   const url = 'https://run.mocky.io/v3/6f22b652-258e-4388-827e-98e0ad85565e';
 
@@ -166,4 +186,4 @@ const sendMessageApi = async (orderId, message) => {
   return json;
 };
 
-export { updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi, cancelBookingApi, sendMessageApi, checkOutApi };
+export { searchBookingApi, updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi, cancelBookingApi, sendMessageApi, checkOutApi };

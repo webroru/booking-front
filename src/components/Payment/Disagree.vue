@@ -1,5 +1,6 @@
 <script setup>
-  import { ref, defineEmits } from 'vue';
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
 
@@ -9,16 +10,16 @@
   const { info } = infoStore;
   const show = ref(false);
   const checked = ref(false);
-  const emit = defineEmits(['backToInitial']);
+  const router = useRouter();
 
   const handle = () => {
     if (booking.paymentStatus !== 'paid' && checked.value) {
       cancelBooking(booking.orderId);
-      emit('backToInitial');
+      router.push('/');
     }
   };
 </script>
-
+``
 <template>
   <el-link type="info" @click="show = true">{{ $t('payment.disagree') }}</el-link>
   <el-dialog v-model="show" :title="$t('payment.disagreeHeader')" width="30%" @close="handle">
