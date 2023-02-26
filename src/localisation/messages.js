@@ -39,6 +39,7 @@ export default Object.freeze({
       disagreeHeader: 'Payment disagree',
       payByCash: 'Payment by cash',
       cancelAgree: 'I am agree',
+      qrcode: 'You can scan the QR-code to continue on your smartphone',
     },
     photos: {
       takePhoto: 'Take photo',

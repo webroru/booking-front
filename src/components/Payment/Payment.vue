@@ -2,6 +2,7 @@
   import { ref, onBeforeMount } from 'vue';
   import { ElMessageBox } from 'element-plus';
   import { useI18n } from 'vue-i18n';
+  import QrcodeVue from 'qrcode.vue';
   import { loadStripe } from '@stripe/stripe-js';
   import { StripeElements, StripeElement } from 'vue-stripe-js';
   import { useBookingStore } from '@/stores/booking';
@@ -30,6 +31,7 @@
   const errorText = ref();
   const isButtonDissabled = ref(true);
   const loading = ref(false);
+  const paymentUrl = window.location.href;
 
   const pay = async () => {
     isButtonDissabled.value = true;
@@ -112,8 +114,8 @@
 </script>
 
 <template>
-  <el-row>
-    <el-col :xs="24" :sm="18" :md="8">
+  <el-row :gutter="20">
+    <el-col :xs="24" :sm="16" :md="8">
       <p>{{ $t('payment.debt', { debt: booking.debt }) }}</p>
       <div class="container" v-loading="loading">
         <StripeElements v-if="stripeLoaded" v-slot="{ elements }" ref="elms" :stripe-key="config.stripePublicKey"
@@ -126,6 +128,10 @@
         <PayByCash />
         <Disagree />
       </div>
+    </el-col>
+    <el-col :xs="24" :sm="8" :md="8">
+      <p>{{ $t('payment.qrcode') }}</p>
+      <qrcode-vue :value="paymentUrl" />
     </el-col>
   </el-row>
   

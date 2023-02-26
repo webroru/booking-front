@@ -16,7 +16,7 @@
   const showMakePhoto = ref(false);
   const formRef = ref();
   const isCameraEnabled = ref(false);
-  const doesShowUpload = window.location !== 'https://test.smartlock.ovh/';
+  const doesShowUpload = true;
 
   const TAX = {
     adult: 3.13,
