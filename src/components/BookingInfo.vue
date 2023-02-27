@@ -49,6 +49,9 @@
       <el-button type="primary" @click="showHowToMakeInDialog = true">{{ $t('bookingInfo.howToMakeIn') }}</el-button>
       <el-button type="primary" @click="showFacilitiesDialog = true">{{ $t('bookingInfo.facilities') }}</el-button>
       <el-button type="primary" @click="showextrasDialog = true">{{ $t('bookingInfo.extras') }}</el-button>
+      <router-link v-if="booking.debt > 0" :to="`/confirmation/${booking.orderId}/payment`">
+        <el-button type="primary">{{ $t('bookingInfo.payDebt') }}</el-button>
+      </router-link>
 
       <p>{{ $t('bookingInfo.photoDocuments') }}</p>
       <div class="upload-container">
@@ -102,11 +105,16 @@
 </template>
 
 <style scoped>
+    a {
+      text-decoration: none;
+    }
+
   .description {
     margin-bottom: 20px;
   }
 
   .el-button {
+    margin-left: 12px;
     margin-bottom: 20px;
     text-decoration: none;
   }

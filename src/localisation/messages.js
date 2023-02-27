@@ -72,6 +72,7 @@ export default Object.freeze({
       extras: 'Extras',
       debt: 'Debt',
       photoDocuments: 'You can add photos of your ID or passport',
+      payDebt: 'Pay your debt',
     },
     checkInDetails: {
       email: 'Please input your e-mail',
