@@ -45,6 +45,7 @@ export default Object.freeze({
       takePhoto: 'Take photo',
       remove: 'Remove',
       upload: 'Upload',
+      makePhotoTitle: 'Make photos of yours Pasports or Card IDs',
     },
     search: {
       property: 'Property',
@@ -70,6 +71,7 @@ export default Object.freeze({
       facilities: 'Facilities',
       extras: 'Extras',
       debt: 'Debt',
+      photoDocuments: 'You can add photos of your ID or passport',
     },
     checkInDetails: {
       email: 'Please input your e-mail',
@@ -113,7 +115,6 @@ export default Object.freeze({
       taxBaby: '6 years and younger: {baby} €',
       total: 'Total Tax: {total} €',
       extraPay: 'The Addition payment for extra guests is {extraPayment} €',
-      makePhotoTitle: 'Make photos of yours Pasports or Card IDs',
     },
   },
   ru: {

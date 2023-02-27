@@ -149,7 +149,7 @@
   </el-row>
   <el-row>
   </el-row>
-  <el-dialog v-model="showMakePhoto" :title="$t('tax.makePhotoTitle')" width="80%"
+  <el-dialog v-model="showMakePhoto" :title="$t('makePhotoTitle.makePhotoTitle')" width="80%"
     :before-close="closeMakePhoto">
     <MakePhoto :is-camera-enabled="isCameraEnabled" />
     <template #footer>

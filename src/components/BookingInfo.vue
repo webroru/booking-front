@@ -3,6 +3,9 @@
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
   import Rules from './Rules.vue';
+  import MakePhoto from './Photos/MakePhoto.vue';
+  import ShowPhotos from './Photos/ShowPhotos.vue';
+  import UploadPhoto from './Photos/UploadPhoto.vue';
 
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;
@@ -12,6 +15,19 @@
   const showHowToMakeInDialog = ref(false);
   const showFacilitiesDialog = ref(false);
   const showextrasDialog = ref(false);
+  const showMakePhoto = ref(false);
+  const isCameraEnabled = ref(false);
+
+  const closeMakePhoto = () => {
+    isCameraEnabled.value = false;
+    showMakePhoto.value = false;
+  };
+
+  const openMakePhoto = () => {
+    isCameraEnabled.value = true;
+    showMakePhoto.value = true;
+  };
+
 </script>
 
 <template>
@@ -33,6 +49,16 @@
       <el-button type="primary" @click="showHowToMakeInDialog = true">{{ $t('bookingInfo.howToMakeIn') }}</el-button>
       <el-button type="primary" @click="showFacilitiesDialog = true">{{ $t('bookingInfo.facilities') }}</el-button>
       <el-button type="primary" @click="showextrasDialog = true">{{ $t('bookingInfo.extras') }}</el-button>
+
+      <p>{{ $t('bookingInfo.photoDocuments') }}</p>
+      <div class="upload-container">
+        <upload-photo />
+      </div>
+      <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
+
+      <div class="output">
+        <show-photos />
+      </div>
 
       <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="30%">
         <Rules />
@@ -61,6 +87,16 @@
           <el-button @click="showextrasDialog = false">{{ $t('common.close') }}</el-button>
         </template>
       </el-dialog>
+
+      <el-dialog v-model="showMakePhoto" :title="$t('makePhotoTitle.makePhotoTitle')" width="80%"
+        :before-close="closeMakePhoto">
+        <make-photo :is-camera-enabled="isCameraEnabled" />
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button type="primary" @click="closeMakePhoto">{{ $t('common.done') }}</el-button>
+          </span>
+        </template>
+      </el-dialog>
     </el-col>
   </el-row>
 </template>
@@ -73,5 +109,16 @@
   .el-button {
     margin-bottom: 20px;
     text-decoration: none;
+  }
+
+  .output {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .upload-container {
+    margin: 0 20px 20px 0;
+    display: inline-block;
+    vertical-align: middle;
   }
 </style>
