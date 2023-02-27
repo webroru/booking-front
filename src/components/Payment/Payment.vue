@@ -14,7 +14,6 @@
   const { booking, updateBooking } = bookingStore;
   const { t } = useI18n();
 
-  //const stripeKey = 'pk_test_51KlDhBGT2BPFfMCDGsKJRjDzrAS1poMsp8QLwL2vfpL1NOjvKIRaoJFseGQEiUECvA9JodSOhLMOE3Vwk4fWvhup00joqB3GX5'; // test key
   const instanceOptions = ref({
     // https://stripe.com/docs/js/initializing#init_stripe_js-options
   });
