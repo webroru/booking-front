@@ -118,12 +118,10 @@
         <el-form-item :label="$t('tax.enterSucklings')">
           <el-input-number v-model="booking.sucklings" :min="0" :max="10" @change="update" />
         </el-form-item>
-        <el-form-item>
-          <div class="output">
-            <ShowPhotos />
-          </div>
-        </el-form-item>
       </el-form>
+      <div class="output">
+        <ShowPhotos />
+      </div>
     </el-col>
     <el-col :xs="24" :sm="10">
       <el-card class="box-card">
