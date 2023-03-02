@@ -30,8 +30,9 @@
   };
 
   const takepicture = () => {
-    canvas.value.height = video.value.clientHeight;
-    canvas.value.width = video.value.clientWidth;
+    const ratio = video.value.clientHeight / video.value.clientWidth;
+    canvas.value.width = 1024;
+    canvas.value.height = canvas.value.width * ratio;
     const context = canvas.value.getContext('2d');
     
     if (!canvas.value.height || !canvas.value.width) {
