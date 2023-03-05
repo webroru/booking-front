@@ -13,7 +13,6 @@
 
   const handleUpload = (event) => {
     Array.from(event.target.files).forEach(file => {
-      console.log(file);
       addPhoto(file);
     });
   };

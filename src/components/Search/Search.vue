@@ -4,12 +4,16 @@
   import { ElMessageBox } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
+  import { usePhotosStore } from '@/stores/photos';
   import Result from './Result.vue';
   import config from '@/config';
 
   const { t } = useI18n();
   const store = useBookingStore();
   const { setBooking } = store;
+  const photosStore = usePhotosStore();
+  const { syncPhotos } = photosStore;
+
   const query = ref();
   const data = ref([]);
   const loading = ref(false);
@@ -18,6 +22,7 @@
     data.value = await fetchData(`${config.apiUrl}/api/booking?search=${query.value}`);
     if (data.value.length === 1) {
       setBooking(data.value[0]);
+      syncPhotos();
     }
   };
 

@@ -24,5 +24,11 @@ export const usePhotosStore = defineStore('photos', () => {
     });
   };
 
-  return { photosBlobs, addPhoto, removePhoto, clearPhotosStore };
+  const syncPhotos = () => {
+    booking.photos.forEach( async ({ id, url }) => {
+      photosBlobs[id] = await fetch(url).then(r => r.blob());
+    });
+  };
+
+  return { photosBlobs, addPhoto, removePhoto, clearPhotosStore, syncPhotos };
 });

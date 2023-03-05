@@ -12,7 +12,7 @@
   const infoStore = useInfoStore();
   const { getInfo } = infoStore;
   const photosStore = usePhotosStore();
-  const { clearPhotosStore } = photosStore;
+  const { clearPhotosStore, syncPhotos } = photosStore;
   const date = ref('');
   const inActiveTime = 60000;
   const lastActivity = new Date();
@@ -54,6 +54,7 @@
       const { data } = await searchBooking(orderId);
       if (data.length) {
         setBooking(data[0]);
+        syncPhotos();
       }
     }
   };
