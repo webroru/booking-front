@@ -13,8 +13,7 @@
   const canvas = ref(null);
   const video = ref(null);
   let localStream = null;
-  const isIPad = /iPad/i.test(navigator.userAgent);
-  let camera = isIPad ? 'user' : 'environment';
+  let camera = 'user';
 
   const startStreaming = async facingMode => {
     try {
