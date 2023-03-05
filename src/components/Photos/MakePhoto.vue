@@ -63,6 +63,7 @@
 
   const swithCamera = () => {
     camera = camera === 'environment' ? 'user' : 'environment';
+    startStreaming(camera);
   };
 
   startStreaming(camera);
@@ -95,6 +96,10 @@
 </template>
 
 <style scoped>
+  button {
+    margin: 0 0 15px 15px;
+  }
+
   canvas {
     display: none;
   }
