@@ -13,10 +13,15 @@
   const canvas = ref(null);
   const video = ref(null);
   let localStream = null;
+  let camera = 'environment';
 
-  const startStreaming = async () => {
+  const startStreaming = async facingMode => {
     try {
-      localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+      if (localStream) {
+        stopStreaming();
+      }
+
+      localStream = await navigator.mediaDevices.getUserMedia({ video: facingMode, audio: false });
       video.value.srcObject = localStream;
     } catch (err) {
       console.error(`An error occurred: ${err}`);
@@ -51,18 +56,20 @@
   };
 
   const stopStreaming = () => {
-    if (localStream !== null) {
-      const track = localStream.getTracks()[0];
-      track.stop();
-      localStream = null;
-    }
+    const tracks = localStream.getTracks();
+    tracks.forEach(track => track.stop());
+    localStream = null;
   };
 
-  startStreaming();
+  const swithCamera = () => {
+    camera = camera === 'environment' ? 'user' : 'environment';
+  };
+
+  startStreaming(camera);
 
   watch(() => props.isCameraEnabled, (value) => {
     if (value) {
-      startStreaming();
+      startStreaming(camera);
     } else {
       stopStreaming();
     }
@@ -75,6 +82,7 @@
       <div class="camera">
         <video ref="video" autoplay muted playsinline @canplay="adjustVideoSize"></video>
         <el-button @click="takepicture" type="primary">{{ $t('photos.takePhoto') }}</el-button>
+        <el-button @click="swithCamera" type="primary">{{ $t('photos.switch') }}</el-button>
       </div>
       <canvas ref="canvas"></canvas>
     </el-col>

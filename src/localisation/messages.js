@@ -46,6 +46,7 @@ export default Object.freeze({
       remove: 'Remove',
       upload: 'Upload',
       makePhotoTitle: 'Make photos of yours Pasports or Card IDs',
+      switch: 'Switch the camera',
     },
     search: {
       property: 'Property',
