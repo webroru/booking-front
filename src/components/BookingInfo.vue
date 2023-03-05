@@ -91,7 +91,7 @@
         </template>
       </el-dialog>
 
-      <el-dialog v-model="showMakePhoto" :title="$t('makePhotoTitle.makePhotoTitle')" width="80%"
+      <el-dialog v-model="showMakePhoto" :title="$t('photos.makePhotoTitle')" width="80%"
         :before-close="closeMakePhoto">
         <make-photo :is-camera-enabled="isCameraEnabled" />
         <template #footer>
