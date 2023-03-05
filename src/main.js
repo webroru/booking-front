@@ -14,8 +14,7 @@ const pinia = createPinia();
 const app = createApp(App);
 const i18n = createI18n({
   legacy: false,
-  locale: 'ru',
-  fallbackLocale: 'en',
+  locale: 'en',
   messages,
 });
 const router = createRouter({
