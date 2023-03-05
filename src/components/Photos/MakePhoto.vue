@@ -21,7 +21,7 @@
         stopStreaming();
       }
 
-      localStream = await navigator.mediaDevices.getUserMedia({ video: facingMode, audio: false });
+      localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode }, audio: false });
       video.value.srcObject = localStream;
     } catch (err) {
       console.error(`An error occurred: ${err}`);
