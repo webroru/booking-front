@@ -22,7 +22,7 @@
 </script>
 
 <template>
-  <el-link type="info" @click="show = true">{{ $t('payment.cash') }}</el-link>
+  <el-button type="primary"  @click="show = true">{{ $t('payment.cash') }}</el-button>
   <el-dialog v-model="show" :title="$t('payment.payByCash')" width="30%">
     <div v-html="message"></div>
     <div>
