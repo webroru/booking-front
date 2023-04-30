@@ -23,7 +23,7 @@
 
 <template>
   <el-button type="primary"  @click="show = true">{{ $t('payment.cash') }}</el-button>
-  <el-dialog v-model="show" :title="$t('payment.payByCash')" width="30%">
+  <el-dialog v-model="show" :title="$t('payment.payByCash')">
     <div v-html="message"></div>
     <div>
       <el-checkbox v-model="checked"
@@ -35,3 +35,11 @@
     </template>
   </el-dialog>
 </template>
+
+<style>
+@media only screen and (max-width: 768px) {
+  .el-dialog {
+    --el-dialog-width: 100%;
+  }
+}
+</style>
