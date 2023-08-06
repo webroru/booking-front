@@ -29,7 +29,7 @@
     const bookingHasNotBeenSelected = Object.keys(booking).length === 0;
     const bookingHasNotBeenPaid = active.value === 4 && !(booking.paymentStatus === 'paid' || booking.paymentStatus === 'payByCash');
     const bookingRuleHasNotBeenAccepted = active.value === 2 && !booking.isRuleAccepted;
-    const guestsWereNotSpecified = booking.adults + booking.children + booking.babies === 0;
+    const guestsWereNotSpecified = active.value === 3 && booking.adults + booking.children + booking.babies === 0;
 
     return bookingHasNotBeenSelected || bookingHasNotBeenPaid || bookingRuleHasNotBeenAccepted || guestsWereNotSpecified;
   };
