@@ -1,7 +1,7 @@
 import config from '@/config';
 
 const searchBookingApi = async (string) => {
-  const url = `${config.apiUrl}/api/booking?search=${string}`;
+  const url = `${config.apiUrl}/api/booking?searchString=${string}`;
 
   let json = [];
 
@@ -121,7 +121,7 @@ const updateGuestsApi = async (orderId, data) => {
     console.log(err);
   }
 
-  return json;
+  return json.data;
 };
 
 const payByCashApi = async (orderId, isPayByCash) => {

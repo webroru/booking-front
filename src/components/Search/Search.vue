@@ -19,7 +19,7 @@
   const loading = ref(false);
 
   const onSubmit = async () => {
-    data.value = await fetchData(`${config.apiUrl}/api/booking?search=${query.value}`);
+    data.value = await fetchData(`${config.apiUrl}/api/booking?searchString=${query.value}`);
     if (data.value.length === 1) {
       setBooking(data.value[0]);
       syncPhotos();

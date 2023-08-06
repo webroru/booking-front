@@ -60,6 +60,7 @@
     } else {
       booking.paymentStatus = 'paid';
       booking.checkIn = true;
+      booking.debt = 0;
       updateBooking(booking);
       showSuccess();
     }
