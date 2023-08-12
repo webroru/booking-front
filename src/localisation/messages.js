@@ -28,6 +28,7 @@ export default Object.freeze({
     instruction: {
       register: 'You should register your guests',
       pay: 'and pay the city tax',
+      warning: 'Please pay attention. Your chech-in is not today.',
     },
     payment: {
       debt: 'Your debt is {debt} €',
