@@ -14,7 +14,6 @@
   const { photosBlobs } = photosStore;
   const { t } = useI18n();
   const showMakePhoto = ref(false);
-  const formRef = ref();
   const isCameraEnabled = ref(false);
   const doesShowUpload = true;
 
@@ -104,30 +103,48 @@
 
 <template>
   <el-row :gutter="20">
-    <el-col :xs="24" :sm="14">
-      <el-form :model="booking" label-width="60%" ref="formRef">
-        <el-form-item :label="$t('tax.enterAdults')">
+    <el-col :xs="24" :md="16" class="input-fields">
+      <el-row>
+        <el-col :xs="24" :sm="16">
+          <span class="label">{{ $t('tax.enterAdults') }}</span>
+        </el-col>
+        <el-col :xs="24" :sm="8">
           <el-input-number v-model="booking.adults" :min="0" :max="10" @change="update" />
-        </el-form-item>
-        <el-form-item :label="$t('tax.enterChildren')">
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :xs="24" :sm="16">
+          <span class="label">{{ $t('tax.enterChildren') }}</span>
+        </el-col>
+        <el-col :xs="24" :sm="8">
           <el-input-number v-model="booking.children" :min="0" :max="10" @change="update" />
-        </el-form-item>
-        <el-form-item :label="$t('tax.enterBabies')">
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :xs="24" :sm="16">
+          <span class="label">{{ $t('tax.enterBabies') }}</span>
+        </el-col>
+        <el-col :xs="24" :sm="8">
           <el-input-number v-model="booking.babies" :min="0" :max="10" @change="update" />
-        </el-form-item>
-        <el-form-item :label="$t('tax.enterSucklings')">
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :xs="24" :sm="16">
+          <span class="label">{{ $t('tax.enterSucklings') }}</span>
+        </el-col>
+        <el-col :xs="24" :sm="8">
           <el-input-number v-model="booking.sucklings" :min="0" :max="10" @change="update" />
-        </el-form-item>
-      </el-form>
+        </el-col>
+      </el-row>
       <div class="output">
         <ShowPhotos />
       </div>
     </el-col>
-    <el-col :xs="24" :sm="10">
+    <el-col :xs="24" :md="8">
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
-            <span>{{ $t('tax.cityTax')}}</span>
+            <span>{{ $t('tax.cityTax') }}</span>
           </div>
         </template>
         <div class="text item">{{ $t('tax.taxAdult', { adult: TAX.adult }) }}</div>
@@ -159,6 +176,10 @@
 </template>
 
 <style scoped>
+  .input-fields {
+    margin-bottom: 20px;
+  }
+
   .card-header {
     display: flex;
     justify-content: space-between;
@@ -171,6 +192,17 @@
   
   .item {
     margin-bottom: 18px;
+  }
+
+  .label {
+    display: inline-flex;
+    font-size: var(--el-font-size-base);
+    color: var(--el-text-color-regular);
+    height: 32px;
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .bottom {
