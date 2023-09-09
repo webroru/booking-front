@@ -4,6 +4,7 @@
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
   import { usePhotosStore } from '@/stores/photos';
+  import config from '@/config';
   import LanguageSelect from './components/LanguageSelect.vue';
   import HotelAddress from './components/HotelAddress.vue';
 
@@ -44,7 +45,7 @@
 
   const resetInactivePage = () => {
     const currentTime = new Date();
-    if (currentTime.getTime() - lastActivity.getTime() >= inActiveTime) {
+    if (currentTime.getTime() - lastActivity.getTime() >= inActiveTime && config.env === 'prod') {
       router.push('/');
     }
   };
