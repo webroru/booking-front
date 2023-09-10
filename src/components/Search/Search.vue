@@ -10,7 +10,7 @@
 
   const { t } = useI18n();
   const store = useBookingStore();
-  const { setBooking } = store;
+  const { setBookings } = store;
   const photosStore = usePhotosStore();
   const { syncPhotos } = photosStore;
 
@@ -21,7 +21,7 @@
   const onSubmit = async () => {
     data.value = await fetchData(`${config.apiUrl}/api/booking?searchString=${query.value}`);
     if (data.value.length === 1) {
-      setBooking(data.value[0]);
+      setBookings(data.value);
       syncPhotos();
     }
   };
@@ -51,6 +51,15 @@
     loading.value = false;
     return json.data;
   };
+
+  const onSelectBooking = (id) => {
+    let bookings = [data.value.find(booking => booking.orderId === id)];
+    if (bookings[0].groupId) {
+      bookings = data.value.filter(booking => booking.groupId);
+    }
+    setBookings(bookings);
+    syncPhotos();
+  };
 </script>
 
 <template>
@@ -69,6 +78,7 @@
       v-for="item in data"
       :key="item.orderId"
       :booking="item"
+      @select-booking="onSelectBooking"
     />
   </div>
   <p v-else>{{ $t('search.restriction') }}</p>

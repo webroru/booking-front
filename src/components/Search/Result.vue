@@ -2,7 +2,6 @@
   import { computed } from 'vue';
   import { Select } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
-  import { usePhotosStore } from '@/stores/photos';
 
   // eslint-disable-next-line no-unused-vars
   const props = defineProps({
@@ -10,18 +9,12 @@
   });
 
   const store = useBookingStore();
-  const { booking: selectedBooking, setBooking } = store;
-  const photosStore = usePhotosStore();
-  const { syncPhotos } = photosStore;
-  const showIcon = computed(() => props.booking.orderId === selectedBooking.orderId);
-  const handleSelect = () => {
-    setBooking(props.booking);
-    syncPhotos();
-  };
+  const { bookings } = store;
+  const showIcon = computed(() => bookings.find(booking => booking.orderId === props.booking.orderId));
 </script>
 
 <template>
-  <el-descriptions :title="`${booking.firstName} ${booking.lastName}`" @click="handleSelect" border :column="3" class="item">
+  <el-descriptions :title="`${booking.firstName} ${booking.lastName}`" @click="$emit('selectBooking', booking.orderId)" border :column="3" class="item">
     <el-descriptions-item>
       <template #label>
         <el-icon class="el-icon--left">

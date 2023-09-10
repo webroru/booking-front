@@ -6,7 +6,7 @@
   import NextButton from './NextButton.vue';
 
   const bookingStore = useBookingStore();
-  const { booking } = bookingStore;
+  const { bookings } = bookingStore;
 
   const route = useRoute();
   const active = computed(() => {
@@ -26,10 +26,12 @@
   ];
 
   const isNextDisabledCondition = () => {
-    const bookingHasNotBeenSelected = Object.keys(booking).length === 0;
-    const bookingHasNotBeenPaid = active.value === 4 && !(booking.paymentStatus === 'paid' || booking.paymentStatus === 'payByCash');
-    const bookingRuleHasNotBeenAccepted = active.value === 2 && !booking.isRuleAccepted;
-    const guestsWereNotSpecified = active.value === 3 && booking.adults + booking.children + booking.babies === 0;
+    const bookingHasNotBeenSelected = bookings.length === 0;
+    const isBookingPaid = bookings.every(booking => ['paid', 'payByCash'].includes(booking.paymentStatus));
+    const bookingHasNotBeenPaid = active.value === 4 && !isBookingPaid;
+    const bookingRuleHasNotBeenAccepted = active.value === 2 && !bookings.every(booking => booking.isRuleAccepted);
+    const guests = bookings.reduce((total, booking) => total + booking.adults + booking.children + booking.babies, 0);
+    const guestsWereNotSpecified = active.value === 3 && guests === 0;
 
     return bookingHasNotBeenSelected || bookingHasNotBeenPaid || bookingRuleHasNotBeenAccepted || guestsWereNotSpecified;
   };
