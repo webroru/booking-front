@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import { ref } from 'vue';
   import { ElNotification } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
@@ -9,7 +9,7 @@
   import UploadPhoto from './Photos/UploadPhoto.vue';
 
   const store = useBookingStore();
-  const { booking, updateGuests } = store;
+  const { bookings, updateGuests } = store;
   const photosStore = usePhotosStore();
   const { photosBlobs } = photosStore;
   const { t } = useI18n();
@@ -24,9 +24,14 @@
     baby: 0,
   };
 
-  const bookedNights = Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
-  const totalTax = computed(() => strip(bookedNights * (booking.adults * TAX.adult + booking.children * TAX.children + booking.babies * TAX.baby)));
-  const showExtraPay = computed(() => extraGuests() > 0);
+  const bookedNights = (booking) => Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
+  const totalTax = (booking) => {
+    const adults = booking.adults * TAX.adult;
+    const children = booking.children * TAX.children;
+    const babies = booking.babies * TAX.baby;
+    return strip(bookedNights(booking) * (adults + children + babies));
+  };
+  const showExtraPay = booking => extraGuests(booking) > 0 && extraPayment(booking);
   const strip = (number) => parseFloat(number).toPrecision(4);
 
   const closeMakePhoto = () => {
@@ -39,7 +44,7 @@
     showMakePhoto.value = true;
   };
 
-  const confirmedGuests = () => {
+  const confirmedGuests = (booking) => {
     let confirmedGuests = booking.adults + booking.children + booking.babies;
     if (booking.sucklings > 1) {
       confirmedGuests += booking.sucklings - 1;
@@ -47,23 +52,23 @@
     return confirmedGuests;
   };
 
-  const isExtraGuest = () => confirmedGuests() > booking.guestsAmount;
-  const extraGuests = () => confirmedGuests() - booking.guestsAmount;
-  const isGuestLimit = () => confirmedGuests() > booking.capacity + 2;
-  const isLessDocs = () => Object.keys(photosBlobs).length < booking.adults + booking.children;
-  const extraPayment = computed(() => (Math.min(booking.capacity, confirmedGuests()) - booking.guestsAmount) * bookedNights * booking.extraPerson);
+  const isExtraGuest = (booking) => confirmedGuests(booking) > booking.guestsAmount;
+  const extraGuests = (booking) => confirmedGuests(booking) - booking.guestsAmount;
+  const isGuestLimit = (booking) => confirmedGuests(booking) > booking.capacity + 2;
+  const isLessDocs = (booking) => Object.keys(photosBlobs).length < booking.adults + booking.children;
+  const extraPayment = booking => (Math.min(booking.capacity, confirmedGuests(booking)) - booking.guestsAmount) * bookedNights(booking) * booking.extraPerson;
 
   let isGuestLimitShow = false;
   let isExtraGuestShow = false;
   let isLessDocsShow = false;
 
-  const update = async () => {
+  const update = async (booking) => {
     loading.value = true;
-    booking.overmax = isGuestLimit() ? confirmedGuests() : 0;
-    booking.plusGuest = isExtraGuest();
-    booking.lessDocs = isLessDocs();
+    booking.overmax = isGuestLimit(booking) ? confirmedGuests(booking) : 0;
+    booking.plusGuest = isExtraGuest(booking);
+    booking.lessDocs = isLessDocs(booking);
 
-    if (isGuestLimit() && !isGuestLimitShow) {
+    if (isGuestLimit(booking) && !isGuestLimitShow) {
       isGuestLimitShow = true;
       setTimeout(() => {
         ElNotification({
@@ -75,7 +80,7 @@
 
       }, 0);
     }
-    if (isExtraGuest() && !isExtraGuestShow) {
+    if (isExtraGuest(booking) && !isExtraGuestShow) {
       isExtraGuestShow = true;
       setTimeout(() => {
         ElNotification({
@@ -87,7 +92,7 @@
 
       }, 0);
     }
-    if (isLessDocs() && !isLessDocsShow) {
+    if (isLessDocs(booking) && !isLessDocsShow) {
       isLessDocsShow = true;
       setTimeout(() => {
         ElNotification({
@@ -105,67 +110,70 @@
 </script>
 
 <template>
-  <el-row :gutter="20" v-loading="loading">
-    <el-col :xs="24" :md="16" class="input-fields">
-      <el-row>
-        <el-col :xs="24" :sm="16">
-          <span class="label">{{ $t('tax.enterAdults') }}</span>
-        </el-col>
-        <el-col :xs="24" :sm="8">
-          <el-input-number v-model="booking.adults" :min="0" :max="10" @change="update" />
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :xs="24" :sm="16">
-          <span class="label">{{ $t('tax.enterChildren') }}</span>
-        </el-col>
-        <el-col :xs="24" :sm="8">
-          <el-input-number v-model="booking.children" :min="0" :max="10" @change="update" />
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :xs="24" :sm="16">
-          <span class="label">{{ $t('tax.enterBabies') }}</span>
-        </el-col>
-        <el-col :xs="24" :sm="8">
-          <el-input-number v-model="booking.babies" :min="0" :max="10" @change="update" />
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :xs="24" :sm="16">
-          <span class="label">{{ $t('tax.enterSucklings') }}</span>
-        </el-col>
-        <el-col :xs="24" :sm="8">
-          <el-input-number v-model="booking.sucklings" :min="0" :max="10" @change="update" />
-        </el-col>
-      </el-row>
-      <div class="output">
-        <ShowPhotos />
-      </div>
-    </el-col>
-    <el-col :xs="24" :md="8">
-      <el-card class="box-card">
-        <template #header>
-          <div class="card-header">
-            <span>{{ $t('tax.cityTax') }}</span>
-          </div>
-        </template>
-        <div class="text item">{{ $t('tax.taxAdult', { adult: TAX.adult }) }}</div>
-        <div class="text item">{{ $t('tax.taxChildren', { children: TAX.children }) }}</div>
-        <div class="text item">{{ $t('tax.taxBaby', { baby: TAX.baby }) }}</div>
-        <div class="bottom">{{ $t('tax.total', { total: totalTax }) }}</div>
-      </el-card>
-      <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment }) }}</strong></p>
-    </el-col>
-  </el-row>
-  <el-row>
+  <el-row v-for="booking in bookings" :key="booking.orderId" v-loading="loading">
     <el-col>
-      <p>{{ $t('tax.passportOrId') }}</p>
-      <UploadPhoto v-if="doesShowUpload" />
-      <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
+      <h2>{{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}</h2>
+      <el-row :gutter="20">
+        <el-col :xs="24" :md="16" class="input-fields">
+          <el-row>
+            <el-col :xs="24" :sm="16">
+              <span class="label">{{ $t('tax.enterAdults') }}</span>
+            </el-col>
+            <el-col :xs="24" :sm="8">
+              <el-input-number v-model="booking.adults" :min="0" :max="10" @change="update(booking)" />
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :xs="24" :sm="16">
+              <span class="label">{{ $t('tax.enterChildren') }}</span>
+            </el-col>
+            <el-col :xs="24" :sm="8">
+              <el-input-number v-model="booking.children" :min="0" :max="10" @change="update(booking)" />
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :xs="24" :sm="16">
+              <span class="label">{{ $t('tax.enterBabies') }}</span>
+            </el-col>
+            <el-col :xs="24" :sm="8">
+              <el-input-number v-model="booking.babies" :min="0" :max="10" @change="update(booking)" />
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :xs="24" :sm="16">
+              <span class="label">{{ $t('tax.enterSucklings') }}</span>
+            </el-col>
+            <el-col :xs="24" :sm="8">
+              <el-input-number v-model="booking.sucklings" :min="0" :max="10" @change="update(booking)" />
+            </el-col>
+          </el-row>
+          <div class="output">
+            <ShowPhotos />
+          </div>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card class="box-card">
+            <template #header>
+              <div class="card-header">
+                <span>{{ $t('tax.cityTax') }}</span>
+              </div>
+            </template>
+            <div class="text item">{{ $t('tax.taxAdult', { adult: TAX.adult }) }}</div>
+            <div class="text item">{{ $t('tax.taxChildren', { children: TAX.children }) }}</div>
+            <div class="text item">{{ $t('tax.taxBaby', { baby: TAX.baby }) }}</div>
+            <div class="bottom">{{ $t('tax.total', { total: totalTax(booking) }) }}</div>
+          </el-card>
+          <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col>
+          <p>{{ $t('tax.passportOrId') }}</p>
+          <UploadPhoto v-if="doesShowUpload" />
+          <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
+        </el-col>
+      </el-row>
     </el-col>
-  </el-row>
-  <el-row>
   </el-row>
   <el-dialog v-model="showMakePhoto" :title="$t('photos.makePhotoTitle')" width="80%"
     :before-close="closeMakePhoto">

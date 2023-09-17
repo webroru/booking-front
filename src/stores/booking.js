@@ -37,7 +37,11 @@ export const useBookingStore = defineStore('booking', () => {
   const bookings = reactive([]);
 
   const setBooking = (newBooking) => {
-    Object.assign(booking, newBooking);
+    bookings.forEach(booking => {
+      if (booking.orderId === newBooking.orderId) {
+        Object.assign(booking, newBooking);
+      }
+    });
   };
 
   const setBookings = (newBookings) => {
@@ -70,7 +74,8 @@ export const useBookingStore = defineStore('booking', () => {
   };
 
   const updateGuests = async (booking) => {
-    setBooking(await updateGuestsApi(booking.orderId, booking));
+    const newBooking = await updateGuestsApi(booking.orderId, booking);
+    setBooking(newBooking);
   };
 
   const payByCash = (orderId, isPayByCash) => {
@@ -78,9 +83,7 @@ export const useBookingStore = defineStore('booking', () => {
   };
 
   const resetBooking = () => {
-    Object.keys(booking).forEach(key => {
-      delete booking[key];
-    });
+    bookings.splice(0);
   };
 
   const cancelBooking = (orderId) => {
