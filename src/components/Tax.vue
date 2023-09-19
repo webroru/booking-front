@@ -16,6 +16,7 @@
   const showMakePhoto = ref(false);
   const isCameraEnabled = ref(false);
   const doesShowUpload = true;
+  const loading = ref(false);
 
   const TAX = {
     adult: 3.13,
@@ -56,7 +57,8 @@
   let isExtraGuestShow = false;
   let isLessDocsShow = false;
 
-  const update = () => {
+  const update = async () => {
+    loading.value = true;
     booking.overmax = isGuestLimit() ? confirmedGuests() : 0;
     booking.plusGuest = isExtraGuest();
     booking.lessDocs = isLessDocs();
@@ -97,12 +99,13 @@
       }, 0);
     }
 
-    updateGuests(booking);
+    await updateGuests(booking);
+    loading.value = false;
   };
 </script>
 
 <template>
-  <el-row :gutter="20">
+  <el-row :gutter="20" v-loading="loading">
     <el-col :xs="24" :md="16" class="input-fields">
       <el-row>
         <el-col :xs="24" :sm="16">

@@ -12,6 +12,7 @@
   const { addPhoto } = photosStore;
   const canvas = ref(null);
   const video = ref(null);
+  const loading = ref(false);
   let localStream = null;
   let camera = 'user';
 
@@ -46,12 +47,14 @@
     }
 
     context.drawImage(video.value, 0, 0, canvas.value.width, canvas.value.height);
-    canvas.value.toBlob((blob) => {
+    canvas.value.toBlob(async (blob) => {
       if (blob === null) {
         console.log('Failed to convert canvas to blob');
         return;
       }
-      addPhoto(blob);
+      loading.value = true;
+      await addPhoto(blob);
+      loading.value = false;
     });
   };
 
@@ -78,7 +81,7 @@
 </script>
 
 <template>
-  <el-row>
+  <el-row v-loading="loading">
     <el-col :span="12">
       <div class="camera">
         <video ref="video" autoplay muted playsinline @canplay="adjustVideoSize"></video>

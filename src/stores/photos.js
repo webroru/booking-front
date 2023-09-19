@@ -13,9 +13,9 @@ export const usePhotosStore = defineStore('photos', () => {
     photosBlobs[data] = photoBlob;
   };
 
-  const removePhoto = (photoId) => {
+  const removePhoto = async (photoId) => {
     delete photosBlobs[photoId];
-    removePhotoApi(booking.orderId, photoId);
+    await removePhotoApi(booking.orderId, photoId);
   };
 
   const clearPhotosStore = () => {

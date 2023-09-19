@@ -1,20 +1,27 @@
 <script setup>
+  import { ref } from 'vue';
   import { computed } from 'vue';
   import { usePhotosStore } from '@/stores/photos';
 
   const photosStore = usePhotosStore();
   const { photosBlobs, removePhoto } = photosStore;
+  const loading = ref(false);
 
+  const remove = async (index) => {
+    loading.value = true;
+    await removePhoto(getIdByIndex(index));
+    loading.value = false;
+  };
   const getBlobUrl = (blob) => window.URL.createObjectURL(blob);
   const getIdByIndex = (index) => Object.keys(photosBlobs)[index];
   const photos = computed(() => Object.values(photosBlobs).map(getBlobUrl));
 </script>
 
 <template>
-  <div class="output">
+  <div class="output" v-loading="loading">
     <div class="image-wraper" v-for="(img, index) in photos" :key="'photo' + index">
       <el-image :src="img" :preview-src-list="photos" :initial-index="index" fit="contain" />
-      <el-button type="danger" @click="removePhoto(getIdByIndex(index))">{{ $t('photos.remove') }}</el-button>
+      <el-button type="danger" @click="remove(index)">{{ $t('photos.remove') }}</el-button>
     </div>
   </div>
 </template>
