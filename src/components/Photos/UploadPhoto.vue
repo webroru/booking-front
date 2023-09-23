@@ -2,6 +2,11 @@
   import { ref } from 'vue';
   import { usePhotosStore } from '@/stores/photos';
 
+  // eslint-disable-next-line no-unused-vars
+  const props = defineProps({
+    orderId: Number,
+  });
+
   const photosStore = usePhotosStore();
   const { addPhoto } = photosStore;
 
@@ -13,7 +18,7 @@
 
   const handleUpload = (event) => {
     Array.from(event.target.files).forEach(file => {
-      addPhoto(file);
+      addPhoto(props.orderId, file);
     });
   };
 </script>

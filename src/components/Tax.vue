@@ -17,6 +17,7 @@
   const isCameraEnabled = ref(false);
   const doesShowUpload = true;
   const loading = ref(false);
+  const makePhotoOrderId = ref();
 
   const TAX = {
     adult: 3.13,
@@ -39,9 +40,10 @@
     showMakePhoto.value = false;
   };
 
-  const openMakePhoto = () => {
+  const openMakePhoto = (orderId) => {
     isCameraEnabled.value = true;
     showMakePhoto.value = true;
+    makePhotoOrderId.value = orderId;
   };
 
   const confirmedGuests = (booking) => {
@@ -55,7 +57,7 @@
   const isExtraGuest = (booking) => confirmedGuests(booking) > booking.guestsAmount;
   const extraGuests = (booking) => confirmedGuests(booking) - booking.guestsAmount;
   const isGuestLimit = (booking) => confirmedGuests(booking) > booking.capacity + 2;
-  const isLessDocs = (booking) => Object.keys(photosBlobs).length < booking.adults + booking.children;
+  const isLessDocs = (booking) => Object.keys(photosBlobs[booking.orderId]).length < booking.adults + booking.children;
   const extraPayment = booking => (Math.min(booking.capacity, confirmedGuests(booking)) - booking.guestsAmount) * bookedNights(booking) * booking.extraPerson;
 
   let isGuestLimitShow = false;
@@ -148,7 +150,7 @@
             </el-col>
           </el-row>
           <div class="output">
-            <ShowPhotos />
+            <show-photos :order-id="booking.orderId" />
           </div>
         </el-col>
         <el-col :xs="24" :md="8">
@@ -169,15 +171,15 @@
       <el-row>
         <el-col>
           <p>{{ $t('tax.passportOrId') }}</p>
-          <UploadPhoto v-if="doesShowUpload" />
-          <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
+          <upload-photo :order-id="booking.orderId" v-if="doesShowUpload" />
+          <el-button type="primary" @click="openMakePhoto(booking.orderId)">{{ $t('tax.makePhoto') }}</el-button>
         </el-col>
       </el-row>
     </el-col>
   </el-row>
   <el-dialog v-model="showMakePhoto" :title="$t('photos.makePhotoTitle')" width="80%"
     :before-close="closeMakePhoto">
-    <MakePhoto :is-camera-enabled="isCameraEnabled" />
+    <make-photo :is-camera-enabled="isCameraEnabled" :order-id="makePhotoOrderId" />
     <template #footer>
       <span class="dialog-footer">
         <el-button type="primary" @click="closeMakePhoto">{{ $t('common.done') }}</el-button>

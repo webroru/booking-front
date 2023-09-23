@@ -6,16 +6,16 @@ import { useBookingStore } from '@/stores/booking';
 export const usePhotosStore = defineStore('photos', () => {
   const photosBlobs = reactive({});
   const bookingStore = useBookingStore();
-  const { booking } = bookingStore;
-  
-  const addPhoto = async (photoBlob) => {
-    const { data } = await addPhotoApi(booking.orderId, photoBlob);
-    photosBlobs[data] = photoBlob;
+  const { bookings } = bookingStore;
+
+  const addPhoto = async (orderId, photoBlob) => {
+    const { data } = await addPhotoApi(orderId, photoBlob);
+    photosBlobs[orderId][data] = photoBlob;
   };
 
-  const removePhoto = async (photoId) => {
-    delete photosBlobs[photoId];
-    await removePhotoApi(booking.orderId, photoId);
+  const removePhoto = async (orderId, photoId) => {
+    delete photosBlobs[orderId][photoId];
+    await removePhotoApi(orderId, photoId);
   };
 
   const clearPhotosStore = () => {
@@ -25,8 +25,11 @@ export const usePhotosStore = defineStore('photos', () => {
   };
 
   const syncPhotos = () => {
-    booking.photos.forEach( async ({ id, url }) => {
-      photosBlobs[id] = await fetch(url).then(r => r.blob());
+    bookings.forEach(booking => {
+      photosBlobs[booking.orderId] = {};
+      booking.photos.forEach(async ({ id, url }) => {
+        photosBlobs[booking.orderId][id] = await fetch(url).then(r => r.blob());
+      });
     });
   };
 

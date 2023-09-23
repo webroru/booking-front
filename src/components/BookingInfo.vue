@@ -55,12 +55,12 @@
 
       <p>{{ $t('bookingInfo.photoDocuments') }}</p>
       <div class="upload-container">
-        <upload-photo />
+        <upload-photo :order-id="booking.orderId" />
       </div>
       <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
 
       <div class="output">
-        <show-photos />
+        <show-photos :order-id="booking.orderId" />
       </div>
 
       <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="30%">
@@ -93,7 +93,7 @@
 
       <el-dialog v-model="showMakePhoto" :title="$t('photos.makePhotoTitle')" width="80%"
         :before-close="closeMakePhoto">
-        <make-photo :is-camera-enabled="isCameraEnabled" />
+        <make-photo :is-camera-enabled="isCameraEnabled" :order-id="booking.orderId" />
         <template #footer>
           <span class="dialog-footer">
             <el-button type="primary" @click="closeMakePhoto">{{ $t('common.done') }}</el-button>
