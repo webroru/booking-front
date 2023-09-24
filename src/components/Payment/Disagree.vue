@@ -5,7 +5,7 @@
   import { useInfoStore } from '@/stores/info';
 
   const bookingStore = useBookingStore();
-  const { booking, cancelBooking } = bookingStore;
+  const { bookings, cancelBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
   const show = ref(false);
@@ -13,10 +13,16 @@
   const router = useRouter();
 
   const handle = () => {
-    if (booking.paymentStatus !== 'paid' && checked.value) {
-      cancelBooking(booking.orderId);
+    if (bookings.every(booking => booking.paymentStatus !== 'paid') && checked.value) {
+      bookings.foreach(booking => cancelBooking(booking.orderId));
       router.push('/');
     }
+  };
+
+  const cancel = () => {
+    bookings.forEach(booking => {
+      booking.paymentStatus = checked.value ? 'cancel' : '';
+    });
   };
 </script>
 ``
@@ -26,7 +32,7 @@
     <div v-html="info.paymentDisagree"></div>
     <div>
       <el-checkbox v-model="checked"
-        @change="booking.paymentStatus = checked.value ? 'cancel' : ''" :label="$t('payment.cancelAgree')" size="large" />
+        @change="cancel" :label="$t('payment.cancelAgree')" size="large" />
     </div>
 
     <template #footer>

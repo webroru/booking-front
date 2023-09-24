@@ -11,7 +11,7 @@
   import config from '@/config';
 
   const bookingStore = useBookingStore();
-  const { booking, updateBooking } = bookingStore;
+  const { bookings, updateBooking } = bookingStore;
   const { t } = useI18n();
 
   const instanceOptions = ref({
@@ -37,7 +37,7 @@
     const cardElement = card.value.stripeElement;
 
     const purchase = {
-      bookingId: booking.orderId,
+      bookings: bookings.map(booking => booking.orderId),
     };
 
     const url = `${config.apiUrl}/api/payment`;
@@ -48,7 +48,7 @@
         payment_method: {
           card: cardElement,
           billing_details: {
-            name: `${booking.firstName} ${booking.lastName}`,
+            name: `${bookings[0].firstName} ${bookings[0].lastName}`,
           },
         },
       }
@@ -58,10 +58,12 @@
       errorText.value = result.error.message;
       showError();
     } else {
-      booking.paymentStatus = 'paid';
-      booking.checkIn = true;
-      booking.debt = 0;
-      updateBooking(booking);
+      bookings.forEach(booking => {
+        booking.paymentStatus = 'paid';
+        booking.checkIn = true;
+        booking.debt = 0;
+        updateBooking(booking);
+      });
       showSuccess();
     }
     isButtonDissabled.value = false;
@@ -105,6 +107,8 @@
     errorText.value = event.error ? event.error.message : '';
   };
 
+  const getDebt = () => bookings.reduce((debt, booking) => (Number.parseFloat(debt) + Number.parseFloat(booking.debt)).toFixed(2), '0');
+
   onBeforeMount(() => {
     const stripePromise = loadStripe(config.stripePublicKey);
     stripePromise.then(() => {
@@ -116,7 +120,7 @@
 <template>
   <el-row :gutter="20">
     <el-col :xs="24" :sm="16" :md="8">
-      <p>{{ $t('payment.debt', { debt: booking.debt }) }}</p>
+      <p>{{ $t('payment.debt', { debt: getDebt() }) }}</p>
       <div class="container" v-loading="loading">
         <StripeElements v-if="stripeLoaded" v-slot="{ elements }" ref="elms" :stripe-key="config.stripePublicKey"
           :instance-options="instanceOptions" :elements-options="elementsOptions">
@@ -125,7 +129,7 @@
         </StripeElements>
         <button @click="pay" :disabled="isButtonDissabled">{{ $t('payment.pay') }}</button>
         <p class="card-error" role="alert">{{ errorText }}</p>
-        <PayByCash />
+        <pay-by-cash :debt="getDebt()" />
         <Disagree />
       </div>
     </el-col>
