@@ -7,14 +7,19 @@
   const { photosBlobs, removePhoto } = photosStore;
   const loading = ref(false);
 
+  // eslint-disable-next-line no-unused-vars
+  const props = defineProps({
+    orderId: Number,
+  });
+
   const remove = async (index) => {
     loading.value = true;
-    await removePhoto(getIdByIndex(index));
+    await removePhoto(props.orderId, getIdByIndex(index));
     loading.value = false;
   };
   const getBlobUrl = (blob) => window.URL.createObjectURL(blob);
-  const getIdByIndex = (index) => Object.keys(photosBlobs)[index];
-  const photos = computed(() => Object.values(photosBlobs).map(getBlobUrl));
+  const getIdByIndex = (index) => Object.keys(photosBlobs[props.orderId])[index];
+  const photos = computed(() => Object.values(photosBlobs[props.orderId]).map(getBlobUrl));
 </script>
 
 <template>

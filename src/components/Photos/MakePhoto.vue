@@ -6,6 +6,7 @@
   // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     isCameraEnabled: Boolean,
+    orderId: Number,
   });
 
   const photosStore = usePhotosStore();
@@ -53,7 +54,7 @@
         return;
       }
       loading.value = true;
-      await addPhoto(blob);
+      await addPhoto(props.orderId, blob);
       loading.value = false;
     });
   };
@@ -92,7 +93,7 @@
     </el-col>
     <el-col :span="12">
       <div class="output">
-        <ShowPhotos />
+        <show-photos :order-id="orderId" />
       </div>
     </el-col>
   </el-row>

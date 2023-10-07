@@ -15,8 +15,8 @@ export const useInfoStore = defineStore('info', () => {
     setInfo(info.data);
   };
 
-  const sendToEmail = (booking, email) => {
-    sendToEmailApi(booking, email);
+  const sendToEmail = (bookingIds, email) => {
+    sendToEmailApi(bookingIds, email);
   };
 
   return { info, getInfo, sendToEmail };

@@ -29,12 +29,24 @@ export const useBookingStore = defineStore('booking', () => {
    *   paymentStatus: string,
    *   lessDocs: bool,
    *   photos: Array,
+   *   groupId: number,
    * }}
    */
   const booking = reactive({});
 
+  const bookings = reactive([]);
+
   const setBooking = (newBooking) => {
-    Object.assign(booking, newBooking);
+    bookings.forEach(booking => {
+      if (booking.orderId === newBooking.orderId) {
+        Object.assign(booking, newBooking);
+      }
+    });
+  };
+
+  const setBookings = (newBookings) => {
+    bookings.splice(0);
+    newBookings.forEach(booking => bookings.push(booking));
   };
 
   const searchBooking = async (string) => {
@@ -46,8 +58,11 @@ export const useBookingStore = defineStore('booking', () => {
     updateBookingApi(booking);
   };
 
-  const acceptRule = (orderId, isRuleAccepted) => {
-    acceptRuleApi(orderId, isRuleAccepted);
+  const acceptRule = (isRuleAccepted) => {
+    bookings.forEach(booking => {
+      booking.isRuleAccepted = isRuleAccepted;
+      acceptRuleApi(booking.orderId, isRuleAccepted);
+    });
   };
 
   const checkIn = (orderId, checkIn) => {
@@ -59,7 +74,8 @@ export const useBookingStore = defineStore('booking', () => {
   };
 
   const updateGuests = async (booking) => {
-    setBooking(await updateGuestsApi(booking.orderId, booking));
+    const newBooking = await updateGuestsApi(booking.orderId, booking);
+    setBooking(newBooking);
   };
 
   const payByCash = (orderId, isPayByCash) => {
@@ -67,9 +83,7 @@ export const useBookingStore = defineStore('booking', () => {
   };
 
   const resetBooking = () => {
-    Object.keys(booking).forEach(key => {
-      delete booking[key];
-    });
+    bookings.splice(0);
   };
 
   const cancelBooking = (orderId) => {
@@ -80,5 +94,20 @@ export const useBookingStore = defineStore('booking', () => {
     sendMessageApi(orderId, text);
   };
 
-  return { booking, searchBooking, setBooking, updateBooking, resetBooking, acceptRule, updateGuests, payByCash, checkIn, cancelBooking, sendMessage, checkOut };
+  return {
+    booking,
+    bookings,
+    searchBooking,
+    setBooking,
+    setBookings,
+    updateBooking,
+    resetBooking,
+    acceptRule,
+    updateGuests,
+    payByCash,
+    checkIn,
+    cancelBooking,
+    sendMessage,
+    checkOut,
+  };
 });

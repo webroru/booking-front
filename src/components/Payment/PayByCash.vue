@@ -1,22 +1,29 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
 
+  // eslint-disable-next-line no-unused-vars
+  const props = defineProps({
+    debt: String,
+  });
+
   const bookingStore = useBookingStore();
-  const { booking, payByCash } = bookingStore;
+  const { bookings, payByCash } = bookingStore;
   const infoStore = useInfoStore();
   const { t } = useI18n();
   const { info } = infoStore;
-  const message = `${t('payment.debt', { debt: booking.debt })}. ${info.cashPaymentInstruction}`;
+  const message = computed(()=> `${t('payment.debt', { debt: props.debt })}. ${info.cashPaymentInstruction}`);
   const show = ref(false);
   const checked = ref(false);
 
   const handle = () => {
-    if (booking.paymentStatus !== 'paid') {
-      booking.paymentStatus = checked.value ? 'payByCash' : '';
-      payByCash(booking.orderId, booking.paymentStatus === 'payByCash');
+    if (bookings.every(booking => booking.paymentStatus !== 'paid')) {
+      bookings.forEach(booking => {
+        booking.paymentStatus = checked.value ? 'payByCash' : '';
+        payByCash(booking.orderId, booking.paymentStatus === 'payByCash');
+      });
     }
   };
 </script>

@@ -9,7 +9,7 @@
   import HotelAddress from './components/HotelAddress.vue';
 
   const bookingStore = useBookingStore();
-  const { booking, resetBooking, searchBooking, setBooking } = bookingStore;
+  const { bookings, resetBooking, searchBooking, setBookings } = bookingStore;
   const infoStore = useInfoStore();
   const { getInfo } = infoStore;
   const photosStore = usePhotosStore();
@@ -19,7 +19,7 @@
   const lastActivity = new Date();
   const router = useRouter();
   const route = useRoute();
-  const orderId = computed(() => route.params.orderId);
+  const orderId = computed(() => Number(route.params.orderId));
   const path = computed(() => route.path);
 
   onMounted(() => {
@@ -51,10 +51,10 @@
   };
 
   const fetchBookingByUrlParam = async (orderId) => {
-    if (orderId && booking.orderId !== orderId) {
+    if (orderId && !bookings.some(booking => booking.orderId === orderId)) {
       const { data } = await searchBooking(orderId);
       if (data.length) {
-        setBooking(data[0]);
+        setBookings(data);
         syncPhotos();
       }
     }
@@ -77,8 +77,8 @@
         </el-row>
         <el-row>
           <el-col :xs="24" :sm="8" :md="6">
-            <el-card v-if="Object.keys(booking).length">
-            {{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}
+            <el-card v-for="booking in bookings" :key="booking.orderId" class="card">
+              {{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}
             </el-card>
           </el-col>
           <el-col :xs="24" :sm="12">
@@ -114,5 +114,9 @@
 
   .el-row:last-child {
     margin-bottom: 0;
+  }
+
+  .card {
+    margin-bottom: 10px;
   }
 </style>

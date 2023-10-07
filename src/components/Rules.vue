@@ -1,11 +1,14 @@
 <script setup>
+  import { ref } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
 
   const bookingStore = useBookingStore();
-  const { booking, acceptRule } = bookingStore;
+  const { bookings, acceptRule } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
+  const isRuleAccepted = ref(false);
+
   // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     showCheckbox: {
@@ -13,6 +16,7 @@
       default: true,
     },
   });
+  isRuleAccepted.value = bookings.every(booking => booking.isRuleAccepted);
 </script>
 
 <template>
@@ -21,8 +25,8 @@
   <div>
     <el-checkbox
       v-if="showCheckbox === true"
-      v-model="booking.isRuleAccepted"
-      @change="acceptRule(booking.orderId, booking.isRuleAccepted)"
+      v-model="isRuleAccepted"
+      @change="acceptRule(isRuleAccepted)"
       :label="$t('rules.agree')"
       size="large" />
   </div>
