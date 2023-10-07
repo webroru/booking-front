@@ -8,7 +8,7 @@
   import UploadPhoto from './Photos/UploadPhoto.vue';
 
   const bookingStore = useBookingStore();
-  const { booking } = bookingStore;
+  const { bookings } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
   const showRulesDialog = ref(false);
@@ -28,12 +28,13 @@
     showMakePhoto.value = true;
   };
 
+  const hasDebt = () => bookings.find(booking => booking.debt > 0) !== undefined;
 </script>
 
 <template>
-  <el-row>
+  <h2>{{ $t('bookingInfo.header') }}</h2>
+  <el-row v-for="booking in bookings" :key="booking.orderId">
     <el-col :span="16">
-      <h2>{{ $t('bookingInfo.header') }}</h2>
       <el-descriptions :title="booking.propertyName" border class="description">
         <el-descriptions-item :label="$t('bookingInfo.roomNumber')">{{ booking.room }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.checkIn')">{{ booking.checkInDate }}</el-descriptions-item>
@@ -44,15 +45,6 @@
         <el-descriptions-item :label="$t('bookingInfo.smartLockCode')">{{ booking.passCode }}</el-descriptions-item>
       </el-descriptions>
 
-      <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary">{{ $t('bookingInfo.call') }} {{ info.callTime }}</a>
-      <el-button type="primary" @click="showRulesDialog = true">{{ $t('bookingInfo.rules') }}</el-button>
-      <el-button type="primary" @click="showHowToMakeInDialog = true">{{ $t('bookingInfo.howToMakeIn') }}</el-button>
-      <el-button type="primary" @click="showFacilitiesDialog = true">{{ $t('bookingInfo.facilities') }}</el-button>
-      <el-button type="primary" @click="showextrasDialog = true">{{ $t('bookingInfo.extras') }}</el-button>
-      <router-link v-if="booking.debt > 0" :to="`/confirmation/${booking.orderId}/payment`">
-        <el-button type="primary">{{ $t('bookingInfo.payDebt') }}</el-button>
-      </router-link>
-
       <p>{{ $t('bookingInfo.photoDocuments') }}</p>
       <div class="upload-container">
         <upload-photo :order-id="booking.orderId" />
@@ -62,34 +54,6 @@
       <div class="output">
         <show-photos :order-id="booking.orderId" />
       </div>
-
-      <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="30%">
-        <Rules />
-        <template #footer>
-          <el-button @click="showRulesDialog = false">{{ $t('common.close') }}</el-button>
-        </template>
-      </el-dialog>
-
-      <el-dialog v-model="showHowToMakeInDialog" :title="$t('bookingInfo.rules')" width="30%">
-        <div v-html="info.howToMakeIt"></div>
-        <template #footer>
-          <el-button @click="showHowToMakeInDialog = false">{{ $t('common.close') }}</el-button>
-        </template>
-      </el-dialog>
-
-      <el-dialog v-model="showFacilitiesDialog" :title="$t('bookingInfo.rules')" width="30%">
-        <div v-html="info.facilities"></div>
-        <template #footer>
-          <el-button @click="showFacilitiesDialog = false">{{ $t('common.close') }}</el-button>
-        </template>
-      </el-dialog>
-
-      <el-dialog v-model="showextrasDialog" :title="$t('bookingInfo.rules')" width="30%">
-        <div v-html="info.extras"></div>
-        <template #footer>
-          <el-button @click="showextrasDialog = false">{{ $t('common.close') }}</el-button>
-        </template>
-      </el-dialog>
 
       <el-dialog v-model="showMakePhoto" :title="$t('photos.makePhotoTitle')" width="80%"
         :before-close="closeMakePhoto">
@@ -102,6 +66,43 @@
       </el-dialog>
     </el-col>
   </el-row>
+  <router-link v-if="hasDebt" :to="`/confirmation/${bookings[0].orderId}/payment`">
+    <el-button type="primary">{{ $t('bookingInfo.payDebt') }}</el-button>
+  </router-link>
+
+  <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary">{{ $t('bookingInfo.call') }} {{ info.callTime }}</a>
+  <el-button type="primary" @click="showRulesDialog = true">{{ $t('bookingInfo.rules') }}</el-button>
+  <el-button type="primary" @click="showHowToMakeInDialog = true">{{ $t('bookingInfo.howToMakeIn') }}</el-button>
+  <el-button type="primary" @click="showFacilitiesDialog = true">{{ $t('bookingInfo.facilities') }}</el-button>
+  <el-button type="primary" @click="showextrasDialog = true">{{ $t('bookingInfo.extras') }}</el-button>
+
+  <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="30%">
+    <Rules />
+    <template #footer>
+      <el-button @click="showRulesDialog = false">{{ $t('common.close') }}</el-button>
+    </template>
+  </el-dialog>
+
+  <el-dialog v-model="showHowToMakeInDialog" :title="$t('bookingInfo.rules')" width="30%">
+    <div v-html="info.howToMakeIt"></div>
+    <template #footer>
+      <el-button @click="showHowToMakeInDialog = false">{{ $t('common.close') }}</el-button>
+    </template>
+  </el-dialog>
+
+  <el-dialog v-model="showFacilitiesDialog" :title="$t('bookingInfo.rules')" width="30%">
+    <div v-html="info.facilities"></div>
+    <template #footer>
+      <el-button @click="showFacilitiesDialog = false">{{ $t('common.close') }}</el-button>
+    </template>
+  </el-dialog>
+
+  <el-dialog v-model="showextrasDialog" :title="$t('bookingInfo.rules')" width="30%">
+    <div v-html="info.extras"></div>
+    <template #footer>
+      <el-button @click="showextrasDialog = false">{{ $t('common.close') }}</el-button>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped>
