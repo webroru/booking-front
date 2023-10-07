@@ -21,7 +21,7 @@ const getInfoApi = async (locale) => {
   return json;
 };
 
-const sendToEmailApi = async (booking, email) => {
+const sendToEmailApi = async (bookingIds, email) => {
   const url = `${config.apiUrl}/api/send-to-email`;
 
   let json = [];
@@ -32,7 +32,7 @@ const sendToEmailApi = async (booking, email) => {
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify({ booking, email }),
+      body: JSON.stringify({ bookingIds, email }),
     });
     json = await response.json();
   } catch (err) {
