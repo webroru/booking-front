@@ -3,10 +3,14 @@
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';
+  import { usePhotosStore } from '@/stores/photos';
   import NextButton from './NextButton.vue';
 
   const bookingStore = useBookingStore();
   const { bookings } = bookingStore;
+
+  const photosStore = usePhotosStore();
+  const { photosBlobs } = photosStore;
 
   const route = useRoute();
   const active = computed(() => {
@@ -32,8 +36,9 @@
     const bookingRuleHasNotBeenAccepted = active.value === 2 && !bookings.every(booking => booking.isRuleAccepted);
     const guests = bookings.reduce((total, booking) => total + booking.adults + booking.children + booking.babies, 0);
     const guestsWereNotSpecified = active.value === 3 && guests === 0;
+    const noPhotos = active.value === 3 && bookings.some(booking => Object.keys(photosBlobs[booking.orderId]).length === 0);
 
-    return bookingHasNotBeenSelected || bookingHasNotBeenPaid || bookingRuleHasNotBeenAccepted || guestsWereNotSpecified;
+    return bookingHasNotBeenSelected || bookingHasNotBeenPaid || bookingRuleHasNotBeenAccepted || guestsWereNotSpecified || noPhotos;
   };
 </script>
 
