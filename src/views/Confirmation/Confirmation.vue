@@ -4,7 +4,7 @@
   import { useRoute } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';
   import { usePhotosStore } from '@/stores/photos';
-  import NextButton from './NextButton.vue';
+  import NextButton from '@/components/Confirmation/NextButton.vue';
 
   const bookingStore = useBookingStore();
   const { bookings } = bookingStore;

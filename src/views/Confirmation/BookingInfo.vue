@@ -2,10 +2,10 @@
   import { ref } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
-  import Rules from './Rules.vue';
-  import MakePhoto from './Photos/MakePhoto.vue';
-  import ShowPhotos from './Photos/ShowPhotos.vue';
-  import UploadPhoto from './Photos/UploadPhoto.vue';
+  import Rules from '@/components/Rules.vue';
+  import MakePhoto from '@/components/Photos/MakePhoto.vue';
+  import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
+  import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
 
   const bookingStore = useBookingStore();
   const { bookings } = bookingStore;

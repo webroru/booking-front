@@ -2,7 +2,7 @@
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';
-  import NextButton from './NextButton.vue';
+  import NextButton from '@/components/Checkout/NextButton.vue';
 
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;

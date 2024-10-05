@@ -4,7 +4,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import { createI18n } from 'vue-i18n';
-import App from './App.vue';
+import App from '@/App.vue';
 import 'normalize.css';
 import messages from './localisation/messages';
 import routes from './routing/routes';

@@ -6,8 +6,8 @@
   import { loadStripe } from '@stripe/stripe-js';
   import { StripeElements, StripeElement } from 'vue-stripe-js';
   import { useBookingStore } from '@/stores/booking';
-  import PayByCash from './PayByCash.vue';
-  import Disagree from './Disagree.vue';
+  import PayByCash from '@/components/Payment/PayByCash.vue';
+  import Disagree from '@/components/Payment/Disagree.vue';
   import config from '@/config';
 
   const bookingStore = useBookingStore();

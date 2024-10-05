@@ -4,9 +4,9 @@
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { usePhotosStore } from '@/stores/photos';
-  import MakePhoto from './Photos/MakePhoto.vue';
-  import ShowPhotos from './Photos/ShowPhotos.vue';
-  import UploadPhoto from './Photos/UploadPhoto.vue';
+  import MakePhoto from '@/components/Photos/MakePhoto.vue';
+  import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
+  import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
 
   const store = useBookingStore();
   const { bookings, updateGuests } = store;

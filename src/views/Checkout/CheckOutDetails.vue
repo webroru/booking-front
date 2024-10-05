@@ -3,7 +3,7 @@
   import { useRouter } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
-  import Feedback from '../Feedback.vue';
+  import Feedback from '@/components/Feedback.vue';
 
   const bookingStore = useBookingStore();
   const { booking, checkOut } = bookingStore;

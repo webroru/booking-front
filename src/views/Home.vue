@@ -21,17 +21,17 @@
       <el-button type="primary" size="large" :fill="true">
         {{ $t('selectBooking.checkOut') }}
       </el-button>
-  </router-link>
+    </router-link>
   </div>
 </template>
 
 <style scoped>
-  a {
-    text-decoration: none;
-  }
+a {
+  text-decoration: none;
+}
 
-  div {
-    margin: 0 0 20px;
-    text-align: center;
-  }
+div {
+  margin: 0 0 20px;
+  text-align: center;
+}
 </style>

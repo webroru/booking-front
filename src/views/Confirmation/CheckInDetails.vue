@@ -4,7 +4,7 @@
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
-  import Rules from './Rules.vue';
+  import Rules from '@/components/Rules.vue';
 
   const bookingStore = useBookingStore();
   const { bookings, checkIn } = bookingStore;
@@ -55,7 +55,7 @@
   <el-button type="primary" @click="openSendInformation">{{ $t('checkInDetails.sendToEmail') }}</el-button>
 
   <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="30%">
-    <Rules show-checkbox="false" />
+    <Rules />
     <template #footer>
       <el-button @click="showRulesDialog = false">{{ $t('common.close') }}</el-button>
     </template>
