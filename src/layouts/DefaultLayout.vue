@@ -1,26 +1,45 @@
 <script setup>
-  import { ref, onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
+  import { ref, computed, onMounted, watch } from 'vue';
+  import {useRoute, useRouter} from 'vue-router';
+  import config from '@/config';
   import { useInfoStore } from '@/stores/info';
   import { useBookingStore } from '@/stores/booking';
-  import config from '@/config';
   import LanguageSelect from '@/components/LanguageSelect.vue';
   import HotelAddress from '@/components/HotelAddress.vue';
+  import {usePhotosStore} from '@/stores/photos';
 
+  const photosStore = usePhotosStore();
+  const { clearPhotosStore, syncPhotos } = photosStore;
   const bookingStore = useBookingStore();
-  const { bookings } = bookingStore;
+  const { bookings, resetBooking, searchBooking, setBookings } = bookingStore;
   const infoStore = useInfoStore();
   const { getInfo } = infoStore;
   const date = ref('');
   const inActiveTime = 60000;
   const lastActivity = new Date();
   const router = useRouter();
+  const route = useRoute();
+  const loading = ref(false);
+  const orderId = computed(() => parseInt(route.params.orderId, 10));
+  const path = computed(() => route.path);
 
   onMounted(() => {
     setInterval(() => date.value = new Date().toLocaleTimeString(), 100);
     setInterval(resetInactivePage, inActiveTime);
+    fetchBookingByUrlParam(orderId.value);
     getInfo('en');
   });
+
+  watch(
+    [orderId, path],
+    ([orderId, path]) => {
+      fetchBookingByUrlParam(orderId);
+      if (path === '/') {
+        resetBooking();
+        clearPhotosStore();
+      }
+    }
+  );
 
   document.addEventListener('click', () => {
     lastActivity.setTime(new Date());
@@ -30,6 +49,20 @@
     const currentTime = new Date();
     if (currentTime.getTime() - lastActivity.getTime() >= inActiveTime && config.env === 'prod') {
       router.push('/');
+    }
+  };
+
+  const fetchBookingByUrlParam = async (orderId) => {
+    if (orderId && !bookings.some(booking => booking.orderId === orderId)) {
+      loading.value = true;
+      const { data } = await searchBooking(orderId);
+      if (data.length) {
+        setBookings(data);
+        syncPhotos();
+      } else {
+        await router.push('/');
+      }
+      loading.value = false;
     }
   };
 </script>
@@ -64,7 +97,7 @@
             <HotelAddress/>
           </el-col>
         </el-row>
-        <el-row justify="center">
+        <el-row justify="center" v-loading="loading">
           <el-col :span="18">
             <router-view></router-view>
           </el-col>
