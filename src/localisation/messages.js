@@ -1,7 +1,8 @@
 export default Object.freeze({
   en: {
     app: {
-      bookingFor: 'The booking for {name}, booking № {orderId}, referer: {referer}'
+      bookingFor: 'The booking for {name}, booking № {orderId}, referer: {referer}',
+      earlyCheckInWarning: 'You can register ONLY 4 days before ARRIVAL. You can register from {date}',
     },
     common: {
       back: 'Back',
@@ -28,7 +29,7 @@ export default Object.freeze({
     instruction: {
       register: 'You should register your guests',
       pay: 'and pay the city tax',
-      warning: 'Please pay attention. Your chech-in is not today.',
+      warning: 'Please pay attention. Your check-in is not today.',
     },
     payment: {
       debt: 'Your debt is {debt} €',
@@ -46,7 +47,7 @@ export default Object.freeze({
       takePhoto: 'Take photo',
       remove: 'Remove',
       upload: 'Upload',
-      makePhotoTitle: 'Make photos of yours Pasports or Card IDs',
+      makePhotoTitle: 'Make photos of yours Passports or Card IDs',
       switch: 'Switch the camera',
     },
     search: {
@@ -60,7 +61,7 @@ export default Object.freeze({
       restriction: 'Registration is open 4 days before check-in only',
     },
     bookingInfo: {
-      header: 'Detais about your reservaton',
+      header: 'Details about your reservation',
       roomNumber: 'Room Number',
       checkIn: 'CheckIn',
       checkOut: 'CheckOut',
@@ -103,14 +104,14 @@ export default Object.freeze({
       agree: 'I am agree',
     },
     tax: {
-      guestLimit: 'We can\'t revieve guest more than {limit} guests',
+      guestLimit: 'We can\'t revive guest more than {limit} guests',
       extraGuest: 'You will be required to pay for an additional guest',
       lessDocs: 'Don\'t forget to add a document photo for each guest',
       enterAdults: 'Enter amount of Adults (18 years and older)',
       enterChildren: 'Enter amount of Children (from 7 years up to 18 years)',
       enterBabies: 'Enter amount of Children (from 4 years up to 7)',
       enterSucklings: 'Enter amount of Children (4 years and younger)',
-      passportOrId: 'Please provide Pasport or Card ID for every guest',
+      passportOrId: 'Please provide Passport or Card ID for every guest',
       makePhoto: 'Make a photo',
       cityTax: 'The city tax for a person per night',
       taxAdult: '18 years and older: {adult} €',

@@ -1,12 +1,13 @@
 <script setup>
   import { ref, computed, onMounted, watch } from 'vue';
-  import {useRoute, useRouter} from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import config from '@/config';
   import { useInfoStore } from '@/stores/info';
   import { useBookingStore } from '@/stores/booking';
+  import { usePhotosStore } from '@/stores/photos';
   import LanguageSelect from '@/components/LanguageSelect.vue';
   import HotelAddress from '@/components/HotelAddress.vue';
-  import {usePhotosStore} from '@/stores/photos';
+  import EarlyCheckInWarning from '@/components/EarlyCheckInWarning.vue';
 
   const photosStore = usePhotosStore();
   const { clearPhotosStore, syncPhotos } = photosStore;
@@ -56,12 +57,14 @@
     if (orderId && !bookings.some(booking => booking.orderId === orderId)) {
       loading.value = true;
       const { data } = await searchBooking(orderId);
-      if (data.length) {
-        setBookings(data);
-        syncPhotos();
-      } else {
+      if (!data.length) {
         await router.push('/');
+        loading.value = false;
+        return;
       }
+
+      setBookings(data);
+      syncPhotos();
       loading.value = false;
     }
   };
@@ -105,6 +108,7 @@
       </el-main>
     </el-container>
   </div>
+  <EarlyCheckInWarning />
 </template>
 
 <style>
