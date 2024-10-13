@@ -30,6 +30,7 @@ export const useBookingStore = defineStore('booking', () => {
    *   lessDocs: boolean,
    *   photos: Array,
    *   groupId: number,
+   *   invoiceItems: Array,
    * }}
    */
   const booking = reactive({});
