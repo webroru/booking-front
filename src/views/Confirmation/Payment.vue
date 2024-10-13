@@ -109,6 +109,9 @@
 
   const getDebt = () => bookings.reduce((debt, booking) => (Number.parseFloat(debt) + Number.parseFloat(booking.debt)).toFixed(2), '0');
 
+  const getDebtItems = (booking) => booking.invoiceItems.filter(item => item.type === 'charge');
+  const getPaymentItems = (booking) => booking.invoiceItems.filter(item => item.type === 'payment');
+
   onBeforeMount(() => {
     const stripePromise = loadStripe(config.stripePublicKey);
     stripePromise.then(() => {
@@ -118,9 +121,25 @@
 </script>
 
 <template>
+  <div v-for="booking in bookings" :key="booking.orderId">
+    <strong>{{ $t('payment.details', { orderId: booking.orderId }) }}</strong>
+    <p><strong>{{ $t('payment.charges') }}:</strong></p>
+    <ul>
+      <li v-for="invoice in getDebtItems(booking)" :key="invoice.id">
+        {{ invoice.description }}: {{ invoice.amount }} € &times; {{ invoice.qty }} = <strong>{{ invoice.lineTotal }} €</strong>
+      </li>
+    </ul>
+    <p v-if="getPaymentItems(booking)"><strong>{{ $t('payment.payments') }}:</strong></p>
+    <ul v-if="getPaymentItems(booking)">
+      <li v-for="invoice in getPaymentItems(booking)" :key="invoice.id">
+        {{ invoice.description }}: <strong>{{ invoice.lineTotal }} €</strong>
+      </li>
+    </ul>
+
+  </div>
   <el-row :gutter="20">
     <el-col :xs="24" :sm="16" :md="8">
-      <p>{{ $t('payment.debt', { debt: getDebt() }) }}</p>
+      <p><strong>{{ $t('payment.debt', { debt: getDebt() }) }}</strong></p>
       <div class="container" v-loading="loading">
         <StripeElements v-if="stripeLoaded" v-slot="{ elements }" ref="elms" :stripe-key="config.stripePublicKey"
           :instance-options="instanceOptions" :elements-options="elementsOptions">

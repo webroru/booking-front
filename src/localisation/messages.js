@@ -33,6 +33,8 @@ export default Object.freeze({
     },
     payment: {
       debt: 'Your debt is {debt} €',
+      charges: 'Charges',
+      payments: 'Payments',
       cash: 'I can\'t pay by Card',
       success: 'Thank you for your payment. You can go to the next step',
       pay: 'Pay',
@@ -42,6 +44,7 @@ export default Object.freeze({
       payByCash: 'Payment by cash',
       cancelAgree: 'I am agree',
       qrcode: 'You can scan the QR-code to continue on your smartphone',
+      details: 'Payment details for {orderId}',
     },
     photos: {
       takePhoto: 'Take photo',
