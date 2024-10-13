@@ -129,8 +129,8 @@
         {{ invoice.description }}: {{ invoice.amount }} € &times; {{ invoice.qty }} = <strong>{{ invoice.lineTotal }} €</strong>
       </li>
     </ul>
-    <p v-if="getPaymentItems(booking)"><strong>{{ $t('payment.payments') }}:</strong></p>
-    <ul v-if="getPaymentItems(booking)">
+    <p v-if="getPaymentItems(booking).length"><strong>{{ $t('payment.payments') }}:</strong></p>
+    <ul v-if="getPaymentItems(booking).length">
       <li v-for="invoice in getPaymentItems(booking)" :key="invoice.id">
         {{ invoice.description }}: <strong>{{ invoice.lineTotal }} €</strong>
       </li>
