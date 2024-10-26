@@ -12,11 +12,8 @@
   const photosStore = usePhotosStore();
   const { photosBlobs } = photosStore;
   const { t } = useI18n();
-  const showMakePhoto = ref(false);
-  const isCameraEnabled = ref(false);
   const doesShowUpload = true;
   const loading = ref(false);
-  const makePhotoOrderId = ref();
 
   const TAX = {
     adult: 3.13,
@@ -40,12 +37,6 @@
   };
   const showExtraPay = booking => extraGuests(booking) > 0 && extraPayment(booking);
   const strip = (number) => parseFloat(number).toPrecision(4);
-
-  const openMakePhoto = (orderId) => {
-    isCameraEnabled.value = true;
-    showMakePhoto.value = true;
-    makePhotoOrderId.value = orderId;
-  };
 
   const confirmedGuests = (booking) => {
     let confirmedGuests = booking.adults + booking.children + booking.babies;
@@ -171,7 +162,7 @@
         <el-col>
           <p>{{ $t('tax.passportOrId') }}</p>
           <upload-photo :order-id="booking.orderId" v-if="doesShowUpload" />
-          <el-button type="primary" @click="openMakePhoto(booking.orderId)">{{ $t('tax.makePhoto') }}</el-button>
+          <el-button type="primary" @click="$emit('openMakePhoto', booking.orderId)">{{ $t('tax.makePhoto') }}</el-button>
         </el-col>
       </el-row>
     </el-col>

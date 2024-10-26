@@ -60,8 +60,7 @@
   };
 
   const stopStreaming = () => {
-    const tracks = localStream.getTracks();
-    tracks.forEach(track => track.stop());
+    localStream?.getTracks().forEach(track => track.stop());
     localStream = null;
   };
 
