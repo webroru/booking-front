@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, reactive } from 'vue';
   import { ElNotification } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
@@ -28,6 +28,8 @@
   const props = defineProps({
     booking: Object,
   });
+
+  const localBooking = reactive(props.booking);
 
   const bookedNights = (booking) => Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
   const totalTax = (booking) => {
@@ -119,7 +121,7 @@
               <span class="label">{{ $t('tax.enterAdults') }}</span>
             </el-col>
             <el-col :xs="24" :sm="8">
-              <el-input-number :model-value="booking.adults" :min="0" :max="10" @change="update(booking)" />
+              <el-input-number v-model="localBooking.adults" :min="0" :max="10" @change="update(localBooking)" />
             </el-col>
           </el-row>
           <el-row>
@@ -127,7 +129,7 @@
               <span class="label">{{ $t('tax.enterChildren') }}</span>
             </el-col>
             <el-col :xs="24" :sm="8">
-              <el-input-number :model-value="booking.children" :min="0" :max="10" @change="update(booking)" />
+              <el-input-number v-model="localBooking.children" :min="0" :max="10" @change="update(localBooking)" />
             </el-col>
           </el-row>
           <el-row>
@@ -135,7 +137,7 @@
               <span class="label">{{ $t('tax.enterBabies') }}</span>
             </el-col>
             <el-col :xs="24" :sm="8">
-              <el-input-number :model-value="booking.babies" :min="0" :max="10" @change="update(booking)" />
+              <el-input-number v-model="localBooking.babies" :min="0" :max="10" @change="update(localBooking)" />
             </el-col>
           </el-row>
           <el-row>
@@ -143,7 +145,7 @@
               <span class="label">{{ $t('tax.enterSucklings') }}</span>
             </el-col>
             <el-col :xs="24" :sm="8">
-              <el-input-number :model-value="booking.sucklings" :min="0" :max="10" @change="update(booking)" />
+              <el-input-number v-model="localBooking.sucklings" :min="0" :max="10" @change="update(localBooking)" />
             </el-col>
           </el-row>
           <div class="output">
