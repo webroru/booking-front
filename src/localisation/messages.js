@@ -38,6 +38,7 @@ export default Object.freeze({
       cash: 'I can\'t pay by Card',
       success: 'Thank you for your payment. You can go to the next step',
       pay: 'Pay',
+      total: 'Total',
       cashAgree: 'I am agree',
       disagree: 'I am disagree with payment',
       disagreeHeader: 'Payment disagree',
