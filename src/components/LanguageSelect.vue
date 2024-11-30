@@ -16,7 +16,7 @@
 <template>
   <ul>
     <li v-for="locale in availableLocales" :key="locale">
-      <a href="#" @click="changeLanguage(locale)">
+      <a href="#" @click.prevent="changeLanguage(locale)">
         <span :class="`fi fi-${locale === 'en' ? 'gb' : locale === 'sl' ? 'si' : locale === 'zh' ? 'cn' : locale}`"></span>
         <p>{{ ISO6391.getName(locale) }}</p>
       </a>
