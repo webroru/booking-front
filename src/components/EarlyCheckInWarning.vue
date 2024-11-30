@@ -35,7 +35,7 @@
 </script>
 
 <template>
-  <el-dialog v-model="showDialog" title="Warning" width="30%" center @close="handleClose">
+  <el-dialog v-model="showDialog" title="Warning" width="80%" @close="handleClose">
     {{ $t('app.earlyCheckInWarning', { date: date.toLocaleDateString() }) }}
     <template #footer>
       <span class="dialog-footer">
