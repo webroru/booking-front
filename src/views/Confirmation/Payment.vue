@@ -22,18 +22,25 @@
   });
   const cardOptions = ref({
     // https://stripe.com/docs/stripe.js#element-options
-
   });
+
   const stripeLoaded = ref(false);
   const card = ref();
   const elms = ref();
   const errorText = ref();
-  const isButtonDissabled = ref(true);
+  const isButtonDisabled = ref(true);
   const loading = ref(false);
   const paymentUrl = window.location.href;
 
+  bookings.forEach(booking => {
+    if (booking.debt === 0) {
+      booking.paymentStatus = 'paid';
+      booking.checkIn = true;
+    }
+  });
+
   const pay = async () => {
-    isButtonDissabled.value = true;
+    isButtonDisabled.value = true;
     const cardElement = card.value.stripeElement;
 
     const purchase = {
@@ -66,7 +73,7 @@
       });
       showSuccess();
     }
-    isButtonDissabled.value = false;
+    isButtonDisabled.value = false;
   };
 
   const showError = () => {
@@ -103,11 +110,12 @@
   };
 
   const handleChange = (event) => {
-    isButtonDissabled.value = event.empty || event.error;
+    isButtonDisabled.value = event.empty || event.error;
     errorText.value = event.error ? event.error.message : '';
   };
 
-  const getDebt = () => bookings.reduce((debt, booking) => (Number.parseFloat(debt) + Number.parseFloat(booking.debt)).toFixed(2), '0');
+  const getDebt = () => bookings.reduce((debt, booking) => (debt + booking.debt), 0);
+  const getDebtFormatted = () => getDebt().toFixed(2);
 
   const getDebtItems = (booking) => booking.invoiceItems.filter(item => item.type === 'charge');
   const getPaymentItems = (booking) => booking.invoiceItems.filter(item => item.type === 'payment');
@@ -140,20 +148,19 @@
         {{ invoice.description }}: <strong>{{ invoice.lineTotal }} €</strong>
       </li>
     </ul>
-
+    <p><strong>{{ $t('payment.debt', { debt: getDebtFormatted() }) }}</strong></p>
   </div>
-  <el-row :gutter="20">
+  <el-row :gutter="20" v-if="getDebt() !== 0">
     <el-col :xs="24" :sm="16" :md="8">
-      <p><strong>{{ $t('payment.debt', { debt: getDebt() }) }}</strong></p>
-      <div class="container" v-loading="loading">
+      <div class="container" v-loading="loading" >
         <StripeElements v-if="stripeLoaded" v-slot="{ elements }" ref="elms" :stripe-key="config.stripePublicKey"
           :instance-options="instanceOptions" :elements-options="elementsOptions">
           <StripeElement class="stripe-element" ref="card" :elements="elements" :options="cardOptions"
             @change="handleChange" />
         </StripeElements>
-        <button @click="pay" :disabled="isButtonDissabled">{{ $t('payment.pay') }}</button>
+        <button @click="pay" :disabled="isButtonDisabled">{{ $t('payment.pay') }}</button>
         <p class="card-error" role="alert">{{ errorText }}</p>
-        <pay-by-cash :debt="getDebt()" />
+        <pay-by-cash :debt="getDebtFormatted()" />
         <Disagree />
       </div>
     </el-col>
@@ -162,7 +169,6 @@
       <qrcode-vue :value="paymentUrl" />
     </el-col>
   </el-row>
-  
 </template>
 
 <style scoped>

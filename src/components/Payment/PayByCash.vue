@@ -21,8 +21,8 @@
   const handle = () => {
     if (bookings.every(booking => booking.paymentStatus !== 'paid')) {
       bookings.forEach(booking => {
-        booking.paymentStatus = checked.value ? 'payByCash' : '';
-        payByCash(booking.orderId, booking.paymentStatus === 'payByCash');
+        booking.paymentStatus = checked.value ? 'paid by cash' : '';
+        payByCash(booking.orderId, booking.paymentStatus === 'paid by cash');
       });
     }
   };
