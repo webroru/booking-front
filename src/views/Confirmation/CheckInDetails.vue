@@ -54,7 +54,7 @@
   <el-button type="primary" @click="showRulesDialog = true">{{ $t('bookingInfo.rules') }}</el-button>
   <el-button type="primary" @click="openSendInformation">{{ $t('checkInDetails.sendToEmail') }}</el-button>
 
-  <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="30%">
+  <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="80%">
     <Rules />
     <template #footer>
       <el-button @click="showRulesDialog = false">{{ $t('common.close') }}</el-button>
