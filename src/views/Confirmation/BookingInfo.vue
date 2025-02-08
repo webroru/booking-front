@@ -58,11 +58,6 @@
       <el-dialog v-model="showMakePhoto" :title="$t('photos.makePhotoTitle')" width="80%"
         :before-close="closeMakePhoto">
         <make-photo :is-camera-enabled="isCameraEnabled" :order-id="booking.orderId" />
-        <template #footer>
-          <span class="dialog-footer">
-            <el-button type="primary" @click="closeMakePhoto">{{ $t('common.done') }}</el-button>
-          </span>
-        </template>
       </el-dialog>
     </el-col>
   </el-row>
