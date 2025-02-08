@@ -66,7 +66,7 @@
       </el-dialog>
     </el-col>
   </el-row>
-  <router-link v-if="hasDebt" :to="`/confirmation/${bookings[0].orderId}/payment`">
+  <router-link v-if="hasDebt()" :to="`/confirmation/${bookings[0].orderId}/payment`">
     <el-button type="primary">{{ $t('bookingInfo.payDebt') }}</el-button>
   </router-link>
 
