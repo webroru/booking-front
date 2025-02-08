@@ -85,8 +85,6 @@
     <el-col :span="12">
       <div class="camera">
         <video ref="video" autoplay muted playsinline @canplay="adjustVideoSize"></video>
-        <el-button @click="takepicture" type="primary">{{ $t('photos.takePhoto') }}</el-button>
-        <el-button @click="swithCamera" type="primary">{{ $t('photos.switch') }}</el-button>
       </div>
       <canvas ref="canvas"></canvas>
     </el-col>
@@ -95,6 +93,10 @@
         <show-photos :order-id="orderId" />
       </div>
     </el-col>
+  </el-row>
+  <el-row justify="end">
+    <el-button @click="swithCamera" type="text">{{ $t('photos.switch') }}</el-button>
+    <el-button @click="takepicture" type="primary">{{ $t('photos.takePhoto') }}</el-button>
   </el-row>
 </template>
 
