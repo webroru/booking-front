@@ -86,12 +86,13 @@
       <div class="camera">
         <video ref="video" autoplay muted playsinline @canplay="adjustVideoSize"></video>
       </div>
-      <canvas ref="canvas"></canvas>
-    </el-col>
-    <el-col :span="12">
       <div class="output">
         <show-photos :order-id="orderId" />
       </div>
+      <canvas ref="canvas"></canvas>
+    </el-col>
+    <el-col :span="12">
+      <img src="./example.jpg" class="example">
     </el-col>
   </el-row>
   <el-row justify="end">
@@ -120,5 +121,9 @@
   .output {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  .example {
+    width: 100%;
   }
 </style>
