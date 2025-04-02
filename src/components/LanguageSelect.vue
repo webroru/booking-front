@@ -37,7 +37,7 @@
     display: flex;
     height: 10vh;
     justify-content: space-evenly;
-    overflow: auto;
+    overflow: scroll;
   }
 
   li {
