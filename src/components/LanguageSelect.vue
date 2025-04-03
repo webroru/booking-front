@@ -14,14 +14,16 @@
 </script>
 
 <template>
-  <ul>
-    <li v-for="locale in availableLocales" :key="locale">
-      <a href="#" @click.prevent="changeLanguage(locale)">
-        <span :class="`fi fi-${locale === 'en' ? 'gb' : locale === 'sl' ? 'si' : locale === 'zh' ? 'cn' : locale}`"></span>
-        <p>{{ ISO6391.getName(locale) }}</p>
-      </a>
-    </li>
-  </ul>
+  <el-scrollbar always>
+    <div class="flags">
+      <div class="flag" v-for="locale in availableLocales" :key="locale">
+        <a href="#" @click.prevent="changeLanguage(locale)">
+          <span :class="`fi fi-${locale === 'en' ? 'gb' : locale === 'sl' ? 'si' : locale === 'zh' ? 'cn' : locale}`"></span>
+          <p>{{ ISO6391.getName(locale) }}</p>
+        </a>
+      </div>
+    </div>
+  </el-scrollbar>
 </template>
 
 <style scoped>
@@ -33,20 +35,22 @@
     text-decoration: none;
   }
 
-  ul {
+  .flags {
     display: flex;
-    height: 10vh;
     justify-content: space-evenly;
-    overflow: scroll;
   }
 
-  li {
+  .flag {
+    flex-shrink: 0;
     display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    list-style: none;
-    margin: 0 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    margin: 10px;
     text-align: center;
+    border-radius: 4px;
+    background: var(--el-color-primary-light-9);
   }
 
   p {
