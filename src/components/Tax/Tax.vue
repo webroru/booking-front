@@ -3,6 +3,7 @@
   import { useBookingStore } from '@/stores/booking';
   import MakePhoto from '@/components/Photos/MakePhoto.vue';
   import TaxItem from '@/components/Tax/TaxItem.vue';
+  import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
 
   const store = useBookingStore();
   const { bookings } = store;
@@ -24,8 +25,10 @@
 
 <template>
   <TaxItem v-for="booking in bookings" :key="booking.orderId" :booking="booking" @open-make-photo="openMakePhoto"/>
+
   <el-dialog v-model="showMakePhoto" :title="$t('photos.makePhotoTitle')" width="80%"
     :before-close="closeMakePhoto">
     <make-photo :is-camera-enabled="isCameraEnabled" :order-id="makePhotoOrderId" />
   </el-dialog>
+  <smart-capture></smart-capture>
 </template>
