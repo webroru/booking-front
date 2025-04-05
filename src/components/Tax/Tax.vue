@@ -3,7 +3,6 @@
   import { useBookingStore } from '@/stores/booking';
   import MakePhoto from '@/components/Photos/MakePhoto.vue';
   import TaxItem from '@/components/Tax/TaxItem.vue';
-  import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
 
   const store = useBookingStore();
   const { bookings } = store;
@@ -30,5 +29,4 @@
     :before-close="closeMakePhoto">
     <make-photo :is-camera-enabled="isCameraEnabled" :order-id="makePhotoOrderId" />
   </el-dialog>
-  <smart-capture></smart-capture>
 </template>

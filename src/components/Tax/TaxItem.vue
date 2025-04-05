@@ -6,6 +6,7 @@
   import { usePhotosStore } from '@/stores/photos';
   import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
   import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
+  import SmartCapture from "@/components/SmartCapture/SmartCapture.vue";
 
   const store = useBookingStore();
   const { updateGuests } = store;
@@ -139,9 +140,15 @@
               <el-input-number v-model="localBooking.sucklings" :min="0" :max="10" @change="update(localBooking)" />
             </el-col>
           </el-row>
-          <div class="output">
+            <div class="output">
             <show-photos :order-id="booking.orderId" />
           </div>
+          <el-row justify="center">
+            <el-col :xs="24" :md="12">
+              <smart-capture></smart-capture>
+            </el-col>
+          </el-row>
+
         </el-col>
         <el-col :xs="24" :md="8">
           <el-card class="box-card">
@@ -158,13 +165,14 @@
           <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
         </el-col>
       </el-row>
-      <el-row>
-        <el-col>
-          <p>{{ $t('tax.passportOrId') }}</p>
-          <upload-photo :order-id="booking.orderId" v-if="doesShowUpload" />
-          <el-button type="primary" @click="$emit('openMakePhoto', booking.orderId)">{{ $t('tax.makePhoto') }}</el-button>
-        </el-col>
-      </el-row>
+<!--      <el-row>-->
+<!--        <el-col>-->
+<!--          <p>{{ $t('tax.passportOrId') }}</p>-->
+<!--          <upload-photo :order-id="booking.orderId" v-if="doesShowUpload" />-->
+<!--          <el-button type="primary" @click="$emit('openMakePhoto', booking.orderId)">{{ $t('tax.makePhoto') }}</el-button>-->
+<!--          <smart-capture></smart-capture>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
     </el-col>
   </el-row>
 </template>
