@@ -4,15 +4,14 @@
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { usePhotosStore } from '@/stores/photos';
-  import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
-  import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
+  import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
+  import Guest from '@/components/Tax/Guest.vue';
 
   const store = useBookingStore();
-  const { updateGuests } = store;
+  const { updateGuests, setBooking } = store;
   const photosStore = usePhotosStore();
   const { photosBlobs } = photosStore;
   const { t } = useI18n();
-  const doesShowUpload = true;
   const loading = ref(false);
 
   const TAX = {
@@ -21,7 +20,6 @@
     baby: 0,
   };
 
-  // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     booking: Object,
   });
@@ -55,6 +53,18 @@
   let isGuestLimitShow = false;
   let isExtraGuestShow = false;
   let isLessDocsShow = false;
+
+  const onRecognize = async (guest) => {
+    loading.value = true;
+    localBooking.guests.push(guest);
+    setBooking(localBooking);
+    //await updateBooking(localBooking);
+    loading.value = false;
+  };
+
+  const onGender = (gender) => {
+    console.log(gender);
+  };
 
   const update = async (booking) => {
     loading.value = true;
@@ -107,43 +117,17 @@
       <h2>{{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}</h2>
       <el-row :gutter="20">
         <el-col :xs="24" :md="16" class="input-fields">
-          <el-row>
-            <el-col :xs="24" :sm="16">
-              <span class="label">{{ $t('tax.enterAdults') }}</span>
-            </el-col>
-            <el-col :xs="24" :sm="8">
-              <el-input-number v-model="localBooking.adults" :min="0" :max="10" @change="update(localBooking)" />
+          <el-row justify="center">
+            <el-col :xs="24" :md="12">
+              <smart-capture @recognize="onRecognize" />
             </el-col>
           </el-row>
-          <el-row>
-            <el-col :xs="24" :sm="16">
-              <span class="label">{{ $t('tax.enterChildren') }}</span>
-            </el-col>
-            <el-col :xs="24" :sm="8">
-              <el-input-number v-model="localBooking.children" :min="0" :max="10" @change="update(localBooking)" />
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :xs="24" :sm="16">
-              <span class="label">{{ $t('tax.enterBabies') }}</span>
-            </el-col>
-            <el-col :xs="24" :sm="8">
-              <el-input-number v-model="localBooking.babies" :min="0" :max="10" @change="update(localBooking)" />
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :xs="24" :sm="16">
-              <span class="label">{{ $t('tax.enterSucklings') }}</span>
-            </el-col>
-            <el-col :xs="24" :sm="8">
-              <el-input-number v-model="localBooking.sucklings" :min="0" :max="10" @change="update(localBooking)" />
-            </el-col>
-          </el-row>
-          <div class="output">
-            <show-photos :order-id="booking.orderId" />
-          </div>
         </el-col>
         <el-col :xs="24" :md="8">
+          <template v-for="guest in booking.guests">
+            <guest v-if="guest.documentNumber" :guest="guest" @gender="onGender" :key="guest.documentNumber" />
+            <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
+          </template>
           <el-card class="box-card">
             <template #header>
               <div class="card-header">
@@ -156,13 +140,6 @@
             <div class="bottom">{{ $t('tax.total', { total: totalTax(booking) }) }}</div>
           </el-card>
           <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col>
-          <p>{{ $t('tax.passportOrId') }}</p>
-          <upload-photo :order-id="booking.orderId" v-if="doesShowUpload" />
-          <el-button type="primary" @click="$emit('openMakePhoto', booking.orderId)">{{ $t('tax.makePhoto') }}</el-button>
         </el-col>
       </el-row>
     </el-col>
@@ -201,10 +178,5 @@
 
   .bottom {
     font-weight: bold;
-  }
-
-  .output {
-    display: flex;
-    flex-wrap: wrap;
   }
 </style>

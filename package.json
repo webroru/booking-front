@@ -8,6 +8,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@regulaforensics/vp-frontend-document-components": "^7.6.2158",
     "@stripe/stripe-js": "^1.35.0",
     "element-plus": "^2.2.8",
     "flag-icons": "^6.6.4",
