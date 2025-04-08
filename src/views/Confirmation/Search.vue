@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <Search />
+  <search />
 </template>
