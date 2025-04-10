@@ -1,189 +1,37 @@
-import config from '@/config';
+import apiClient from '@/stores/api/apiClient';
 
-const searchBookingApi = async (string) => {
-  const url = `${config.apiUrl}/api/booking?searchString=${string}`;
+export async function searchBookingApi(string) {
+  return await apiClient.get(`/api/booking?searchString=${string}`);
+}
 
-  let json = [];
+export async function updateBookingApi(orderId, data) {
+  return await apiClient.post(`/api/booking/${orderId}`, data);
+}
 
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      },
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
+export async function acceptRuleApi(orderId, isRuleAccepted) {
+  return await apiClient.post(`/api/acceptRule`, { orderId, isRuleAccepted });
+}
 
-  return json;
-};
+export async function checkInApi(orderId, checkIn) {
+  return await apiClient.put(`/api/booking/${orderId}/check-in`, { checkIn });
+}
 
-const updateBookingApi = async (data) => {
-  const url = 'https://run.mocky.io/v3/6f22b652-258e-4388-827e-98e0ad85565e';
+export async function checkOutApi(orderId) {
+  return await apiClient.put(`/api/booking/${orderId}/check-out`);
+}
 
-  let json = [];
+export async function updateGuestsApi(orderId, data) {
+  return await apiClient.put(`/api/booking/${orderId}/guests`, data);
+}
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(data),
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
+export async function payByCashApi(orderId, isPayByCash) {
+  return await apiClient.put(`/api/booking/${orderId}/pay-by-cash`, { isPayByCash });
+}
 
-  return json;
-};
+export async function cancelBookingApi(orderId) {
+  return await apiClient.put(`/api/booking/${orderId}/cancel`);
+}
 
-const acceptRuleApi = async (orderId, isRuleAccepted) => {
-  const url = `${config.apiUrl}/api/acceptRule`;
-
-  let json = [];
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ orderId, isRuleAccepted }),
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-
-  return json;
-};
-
-const checkInApi = async (orderId, checkIn) => {
-  const url = `${config.apiUrl}/api/booking/${orderId}/check-in`;
-
-  let json = [];
-
-  try {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ checkIn }),
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-
-  return json;
-};
-
-const checkOutApi = async (orderId) => {
-  const url = `${config.apiUrl}/api/booking/${orderId}/check-out`;
-
-  let json = [];
-
-  try {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      },
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-
-  return json;
-};
-
-const updateGuestsApi = async (orderId, data) => {
-  const url = `${config.apiUrl}/api/booking/${orderId}/guests`;
-
-  let json = [];
-
-  try {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(data),
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-
-  return json.data;
-};
-
-const payByCashApi = async (orderId, isPayByCash) => {
-  const url = `${config.apiUrl}/api/booking/${orderId}/pay-by-cash`;
-
-  let json = [];
-
-  try {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ isPayByCash }),
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-
-  return json;
-};
-
-const cancelBookingApi = async (orderId) => {
-  const url = `${config.apiUrl}/api/booking/${orderId}/cancel`;
-
-  let json = [];
-
-  try {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      },
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-
-  return json;
-};
-
-const sendMessageApi = async (orderId, message) => {
-  const url = `${config.apiUrl}/api/booking/${orderId}/message`;
-
-  let json = [];
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ message }),
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-
-  return json;
-};
-
-export { searchBookingApi, updateBookingApi, acceptRuleApi, updateGuestsApi, payByCashApi, checkInApi, cancelBookingApi, sendMessageApi, checkOutApi };
+export async function sendMessageApi(orderId, message) {
+  return await apiClient.post(`/api/booking/${orderId}/message`, { message });
+}

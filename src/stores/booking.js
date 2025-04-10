@@ -55,9 +55,9 @@ export const useBookingStore = defineStore('booking', () => {
     return await searchBookingApi(string);
   };
 
-  const updateBooking = (booking) => {
-    setBooking(booking);
-    updateBookingApi(booking);
+  const updateBooking = async (orderId, booking) => {
+    //setBooking(booking);
+    await updateBookingApi(orderId, booking);
   };
 
   const acceptRule = (isRuleAccepted) => {
