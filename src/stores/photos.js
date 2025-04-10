@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
 import { defineStore } from 'pinia';
-import { addPhotoApi, removePhotoApi } from './api/photos';
+import { addPhotoApi, removePhotoApi } from '@/api/photos';
 import { useBookingStore } from '@/stores/booking';
 
 export const usePhotosStore = defineStore('photos', () => {

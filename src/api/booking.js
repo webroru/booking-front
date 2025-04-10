@@ -1,4 +1,4 @@
-import apiClient from '@/stores/api/apiClient';
+import apiClient from './apiClient';
 
 export async function searchBookingApi(string) {
   return await apiClient.get(`/api/booking?searchString=${string}`);
