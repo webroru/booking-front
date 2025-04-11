@@ -56,14 +56,14 @@
   const fetchBookingByUrlParam = async (orderId) => {
     if (orderId && !bookings.some(booking => booking.orderId === orderId)) {
       loading.value = true;
-      const { data } = await searchBooking(orderId);
-      if (!data.length) {
+      const bookings = await searchBooking(orderId);
+      if (!bookings.length) {
         await router.push('/');
         loading.value = false;
         return;
       }
 
-      setBookings(data);
+      setBookings(bookings);
       syncPhotos();
       loading.value = false;
     }

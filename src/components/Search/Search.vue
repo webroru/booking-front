@@ -6,11 +6,10 @@
   import { useBookingStore } from '@/stores/booking';
   import { usePhotosStore } from '@/stores/photos';
   import Result from './Result.vue';
-  import config from '@/config';
 
   const { t } = useI18n();
   const store = useBookingStore();
-  const { setBookings } = store;
+  const { setBookings, searchBooking } = store;
   const photosStore = usePhotosStore();
   const { syncPhotos } = photosStore;
 
@@ -19,37 +18,19 @@
   const loading = ref(false);
 
   const onSubmit = async () => {
-    data.value = await fetchData(`${config.apiUrl}/api/booking?searchString=${query.value}`);
-    if (data.value.length === 1) {
-      setBookings(data.value);
-      syncPhotos();
-    }
-  };
-
-  const showError = () => {
-    ElMessageBox.alert(t('common.error'), 'Error', {
-      confirmButtonText: 'OK',
-    });
-  };
-
-  const fetchData = async (url) => {
     loading.value = true;
-    let json = [];
-
     try {
-      const response = await fetch(url, {
-        method: 'get',
-        headers: {
-          'content-type': 'application/json'
-        }
+      data.value = await searchBooking(query.value);
+      if (data.value.length === 1) {
+        setBookings(data.value);
+        syncPhotos();
+      }
+    } catch (error) {
+      await ElMessageBox.alert(t('common.error'), 'Error', {
+        confirmButtonText: 'OK',
       });
-      json = await response.json();
-    } catch (err) {
-      showError();
     }
-
     loading.value = false;
-    return json.data;
   };
 
   const onSelectBooking = (id) => {

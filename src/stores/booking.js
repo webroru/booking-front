@@ -4,37 +4,33 @@ import { searchBookingApi, updateBookingApi, acceptRuleApi, updateGuestsApi, pay
 
 export const useBookingStore = defineStore('booking', () => {
 
-  /**
-   * @type {{
-   *   firstName: string,
-   *   lastName: string,
-   *   checkInDate: string,
-   *   checkOutDate: string,
-   *   phone: string,
-   *   orderId: number,
-   *   propertyName: string,
-   *   room: number,
-   *   originalReferer: string,
-   *   guestsAmount: number,
-   *   adults: number,
-   *   children: number,
-   *   babies: number,
-   *   passCode: number,
-   *   debt: number,
-   *   extraPerson: number,
-   *   capacity: number,
-   *   overmax: number,
-   *   isRuleAccepted,
-   *   checkIn: boolean,
-   *   paymentStatus: string,
-   *   lessDocs: boolean,
-   *   photos: Array,
-   *   groupId: number,
-   *   invoiceItems: Array,
-   *   guests: Array,
-   * }}
-   */
-  const booking = reactive({});
+  const booking = reactive({
+    lastName: '',
+    checkInDate: '',
+    checkOutDate: '',
+    phone: '',
+    orderId: null,
+    propertyName: '',
+    room: null,
+    originalReferer: '',
+    guestsAmount: null,
+    adults: null,
+    children: null,
+    babies: null,
+    passCode: null,
+    debt: null,
+    extraPerson: null,
+    capacity: null,
+    overmax: null,
+    isRuleAccepted: false,
+    checkIn: false,
+    paymentStatus: '',
+    lessDocs: false,
+    photos: [],
+    groupId: null,
+    invoiceItems: [],
+    guests: [],
+  });
 
   const bookings = reactive([]);
 
@@ -52,27 +48,26 @@ export const useBookingStore = defineStore('booking', () => {
   };
 
   const searchBooking = async (string) => {
-    return await searchBookingApi(string);
+    return (await searchBookingApi(string)).data;
   };
 
   const updateBooking = async (orderId, booking) => {
-    //setBooking(booking);
     await updateBookingApi(orderId, booking);
   };
 
   const acceptRule = (isRuleAccepted) => {
-    bookings.forEach(booking => {
+    bookings.forEach(async booking => {
       booking.isRuleAccepted = isRuleAccepted;
-      acceptRuleApi(booking.orderId, isRuleAccepted);
+      await acceptRuleApi(booking.orderId, isRuleAccepted);
     });
   };
 
-  const checkIn = (orderId, checkIn) => {
-    checkInApi(orderId, checkIn);
+  const checkIn = async (orderId, checkIn) => {
+    await checkInApi(orderId, checkIn);
   };
 
-  const checkOut = (orderId) => {
-    checkOutApi(orderId);
+  const checkOut = async (orderId) => {
+    await checkOutApi(orderId);
   };
 
   const updateGuests = async (booking) => {
@@ -80,20 +75,20 @@ export const useBookingStore = defineStore('booking', () => {
     setBooking(newBooking);
   };
 
-  const payByCash = (orderId, isPayByCash) => {
-    payByCashApi(orderId, isPayByCash);
+  const payByCash = async (orderId, isPayByCash) => {
+    await payByCashApi(orderId, isPayByCash);
   };
 
   const resetBooking = () => {
     bookings.splice(0);
   };
 
-  const cancelBooking = (orderId) => {
-    cancelBookingApi(orderId);
+  const cancelBooking = async (orderId) => {
+    await cancelBookingApi(orderId);
   };
 
-  const sendMessage = (orderId, text) => {
-    sendMessageApi(orderId, text);
+  const sendMessage = async (orderId, text) => {
+    await sendMessageApi(orderId, text);
   };
 
   return {
