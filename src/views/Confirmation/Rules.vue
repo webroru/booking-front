@@ -10,7 +10,7 @@
   const acceptRule = (isRuleAccepted) => {
     bookings.forEach(async booking => {
       booking.isRuleAccepted = isRuleAccepted;
-      await updateBooking(booking.orderId, booking);
+      await updateBooking(booking);
     });
   };
   isRuleAccepted.value = bookings.every(booking => booking.isRuleAccepted);

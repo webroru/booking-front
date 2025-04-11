@@ -65,11 +65,11 @@
       errorText.value = result.error.message;
       showError();
     } else {
-      bookings.forEach(booking => {
+      bookings.forEach(async booking => {
         booking.paymentStatus = 'paid';
         booking.checkIn = true;
         booking.debt = 0;
-        updateBooking(booking);
+        await updateBooking(booking);
       });
       showSuccess();
     }

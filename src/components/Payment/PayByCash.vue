@@ -21,7 +21,7 @@
     if (bookings.every(booking => booking.paymentStatus !== 'paid')) {
       bookings.forEach(async booking => {
         booking.paymentStatus = checked.value ? 'paid by cash' : '';
-        await updateBooking(booking.orderId, booking);
+        await updateBooking(booking);
       });
     }
   };
