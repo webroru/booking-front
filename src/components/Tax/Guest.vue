@@ -2,11 +2,12 @@
   import { ref } from 'vue';
   import { Delete } from '@element-plus/icons-vue';
 
-  defineProps({
+  const props = defineProps({
     guest: Object,
+    index: Number,
   });
 
-  const gender = ref('');
+  const localGuest = ref({ ...props.guest });
 </script>
 
 <template>
@@ -23,11 +24,11 @@
     <el-descriptions-item label="Gender">
       <template v-if="guest.gender">{{ guest.gender }}</template>
       <el-select v-else
-          v-model="gender"
+          v-model="localGuest.gender"
           placeholder="---"
           size="small"
           style="width: 50px"
-          @change="$emit('gender', gender)"
+          @change="$emit('change', localGuest, index)"
       >
         <el-option
             v-for="item in ['M', 'F']"

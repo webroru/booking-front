@@ -8,7 +8,7 @@
   import Guest from '@/components/Tax/Guest.vue';
 
   const store = useBookingStore();
-  const { updateGuests, setBooking } = store;
+  const { setBooking, updateBooking } = store;
   const photosStore = usePhotosStore();
   const { photosBlobs } = photosStore;
   const { t } = useI18n();
@@ -58,15 +58,20 @@
     loading.value = true;
     localBooking.guests.push(guest);
     setBooking(localBooking);
-    //await updateBooking(localBooking);
+    await updateBooking(localBooking);
+    loading.value = false;
+    update(localBooking);
+  };
+
+  const onChange = async (guest, index) => {
+    loading.value = true;
+    Object.assign(localBooking.guests[index], guest);
+    setBooking(localBooking);
+    await updateBooking(localBooking);
     loading.value = false;
   };
 
-  const onGender = (gender) => {
-    console.log(gender);
-  };
-
-  const update = async (booking) => {
+  const update = (booking) => {
     loading.value = true;
     booking.overmax = isGuestLimit(booking) ? confirmedGuests(booking) : 0;
     booking.plusGuest = isExtraGuest(booking);
@@ -105,9 +110,6 @@
         });
       }, 0);
     }
-
-    await updateGuests(booking);
-    loading.value = false;
   };
 </script>
 
@@ -125,7 +127,7 @@
         </el-col>
         <el-col :xs="24" :md="8">
           <template v-for="guest in booking.guests">
-            <guest v-if="guest.documentNumber" :guest="guest" @gender="onGender" :key="guest.documentNumber" />
+            <guest v-if="guest.documentNumber" :guest="guest" @change="onChange" :key="guest.documentNumber" />
             <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
           </template>
           <el-card class="box-card">
