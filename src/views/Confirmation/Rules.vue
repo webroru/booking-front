@@ -4,9 +4,15 @@
   import Rules from '@/components/Rules.vue';
 
   const bookingStore = useBookingStore();
-  const { bookings, acceptRule } = bookingStore;
+  const { bookings, updateBooking } = bookingStore;
   const isRuleAccepted = ref(false);
 
+  const acceptRule = (isRuleAccepted) => {
+    bookings.forEach(async booking => {
+      booking.isRuleAccepted = isRuleAccepted;
+      await updateBooking(booking.orderId, booking);
+    });
+  };
   isRuleAccepted.value = bookings.every(booking => booking.isRuleAccepted);
 </script>
 
