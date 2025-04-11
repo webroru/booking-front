@@ -12,8 +12,7 @@
       console.log(event.detail.data);
 
       const data = {
-        // gender: getValueFromFieldList(fieldList, 'Sex'),
-        gender: undefined,
+        gender: getValueFromFieldList(fieldList, 'Sex'),
         firstName: getValueFromFieldList(fieldList, 'Given Names'),
         lastName: getValueFromFieldList(fieldList, 'Surname'),
         nationality: getValueFromFieldList(fieldList, 'Nationality'),
