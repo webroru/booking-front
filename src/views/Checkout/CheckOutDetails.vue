@@ -6,15 +6,16 @@
   import Feedback from '@/components/Feedback.vue';
 
   const bookingStore = useBookingStore();
-  const { booking, checkOut } = bookingStore;
+  const { booking, updateBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
   const showFeedbackDialog = ref(false);
   const router = useRouter();
 
-  const handleCheckout = () => {
-    checkOut(booking.orderId);
-    router.push('/');
+  const handleCheckout = async () => {
+    booking.checkOut = true;
+    await updateBooking(booking);
+    await router.push('/');
   };
 </script>
 
