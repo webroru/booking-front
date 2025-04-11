@@ -8,10 +8,6 @@ export async function updateBookingApi(orderId, data) {
   return await apiClient.put(`/api/booking/${orderId}`, data);
 }
 
-export async function checkInApi(orderId, checkIn) {
-  return await apiClient.put(`/api/booking/${orderId}/check-in`, { checkIn });
-}
-
 export async function checkOutApi(orderId) {
   return await apiClient.put(`/api/booking/${orderId}/check-out`);
 }
