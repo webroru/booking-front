@@ -61,10 +61,6 @@ export const useBookingStore = defineStore('booking', () => {
     bookings.splice(0);
   };
 
-  const cancelBooking = async (orderId) => {
-    await cancelBookingApi(orderId);
-  };
-
   const sendMessage = async (orderId, text) => {
     await sendMessageApi(orderId, text);
   };
@@ -77,7 +73,6 @@ export const useBookingStore = defineStore('booking', () => {
     setBookings,
     updateBooking,
     resetBooking,
-    cancelBooking,
     sendMessage,
   };
 });

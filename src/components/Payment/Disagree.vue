@@ -5,7 +5,7 @@
   import { useInfoStore } from '@/stores/info';
 
   const bookingStore = useBookingStore();
-  const { bookings, cancelBooking } = bookingStore;
+  const { bookings, updateBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
   const show = ref(false);
@@ -14,7 +14,11 @@
 
   const handle = () => {
     if (bookings.every(booking => booking.paymentStatus !== 'paid') && checked.value) {
-      bookings.foreach(booking => cancelBooking(booking.orderId));
+      bookings.foreach(async booking => {
+        booking.paymentStatus = 'disagree';
+        booking.checkIn = false;
+        await updateBooking(booking.orderId, booking);
+      });
       router.push('/');
     }
   };
