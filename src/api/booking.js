@@ -8,10 +8,6 @@ export async function updateBookingApi(orderId, data) {
   return await apiClient.put(`/api/booking/${orderId}`, data);
 }
 
-export async function payByCashApi(orderId, isPayByCash) {
-  return await apiClient.put(`/api/booking/${orderId}/pay-by-cash`, { isPayByCash });
-}
-
 export async function cancelBookingApi(orderId) {
   return await apiClient.put(`/api/booking/${orderId}/cancel`);
 }
