@@ -30,7 +30,7 @@
 
   bookings.forEach(async booking => {
     booking.checkIn = true;
-    await updateBooking(booking.orderId, booking);
+    await updateBooking(booking);
   });
 </script>
 

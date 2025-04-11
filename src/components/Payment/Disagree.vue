@@ -17,7 +17,7 @@
       bookings.foreach(async booking => {
         booking.paymentStatus = 'disagree';
         booking.checkIn = false;
-        await updateBooking(booking.orderId, booking);
+        await updateBooking(booking);
       });
       router.push('/');
     }
