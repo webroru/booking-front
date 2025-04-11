@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
-import { searchBookingApi, updateBookingApi, cancelBookingApi, sendMessageApi} from '@/api/booking';
+import { searchBookingApi, updateBookingApi, sendMessageApi} from '@/api/booking';
 
 export const useBookingStore = defineStore('booking', () => {
 
