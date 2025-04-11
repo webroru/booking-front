@@ -4,13 +4,12 @@
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
 
-  // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     debt: String,
   });
 
   const bookingStore = useBookingStore();
-  const { bookings, payByCash } = bookingStore;
+  const { bookings, updateBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { t } = useI18n();
   const { info } = infoStore;
@@ -20,9 +19,9 @@
 
   const handle = () => {
     if (bookings.every(booking => booking.paymentStatus !== 'paid')) {
-      bookings.forEach(booking => {
+      bookings.forEach(async booking => {
         booking.paymentStatus = checked.value ? 'paid by cash' : '';
-        payByCash(booking.orderId, booking.paymentStatus === 'paid by cash');
+        await updateBooking(booking.orderId, booking);
       });
     }
   };
