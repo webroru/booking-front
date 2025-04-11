@@ -5,11 +5,7 @@ export async function searchBookingApi(string) {
 }
 
 export async function updateBookingApi(orderId, data) {
-  return await apiClient.post(`/api/booking/${orderId}`, data);
-}
-
-export async function acceptRuleApi(orderId, isRuleAccepted) {
-  return await apiClient.post(`/api/acceptRule`, { orderId, isRuleAccepted });
+  return await apiClient.put(`/api/booking/${orderId}`, data);
 }
 
 export async function checkInApi(orderId, checkIn) {
