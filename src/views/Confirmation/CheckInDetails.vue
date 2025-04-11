@@ -7,7 +7,7 @@
   import Rules from '@/components/Rules.vue';
 
   const bookingStore = useBookingStore();
-  const { bookings, checkIn } = bookingStore;
+  const { bookings, updateBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { info, sendToEmail } = infoStore;
   const { t } = useI18n();
@@ -21,14 +21,17 @@
         /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
       inputErrorMessage: t('checkInDetails.invalidEmail'),
     });
-    sendToEmail(bookings.map(booking => booking.orderId), email.value);
+    await sendToEmail(bookings.map(booking => booking.orderId), email.value);
     ElMessage({
       type: 'success',
       message: t('checkInDetails.sent', { email: email.value }),
     });
   };
 
-  bookings.forEach(booking => checkIn(booking.orderId, true));
+  bookings.forEach(async booking => {
+    booking.checkIn = true;
+    await updateBooking(booking.orderId, booking);
+  });
 </script>
 
 <template>
