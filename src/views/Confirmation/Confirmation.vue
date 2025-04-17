@@ -34,7 +34,7 @@
     const isBookingPaid = bookings.every(booking => ['paid', 'paid by cash'].includes(booking.paymentStatus));
     const bookingHasNotBeenPaid = active.value === 4 && !isBookingPaid;
     const bookingRuleHasNotBeenAccepted = active.value === 2 && !bookings.every(booking => booking.isRuleAccepted);
-    const guests = bookings.reduce((total, booking) => total + booking.adults + booking.children + booking.babies, 0);
+    const guests = bookings.reduce((total, booking) => total + booking.guests.length, 0);
     const guestsWereNotSpecified = active.value === 3 && guests === 0;
     const noPhotos = active.value === 3 && bookings.some(booking => Object.keys(photosBlobs[booking.orderId]).length === 0);
 
