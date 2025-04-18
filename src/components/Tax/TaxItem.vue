@@ -76,8 +76,6 @@
   };
 
   const update = (booking) => {
-    booking.lessDocs = isLessDocs(booking);
-
     if (isGuestLimit(booking) && !isGuestLimitShow) {
       isGuestLimitShow = true;
       setTimeout(() => {
