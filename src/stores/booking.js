@@ -22,7 +22,6 @@ export const useBookingStore = defineStore('booking', () => {
     checkIn: false,
     checkOut: false,
     paymentStatus: '',
-    lessDocs: false,
     photos: [],
     groupId: null,
     invoiceItems: [],
