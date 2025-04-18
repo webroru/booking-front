@@ -76,7 +76,6 @@
   };
 
   const update = (booking) => {
-    booking.overmax = isGuestLimit(booking) ? confirmedGuests(booking) : 0;
     booking.plusGuest = isExtraGuest(booking);
     booking.lessDocs = isLessDocs(booking);
 
