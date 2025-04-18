@@ -76,7 +76,6 @@
   };
 
   const update = (booking) => {
-    booking.plusGuest = isExtraGuest(booking);
     booking.lessDocs = isLessDocs(booking);
 
     if (isGuestLimit(booking) && !isGuestLimitShow) {
