@@ -4,7 +4,7 @@
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
-  import Guest from '@/components/Tax/Guest.vue';
+  import Guest from '@/components/Documents/Guest.vue';
 
   const store = useBookingStore();
   const { setBooking, updateBooking } = store;

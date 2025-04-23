@@ -1,11 +1,11 @@
 <script setup>
   import { useBookingStore } from '@/stores/booking';
-  import TaxItem from '@/components/Tax/TaxItem.vue';
+  import Documents from '@/components/Documents/Documents.vue';
 
   const store = useBookingStore();
   const { bookings } = store;
 </script>
 
 <template>
-  <TaxItem v-for="booking in bookings" :key="booking.orderId" :booking="booking" />
+  <documents v-for="booking in bookings" :key="booking.orderId" :booking="booking" />
 </template>
