@@ -65,12 +65,12 @@
       errorText.value = result.error.message;
       showError();
     } else {
-      bookings.forEach(async booking => {
+      for (const booking of bookings) {
         booking.paymentStatus = 'paid';
         booking.checkIn = true;
         booking.debt = 0;
         await updateBooking(booking);
-      });
+      }
       showSuccess();
     }
     isButtonDisabled.value = false;
