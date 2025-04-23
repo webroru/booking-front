@@ -1,16 +1,13 @@
 <script setup>
-  import { ref, reactive } from 'vue';
+  import { ref, reactive, computed } from 'vue';
   import { ElNotification } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
-  import { usePhotosStore } from '@/stores/photos';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
   import Guest from '@/components/Tax/Guest.vue';
 
   const store = useBookingStore();
   const { setBooking, updateBooking } = store;
-  const photosStore = usePhotosStore();
-  const { photosBlobs } = photosStore;
   const { t } = useI18n();
   const loading = ref(false);
 
@@ -26,29 +23,36 @@
 
   const localBooking = reactive(props.booking);
 
+  const adults = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 18 ? 1 : 0), 0));
+  const children = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 7 && getAges(guest) < 18 ? 1 : 0), 0));
+  const preschoolers = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 4 && getAges(guest) < 7 ? 1 : 0), 0));
+  const toddlers = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) < 4 ? 1 : 0), 0));
+
+  const getAges = guest => new Date().getFullYear() - new Date(guest.dateOfBirth).getFullYear();
+
   const bookedNights = (booking) => Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
   const totalTax = (booking) => {
-    const adults = booking.adults * TAX.adult;
-    const children = booking.children * TAX.children;
-    const babies = booking.babies * TAX.baby;
-    return strip(bookedNights(booking) * (adults + children + babies));
+    const adultsTax = adults.value * TAX.adult;
+    const childrenTax = children.value * TAX.children;
+    const preschoolersTax = preschoolers.value * TAX.baby;
+    return strip(bookedNights(booking) * (adultsTax + childrenTax + preschoolersTax));
   };
   const showExtraPay = booking => extraGuests(booking) > 0 && extraPayment(booking);
   const strip = (number) => parseFloat(number).toPrecision(4);
 
-  const confirmedGuests = (booking) => {
-    let confirmedGuests = booking.adults + booking.children + booking.babies;
-    if (booking.sucklings > 1) {
-      confirmedGuests += booking.sucklings - 1;
+  const confirmedGuests = () => {
+    let confirmedGuests = adults.value + children.value + preschoolers.value;
+    if (toddlers.value > 1) {
+      confirmedGuests += toddlers.value - 1;
     }
     return confirmedGuests;
   };
 
-  const isExtraGuest = (booking) => confirmedGuests(booking) > booking.guestsAmount;
-  const extraGuests = (booking) => confirmedGuests(booking) - booking.guestsAmount;
-  const isGuestLimit = (booking) => confirmedGuests(booking) > booking.capacity + 2;
-  const isLessDocs = (booking) => Object.keys(photosBlobs[booking.orderId]).length < booking.adults + booking.children;
-  const extraPayment = booking => (Math.min(booking.capacity, confirmedGuests(booking)) - booking.guestsAmount) * bookedNights(booking) * booking.extraPerson;
+  const isExtraGuest = (booking) => confirmedGuests() > booking.guestsAmount;
+  const extraGuests = (booking) => confirmedGuests() - booking.guestsAmount;
+  const isGuestLimit = (booking) => confirmedGuests() > booking.capacity + 2;
+  const isLessDocs = (booking) => booking.guestsAmount > adults.value + children.value + preschoolers.value + toddlers.value;
+  const extraPayment = booking => (Math.min(booking.capacity, confirmedGuests()) - booking.guestsAmount) * bookedNights(booking) * booking.extraPerson;
 
   let isGuestLimitShow = false;
   let isExtraGuestShow = false;
@@ -63,7 +67,7 @@
     update(localBooking);
   };
 
-  const onChange = async (guest, index) => {
+  const onGuestChange = async (guest, index) => {
     loading.value = true;
     Object.assign(localBooking.guests[index], guest);
     setBooking(localBooking);
@@ -72,10 +76,6 @@
   };
 
   const update = (booking) => {
-    booking.overmax = isGuestLimit(booking) ? confirmedGuests(booking) : 0;
-    booking.plusGuest = isExtraGuest(booking);
-    booking.lessDocs = isLessDocs(booking);
-
     if (isGuestLimit(booking) && !isGuestLimitShow) {
       isGuestLimitShow = true;
       setTimeout(() => {
@@ -126,7 +126,7 @@
         </el-col>
         <el-col :xs="24" :md="8">
           <template v-for="guest in booking.guests">
-            <guest v-if="guest.documentNumber" :guest="guest" @change="onChange" :key="guest.documentNumber" />
+            <guest v-if="guest.documentNumber" :guest="guest" @change="onGuestChange" :key="guest.documentNumber" />
             <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
           </template>
           <el-card class="box-card">

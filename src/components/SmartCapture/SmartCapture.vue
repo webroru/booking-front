@@ -9,7 +9,6 @@
   const listener = (event) => {
     if (event.detail.action === 'PROCESS_FINISHED' && event.detail.data.status === 1 && event.detail.data.response.text !== undefined) {
       const fieldList = event.detail.data.response.text.fieldList;
-      console.log(event.detail.data);
 
       const data = {
         gender: getValueFromFieldList(fieldList, 'Sex'),
