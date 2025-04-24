@@ -11,12 +11,6 @@
   const { t } = useI18n();
   const loading = ref(false);
 
-  const TAX = {
-    adult: 3.13,
-    children: 1.57,
-    baby: 0,
-  };
-
   const props = defineProps({
     booking: Object,
   });
@@ -31,14 +25,7 @@
   const getAges = guest => new Date().getFullYear() - new Date(guest.dateOfBirth).getFullYear();
 
   const bookedNights = (booking) => Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
-  const totalTax = (booking) => {
-    const adultsTax = adults.value * TAX.adult;
-    const childrenTax = children.value * TAX.children;
-    const preschoolersTax = preschoolers.value * TAX.baby;
-    return strip(bookedNights(booking) * (adultsTax + childrenTax + preschoolersTax));
-  };
   const showExtraPay = booking => extraGuests(booking) > 0 && extraPayment(booking);
-  const strip = (number) => parseFloat(number).toPrecision(4);
 
   const confirmedGuests = () => {
     let confirmedGuests = adults.value + children.value + preschoolers.value;
@@ -129,17 +116,6 @@
             <guest v-if="guest.documentNumber" :guest="guest" @change="onGuestChange" :key="guest.documentNumber" />
             <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
           </template>
-          <el-card class="box-card">
-            <template #header>
-              <div class="card-header">
-                <span>{{ $t('tax.cityTax') }}</span>
-              </div>
-            </template>
-            <div class="text item">{{ $t('tax.taxAdult', { adult: TAX.adult }) }}</div>
-            <div class="text item">{{ $t('tax.taxChildren', { children: TAX.children }) }}</div>
-            <div class="text item">{{ $t('tax.taxBaby', { baby: TAX.baby }) }}</div>
-            <div class="bottom">{{ $t('tax.total', { total: totalTax(booking) }) }}</div>
-          </el-card>
           <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
         </el-col>
       </el-row>
@@ -150,34 +126,5 @@
 <style scoped>
   .input-fields {
     margin-bottom: 20px;
-  }
-
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .text {
-    font-size: 14px;
-  }
-  
-  .item {
-    margin-bottom: 18px;
-  }
-
-  .label {
-    display: inline-flex;
-    font-size: var(--el-font-size-base);
-    color: var(--el-text-color-regular);
-    height: 32px;
-    padding: 0 12px 0 0;
-    box-sizing: border-box;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .bottom {
-    font-weight: bold;
   }
 </style>
