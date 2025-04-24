@@ -9,6 +9,7 @@
   const store = useBookingStore();
   const { setBooking, updateBooking } = store;
   const { t } = useI18n();
+  const loading = ref(false);
 
   const props = defineProps({
     booking: Object,
@@ -45,16 +46,28 @@
   let isLessDocsShow = false;
 
   const onRecognize = async (guest) => {
+    loading.value = true;
     localBooking.guests.push(guest);
     setBooking(localBooking);
     await updateBooking(localBooking);
+    loading.value = false;
     update(localBooking);
   };
 
   const onGuestChange = async (guest, index) => {
+    loading.value = true;
     Object.assign(localBooking.guests[index], guest);
     setBooking(localBooking);
     await updateBooking(localBooking);
+    loading.value = false;
+  };
+
+  const onGuestRemove = async (index) => {
+    loading.value = true;
+    localBooking.guests.splice(index, 1);
+    setBooking(localBooking);
+    await updateBooking(localBooking);
+    loading.value = false;
   };
 
   const update = (booking) => {
@@ -101,7 +114,7 @@
   </div>
   <el-divider />
   <template v-for="guest in booking.guests">
-    <guest v-if="guest.documentNumber" :guest="guest" @change="onGuestChange" :key="guest.documentNumber" />
+    <guest v-if="guest.documentNumber" :guest="guest" @change="onGuestChange" @remove="onGuestRemove" :key="guest.documentNumber" v-loading="loading" />
     <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
   </template>
   <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
