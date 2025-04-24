@@ -17,7 +17,7 @@
       border
   >
     <template #extra>
-      <el-button type="danger" :icon="Delete" circle @click="$emit('remove')" />
+      <el-button type="danger" :icon="Delete" circle @click="$emit('remove', index)" />
     </template>
     <el-descriptions-item label="Document Number">{{ guest.documentNumber }}</el-descriptions-item>
     <el-descriptions-item label="Document Class">{{ guest.documentType }}</el-descriptions-item>
