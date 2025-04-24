@@ -8,6 +8,12 @@
 </script>
 
 <template>
-  <guide />
-  <documents v-for="booking in bookings" :key="booking.orderId" :booking="booking" />
+  <el-row :gutter="20">
+    <el-col :xs="24" :md="16">
+      <guide />
+    </el-col>
+    <el-col :xs="24" :md="8">
+      <documents v-for="booking in bookings" :key="booking.orderId" :booking="booking" />
+    </el-col>
+  </el-row>
 </template>

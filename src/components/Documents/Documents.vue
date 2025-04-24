@@ -9,7 +9,6 @@
   const store = useBookingStore();
   const { setBooking, updateBooking } = store;
   const { t } = useI18n();
-  const loading = ref(false);
 
   const props = defineProps({
     booking: Object,
@@ -46,20 +45,16 @@
   let isLessDocsShow = false;
 
   const onRecognize = async (guest) => {
-    loading.value = true;
     localBooking.guests.push(guest);
     setBooking(localBooking);
     await updateBooking(localBooking);
-    loading.value = false;
     update(localBooking);
   };
 
   const onGuestChange = async (guest, index) => {
-    loading.value = true;
     Object.assign(localBooking.guests[index], guest);
     setBooking(localBooking);
     await updateBooking(localBooking);
-    loading.value = false;
   };
 
   const update = (booking) => {
@@ -100,31 +95,14 @@
 </script>
 
 <template>
-  <el-row v-loading="loading">
-    <el-col>
-      <h2>{{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}</h2>
-      <el-row :gutter="20">
-        <el-col :xs="24" :md="16" class="input-fields">
-          <el-row justify="center">
-            <el-col :xs="24" :md="12">
-              <smart-capture @recognize="onRecognize" />
-            </el-col>
-          </el-row>
-        </el-col>
-        <el-col :xs="24" :md="8">
-          <template v-for="guest in booking.guests">
-            <guest v-if="guest.documentNumber" :guest="guest" @change="onGuestChange" :key="guest.documentNumber" />
-            <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
-          </template>
-          <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
-        </el-col>
-      </el-row>
-    </el-col>
-  </el-row>
+  <h2>{{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}</h2>
+  <div>
+    <smart-capture @recognize="onRecognize" />
+  </div>
+  <el-divider />
+  <template v-for="guest in booking.guests">
+    <guest v-if="guest.documentNumber" :guest="guest" @change="onGuestChange" :key="guest.documentNumber" />
+    <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
+  </template>
+  <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
 </template>
-
-<style scoped>
-  .input-fields {
-    margin-bottom: 20px;
-  }
-</style>
