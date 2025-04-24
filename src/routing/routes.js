@@ -2,7 +2,7 @@ import Checkout from '@/views/Checkout/Checkout.vue';
 import Registration from "@/views/Registration.vue";
 import Search from '@/views/Confirmation/Search.vue';
 import Instruction from '@/views/Confirmation/Instruction.vue';
-import Tax from '@/views/Confirmation/Tax.vue';
+import Documents from '@/views/Confirmation/Documents.vue';
 import Payment from '@/views/Confirmation/Payment.vue';
 import Rules from '@/views/Confirmation/Rules.vue';
 import CheckInDetails from '@/views/Confirmation/CheckInDetails.vue';
@@ -25,7 +25,7 @@ const routes = [
           { path: 'search', component: Search },
           { path: ':orderId/instruction', component: Instruction },
           { path: ':orderId/rules', component: Rules },
-          { path: ':orderId/tax', component: Tax },
+          { path: ':orderId/documents', component: Documents },
           { path: ':orderId/payment', component: Payment },
           { path: ':orderId/checkin-details', component: CheckInDetails },
           { path: ':orderId/booking-info', component: BookingInfo },

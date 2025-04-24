@@ -47,7 +47,7 @@
     <el-step :title="$t('confirmation.search')" />
     <el-step :title="$t('confirmation.information')" />
     <el-step :title="$t('confirmation.rules')" />
-    <el-step :title="$t('confirmation.tax')" />
+    <el-step :title="$t('confirmation.documents')" />
     <el-step :title="$t('confirmation.payment')" />
     <el-step :title="$t('confirmation.checkInDetails')" />
   </el-steps>
