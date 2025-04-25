@@ -152,6 +152,10 @@ export default Object.freeze({
         body: 'To achieve good quality document recognition, it is recommended to provide images taken with a camera with a resolution of at least Full HD (1920×1080) and autofocus.',
       }
     },
+    documents: {
+      mandatory: 'You are required to register all guests prior to check-in for booking {id}',
+      requirement: 'Only a passport or ID is required for scanning',
+    },
   },
   ru: {
     common: {
