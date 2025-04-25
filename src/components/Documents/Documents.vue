@@ -5,6 +5,7 @@
   import { useBookingStore } from '@/stores/booking';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
   import Guest from '@/components/Documents/Guest.vue';
+  import { InfoFilled } from '@element-plus/icons-vue';
 
   const store = useBookingStore();
   const { setBooking, updateBooking } = store;
@@ -108,7 +109,7 @@
 </script>
 
 <template>
-  <h2>{{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}</h2>
+  <h2>{{ $t('documents.mandatory', { id: booking.orderId }) }}</h2>
   <template v-for="guest in booking.guests">
     <guest v-if="guest.documentNumber" :guest="guest" @change="onGuestChange" @remove="onGuestRemove" :key="guest.documentNumber" v-loading="loading" />
     <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
@@ -117,4 +118,18 @@
   <div>
     <smart-capture @recognize="onRecognize" />
   </div>
+  <p><span class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</span></p>
 </template>
+
+<style scoped>
+  .info {
+    background: var(--el-color-primary-light-5);
+    border-radius: 4px;
+    padding: 4px;
+    vertical-align: baseline;
+  }
+
+  .el-icon {
+    vertical-align: middle;
+  }
+</style>
