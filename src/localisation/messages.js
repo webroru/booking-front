@@ -115,42 +115,41 @@ export default Object.freeze({
     },
     guide: {
       p1: {
-        title: 'Посторонние предметы и искажения',
-        body: 'Убедитесь, что ваши руки или другие предметы не закрывают данные документа. При сканировании паспорта убедитесь, что страницы правильно выровнены и все данные четко видны.',
-        image: 'img_1.png',
+        title: 'Foreign objects and distortions',
+        body: 'Ensure that your hands or other objects do not cover the document data. When scanning a passport, ensure that the pages are aligned correctly and all data is clearly visible.',
       },
       p2: {
-        title: 'Хорошее освещение.',
-        body: 'Хорошее освещение помогает достичь лучших результатов OCR. Если изображение слишком темное или слишком яркое, документ может быть обработан некорректно.',
+        title: 'Good lighting',
+        body: 'Good lighting helps achieve better OCR results. If the image is too dark or too bright, the document may not be processed correctly.',
       },
       p3: {
-        title: 'Избегайте отражений',
-        body: 'Блики и отражения мешают обработке и снижают точность извлечения данных. Мы рекомендуем не использовать вспышку мобильного устройства при съемке изображений документов.',
+        title: 'Avoid reflections',
+        body: 'Glare and reflections interfere with processing and reduce data extraction accuracy. We recommend not using the mobile device\'s flash when taking pictures of documents.',
       },
       p4: {
-        title: 'Фокус и резкость',
-        body: 'Убедитесь, что изображение четкое и на нем нет размытых участков.',
+        title: 'Focus and sharpness',
+        body: 'Ensure that the image is clear and has no blurred areas.',
       },
       p5: {
-        title: 'Угол',
-        body: 'Угол наклона документа не должен превышать 10 градусов в любом направлении (горизонтальном или вертикальном).',
+        title: 'Angle',
+        body: 'The tilt of the document should not exceed 10 degrees in any direction (horizontal or vertical).',
       },
       p6: {
-        title: 'Поля (слишком малы)',
-        body: 'Убедитесь, что вокруг документа есть минимальное пространство. Рекомендуется, чтобы документ занимал 70-80% изображения.',
+        title: 'Margins (too small)',
+        body: 'Make sure there is minimal space around the document. It is recommended that the document occupy 70-80% of the image.',
       },
       p7: {
-        title: 'Поля (слишком большие)',
-        body: 'Убедитесь, что пространство вокруг документа не занимает более 20-30% изображения. Рекомендуется, чтобы документ занимал 70-80% изображения.',
+        title: 'Margins (too large)',
+        body: 'Ensure that the space around the document does not occupy more than 20-30% of the image. It is recommended that the document occupy 70-80% of the image.',
       },
       p8: {
-        title: 'Контраст',
-        body: 'Документ должен четко контрастировать с фоном. Светлый документ на светлом фоне, а также темный документ на темном фоне могут быть не распознаны.',
+        title: 'Contrast',
+        body: 'The document should contrast clearly with the background. A light document on a light background or a dark document on a dark background may not be recognized.',
       },
       p9: {
-        title: 'Разрешение изображения',
-        body: 'Для достижения хорошего качества распознавания документов, удостоверяющих личность, рекомендуем предоставлять изображения, снятые камерой с разрешением не менее Full HD (1920×1080) и автофокусом.',
-      },
+        title: 'Image resolution',
+        body: 'To achieve good quality document recognition, it is recommended to provide images taken with a camera with a resolution of at least Full HD (1920×1080) and autofocus.',
+      }
     },
   },
   ru: {
@@ -246,6 +245,44 @@ export default Object.freeze({
       total: 'Общий налог: {total} €',
       makePhotoTitle: 'Сфотографируйте свои паспорта или удостоверения личности',
     },
+    guide: {
+      p1: {
+        title: 'Посторонние предметы и искажения',
+        body: 'Убедитесь, что ваши руки или другие предметы не закрывают данные документа. При сканировании паспорта убедитесь, что страницы правильно выровнены и все данные четко видны.',
+      },
+      p2: {
+        title: 'Хорошее освещение.',
+        body: 'Хорошее освещение помогает достичь лучших результатов OCR. Если изображение слишком темное или слишком яркое, документ может быть обработан некорректно.',
+      },
+      p3: {
+        title: 'Избегайте отражений',
+        body: 'Блики и отражения мешают обработке и снижают точность извлечения данных. Мы рекомендуем не использовать вспышку мобильного устройства при съемке изображений документов.',
+      },
+      p4: {
+        title: 'Фокус и резкость',
+        body: 'Убедитесь, что изображение четкое и на нем нет размытых участков.',
+      },
+      p5: {
+        title: 'Угол',
+        body: 'Угол наклона документа не должен превышать 10 градусов в любом направлении (горизонтальном или вертикальном).',
+      },
+      p6: {
+        title: 'Поля (слишком малы)',
+        body: 'Убедитесь, что вокруг документа есть минимальное пространство. Рекомендуется, чтобы документ занимал 70-80% изображения.',
+      },
+      p7: {
+        title: 'Поля (слишком большие)',
+        body: 'Убедитесь, что пространство вокруг документа не занимает более 20-30% изображения. Рекомендуется, чтобы документ занимал 70-80% изображения.',
+      },
+      p8: {
+        title: 'Контраст',
+        body: 'Документ должен четко контрастировать с фоном. Светлый документ на светлом фоне, а также темный документ на темном фоне могут быть не распознаны.',
+      },
+      p9: {
+        title: 'Разрешение изображения',
+        body: 'Для достижения хорошего качества распознавания документов, удостоверяющих личность, рекомендуем предоставлять изображения, снятые камерой с разрешением не менее Full HD (1920×1080) и автофокусом.',
+      },
+    },
   },
   zh: {
     common: {
@@ -337,6 +374,44 @@ export default Object.freeze({
       extraGuest: '您将需要为额外的客人付费',
       lessDocs: '不要忘记为每位客人添加证件照片',
       makePhoto: '拍张照片',
+    },
+    guide: {
+      p1: {
+        title: '外来物品和失真',
+        body: '确保您的手或其他物品不会遮挡文件数据。扫描护照时，请确保页面对齐正确，所有数据清晰可见。',
+      },
+      p2: {
+        title: '良好的照明',
+        body: '良好的照明有助于获得更好的OCR结果。如果图像太暗或太亮，文件可能无法正确处理。',
+      },
+      p3: {
+        title: '避免反射',
+        body: '眩光和反射会干扰处理并降低数据提取准确性。我们建议在拍摄文档图片时不要使用手机闪光灯。',
+      },
+      p4: {
+        title: '对焦和清晰度',
+        body: '确保图像清晰且没有模糊区域。',
+      },
+      p5: {
+        title: '角度',
+        body: '文件的倾斜角度在任何方向（水平或垂直）不得超过10度。',
+      },
+      p6: {
+        title: '边距（太小）',
+        body: '确保文件周围有最小空间。建议文件占图像的70-80%。',
+      },
+      p7: {
+        title: '边距（太大）',
+        body: '确保文件周围的空间不超过图像的20-30%。建议文件占图像的70-80%。',
+      },
+      p8: {
+        title: '对比度',
+        body: '文件应与背景有明显的对比。浅色文件放在浅色背景上，深色文件放在深色背景上，可能无法识别。',
+      },
+      p9: {
+        title: '图像分辨率',
+        body: '为了获得良好的文件识别质量，建议提供使用分辨率至少为Full HD（1920×1080）且具有自动对焦的相机拍摄的图像。',
+      }
     },
   },
   hr: {
@@ -430,6 +505,44 @@ export default Object.freeze({
       lessDocs: 'Ne zaboravite dodati fotografiju dokumenta za svakog gosta',
       makePhoto: 'Napravi fotografiju',
     },
+    guide: {
+      p1: {
+        title: 'Strani predmeti i izobličenja',
+        body: 'Pobrinite se da vaše ruke ili drugi predmeti ne prekrivaju podatke na dokumentu. Prilikom skeniranja putovnice pobrinite se da su stranice pravilno poravnate i svi podaci jasno vidljivi.',
+      },
+      p2: {
+        title: 'Dobro osvjetljenje',
+        body: 'Dobro osvjetljenje pomaže u postizanju boljih OCR rezultata. Ako je slika previše tamna ili previše svijetla, dokument može biti pogrešno obrađen.',
+      },
+      p3: {
+        title: 'Izbjegavajte refleksije',
+        body: 'Odsjaji i refleksije ometaju obradu i smanjuju točnost ekstrakcije podataka. Preporučujemo da ne koristite bljeskalicu mobilnog uređaja prilikom snimanja slika dokumenata.',
+      },
+      p4: {
+        title: 'Fokus i oštrina',
+        body: 'Pobrinite se da slika bude jasna i da nema zamućenih dijelova.',
+      },
+      p5: {
+        title: 'Kut',
+        body: 'Kut nagiba dokumenta ne smije biti veći od 10 stupnjeva u bilo kojem smjeru (horizontalno ili vertikalno).',
+      },
+      p6: {
+        title: 'Margine (previše male)',
+        body: 'Pobrinite se da oko dokumenta bude minimalan prostor. Preporučuje se da dokument zauzima 70-80% slike.',
+      },
+      p7: {
+        title: 'Margine (previše velike)',
+        body: 'Pobrinite se da prostor oko dokumenta ne zauzima više od 20-30% slike. Preporučuje se da dokument zauzima 70-80% slike.',
+      },
+      p8: {
+        title: 'Kontrast',
+        body: 'Dokument mora jasno kontrastirati s pozadinom. Svijetli dokument na svijetloj pozadini ili tamni dokument na tamnoj pozadini možda neće biti prepoznati.',
+      },
+      p9: {
+        title: 'Rezolucija slike',
+        body: 'Za postizanje dobre kvalitete prepoznavanja dokumenata, preporučujemo pružanje slika snimljenih kamerom s rezolucijom od najmanje Full HD (1920×1080) i automatskim fokusom.',
+      }
+    }
   },
   fr: {
     common: {
@@ -521,6 +634,44 @@ export default Object.freeze({
       extraGuest: 'Vous devrez payer pour un invité supplémentaire',
       lessDocs: 'N\'oubliez pas d\'ajouter une photo de document pour chaque invité',
       makePhoto: 'Prendre une photo',
+    },
+    guide: {
+      p1: {
+        title: 'Objets étrangers et distorsions',
+        body: 'Assurez-vous que vos mains ou d\'autres objets ne couvrent pas les données du document. Lors de la numérisation d\'un passeport, assurez-vous que les pages sont correctement alignées et que toutes les données sont clairement visibles.',
+      },
+      p2: {
+        title: 'Bonne éclairage',
+        body: 'Une bonne éclairage aide à obtenir de meilleurs résultats OCR. Si l\'image est trop sombre ou trop lumineuse, le document peut ne pas être correctement traité.',
+      },
+      p3: {
+        title: 'Évitez les reflets',
+        body: 'Les reflets et les éclats gênent le traitement et réduisent la précision de l\'extraction des données. Nous vous recommandons de ne pas utiliser le flash de votre appareil mobile lors de la prise de photos des documents.',
+      },
+      p4: {
+        title: 'Mise au point et netteté',
+        body: 'Assurez-vous que l\'image est claire et sans zones floues.',
+      },
+      p5: {
+        title: 'Angle',
+        body: 'L\'angle d\'inclinaison du document ne doit pas dépasser 10 degrés dans toutes les directions (horizontale ou verticale).',
+      },
+      p6: {
+        title: 'Marges (trop petites)',
+        body: 'Assurez-vous qu\'il y a un espace minimal autour du document. Il est recommandé que le document occupe 70 à 80 % de l\'image.',
+      },
+      p7: {
+        title: 'Marges (trop grandes)',
+        body: 'Assurez-vous que l\'espace autour du document ne prend pas plus de 20 à 30 % de l\'image. Il est recommandé que le document occupe 70 à 80 % de l\'image.',
+      },
+      p8: {
+        title: 'Contraste',
+        body: 'Le document doit contraster clairement avec l\'arrière-plan. Un document clair sur un fond clair ou un document sombre sur un fond sombre peut ne pas être reconnu.',
+      },
+      p9: {
+        title: 'Résolution de l\'image',
+        body: 'Pour obtenir une bonne qualité de reconnaissance des documents, nous vous recommandons de fournir des images prises avec une caméra d\'une résolution d\'au moins Full HD (1920×1080) et avec autofocus.',
+      }
     },
   },
   de: {
@@ -614,6 +765,44 @@ export default Object.freeze({
       lessDocs: 'Vergessen Sie nicht, für jeden Gast ein Dokumentenfoto hinzuzufügen',
       makePhoto: 'Machen Sie ein Foto',
     },
+    guide: {
+      p1: {
+        title: 'Fremde Objekte und Verzerrungen',
+        body: 'Stellen Sie sicher, dass Ihre Hände oder andere Objekte die Dokumentendaten nicht verdecken. Beim Scannen eines Reisepasses stellen Sie sicher, dass die Seiten korrekt ausgerichtet sind und alle Daten klar sichtbar sind.',
+      },
+      p2: {
+        title: 'Gute Beleuchtung',
+        body: 'Gute Beleuchtung hilft, bessere OCR-Ergebnisse zu erzielen. Wenn das Bild zu dunkel oder zu hell ist, kann das Dokument möglicherweise nicht korrekt verarbeitet werden.',
+      },
+      p3: {
+        title: 'Vermeiden Sie Reflexionen',
+        body: 'Blendungen und Reflexionen stören die Verarbeitung und verringern die Genauigkeit der Datenerfassung. Wir empfehlen, beim Fotografieren von Dokumenten den Blitz des mobilen Geräts nicht zu verwenden.',
+      },
+      p4: {
+        title: 'Fokus und Schärfe',
+        body: 'Stellen Sie sicher, dass das Bild klar ist und keine unscharfen Bereiche vorhanden sind.',
+      },
+      p5: {
+        title: 'Winkel',
+        body: 'Der Neigungswinkel des Dokuments sollte in jede Richtung (horizontal oder vertikal) nicht mehr als 10 Grad betragen.',
+      },
+      p6: {
+        title: 'Ränder (zu klein)',
+        body: 'Stellen Sie sicher, dass der Abstand um das Dokument minimal ist. Es wird empfohlen, dass das Dokument 70-80 % des Bildes einnimmt.',
+      },
+      p7: {
+        title: 'Ränder (zu groß)',
+        body: 'Stellen Sie sicher, dass der Raum um das Dokument nicht mehr als 20-30 % des Bildes ausmacht. Es wird empfohlen, dass das Dokument 70-80 % des Bildes einnimmt.',
+      },
+      p8: {
+        title: 'Kontrast',
+        body: 'Das Dokument sollte deutlich vom Hintergrund abheben. Ein heller Dokument auf einem hellen Hintergrund oder ein dunkles Dokument auf einem dunklen Hintergrund könnte nicht erkannt werden.',
+      },
+      p9: {
+        title: 'Bildauflösung',
+        body: 'Um eine gute Dokumentenerkennungsqualität zu erreichen, empfehlen wir, Bilder mit einer Auflösung von mindestens Full HD (1920×1080) und Autofokus bereitzustellen.',
+      }
+    }
   },
   it: {
     common: {
@@ -705,6 +894,44 @@ export default Object.freeze({
       extraGuest: 'Ti verrà richiesto di pagare per un ospite aggiuntivo',
       lessDocs: 'Non dimenticare di aggiungere una foto documento per ogni ospi',
       makePhoto: 'Fare una foto',
+    },
+    guide: {
+      p1: {
+        title: 'Oggetti esterni e distorsioni',
+        body: 'Assicurati che le tue mani o altri oggetti non coprano i dati del documento. Quando scansiona un passaporto, assicurati che le pagine siano allineate correttamente e che tutti i dati siano chiaramente visibili.',
+      },
+      p2: {
+        title: 'Buona illuminazione',
+        body: 'Una buona illuminazione aiuta a ottenere risultati migliori con l\'OCR. Se l\'immagine è troppo scura o troppo luminosa, il documento potrebbe non essere elaborato correttamente.',
+      },
+      p3: {
+        title: 'Evita i riflessi',
+        body: 'Riflessi e bagliori interferiscono con l\'elaborazione e riducono la precisione dell\'estrazione dei dati. Ti consigliamo di non usare il flash del dispositivo mobile quando scatti foto ai documenti.',
+      },
+      p4: {
+        title: 'Messa a fuoco e nitidezza',
+        body: 'Assicurati che l\'immagine sia chiara e priva di aree sfocate.',
+      },
+      p5: {
+        title: 'Angolo',
+        body: 'L\'inclinazione del documento non deve superare i 10 gradi in qualsiasi direzione (orizzontale o verticale).',
+      },
+      p6: {
+        title: 'Margini (troppo piccoli)',
+        body: 'Assicurati che ci sia uno spazio minimo attorno al documento. È consigliato che il documento occupi il 70-80% dell\'immagine.',
+      },
+      p7: {
+        title: 'Margini (troppo grandi)',
+        body: 'Assicurati che lo spazio attorno al documento non occupi più del 20-30% dell\'immagine. È consigliato che il documento occupi il 70-80% dell\'immagine.',
+      },
+      p8: {
+        title: 'Contrasto',
+        body: 'Il documento deve contrapporsi chiaramente allo sfondo. Un documento chiaro su uno sfondo chiaro o un documento scuro su uno sfondo scuro potrebbe non essere riconosciuto.',
+      },
+      p9: {
+        title: 'Risoluzione dell\'immagine',
+        body: 'Per ottenere una buona qualità di riconoscimento dei documenti, ti consigliamo di fornire immagini scattate con una fotocamera con una risoluzione di almeno Full HD (1920×1080) e autofocus.',
+      }
     },
   },
   pl: {
@@ -798,6 +1025,44 @@ export default Object.freeze({
       lessDocs: 'Nie zapomnij dodać zdjęcia dokumentu dla każdego gościa',
       makePhoto: 'Zrobić zdjęcie',
     },
+    guide: {
+      p1: {
+        title: 'Obce przedmioty i zniekształcenia',
+        body: 'Upewnij się, że twoje ręce lub inne przedmioty nie zakrywają danych dokumentu. Podczas skanowania paszportu upewnij się, że strony są prawidłowo wyrównane i wszystkie dane są wyraźnie widoczne.',
+      },
+      p2: {
+        title: 'Dobre oświetlenie',
+        body: 'Dobre oświetlenie pomaga uzyskać lepsze wyniki OCR. Jeśli obraz jest zbyt ciemny lub zbyt jasny, dokument może zostać błędnie przetworzony.',
+      },
+      p3: {
+        title: 'Unikaj odbić',
+        body: 'Odbicia i refleksy utrudniają przetwarzanie i zmniejszają dokładność wyodrębniania danych. Zalecamy unikanie używania lampy błyskowej urządzenia mobilnego przy robieniu zdjęć dokumentów.',
+      },
+      p4: {
+        title: 'Ostrzeżenie i ostrość',
+        body: 'Upewnij się, że obraz jest wyraźny i nie zawiera rozmytych obszarów.',
+      },
+      p5: {
+        title: 'Kąt',
+        body: 'Kąt nachylenia dokumentu nie powinien przekraczać 10 stopni w żadnym kierunku (poziomym ani pionowym).',
+      },
+      p6: {
+        title: 'Marginesy (za małe)',
+        body: 'Upewnij się, że wokół dokumentu jest minimalna przestrzeń. Zaleca się, aby dokument zajmował 70-80% obrazu.',
+      },
+      p7: {
+        title: 'Marginesy (za duże)',
+        body: 'Upewnij się, że przestrzeń wokół dokumentu nie zajmuje więcej niż 20-30% obrazu. Zaleca się, aby dokument zajmował 70-80% obrazu.',
+      },
+      p8: {
+        title: 'Kontrast',
+        body: 'Dokument powinien wyraźnie kontrastować z tłem. Jasny dokument na jasnym tle lub ciemny dokument na ciemnym tle mogą nie zostać rozpoznane.',
+      },
+      p9: {
+        title: 'Rozdzielczość obrazu',
+        body: 'Aby uzyskać dobrą jakość rozpoznawania dokumentów tożsamości, zaleca się dostarczenie zdjęć wykonanych aparatem o rozdzielczości co najmniej Full HD (1920×1080) i z automatycznym ustawieniem ostrości.',
+      }
+    }
   },
   sl: {
     common: {
@@ -981,6 +1246,44 @@ export default Object.freeze({
       extraGuest: 'Se le pedirá que pague por un invitado adicional',
       lessDocs: 'No olvide agregar una foto de documento para cada invitado',
       makePhoto: 'Hacer una foto',
+    },
+    guide: {
+      p1: {
+        title: 'Tuje predmete in popačenja',
+        body: 'Prepričajte se, da vaše roke ali drugi predmeti ne pokrivajo podatkov na dokumentu. Pri skeniranju potnega lista se prepričajte, da so strani pravilno poravnane in da so vsi podatki jasno vidni.',
+      },
+      p2: {
+        title: 'Dobro osvetlitev',
+        body: 'Dobro osvetlitev pomaga doseči boljše rezultate OCR. Če je slika pretemna ali preveč svetla, je lahko dokument obdelan napačno.',
+      },
+      p3: {
+        title: 'Izogibajte se odsevom',
+        body: 'Odbijajoča se svetloba in odsevi ovirajo obdelavo in zmanjšujejo natančnost ekstrakcije podatkov. Priporočamo, da ne uporabljate bliskavice mobilne naprave pri fotografiranju dokumentov.',
+      },
+      p4: {
+        title: 'Fokus in ostrina',
+        body: 'Prepričajte se, da je slika jasna in da na njej ni zamegljenih področij.',
+      },
+      p5: {
+        title: 'Kot',
+        body: 'Kot nagiba dokumenta ne sme presegati 10 stopinj v katerem koli smeri (horizontalno ali vertikalno).',
+      },
+      p6: {
+        title: 'Robovi (premajhni)',
+        body: 'Prepričajte se, da je okoli dokumenta dovolj prostora. Priporočamo, da dokument zavzema 70-80 % slike.',
+      },
+      p7: {
+        title: 'Robovi (preveliki)',
+        body: 'Prepričajte se, da prostor okoli dokumenta ne zavzema več kot 20-30 % slike. Priporočamo, da dokument zavzema 70-80 % slike.',
+      },
+      p8: {
+        title: 'Kontrast',
+        body: 'Dokument mora biti v jasnem kontrastu s ozadjem. Svetel dokument na svetlem ozadju ali temen dokument na temnem ozadju morda ne bodo prepoznani.',
+      },
+      p9: {
+        title: 'Ločljivost slike',
+        body: 'Za dobro kakovost prepoznavanja dokumentov z identifikacijo priporočamo, da predložite slike, posnete s kamero z ločljivostjo vsaj Full HD (1920×1080) in samodejno ostrino.',
+      }
     },
   },
 });
