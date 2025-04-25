@@ -114,6 +114,7 @@ export default Object.freeze({
       makePhoto: 'Make a photo',
     },
     guide: {
+      p0: 'Below are the requirements for the size and quality of document images for successful image processing:',
       p1: {
         title: 'Foreign objects and distortions',
         body: 'Ensure that your hands or other objects do not cover the document data. When scanning a passport, ensure that the pages are aligned correctly and all data is clearly visible.',
@@ -246,6 +247,7 @@ export default Object.freeze({
       makePhotoTitle: 'Сфотографируйте свои паспорта или удостоверения личности',
     },
     guide: {
+      p0: 'Ниже приведены требования к размеру и качеству изображений документов для успешной обработки изображений:',
       p1: {
         title: 'Посторонние предметы и искажения',
         body: 'Убедитесь, что ваши руки или другие предметы не закрывают данные документа. При сканировании паспорта убедитесь, что страницы правильно выровнены и все данные четко видны.',
@@ -376,6 +378,7 @@ export default Object.freeze({
       makePhoto: '拍张照片',
     },
     guide: {
+      p0: '以下是成功处理图像的文档图像大小和质量要求：',
       p1: {
         title: '外来物品和失真',
         body: '确保您的手或其他物品不会遮挡文件数据。扫描护照时，请确保页面对齐正确，所有数据清晰可见。',
@@ -506,6 +509,7 @@ export default Object.freeze({
       makePhoto: 'Napravi fotografiju',
     },
     guide: {
+      p0: 'Ispod su zahtjevi za veličinu i kvalitetu slika dokumenata za uspješnu obradu slika:',
       p1: {
         title: 'Strani predmeti i izobličenja',
         body: 'Pobrinite se da vaše ruke ili drugi predmeti ne prekrivaju podatke na dokumentu. Prilikom skeniranja putovnice pobrinite se da su stranice pravilno poravnate i svi podaci jasno vidljivi.',
@@ -636,6 +640,7 @@ export default Object.freeze({
       makePhoto: 'Prendre une photo',
     },
     guide: {
+      p0: 'Voici les exigences relatives à la taille et à la qualité des images des documents pour un traitement réussi des images :',
       p1: {
         title: 'Objets étrangers et distorsions',
         body: 'Assurez-vous que vos mains ou d\'autres objets ne couvrent pas les données du document. Lors de la numérisation d\'un passeport, assurez-vous que les pages sont correctement alignées et que toutes les données sont clairement visibles.',
@@ -766,6 +771,7 @@ export default Object.freeze({
       makePhoto: 'Machen Sie ein Foto',
     },
     guide: {
+      p0: 'Nachfolgend finden Sie die Anforderungen an die Größe und Qualität von Dokumentbildern für eine erfolgreiche Bildverarbeitung:',
       p1: {
         title: 'Fremde Objekte und Verzerrungen',
         body: 'Stellen Sie sicher, dass Ihre Hände oder andere Objekte die Dokumentendaten nicht verdecken. Beim Scannen eines Reisepasses stellen Sie sicher, dass die Seiten korrekt ausgerichtet sind und alle Daten klar sichtbar sind.',
@@ -896,6 +902,7 @@ export default Object.freeze({
       makePhoto: 'Fare una foto',
     },
     guide: {
+      p0: 'Di seguito sono riportati i requisiti per le dimensioni e la qualità delle immagini dei documenti per un\'elaborazione delle immagini riuscita:',
       p1: {
         title: 'Oggetti esterni e distorsioni',
         body: 'Assicurati che le tue mani o altri oggetti non coprano i dati del documento. Quando scansiona un passaporto, assicurati che le pagine siano allineate correttamente e che tutti i dati siano chiaramente visibili.',
@@ -1026,6 +1033,7 @@ export default Object.freeze({
       makePhoto: 'Zrobić zdjęcie',
     },
     guide: {
+      p0: 'Poniżej znajdują się wymagania dotyczące rozmiaru i jakości obrazów dokumentów do pomyślnego przetwarzania obrazów:',
       p1: {
         title: 'Obce przedmioty i zniekształcenia',
         body: 'Upewnij się, że twoje ręce lub inne przedmioty nie zakrywają danych dokumentu. Podczas skanowania paszportu upewnij się, że strony są prawidłowo wyrównane i wszystkie dane są wyraźnie widoczne.',
@@ -1155,6 +1163,45 @@ export default Object.freeze({
       lessDocs: 'Ne pozabite dodati fotografije dokumenta za vsakega gosta',
       makePhoto: 'Naredi fotografijo',
     },
+    guide: {
+      p0: 'Spodaj so zahtevani velikost in kakovost slik dokumentov za uspešno obdelavo slik:',
+      p1: {
+        title: 'Tuje predmete in popačenja',
+        body: 'Prepričajte se, da vaše roke ali drugi predmeti ne pokrivajo podatkov na dokumentu. Pri skeniranju potnega lista se prepričajte, da so strani pravilno poravnane in da so vsi podatki jasno vidni.',
+      },
+      p2: {
+        title: 'Dobro osvetlitev',
+        body: 'Dobro osvetlitev pomaga doseči boljše rezultate OCR. Če je slika pretemna ali preveč svetla, je lahko dokument obdelan napačno.',
+      },
+      p3: {
+        title: 'Izogibajte se odsevom',
+        body: 'Odbijajoča se svetloba in odsevi ovirajo obdelavo in zmanjšujejo natančnost ekstrakcije podatkov. Priporočamo, da ne uporabljate bliskavice mobilne naprave pri fotografiranju dokumentov.',
+      },
+      p4: {
+        title: 'Fokus in ostrina',
+        body: 'Prepričajte se, da je slika jasna in da na njej ni zamegljenih področij.',
+      },
+      p5: {
+        title: 'Kot',
+        body: 'Kot nagiba dokumenta ne sme presegati 10 stopinj v katerem koli smeri (horizontalno ali vertikalno).',
+      },
+      p6: {
+        title: 'Robovi (premajhni)',
+        body: 'Prepričajte se, da je okoli dokumenta dovolj prostora. Priporočamo, da dokument zavzema 70-80 % slike.',
+      },
+      p7: {
+        title: 'Robovi (preveliki)',
+        body: 'Prepričajte se, da prostor okoli dokumenta ne zavzema več kot 20-30 % slike. Priporočamo, da dokument zavzema 70-80 % slike.',
+      },
+      p8: {
+        title: 'Kontrast',
+        body: 'Dokument mora biti v jasnem kontrastu s ozadjem. Svetel dokument na svetlem ozadju ali temen dokument na temnem ozadju morda ne bodo prepoznani.',
+      },
+      p9: {
+        title: 'Ločljivost slike',
+        body: 'Za dobro kakovost prepoznavanja dokumentov z identifikacijo priporočamo, da predložite slike, posnete s kamero z ločljivostjo vsaj Full HD (1920×1080) in samodejno ostrino.',
+      }
+    },
   },
   es: {
     common: {
@@ -1248,41 +1295,42 @@ export default Object.freeze({
       makePhoto: 'Hacer una foto',
     },
     guide: {
+      p0: 'A continuación se detallan los requisitos de tamaño y calidad de las imágenes de documentos para un procesamiento exitoso de imágenes:',
       p1: {
-        title: 'Tuje predmete in popačenja',
-        body: 'Prepričajte se, da vaše roke ali drugi predmeti ne pokrivajo podatkov na dokumentu. Pri skeniranju potnega lista se prepričajte, da so strani pravilno poravnane in da so vsi podatki jasno vidni.',
+        title: 'Objetos extraños y distorsiones',
+        body: 'Asegúrese de que sus manos o cualquier otro objeto no estén cubriendo los datos del documento. Al escanear el pasaporte, asegúrese de que las páginas estén correctamente alineadas y todos los datos sean claramente visibles.'
       },
       p2: {
-        title: 'Dobro osvetlitev',
-        body: 'Dobro osvetlitev pomaga doseči boljše rezultate OCR. Če je slika pretemna ali preveč svetla, je lahko dokument obdelan napačno.',
+        title: 'Buena iluminación',
+        body: 'Una buena iluminación ayuda a obtener mejores resultados de OCR. Si la imagen es demasiado oscura o demasiado brillante, el documento puede ser procesado incorrectamente.'
       },
       p3: {
-        title: 'Izogibajte se odsevom',
-        body: 'Odbijajoča se svetloba in odsevi ovirajo obdelavo in zmanjšujejo natančnost ekstrakcije podatkov. Priporočamo, da ne uporabljate bliskavice mobilne naprave pri fotografiranju dokumentov.',
+        title: 'Evite los reflejos',
+        body: 'Los reflejos y destellos interfieren con el procesamiento y reducen la precisión de la extracción de datos. Recomendamos no usar el flash del dispositivo móvil al tomar fotos de documentos.'
       },
       p4: {
-        title: 'Fokus in ostrina',
-        body: 'Prepričajte se, da je slika jasna in da na njej ni zamegljenih področij.',
+        title: 'Enfoque y nitidez',
+        body: 'Asegúrese de que la imagen esté nítida y que no haya áreas borrosas.'
       },
       p5: {
-        title: 'Kot',
-        body: 'Kot nagiba dokumenta ne sme presegati 10 stopinj v katerem koli smeri (horizontalno ali vertikalno).',
+        title: 'Ángulo',
+        body: 'El ángulo de inclinación del documento no debe exceder los 10 grados en ninguna dirección (horizontal o vertical).'
       },
       p6: {
-        title: 'Robovi (premajhni)',
-        body: 'Prepričajte se, da je okoli dokumenta dovolj prostora. Priporočamo, da dokument zavzema 70-80 % slike.',
+        title: 'Márgenes (demasiado pequeños)',
+        body: 'Asegúrese de que haya un espacio mínimo alrededor del documento. Se recomienda que el documento ocupe entre el 70% y el 80% de la imagen.'
       },
       p7: {
-        title: 'Robovi (preveliki)',
-        body: 'Prepričajte se, da prostor okoli dokumenta ne zavzema več kot 20-30 % slike. Priporočamo, da dokument zavzema 70-80 % slike.',
+        title: 'Márgenes (demasiado grandes)',
+        body: 'Asegúrese de que el espacio alrededor del documento no ocupe más del 20-30% de la imagen. Se recomienda que el documento ocupe entre el 70% y el 80% de la imagen.'
       },
       p8: {
-        title: 'Kontrast',
-        body: 'Dokument mora biti v jasnem kontrastu s ozadjem. Svetel dokument na svetlem ozadju ali temen dokument na temnem ozadju morda ne bodo prepoznani.',
+        title: 'Contraste',
+        body: 'El documento debe contrastar claramente con el fondo. Un documento claro sobre un fondo claro, o un documento oscuro sobre un fondo oscuro, pueden no ser reconocidos.'
       },
       p9: {
-        title: 'Ločljivost slike',
-        body: 'Za dobro kakovost prepoznavanja dokumentov z identifikacijo priporočamo, da predložite slike, posnete s kamero z ločljivostjo vsaj Full HD (1920×1080) in samodejno ostrino.',
+        title: 'Resolución de la imagen',
+        body: 'Para obtener una buena calidad de reconocimiento de documentos de identidad, recomendamos proporcionar imágenes tomadas con una cámara de al menos Full HD (1920×1080) y con enfoque automático.'
       }
     },
   },

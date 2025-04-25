@@ -63,7 +63,7 @@
 </script>
 
 <template>
-  <p>Ниже приведены требования к размеру и качеству изображений документов для успешной обработки изображений:</p>
+  <p>{{ $t('guide.p0') }}</p>
 
   <template v-for="item in data" :key="item.title">
     <h2>{{ item.title }}</h2>
