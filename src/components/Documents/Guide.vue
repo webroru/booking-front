@@ -1,4 +1,6 @@
 <script setup>
+  const images = import.meta.glob('./images/*.png', { eager: true, as: 'url' });
+
   const data = [
     {
       title: 'Посторонние предметы и искажения',
@@ -47,6 +49,9 @@
     },
   ];
 
+  data.forEach(item => {
+    item.image = images[`./images/${item.image}`];
+  });
 </script>
 
 <template>
@@ -55,13 +60,14 @@
   <template v-for="item in data" :key="item.title">
     <h2>{{ item.title }}</h2>
     <p>{{ item.body }}</p>
-    <img :src="`/src/components/Documents/images/${item.image}`" alt="" />
+    <el-image :src="item.image" fit="scale-down">
+      <template #placeholder>
+        <el-skeleton animated>
+          <template #template>
+            <el-skeleton-item variant="image" style="width: 240px; height: 240px" />
+          </template>
+        </el-skeleton>
+      </template>
+    </el-image>
   </template>
 </template>
-
-<style scoped>
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-</style>
