@@ -23,7 +23,7 @@
     'search',
     'instruction',
     'rules',
-    'tax',
+    'documents',
     'payment',
     'checkin-details',
     'booking-info',
