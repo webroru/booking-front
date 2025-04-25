@@ -109,13 +109,12 @@
 
 <template>
   <h2>{{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}</h2>
-  <div>
-    <smart-capture @recognize="onRecognize" />
-  </div>
-  <el-divider />
   <template v-for="guest in booking.guests">
     <guest v-if="guest.documentNumber" :guest="guest" @change="onGuestChange" @remove="onGuestRemove" :key="guest.documentNumber" v-loading="loading" />
     <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
   </template>
   <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
+  <div>
+    <smart-capture @recognize="onRecognize" />
+  </div>
 </template>

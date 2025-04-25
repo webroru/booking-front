@@ -1,10 +1,17 @@
 <script setup>
-  import { onMounted } from 'vue';
+  import { onMounted, ref, nextTick } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { defineComponents, DocumentReaderService } from '@regulaforensics/vp-frontend-document-components';
 
   const { locale } = useI18n({ useScope: 'global' });
   const emit = defineEmits(['recognize']);
+  const readerVisible = ref(true);
+
+  const reinitReader = async () => {
+    readerVisible.value = false;
+    await nextTick();
+    readerVisible.value = true;
+  };
 
   const listener = (event) => {
     if (event.detail.action === 'PROCESS_FINISHED' && event.detail.data.status === 1 && event.detail.data.response.text !== undefined) {
@@ -19,7 +26,7 @@
         documentType: getValueFromFieldList(fieldList, 'Document Class Code'),
         documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
       };
-
+      reinitReader();
       emit('recognize', data);
     }
   };
@@ -46,6 +53,7 @@
 
 <template>
   <document-reader
+      v-if="readerVisible"
       @document-reader="listener"
       :locale="locale"
       close-button="false"
