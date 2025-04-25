@@ -1,5 +1,9 @@
 <script setup>
-  const images = import.meta.glob('./images/*.png', { eager: true, as: 'url' });
+  const images = import.meta.glob('./images/*.png', {
+    eager: true,
+    query: '?url',
+    import: 'default'
+  });
 
   const data = [
     {
