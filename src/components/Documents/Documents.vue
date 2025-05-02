@@ -4,7 +4,7 @@
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
-  import Guest from '@/components/Documents/Guest.vue';
+  import GuestName from '@/components/Documents/GuestName.vue';
   import { InfoFilled } from '@element-plus/icons-vue';
 
   const store = useBookingStore();
@@ -111,8 +111,7 @@
 <template>
   <h2>{{ $t('documents.mandatory', { id: booking.orderId }) }}</h2>
   <template v-for="guest in booking.guests">
-    <guest v-if="guest.documentNumber" :guest="guest" @change="onGuestChange" @remove="onGuestRemove" :key="guest.documentNumber" v-loading="loading" />
-    <el-divider v-if="guest.documentNumber" :key="guest.documentNumber" />
+    <guest-name v-if="guest.documentNumber" :guest="guest" @remove="onGuestRemove" :key="guest.documentNumber" v-loading="loading" />
   </template>
   <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
   <div>
