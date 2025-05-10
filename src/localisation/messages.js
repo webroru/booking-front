@@ -155,6 +155,7 @@ export default Object.freeze({
     documents: {
       mandatory: 'You are required to register all guests prior to check-in for booking {id}',
       requirement: 'Only a passport or ID is required for scanning',
+      duplicateGuest: 'You have already added a document for this guest',
     },
   },
   ru: {

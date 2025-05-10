@@ -48,6 +48,15 @@
 
   const onRecognize = async (guest) => {
     loading.value = true;
+    if (isDuplicate(guest)) {
+      loading.value = false;
+      ElNotification({
+        title: 'Warning',
+        message: t('documents.duplicateGuest'),
+        type: 'warning',
+      });
+      return;
+    }
     localBooking.guests.push(guest);
     setBooking(localBooking);
     await updateBooking(localBooking);
@@ -69,6 +78,10 @@
     setBooking(localBooking);
     await updateBooking(localBooking);
     loading.value = false;
+  };
+
+  const isDuplicate = (guest) => {
+    return localBooking.guests.some(existingGuest => existingGuest.documentNumber === guest.documentNumber);
   };
 
   const update = (booking) => {
@@ -110,9 +123,11 @@
 
 <template>
   <h2>{{ $t('documents.mandatory', { id: booking.orderId }) }}</h2>
-  <template v-for="guest in booking.guests">
-    <guest-name v-if="guest.documentNumber" :guest="guest" @remove="onGuestRemove" :key="guest.documentNumber" v-loading="loading" />
-  </template>
+  <div v-loading="loading">
+    <template v-for="guest in booking.guests">
+      <guest-name v-if="guest.documentNumber" :guest="guest" @remove="onGuestRemove" :key="guest.documentNumber" />
+    </template>
+  </div>
   <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
   <div>
     <smart-capture @recognize="onRecognize" />
