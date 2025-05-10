@@ -38,5 +38,5 @@ npm run lint
 ### Use Docker
 
 ```sh
-docker run -it -v=$PWD:/app -w=/app -p 3000:3000 node:20-alpine ./node_modules/.bin/vite --host 0.0.0.0
+docker run -it -v=$PWD:/app -w=/app -p 3000:3000 node:20-alpine ./node_modules/.bin/vite --host 0.0.0.0 --port 3000
 ```
