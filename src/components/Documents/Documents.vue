@@ -7,14 +7,12 @@
   import GuestName from '@/components/Documents/GuestName.vue';
   import { InfoFilled } from '@element-plus/icons-vue';
 
+  const emit = defineEmits(['newGuest']);
+  const props = defineProps({ booking: Object });
   const store = useBookingStore();
   const { setBooking, updateBooking } = store;
   const { t } = useI18n();
   const loading = ref(false);
-
-  const props = defineProps({
-    booking: Object,
-  });
 
   const localBooking = reactive(props.booking);
 
@@ -57,20 +55,23 @@
       });
       return;
     }
-    localBooking.guests.push(guest);
-    setBooking(localBooking);
-    await updateBooking(localBooking);
-    loading.value = false;
-    update(localBooking);
+
+    emit('newGuest', guest);
+
+    // localBooking.guests.push(guest);
+    // setBooking(localBooking);
+    // await updateBooking(localBooking);
+    // loading.value = false;
+    // update(localBooking);
   };
 
-  const onGuestChange = async (guest, index) => {
-    loading.value = true;
-    Object.assign(localBooking.guests[index], guest);
-    setBooking(localBooking);
-    await updateBooking(localBooking);
-    loading.value = false;
-  };
+  // const onGuestChange = async (guest, index) => {
+  //   loading.value = true;
+  //   Object.assign(localBooking.guests[index], guest);
+  //   setBooking(localBooking);
+  //   await updateBooking(localBooking);
+  //   loading.value = false;
+  // };
 
   const onGuestRemove = async (index) => {
     loading.value = true;
