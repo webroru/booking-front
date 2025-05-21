@@ -110,7 +110,7 @@ export default Object.freeze({
     tax: {
       guestLimit: 'We can\'t revive guest more than {limit} guests',
       extraGuest: 'You will be required to pay for an additional guest',
-      lessDocs: 'Don\'t forget to add a document photo for each guest',
+      lessDocs: 'Don\'t forget to add a document for each guest',
       makePhoto: 'Make a photo',
     },
     guide: {
@@ -157,6 +157,21 @@ export default Object.freeze({
       requirement: 'Only a passport or ID is required for scanning',
       duplicateGuest: 'You have already added a document for this guest',
     },
+    guest: {
+      firstName: 'First name',
+      lastName: 'Last name',
+      dateOfBirth: 'Date of birth',
+      pickADate: 'Pick a date',
+      gender: 'Gender',
+      male: 'Male',
+      female: 'Female',
+      nationality: 'Nationality',
+      documentType: 'Document type',
+      passport: 'Passport',
+      id: 'Id',
+      documentNumber: 'Document number',
+      add: 'Add',
+    }
   },
   ru: {
     common: {
