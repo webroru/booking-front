@@ -4,7 +4,7 @@
   import { defineComponents, DocumentReaderService } from '@regulaforensics/vp-frontend-document-components';
 
   const { locale } = useI18n({ useScope: 'global' });
-  const emit = defineEmits(['recognize']);
+  const emit = defineEmits(['recognize', 'error']);
   const readerVisible = ref(true);
 
   const reinitReader = async () => {
@@ -14,7 +14,11 @@
   };
 
   const listener = (event) => {
-    if (event.detail.action === 'PROCESS_FINISHED' && event.detail.data.status === 1 && event.detail.data.response.text !== undefined) {
+    if (event.detail.action !== 'PROCESS_FINISHED') {
+      return;
+    }
+
+    if (event.detail.data.status === 1 && event.detail.data.response.text !== undefined) {
       const fieldList = event.detail.data.response.text.fieldList;
 
       const data = {
@@ -26,9 +30,11 @@
         documentType: getValueFromFieldList(fieldList, 'Document Class Code'),
         documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
       };
-      reinitReader();
       emit('recognize', data);
+    } else {
+      emit('error');
     }
+    reinitReader();
   };
 
   const getValueFromFieldList = (fieldList, fieldName) => {
