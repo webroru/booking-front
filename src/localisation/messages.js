@@ -156,6 +156,9 @@ export default Object.freeze({
       mandatory: 'You are required to register all guests prior to check-in for booking {id}',
       requirement: 'Only a passport or ID is required for scanning',
       duplicateGuest: 'You have already added a document for this guest',
+      guests: 'Registered guests',
+      recognizeError: 'We are unable to recognize the document. Pleas complete the form below',
+      recognizeWarning: 'We are unable to recognize the document. Please check the photo and try again',
     },
     guest: {
       firstName: 'First name',

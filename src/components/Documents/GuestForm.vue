@@ -4,7 +4,7 @@
 
   const { t } = useI18n();
   const props = defineProps({ guest: Object });
-  const localGuest = reactive({...props.guest});
+  const localGuest = reactive({ ...props.guest });
 </script>
 
 <template>

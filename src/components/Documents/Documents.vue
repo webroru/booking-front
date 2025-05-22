@@ -6,17 +6,24 @@
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
   import GuestName from '@/components/Documents/GuestName.vue';
   import { InfoFilled } from '@element-plus/icons-vue';
+  import GuestForm from '@/components/Documents/GuestForm.vue';
 
+  const props = defineProps({ booking: Object });
   const store = useBookingStore();
   const { setBooking, updateBooking } = store;
   const { t } = useI18n();
   const loading = ref(false);
 
-  const props = defineProps({
-    booking: Object,
-  });
-
   const localBooking = reactive(props.booking);
+  const guest = ref({
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    gender: '',
+    nationality: '',
+    documentType: '',
+    documentNumber: '',
+  });
 
   const adults = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 18 ? 1 : 0), 0));
   const children = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 7 && getAges(guest) < 18 ? 1 : 0), 0));
@@ -25,8 +32,8 @@
 
   const getAges = guest => new Date().getFullYear() - new Date(guest.dateOfBirth).getFullYear();
 
-  const bookedNights = (booking) => Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
-  const showExtraPay = booking => extraGuests(booking) > 0 && extraPayment(booking);
+  const bookedNights = () => Math.ceil((Date.parse(localBooking.checkOutDate) - Date.parse(localBooking.checkInDate)) / 1000 / 60 / 60 / 24);
+  const showExtraPay = () => extraGuests() > 0 && extraPayment();
 
   const confirmedGuests = () => {
     let confirmedGuests = adults.value + children.value + preschoolers.value;
@@ -36,20 +43,22 @@
     return confirmedGuests;
   };
 
-  const isExtraGuest = (booking) => confirmedGuests() > booking.guestsAmount;
-  const extraGuests = (booking) => confirmedGuests() - booking.guestsAmount;
-  const isGuestLimit = (booking) => confirmedGuests() > booking.capacity + 2;
-  const isLessDocs = (booking) => booking.guestsAmount > adults.value + children.value + preschoolers.value + toddlers.value;
-  const extraPayment = booking => (Math.min(booking.capacity, confirmedGuests()) - booking.guestsAmount) * bookedNights(booking) * booking.extraPerson;
+  const isExtraGuest = () => confirmedGuests() > localBooking.guestsAmount;
+  const extraGuests = () => confirmedGuests() - localBooking.guestsAmount;
+  const isGuestLimit = () => confirmedGuests() > localBooking.capacity + 2;
+  const isLessDocs = () => localBooking.guestsAmount > adults.value + children.value + preschoolers.value + toddlers.value;
+  const extraPayment = () => (Math.min(localBooking.capacity, confirmedGuests()) - localBooking.guestsAmount) * bookedNights() * localBooking.extraPerson;
+
+  const showGuestForm = ref(false);
 
   let isGuestLimitShow = false;
   let isExtraGuestShow = false;
   let isLessDocsShow = false;
+  let recognizeAttempts = 0;
 
-  const onRecognize = async (guest) => {
-    loading.value = true;
-    if (isDuplicate(guest)) {
-      loading.value = false;
+  const onRecognize = (data) => {
+    recognizeAttempts = 0;
+    if (isDuplicate(data)) {
       ElNotification({
         title: 'Warning',
         message: t('documents.duplicateGuest'),
@@ -57,19 +66,34 @@
       });
       return;
     }
+    guest.value = data;
+  };
+
+  const onRecognizeError = () => {
+    if (++recognizeAttempts < 3) {
+      ElNotification({
+        title: 'Error',
+        message: t('documents.recognizeWarning'),
+        type: 'error',
+      });
+      return;
+    }
+    ElNotification({
+      title: 'Error',
+      message: t('documents.recognizeError'),
+      type: 'error',
+    });
+    showGuestForm.value = true;
+  };
+
+  const onGuestAdd = async (guest) => {
+    loading.value = true;
     localBooking.guests.push(guest);
     setBooking(localBooking);
     await updateBooking(localBooking);
     loading.value = false;
-    update(localBooking);
-  };
-
-  const onGuestChange = async (guest, index) => {
-    loading.value = true;
-    Object.assign(localBooking.guests[index], guest);
-    setBooking(localBooking);
-    await updateBooking(localBooking);
-    loading.value = false;
+    showGuestForm.value = false;
+    update();
   };
 
   const onGuestRemove = async (index) => {
@@ -84,19 +108,19 @@
     return localBooking.guests.some(existingGuest => existingGuest.documentNumber === guest.documentNumber);
   };
 
-  const update = (booking) => {
-    if (isGuestLimit(booking) && !isGuestLimitShow) {
+  const update = () => {
+    if (isGuestLimit() && !isGuestLimitShow) {
       isGuestLimitShow = true;
       setTimeout(() => {
         ElNotification({
           title: 'Warning',
-          message: t('tax.guestLimit', { limit: booking.capacity }),
+          message: t('tax.guestLimit', { limit: localBooking.capacity }),
           type: 'warning',
           onClose: () => isGuestLimitShow = false,
         });
       }, 0);
     }
-    if (isExtraGuest(booking) && !isExtraGuestShow) {
+    if (isExtraGuest() && !isExtraGuestShow) {
       isExtraGuestShow = true;
       setTimeout(() => {
         ElNotification({
@@ -107,7 +131,7 @@
         });
       }, 0);
     }
-    if (isLessDocs(booking) && !isLessDocsShow) {
+    if (isLessDocs() && !isLessDocsShow) {
       isLessDocsShow = true;
       setTimeout(() => {
         ElNotification({
@@ -123,16 +147,24 @@
 
 <template>
   <h2>{{ $t('documents.mandatory', { id: booking.orderId }) }}</h2>
-  <div v-loading="loading">
-    <template v-for="guest in booking.guests">
-      <guest-name v-if="guest.documentNumber" :guest="guest" @remove="onGuestRemove" :key="guest.documentNumber" />
-    </template>
-  </div>
-  <p v-if="showExtraPay(booking)"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment(booking) }) }}</strong></p>
-  <div>
-    <smart-capture @recognize="onRecognize" />
-  </div>
-  <p><span class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</span></p>
+  <el-row :gutter="20">
+    <el-col :xs="24" :md="16">
+      <div>
+        <smart-capture @recognize="onRecognize" @error="onRecognizeError" />
+      </div>
+      <p><span class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</span></p>
+      <guest-form v-if="showGuestForm" :guest="guest" @submit="onGuestAdd" />
+    </el-col>
+    <el-col :xs="24" :md="8">
+      <h3>{{ $t('documents.guests') }}:</h3>
+      <div v-loading="loading">
+        <template v-for="(guest, index) in booking.guests">
+          <guest-name v-if="guest.documentNumber" :guest="guest" :index="index" @remove="onGuestRemove" :key="guest.documentNumber" />
+        </template>
+      </div>
+      <p v-if="showExtraPay()"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment() }) }}</strong></p>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>
