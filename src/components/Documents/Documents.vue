@@ -58,12 +58,7 @@
 
   const onRecognize = (data) => {
     recognizeAttempts = 0;
-    if (isDuplicate(data)) {
-      ElNotification({
-        title: 'Warning',
-        message: t('documents.duplicateGuest'),
-        type: 'warning',
-      });
+    if (!validate(data)) {
       return;
     }
     guest.value = data;
@@ -104,8 +99,35 @@
     loading.value = false;
   };
 
+  const validate = (guest) => {
+    if (isDuplicate(guest)) {
+      ElNotification({
+        title: 'Warning',
+        message: t('documents.duplicateGuest'),
+        type: 'warning',
+      });
+      return false;
+    }
+
+    if (!isRecognized(guest)) {
+      ElNotification({
+        title: 'Error',
+        message: t('documents.partlyRecognize'),
+        type: 'error',
+      });
+      showGuestForm.value = true;
+    }
+
+    return true;
+  };
+
   const isDuplicate = (guest) => {
     return localBooking.guests.some(existingGuest => existingGuest.documentNumber === guest.documentNumber);
+  };
+
+  const isRecognized = (guest) => {
+    return ['firstName', 'lastName', 'dateOfBirth', 'gender', 'nationality', 'documentType', 'documentNumber']
+      .every(key => guest[key] !== undefined);
   };
 
   const update = () => {

@@ -159,6 +159,7 @@ export default Object.freeze({
       guests: 'Registered guests',
       recognizeError: 'We are unable to recognize the document. Pleas complete the form below',
       recognizeWarning: 'We are unable to recognize the document. Please check the photo and try again',
+      partlyRecognize: 'Some fields are not recognized. Please fill in the fields below',
     },
     guest: {
       firstName: 'First name',
