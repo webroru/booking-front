@@ -23,6 +23,9 @@
     nationality: '',
     documentType: '',
     documentNumber: '',
+    checkoutTime: '',
+    checkoutDate: '',
+    cityTaxExemption: '',
   });
 
   const adults = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 18 ? 1 : 0), 0));
@@ -61,7 +64,13 @@
     if (!validate(data)) {
       return;
     }
+    ElNotification({
+      title: '',
+      message: t('documents.additionalInfo'),
+      type: 'info',
+    });
     guest.value = data;
+    showGuestForm.value = true;
   };
 
   const onRecognizeError = () => {
