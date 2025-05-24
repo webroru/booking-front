@@ -11,6 +11,8 @@
 
   const formRef = ref(null);
   const localGuest = reactive({ ...props.guest });
+  localGuest.cityTaxExemption = 0;
+  localGuest.checkOutTime = '11:00';
   const cityTaxExemptionOptions = [
     { value: 0, label: t('guest.cityTaxExemptionOptions.0') },
     { value: 1, label: t('guest.cityTaxExemptionOptions.1') },

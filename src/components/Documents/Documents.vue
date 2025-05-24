@@ -23,7 +23,7 @@
     nationality: '',
     documentType: '',
     documentNumber: '',
-    checkOutTime: '11:00',
+    checkOutTime: '',
     checkOutDate: '',
     cityTaxExemption: 0,
   });
