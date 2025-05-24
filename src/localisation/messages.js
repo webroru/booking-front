@@ -178,6 +178,7 @@ export default Object.freeze({
       documentNumber: 'Document number',
       add: 'Add',
       checkOutDate: 'Check-out date',
+      checkOutTime: 'Check-out time',
       cityTaxExemption: 'City tax exemption',
       select: 'Select',
       cityTaxExemptionOptions: {
@@ -199,6 +200,7 @@ export default Object.freeze({
         18: 'Exemption - volunteers to eliminate natural disasters',
         19: 'Exemption - police officers on duty',
       },
+      validation: 'Enter your {field}',
     }
   },
   ru: {
