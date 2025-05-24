@@ -23,9 +23,9 @@
     nationality: '',
     documentType: '',
     documentNumber: '',
-    checkOutTime: '',
+    checkOutTime: '11:00',
     checkOutDate: '',
-    cityTaxExemption: '',
+    cityTaxExemption: 0,
   });
 
   const adults = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 18 ? 1 : 0), 0));
