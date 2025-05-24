@@ -1,5 +1,5 @@
 <script setup>
-  import {reactive, ref} from 'vue';
+  import { computed, reactive, ref, watch } from 'vue';
   import { useI18n } from 'vue-i18n';
 
   const { t } = useI18n();
@@ -44,6 +44,38 @@
     cityTaxExemption: [{ required: true, message: t('guest.validation', { field: t('guest.cityTaxExemption') }), trigger: 'blur' }],
   };
 
+  const guestAge = computed(() => {
+    if (!localGuest.dateOfBirth) return null;
+
+    const birthDate = new Date(localGuest.dateOfBirth);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    return age;
+  });
+
+  const isChildren = computed(() => guestAge.value !== null && guestAge.value >= 7 && guestAge.value <= 18);
+  const isPreschoolers = computed(() => guestAge.value !== null && guestAge.value < 7);
+  const isSameDayCheckout = computed(() => {
+    if (!props.checkInDate || !localGuest.checkOutDate) return false;
+    const checkIn = new Date(props.checkInDate);
+    const checkOut = new Date(localGuest.checkOutDate);
+    return (
+      checkIn.getFullYear() === checkOut.getFullYear() &&
+      checkIn.getMonth() === checkOut.getMonth() &&
+      checkIn.getDate() === checkOut.getDate()
+    );
+  });
+
+  const isCityTaxExemptionDisabled = computed(() => {
+    return isChildren.value || isPreschoolers.value || isSameDayCheckout.value;
+  });
+
   const submit = (form) => {
     form.validate((valid) => {
       if (valid) {
@@ -51,10 +83,22 @@
       }
     });
   };
+
+  watch([isChildren, isPreschoolers, isSameDayCheckout], ([children, preschoolers, sameDay]) => {
+    if (children) {
+      localGuest.cityTaxExemption = 11;
+    } else if (preschoolers) {
+      localGuest.cityTaxExemption = 1;
+    } else if(sameDay) {
+      localGuest.cityTaxExemption = 16;
+    } else {
+      localGuest.cityTaxExemption = 0;
+    }
+  });
 </script>
 
 <template>
-  <el-form ref="formRef" :model="localGuest" label-width="auto" :rules="rules" style="max-width: 600px">
+  <el-form ref="formRef" :model="localGuest" label-width="auto" :rules="rules" style="max-width: 590px">
     <el-form-item v-if="!guest.firstName" :label="t('guest.firstName')" prop="firstName" required>
       <el-input v-model="localGuest.firstName" />
     </el-form-item>
@@ -116,6 +160,8 @@
       <el-select
           v-model="localGuest.cityTaxExemption"
           :placeholder="t('guest.select')"
+          :disabled="isCityTaxExemptionDisabled"
+          style="width: 100%"
       >
         <el-option
             v-for="item in cityTaxExemptionOptions"
