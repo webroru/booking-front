@@ -1,9 +1,15 @@
 <script setup>
-  import { reactive } from 'vue';
+  import {reactive, ref} from 'vue';
   import { useI18n } from 'vue-i18n';
 
   const { t } = useI18n();
-  const props = defineProps({ guest: Object });
+  const emit = defineEmits(['submit']);
+  const props = defineProps({
+    guest: Object,
+    checkInDate: String,
+  });
+
+  const formRef = ref(null);
   const localGuest = reactive({ ...props.guest });
   const cityTaxExemptionOptions = [
     { value: 0, label: t('guest.cityTaxExemptionOptions.0') },
@@ -24,17 +30,38 @@
     { value: 18, label: t('guest.cityTaxExemptionOptions.18') },
     { value: 19, label: t('guest.cityTaxExemptionOptions.19') },
   ];
+
+  const rules = {
+    firstName: [{ required: true, message: t('guest.validation', { field: t('guest.firstName') }), trigger: 'blur' }],
+    lastName: [{ required: true, message: t('guest.validation', { field: t('guest.lastName') }), trigger: 'blur' }],
+    dateOfBirth: [{ required: true, message: t('guest.validation', { field: t('guest.dateOfBirth') }), trigger: 'blur' }],
+    gender: [{ required: true, message: t('guest.validation', { field: t('guest.gender') }), trigger: 'blur' }],
+    nationality: [{ required: true, message: t('guest.validation', { field: t('guest.nationality') }), trigger: 'blur' }],
+    documentType: [{ required: true, message: t('guest.validation', { field: t('guest.documentType') }), trigger: 'blur' }],
+    documentNumber: [{ required: true, message: t('guest.validation', { field: t('guest.documentNumber') }), trigger: 'blur' }],
+    checkOutDate: [{ required: true, message: t('guest.validation', { field: t('guest.checkOutDate') }), trigger: 'blur' }],
+    checkOutTime: [{ required: true, message: t('guest.validation', { field: t('guest.checkOutTime') }), trigger: 'blur' }],
+    cityTaxExemption: [{ required: true, message: t('guest.validation', { field: t('guest.cityTaxExemption') }), trigger: 'blur' }],
+  };
+
+  const submit = (form) => {
+    form.validate((valid) => {
+      if (valid) {
+        emit('submit', localGuest);
+      }
+    });
+  };
 </script>
 
 <template>
-  <el-form :model="localGuest" label-width="auto" style="max-width: 600px">
-    <el-form-item v-if="!guest.firstName" :label="t('guest.firstName')">
+  <el-form ref="formRef" :model="localGuest" label-width="auto" :rules="rules" style="max-width: 600px">
+    <el-form-item v-if="!guest.firstName" :label="t('guest.firstName')" prop="firstName" required>
       <el-input v-model="localGuest.firstName" />
     </el-form-item>
-    <el-form-item v-if="!guest.lastName" :label="t('guest.lastName')">
+    <el-form-item v-if="!guest.lastName" :label="t('guest.lastName')" prop="lastName" required>
       <el-input v-model="localGuest.lastName" />
     </el-form-item>
-    <el-form-item v-if="!guest.dateOfBirth" :label="t('guest.dateOfBirth')">
+    <el-form-item v-if="!guest.dateOfBirth" :label="t('guest.dateOfBirth')" prop="dateOfBirth" required>
         <el-date-picker
             v-model="localGuest.dateOfBirth"
             type="date"
@@ -42,48 +69,50 @@
             style="width: 100%"
         />
     </el-form-item>
-    <el-form-item v-if="!guest.gender" :label="t('guest.gender')">
+    <el-form-item v-if="!guest.gender" :label="t('guest.gender')" prop="gender" required>
       <el-radio-group v-model="localGuest.gender">
         <el-radio label="M">{{ $t('guest.male') }}</el-radio>
         <el-radio label="F">{{ $t('guest.female') }}</el-radio>
       </el-radio-group>
     </el-form-item>
-    <el-form-item v-if="!guest.nationality" :label="t('guest.nationality')">
+    <el-form-item v-if="!guest.nationality" :label="t('guest.nationality')" prop="nationality" required>
       <el-input v-model="localGuest.nationality" />
     </el-form-item>
-    <el-form-item v-if="!guest.documentType" :label="t('guest.documentType')">
+    <el-form-item v-if="!guest.documentType" :label="t('guest.documentType')" prop="documentType" required>
       <el-radio-group v-model="localGuest.documentType">
         <el-radio label="passport">{{ $t('guest.passport') }}</el-radio>
         <el-radio label="ID">{{ $t('guest.id') }}</el-radio>
       </el-radio-group>
     </el-form-item>
-    <el-form-item v-if="!guest.documentNumber" :label="t('guest.documentNumber')">
+    <el-form-item v-if="!guest.documentNumber" :label="t('guest.documentNumber')" prop="documentNumber" required>
       <el-input v-model="localGuest.documentNumber" />
     </el-form-item>
-    <el-form-item :label="t('guest.checkOutDate')">
-      <el-col :span="11">
-        <el-date-picker
-            v-model="localGuest.checkoutDate"
-            type="date"
-            :placeholder="t('guest.pickADate')"
-            style="width: 100%"
-        />
-      </el-col>
-      <el-col :span="2" class="text-center">
-        <span class="text-gray-500">-</span>
-      </el-col>
-      <el-col :span="11">
-        <el-time-select
-            v-model="localGuest.checkoutTime"
-            style="width: 100%"
-            start="00:00"
-            step="01:00"
-            end="23:00"
-            :placeholder="t('guest.pickATime')"
-        />
-      </el-col>
+    <el-form-item :label="t('guest.checkOutDate')" prop="checkOutDate" required>
+      <el-row justify="space-between">
+        <el-col :span="11">
+          <el-date-picker
+              v-model="localGuest.checkOutDate"
+              type="date"
+              :placeholder="t('guest.pickADate')"
+              style="width: 100%"
+          />
+        </el-col>
+        <el-col :span="2" class="text-center">
+          <span class="text-gray-500">-</span>
+        </el-col>
+        <el-col :span="11">
+          <el-time-select
+              v-model="localGuest.checkOutTime"
+              style="width: 100%"
+              start="00:00"
+              step="01:00"
+              end="23:00"
+              :placeholder="t('guest.pickATime')"
+          />
+        </el-col>
+      </el-row>
     </el-form-item>
-    <el-form-item :label="t('guest.cityTaxExemption')">
+    <el-form-item :label="t('guest.cityTaxExemption')" prop="cityTaxExemption" required>
       <el-select
           v-model="localGuest.cityTaxExemption"
           :placeholder="t('guest.select')"
@@ -97,7 +126,13 @@
       </el-select>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="$emit('submit', localGuest)">{{ $t('guest.add') }}</el-button>
+      <el-button type="primary" @click="submit(formRef)">{{ $t('guest.add') }}</el-button>
     </el-form-item>
   </el-form>
 </template>
+
+<style scoped>
+  .text-center {
+    text-align: center;
+  }
+</style>

@@ -23,8 +23,8 @@
     nationality: '',
     documentType: '',
     documentNumber: '',
-    checkoutTime: '',
-    checkoutDate: '',
+    checkOutTime: '',
+    checkOutDate: '',
     cityTaxExemption: '',
   });
 
@@ -184,7 +184,7 @@
         <smart-capture @recognize="onRecognize" @error="onRecognizeError" />
       </div>
       <p><span class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</span></p>
-      <guest-form v-if="showGuestForm" :guest="guest" @submit="onGuestAdd" />
+      <guest-form v-if="showGuestForm" :guest="guest" :check-in-date="localBooking.checkInDate" @submit="onGuestAdd" />
     </el-col>
     <el-col :xs="24" :md="8">
       <h3>{{ $t('documents.guests') }}:</h3>
