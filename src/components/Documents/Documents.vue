@@ -13,6 +13,7 @@
   const { setBooking, updateBooking } = store;
   const { t } = useI18n();
   const loading = ref(false);
+  const showRequirement = ref(true);
 
   const localBooking = reactive(props.booking);
   const guest = ref({
@@ -60,6 +61,7 @@
   let recognizeAttempts = 0;
 
   const onRecognize = (data) => {
+    showRequirement.value = false;
     recognizeAttempts = 0;
     if (!validate(data)) {
       return;
@@ -183,8 +185,8 @@
       <div>
         <smart-capture @recognize="onRecognize" @error="onRecognizeError" />
       </div>
-      <p><span class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</span></p>
-      <guest-form v-if="showGuestForm" :guest="guest" :check-in-date="localBooking.checkInDate" @submit="onGuestAdd" />
+      <p v-if="showRequirement"><span class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</span></p>
+      <guest-form v-if="showGuestForm" :guest="guest" :check-in-date="localBooking.checkInDate" @submit="onGuestAdd" class="guest-form" />
     </el-col>
     <el-col :xs="24" :md="8">
       <h3>{{ $t('documents.guests') }}:</h3>
@@ -208,5 +210,9 @@
 
   .el-icon {
     vertical-align: middle;
+  }
+
+  .guest-form {
+    margin-top: 20px;
   }
 </style>
