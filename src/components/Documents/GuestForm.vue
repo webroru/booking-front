@@ -1,5 +1,5 @@
 <script setup>
-  import { computed, reactive, ref, watch } from 'vue';
+  import { computed, reactive, ref, watch, onMounted } from 'vue';
   import { useI18n } from 'vue-i18n';
 
   const { t } = useI18n();
@@ -11,6 +11,7 @@
   });
 
   const formRef = ref(null);
+  const isMobile = ref(false);
   const localGuest = reactive({ ...props.guest });
   localGuest.cityTaxExemption = 0;
   localGuest.checkOutDate = props.checkOutDate || '';
@@ -63,6 +64,7 @@
     return age;
   });
 
+  const labelPosition = computed(() => (isMobile.value ? 'top' : 'right'))
   const isChildren = computed(() => guestAge.value !== null && guestAge.value >= 7 && guestAge.value <= 18);
   const isPreschoolers = computed(() => guestAge.value !== null && guestAge.value < 7);
   const isSameDayCheckout = computed(() => {
@@ -99,18 +101,22 @@
       localGuest.cityTaxExemption = 0;
     }
   });
+
+  onMounted(() => {
+    isMobile.value = window.innerWidth < 768;
+  });
 </script>
 
 <template>
   <h4 v-if="localGuest.firstName && localGuest.lastName">{{ localGuest.firstName }} {{localGuest.lastName }}</h4>
   <el-form ref="formRef" :model="localGuest" label-width="auto" :rules="rules" style="max-width: 590px">
-    <el-form-item v-if="!guest.firstName" :label="t('guest.firstName')" prop="firstName" required>
+    <el-form-item v-if="!guest.firstName" :label="t('guest.firstName')" :label-position="labelPosition" prop="firstName" required>
       <el-input v-model="localGuest.firstName" />
     </el-form-item>
-    <el-form-item v-if="!guest.lastName" :label="t('guest.lastName')" prop="lastName" required>
+    <el-form-item v-if="!guest.lastName" :label="t('guest.lastName')" :label-position="labelPosition" prop="lastName" required>
       <el-input v-model="localGuest.lastName" />
     </el-form-item>
-    <el-form-item v-if="!guest.dateOfBirth" :label="t('guest.dateOfBirth')" prop="dateOfBirth" required>
+    <el-form-item v-if="!guest.dateOfBirth" :label="t('guest.dateOfBirth')" :label-position="labelPosition" prop="dateOfBirth" required>
         <el-date-picker
             v-model="localGuest.dateOfBirth"
             type="date"
@@ -118,25 +124,25 @@
             style="width: 100%"
         />
     </el-form-item>
-    <el-form-item v-if="!guest.gender" :label="t('guest.gender')" prop="gender" required>
+    <el-form-item v-if="!guest.gender" :label="t('guest.gender')" :label-position="labelPosition" prop="gender" required>
       <el-radio-group v-model="localGuest.gender">
         <el-radio label="M">{{ $t('guest.male') }}</el-radio>
         <el-radio label="F">{{ $t('guest.female') }}</el-radio>
       </el-radio-group>
     </el-form-item>
-    <el-form-item v-if="!guest.nationality" :label="t('guest.nationality')" prop="nationality" required>
+    <el-form-item v-if="!guest.nationality" :label="t('guest.nationality')" :label-position="labelPosition" prop="nationality" required>
       <el-input v-model="localGuest.nationality" />
     </el-form-item>
-    <el-form-item v-if="!guest.documentType" :label="t('guest.documentType')" prop="documentType" required>
+    <el-form-item v-if="!guest.documentType" :label="t('guest.documentType')" :label-position="labelPosition" prop="documentType" required>
       <el-radio-group v-model="localGuest.documentType">
         <el-radio label="passport">{{ $t('guest.passport') }}</el-radio>
         <el-radio label="ID">{{ $t('guest.id') }}</el-radio>
       </el-radio-group>
     </el-form-item>
-    <el-form-item v-if="!guest.documentNumber" :label="t('guest.documentNumber')" prop="documentNumber" required>
+    <el-form-item v-if="!guest.documentNumber" :label="t('guest.documentNumber')" :label-position="labelPosition" prop="documentNumber" required>
       <el-input v-model="localGuest.documentNumber" />
     </el-form-item>
-    <el-form-item :label="t('guest.checkOutDate')" prop="checkOutDate" required>
+    <el-form-item :label="t('guest.checkOutDate')" :label-position="labelPosition" prop="checkOutDate" required>
       <el-row justify="space-between">
         <el-col :span="11">
           <el-date-picker
@@ -161,7 +167,7 @@
         </el-col>
       </el-row>
     </el-form-item>
-    <el-form-item :label="t('guest.cityTaxExemption')" prop="cityTaxExemption" required>
+    <el-form-item :label="t('guest.cityTaxExemption')" :label-position="labelPosition" prop="cityTaxExemption" required>
       <el-select
           v-model="localGuest.cityTaxExemption"
           :placeholder="t('guest.select')"
