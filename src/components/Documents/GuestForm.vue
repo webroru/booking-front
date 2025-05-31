@@ -7,11 +7,13 @@
   const props = defineProps({
     guest: Object,
     checkInDate: String,
+    checkOutDate: String,
   });
 
   const formRef = ref(null);
   const localGuest = reactive({ ...props.guest });
   localGuest.cityTaxExemption = 0;
+  localGuest.checkOutDate = props.checkOutDate || '';
   localGuest.checkOutTime = '11:00';
   const cityTaxExemptionOptions = [
     { value: 0, label: t('guest.cityTaxExemptionOptions.0') },
