@@ -100,6 +100,7 @@
 </script>
 
 <template>
+  <h4 v-if="localGuest.firstName && localGuest.lastName">{{ localGuest.firstName }} {{localGuest.lastName }}</h4>
   <el-form ref="formRef" :model="localGuest" label-width="auto" :rules="rules" style="max-width: 590px">
     <el-form-item v-if="!guest.firstName" :label="t('guest.firstName')" prop="firstName" required>
       <el-input v-model="localGuest.firstName" />
