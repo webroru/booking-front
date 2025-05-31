@@ -16,4 +16,8 @@
   body {
     font-family: 'Roboto Condensed', sans-serif;
   }
+
+  .el-main {
+    --el-main-padding: 40px;
+  }
 </style>
