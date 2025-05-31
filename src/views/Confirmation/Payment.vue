@@ -117,7 +117,7 @@
   const getDebt = () => bookings.reduce((debt, booking) => (debt + booking.debt), 0);
   const getDebtFormatted = () => getDebt().toFixed(2);
 
-  const getDebtItems = (booking) => booking.invoiceItems.filter(item => item.type === 'charge');
+  const getDebtItems = (booking) => booking.invoiceItems.filter(item => item.type === 'charge' && item.description && item.amount && item.qty);
   const getPaymentItems = (booking) => booking.invoiceItems.filter(item => item.type === 'payment');
 
   const getTotal = (booking) => booking.invoiceItems
