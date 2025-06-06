@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import { createI18n } from 'vue-i18n';
@@ -17,7 +17,7 @@ const i18n = createI18n({
   messages,
 });
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
