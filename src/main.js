@@ -19,8 +19,10 @@ const i18n = createI18n({
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior() {
+    return { top: 0 };
+  },
 });
-
 
 app.use(pinia);
 app.use(ElementPlus);
