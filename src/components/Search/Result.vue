@@ -1,20 +1,25 @@
 <script setup>
-  import { computed } from 'vue';
+  import {computed, onMounted, ref} from 'vue';
   import { Select } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
 
-  // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     booking: Object,
   });
 
   const store = useBookingStore();
   const { bookings } = store;
+  const isMobile = ref(false);
   const showIcon = computed(() => bookings.find(booking => booking.orderId === props.booking.orderId));
+  const columns = computed(() => (isMobile.value ? 1 : 4));
+
+  onMounted(() => {
+    isMobile.value = window.innerWidth < 768;
+  });
 </script>
 
 <template>
-  <el-descriptions :title="`${booking.firstName} ${booking.lastName}`" @click="$emit('selectBooking', booking.orderId)" border :column="3" class="item">
+  <el-descriptions :title="`${booking.firstName} ${booking.lastName}`" @click="$emit('selectBooking', booking.orderId)" border :column="columns" class="item">
     <el-descriptions-item>
       <template #label>
         <el-icon class="el-icon--left">

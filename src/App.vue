@@ -18,6 +18,6 @@
   }
 
   .el-main {
-    --el-main-padding: 60px;
+    padding-bottom: 60px;
   }
 </style>
