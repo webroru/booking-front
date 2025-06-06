@@ -71,7 +71,7 @@ export default Object.freeze({
       checkOut: 'CheckOut',
       fullName: 'Full Name',
       originalReferer: 'Original Referer',
-      smartLockCode: 'Smart Lock Code',
+      smartLockCode: 'Door code',
       call: 'Phone us',
       rules: 'Rules',
       howToMakeIn: 'How to make in',
