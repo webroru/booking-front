@@ -110,13 +110,13 @@
 <template>
   <h4 v-if="localGuest.firstName && localGuest.lastName">{{ localGuest.firstName }} {{localGuest.lastName }}</h4>
   <el-form ref="formRef" :model="localGuest" label-width="auto" :rules="rules" class="guest-form">
-    <el-form-item v-if="!guest.firstName" :label="t('guest.firstName')" :label-position="labelPosition" prop="firstName" required>
+    <el-form-item v-show="!guest.firstName" :label="t('guest.firstName')" :label-position="labelPosition" prop="firstName" required>
       <el-input v-model="localGuest.firstName" />
     </el-form-item>
-    <el-form-item v-if="!guest.lastName" :label="t('guest.lastName')" :label-position="labelPosition" prop="lastName" required>
+    <el-form-item v-show="!guest.lastName" :label="t('guest.lastName')" :label-position="labelPosition" prop="lastName" required>
       <el-input v-model="localGuest.lastName" />
     </el-form-item>
-    <el-form-item v-if="!guest.dateOfBirth" :label="t('guest.dateOfBirth')" :label-position="labelPosition" prop="dateOfBirth" required>
+    <el-form-item v-show="!guest.dateOfBirth" :label="t('guest.dateOfBirth')" :label-position="labelPosition" prop="dateOfBirth" required>
         <el-date-picker
             v-model="localGuest.dateOfBirth"
             type="date"
@@ -124,22 +124,22 @@
             style="width: 100%"
         />
     </el-form-item>
-    <el-form-item v-if="!guest.gender" :label="t('guest.gender')" :label-position="labelPosition" prop="gender" required>
+    <el-form-item v-show="!guest.gender" :label="t('guest.gender')" :label-position="labelPosition" prop="gender" required>
       <el-radio-group v-model="localGuest.gender">
         <el-radio label="M">{{ $t('guest.male') }}</el-radio>
         <el-radio label="F">{{ $t('guest.female') }}</el-radio>
       </el-radio-group>
     </el-form-item>
-    <el-form-item v-if="!guest.nationality" :label="t('guest.nationality')" :label-position="labelPosition" prop="nationality" required>
+    <el-form-item v-show="!guest.nationality" :label="t('guest.nationality')" :label-position="labelPosition" prop="nationality" required>
       <el-input v-model="localGuest.nationality" />
     </el-form-item>
-    <el-form-item v-if="!guest.documentType" :label="t('guest.documentType')" :label-position="labelPosition" prop="documentType" required>
+    <el-form-item v-show="!guest.documentType" :label="t('guest.documentType')" :label-position="labelPosition" prop="documentType" required>
       <el-radio-group v-model="localGuest.documentType">
         <el-radio label="passport">{{ $t('guest.passport') }}</el-radio>
         <el-radio label="ID">{{ $t('guest.id') }}</el-radio>
       </el-radio-group>
     </el-form-item>
-    <el-form-item v-if="!guest.documentNumber" :label="t('guest.documentNumber')" :label-position="labelPosition" prop="documentNumber" required>
+    <el-form-item v-show="!guest.documentNumber" :label="t('guest.documentNumber')" :label-position="labelPosition" prop="documentNumber" required>
       <el-input v-model="localGuest.documentNumber" />
     </el-form-item>
     <el-form-item :label="t('guest.checkOutDate')" :label-position="labelPosition" prop="checkOutDate" required>
