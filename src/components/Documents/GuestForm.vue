@@ -109,7 +109,7 @@
 
 <template>
   <h4 v-if="localGuest.firstName && localGuest.lastName">{{ localGuest.firstName }} {{localGuest.lastName }}</h4>
-  <el-form ref="formRef" :model="localGuest" label-width="auto" :rules="rules" style="max-width: 590px">
+  <el-form ref="formRef" :model="localGuest" label-width="auto" :rules="rules" class="guest-form">
     <el-form-item v-if="!guest.firstName" :label="t('guest.firstName')" :label-position="labelPosition" prop="firstName" required>
       <el-input v-model="localGuest.firstName" />
     </el-form-item>
@@ -191,5 +191,9 @@
 <style scoped>
   .text-center {
     text-align: center;
+  }
+  .guest-form {
+    margin-top: 20px;
+    max-width: 590px
   }
 </style>
