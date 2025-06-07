@@ -4,13 +4,10 @@
   import config from '@/config';
   import { useInfoStore } from '@/stores/info';
   import { useBookingStore } from '@/stores/booking';
-  import { usePhotosStore } from '@/stores/photos';
   import LanguageSelect from '@/components/LanguageSelect.vue';
   import HotelAddress from '@/components/HotelAddress.vue';
   import EarlyCheckInWarning from '@/components/EarlyCheckInWarning.vue';
 
-  const photosStore = usePhotosStore();
-  const { clearPhotosStore, syncPhotos } = photosStore;
   const bookingStore = useBookingStore();
   const { bookings, resetBooking, searchBooking, setBookings } = bookingStore;
   const infoStore = useInfoStore();
@@ -37,7 +34,6 @@
       fetchBookingByUrlParam(orderId);
       if (path === '/') {
         resetBooking();
-        clearPhotosStore();
       }
     }
   );
@@ -64,7 +60,6 @@
       }
 
       setBookings(bookings);
-      syncPhotos();
       loading.value = false;
     }
   };
