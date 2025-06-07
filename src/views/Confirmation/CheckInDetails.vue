@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue';
+  import {computed, onMounted, ref} from 'vue';
   import { ElMessage, ElMessageBox } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
@@ -12,6 +12,7 @@
   const { info, sendToEmail } = infoStore;
   const { t } = useI18n();
   const showRulesDialog = ref(false);
+  const isMobile = ref(false);
 
   const openSendInformation = async () => {
     const email = await ElMessageBox.prompt(t('checkInDetails.email'), 'Tip', {
@@ -32,6 +33,12 @@
     booking.checkIn = true;
     await updateBooking(booking);
   });
+
+  const columns = computed(() => (isMobile.value ? 1 : 4));
+
+  onMounted(() => {
+    isMobile.value = window.innerWidth < 768;
+  });
 </script>
 
 <template>
@@ -39,7 +46,7 @@
   <el-row v-for="booking in bookings" :key="booking.orderId">
     <el-col :xs="24" :sm="16">
       <h3>{{ $t('app.bookingFor', { name: booking.firstName, orderId: booking.orderId, referer: booking.originalReferer }) }}</h3>
-      <el-descriptions :title="booking.propertyName" border class="description">
+      <el-descriptions :title="booking.propertyName" border class="description" :column="columns">
         <el-descriptions-item :label="$t('bookingInfo.roomNumber')"><b>{{ booking.room }}</b></el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.checkIn')">{{ booking.checkInDate }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.checkOut')">{{ booking.checkOutDate }}</el-descriptions-item>
