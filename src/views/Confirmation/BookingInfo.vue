@@ -2,8 +2,9 @@
   import {computed, onMounted, ref} from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
-  import Rules from '@/components/Rules.vue';
+  import Documents from '@/components/Documents/Documents.vue';
   import MakePhoto from '@/components/Photos/MakePhoto.vue';
+  import Rules from '@/components/Rules.vue';
   import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
   import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
 
@@ -52,26 +53,14 @@
       </el-descriptions>
 
       <p>{{ $t('bookingInfo.photoDocuments') }}</p>
-      <div class="upload-container">
-        <upload-photo :order-id="booking.orderId" />
-      </div>
-      <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
-
-      <div class="output">
-        <show-photos :order-id="booking.orderId" />
-      </div>
-
-      <el-dialog v-model="showMakePhoto" :title="$t('photos.makePhotoTitle')" width="80%"
-        :before-close="closeMakePhoto">
-        <make-photo :is-camera-enabled="isCameraEnabled" :order-id="booking.orderId" />
-      </el-dialog>
+      <documents :booking="booking" />
     </el-col>
   </el-row>
   <router-link v-if="hasDebt()" :to="`/confirmation/${bookings[0].orderId}/payment`">
     <el-button type="primary">{{ $t('bookingInfo.payDebt') }}</el-button>
   </router-link>
 
-  <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary">{{ $t('bookingInfo.call') }} {{ info.callTime }}</a>
+  <a :href="'tel:' + info.phoneNumber" class="el-button el-button--primary button-call">{{ $t('bookingInfo.call') }} {{ info.callTime }}</a>
   <el-button type="primary" @click="showRulesDialog = true">{{ $t('bookingInfo.rules') }}</el-button>
   <el-button type="primary" @click="showHowToMakeInDialog = true">{{ $t('bookingInfo.howToMakeIn') }}</el-button>
   <el-button type="primary" @click="showFacilitiesDialog = true">{{ $t('bookingInfo.facilities') }}</el-button>
@@ -116,9 +105,12 @@
   }
 
   .el-button {
-    margin-left: 12px;
     margin-bottom: 20px;
     text-decoration: none;
+  }
+
+  .button-call {
+    margin-left: 12px;
   }
 
   .output {
