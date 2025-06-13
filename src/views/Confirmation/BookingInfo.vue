@@ -1,9 +1,12 @@
 <script setup>
-  import { computed, onMounted, ref } from 'vue';
+  import {computed, onMounted, ref} from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
   import Documents from '@/components/Documents/Documents.vue';
+  import MakePhoto from '@/components/Photos/MakePhoto.vue';
   import Rules from '@/components/Rules.vue';
+  import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
+  import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
 
   const bookingStore = useBookingStore();
   const { bookings } = bookingStore;
@@ -13,7 +16,19 @@
   const showHowToMakeInDialog = ref(false);
   const showFacilitiesDialog = ref(false);
   const showextrasDialog = ref(false);
+  const showMakePhoto = ref(false);
+  const isCameraEnabled = ref(false);
   const isMobile = ref(false);
+
+  const closeMakePhoto = () => {
+    isCameraEnabled.value = false;
+    showMakePhoto.value = false;
+  };
+
+  const openMakePhoto = () => {
+    isCameraEnabled.value = true;
+    showMakePhoto.value = true;
+  };
 
   const hasDebt = () => bookings.find(booking => booking.debt > 0) !== undefined;
   const columns = computed(() => (isMobile.value ? 1 : 4));
@@ -95,5 +110,16 @@
 
   .button-call {
     margin-left: 12px;
+  }
+
+  .output {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .upload-container {
+    margin: 0 20px 20px 0;
+    display: inline-block;
+    vertical-align: middle;
   }
 </style>
