@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 import { createRouter, createWebHistory } from 'vue-router';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
+import 'element-plus/theme-chalk/display.css';
 import { createI18n } from 'vue-i18n';
 import App from '@/App.vue';
 import 'normalize.css';

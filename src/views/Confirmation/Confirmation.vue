@@ -1,5 +1,4 @@
 <script setup>
-  import 'element-plus/theme-chalk/display.css';
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';

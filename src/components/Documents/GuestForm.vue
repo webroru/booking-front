@@ -144,7 +144,7 @@
     </el-form-item>
     <el-form-item :label="t('guest.checkOutDate')" :label-position="labelPosition" prop="checkOutDate" required>
       <el-row justify="space-between">
-        <el-col :span="11">
+        <el-col :xs="24" :sm="11">
           <el-date-picker
               v-model="localGuest.checkOutDate"
               type="date"
@@ -152,10 +152,10 @@
               style="width: 100%"
           />
         </el-col>
-        <el-col :span="2" class="text-center">
+        <el-col :span="2" class="text-center hidden-xs-only">
           <span class="text-gray-500">-</span>
         </el-col>
-        <el-col :span="11">
+        <el-col :xs="24" :sm="11">
           <el-time-select
               v-model="localGuest.checkOutTime"
               style="width: 100%"
