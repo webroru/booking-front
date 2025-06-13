@@ -5,7 +5,7 @@
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { usePhotosStore } from '@/stores/photos';
-  import Result from './Result.vue';
+  import Results from './Results.vue';
 
   const { t } = useI18n();
   const store = useBookingStore();
@@ -55,10 +55,8 @@
   </el-form>
   <div v-if="data.length">
     <h2>{{ $t('search.choose') }}</h2>
-    <Result
-      v-for="item in data"
-      :key="item.orderId"
-      :booking="item"
+    <Results
+      :bookings="data"
       @select-booking="onSelectBooking"
     />
   </div>
