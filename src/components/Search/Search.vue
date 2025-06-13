@@ -4,11 +4,14 @@
   import { ElMessageBox } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
+  import { usePhotosStore } from '@/stores/photos';
   import Result from './Result.vue';
 
   const { t } = useI18n();
   const store = useBookingStore();
   const { setBookings, searchBooking } = store;
+  const photosStore = usePhotosStore();
+  const { syncPhotos } = photosStore;
 
   const query = ref();
   const data = ref([]);
@@ -20,6 +23,7 @@
       data.value = await searchBooking(query.value);
       if (data.value.length === 1) {
         setBookings(data.value);
+        syncPhotos();
       }
     } catch (error) {
       await ElMessageBox.alert(t('common.error'), 'Error', {
@@ -35,6 +39,7 @@
       bookings = data.value.filter(booking => booking.groupId);
     }
     setBookings(bookings);
+    syncPhotos();
   };
 </script>
 
