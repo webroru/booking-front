@@ -18,7 +18,6 @@
   const showextrasDialog = ref(false);
   const showMakePhoto = ref(false);
   const isCameraEnabled = ref(false);
-  const isMobile = ref(false);
 
   const closeMakePhoto = () => {
     isCameraEnabled.value = false;
@@ -38,7 +37,7 @@
   <el-row v-for="booking in bookings" :key="booking.orderId">
     <el-col :span="16">
       <el-descriptions :title="booking.propertyName" border :column="1" class="description">
-        <el-descriptions-item :label="$t('bookingInfo.roomNumber')"><b>{{ booking.room }}</b></el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.roomNumber')">{{ booking.room }} <b>{{ booking.unit ? '№: ' + booking.unit : '' }}</b></el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.checkIn')">{{ booking.checkInDate }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.checkOut')">{{ booking.checkOutDate }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.fullName')">{{ booking.firstName }} {{ booking.lastName }}</el-descriptions-item>

@@ -126,8 +126,8 @@
     </el-form-item>
     <el-form-item v-show="!guest.gender" :label="t('guest.gender')" :label-position="labelPosition" prop="gender" required>
       <el-radio-group v-model="localGuest.gender">
-        <el-radio label="M">{{ $t('guest.male') }}</el-radio>
-        <el-radio label="F">{{ $t('guest.female') }}</el-radio>
+        <el-radio value="M">{{ $t('guest.male') }}</el-radio>
+        <el-radio value="F">{{ $t('guest.female') }}</el-radio>
       </el-radio-group>
     </el-form-item>
     <el-form-item v-show="!guest.nationality" :label="t('guest.nationality')" :label-position="labelPosition" prop="nationality" required>
@@ -135,8 +135,8 @@
     </el-form-item>
     <el-form-item v-show="!guest.documentType" :label="t('guest.documentType')" :label-position="labelPosition" prop="documentType" required>
       <el-radio-group v-model="localGuest.documentType">
-        <el-radio label="passport">{{ $t('guest.passport') }}</el-radio>
-        <el-radio label="ID">{{ $t('guest.id') }}</el-radio>
+        <el-radio value="passport">{{ $t('guest.passport') }}</el-radio>
+        <el-radio value="ID">{{ $t('guest.id') }}</el-radio>
       </el-radio-group>
     </el-form-item>
     <el-form-item v-show="!guest.documentNumber" :label="t('guest.documentNumber')" :label-position="labelPosition" prop="documentNumber" required>
