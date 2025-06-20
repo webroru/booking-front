@@ -1,6 +1,7 @@
 <script setup>
   import { computed, reactive, ref, watch, onMounted } from 'vue';
   import { useI18n } from 'vue-i18n';
+  import iso from 'iso-3166-1';
 
   const { t } = useI18n();
   const emit = defineEmits(['submit']);
@@ -48,6 +49,8 @@
     checkOutTime: [{ required: true, message: t('guest.validation', { field: t('guest.checkOutTime') }), trigger: 'blur' }],
     cityTaxExemption: [{ required: true, message: t('guest.validation', { field: t('guest.cityTaxExemption') }), trigger: 'blur' }],
   };
+
+  const countries = iso.all().map(item => ({ value: item.alpha2, label: item.country }));
 
   const guestAge = computed(() => {
     if (!localGuest.dateOfBirth) return null;
@@ -131,7 +134,14 @@
       </el-radio-group>
     </el-form-item>
     <el-form-item v-show="!guest.nationality" :label="t('guest.nationality')" :label-position="labelPosition" prop="nationality" required>
-      <el-input v-model="localGuest.nationality" />
+      <el-select v-model="localGuest.nationality" filterable>
+        <el-option
+            v-for="country in countries"
+            :key="country.value"
+            :label="country.label"
+            :value="country.value"
+        />
+      </el-select>
     </el-form-item>
     <el-form-item v-show="!guest.documentType" :label="t('guest.documentType')" :label-position="labelPosition" prop="documentType" required>
       <el-radio-group v-model="localGuest.documentType">
