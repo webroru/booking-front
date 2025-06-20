@@ -101,7 +101,7 @@
           </el-col>
         </el-row>
         <el-row justify="center" v-loading="loading">
-          <el-col :span="18">
+          <el-col :xs="24" :sm="18">
             <router-view></router-view>
           </el-col>
         </el-row>

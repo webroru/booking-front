@@ -16,7 +16,6 @@
     'rules',
     'documents',
     'payment',
-    'checkin-details',
     'booking-info',
   ];
 

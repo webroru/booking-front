@@ -16,7 +16,7 @@
   const showRequirement = ref(true);
 
   const localBooking = reactive(props.booking);
-  const guest = ref({
+  const initialGuest = {
     firstName: '',
     lastName: '',
     dateOfBirth: '',
@@ -27,7 +27,8 @@
     checkOutTime: '',
     checkOutDate: '',
     cityTaxExemption: 0,
-  });
+  };
+  const guest = ref({ ...initialGuest });
 
   const adults = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 18 ? 1 : 0), 0));
   const children = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 7 && getAges(guest) < 18 ? 1 : 0), 0));
@@ -89,6 +90,7 @@
       message: t('documents.recognizeError'),
       type: 'error',
     });
+    Object.assign(guest.value, initialGuest);
     showGuestForm.value = true;
   };
 
