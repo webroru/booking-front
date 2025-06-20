@@ -1,5 +1,5 @@
 <script setup>
-  import {computed, onMounted, ref} from 'vue';
+  import { ref } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
   import Documents from '@/components/Documents/Documents.vue';
@@ -18,7 +18,6 @@
   const showextrasDialog = ref(false);
   const showMakePhoto = ref(false);
   const isCameraEnabled = ref(false);
-  const isMobile = ref(false);
 
   const closeMakePhoto = () => {
     isCameraEnabled.value = false;
@@ -31,19 +30,14 @@
   };
 
   const hasDebt = () => bookings.find(booking => booking.debt > 0) !== undefined;
-  const columns = computed(() => (isMobile.value ? 1 : 4));
-
-  onMounted(() => {
-    isMobile.value = window.innerWidth < 768;
-  });
 </script>
 
 <template>
   <h2>{{ $t('bookingInfo.header') }}</h2>
   <el-row v-for="booking in bookings" :key="booking.orderId">
     <el-col :span="16">
-      <el-descriptions :title="booking.propertyName" border :column="columns" class="description">
-        <el-descriptions-item :label="$t('bookingInfo.roomNumber')"><b>{{ booking.room }}</b></el-descriptions-item>
+      <el-descriptions :title="booking.propertyName" border :column="1" class="description">
+        <el-descriptions-item :label="$t('bookingInfo.roomNumber')">{{ booking.room }} <b>{{ booking.unit ? '№: ' + booking.unit : '' }}</b></el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.checkIn')">{{ booking.checkInDate }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.checkOut')">{{ booking.checkOutDate }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.fullName')">{{ booking.firstName }} {{ booking.lastName }}</el-descriptions-item>

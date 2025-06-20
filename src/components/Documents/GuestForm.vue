@@ -1,6 +1,7 @@
 <script setup>
   import { computed, reactive, ref, watch, onMounted } from 'vue';
   import { useI18n } from 'vue-i18n';
+  import iso from 'iso-3166-1';
 
   const { t } = useI18n();
   const emit = defineEmits(['submit']);
@@ -48,6 +49,8 @@
     checkOutTime: [{ required: true, message: t('guest.validation', { field: t('guest.checkOutTime') }), trigger: 'blur' }],
     cityTaxExemption: [{ required: true, message: t('guest.validation', { field: t('guest.cityTaxExemption') }), trigger: 'blur' }],
   };
+
+  const countries = iso.all().map(item => ({ value: item.alpha2, label: item.country }));
 
   const guestAge = computed(() => {
     if (!localGuest.dateOfBirth) return null;
@@ -126,17 +129,24 @@
     </el-form-item>
     <el-form-item v-show="!guest.gender" :label="t('guest.gender')" :label-position="labelPosition" prop="gender" required>
       <el-radio-group v-model="localGuest.gender">
-        <el-radio label="M">{{ $t('guest.male') }}</el-radio>
-        <el-radio label="F">{{ $t('guest.female') }}</el-radio>
+        <el-radio value="M">{{ $t('guest.male') }}</el-radio>
+        <el-radio value="F">{{ $t('guest.female') }}</el-radio>
       </el-radio-group>
     </el-form-item>
     <el-form-item v-show="!guest.nationality" :label="t('guest.nationality')" :label-position="labelPosition" prop="nationality" required>
-      <el-input v-model="localGuest.nationality" />
+      <el-select v-model="localGuest.nationality" filterable>
+        <el-option
+            v-for="country in countries"
+            :key="country.value"
+            :label="country.label"
+            :value="country.value"
+        />
+      </el-select>
     </el-form-item>
     <el-form-item v-show="!guest.documentType" :label="t('guest.documentType')" :label-position="labelPosition" prop="documentType" required>
       <el-radio-group v-model="localGuest.documentType">
-        <el-radio label="passport">{{ $t('guest.passport') }}</el-radio>
-        <el-radio label="ID">{{ $t('guest.id') }}</el-radio>
+        <el-radio value="passport">{{ $t('guest.passport') }}</el-radio>
+        <el-radio value="ID">{{ $t('guest.id') }}</el-radio>
       </el-radio-group>
     </el-form-item>
     <el-form-item v-show="!guest.documentNumber" :label="t('guest.documentNumber')" :label-position="labelPosition" prop="documentNumber" required>
@@ -144,7 +154,7 @@
     </el-form-item>
     <el-form-item :label="t('guest.checkOutDate')" :label-position="labelPosition" prop="checkOutDate" required>
       <el-row justify="space-between">
-        <el-col :span="11">
+        <el-col :xs="24" :sm="11">
           <el-date-picker
               v-model="localGuest.checkOutDate"
               type="date"
@@ -152,10 +162,10 @@
               style="width: 100%"
           />
         </el-col>
-        <el-col :span="2" class="text-center">
+        <el-col :span="2" class="text-center hidden-xs-only">
           <span class="text-gray-500">-</span>
         </el-col>
-        <el-col :span="11">
+        <el-col :xs="24" :sm="11">
           <el-time-select
               v-model="localGuest.checkOutTime"
               style="width: 100%"

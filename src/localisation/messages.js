@@ -55,6 +55,7 @@ export default Object.freeze({
       switch: 'Switch the camera',
     },
     search: {
+      fullName: 'Full Name',
       property: 'Property',
       room: 'Room',
       checkIn: 'Check-in',
@@ -259,6 +260,7 @@ export default Object.freeze({
       switch: 'Переключить камеру',
     },
     search: {
+      fullName: 'Полное имя',
       property: 'Отель',
       room: 'Комната',
       checkIn: 'Заезд',
@@ -463,6 +465,7 @@ export default Object.freeze({
       switch: '切换摄像头',
     },
     search: {
+      fullName: '全名',
       property: '物业',
       room: '房间',
       checkIn: '入住',
@@ -667,6 +670,7 @@ export default Object.freeze({
       switch: 'Zamijeni kameru',
     },
     search: {
+      fullName: 'Puno ime',
       property: 'Objekt',
       room: 'Soba',
       checkIn: 'Prijava',
@@ -871,6 +875,7 @@ export default Object.freeze({
       switch: 'Changer de caméra',
     },
     search: {
+      fullName: 'Nom complet',
       property: 'Établissement',
       room: 'Chambre',
       checkIn: 'Arrivée',
@@ -1075,6 +1080,7 @@ export default Object.freeze({
       switch: 'Kamera wechseln',
     },
     search: {
+      fullName: 'Vollständiger Name',
       property: 'Unterkunft',
       room: 'Zimmer',
       checkIn: 'Anreise',
@@ -1279,6 +1285,7 @@ export default Object.freeze({
       switch: 'Cambia fotocamera',
     },
     search: {
+      fullName: 'Nome completo',
       property: 'Struttura',
       room: 'Camera',
       checkIn: 'Check-in',
@@ -1483,6 +1490,7 @@ export default Object.freeze({
       switch: 'Przełącz kamerę',
     },
     search: {
+      fullName: 'Imię i nazwisko',
       property: 'Obiekt',
       room: 'Pokój',
       checkIn: 'Zameldowanie',
@@ -1687,6 +1695,7 @@ export default Object.freeze({
       switch: 'Zamenjaj kamero',
     },
     search: {
+      fullName: 'Polno ime',
       property: 'Namestitev',
       room: 'Soba',
       checkIn: 'Prijava',
@@ -1891,6 +1900,7 @@ export default Object.freeze({
       switch: 'Cambiar cámara',
     },
     search: {
+      fullName: 'Nombre completo',
       property: 'Propiedad',
       room: 'Habitación',
       checkIn: 'Entrada',

@@ -12,6 +12,7 @@ export const useBookingStore = defineStore('booking', () => {
     orderId: null,
     propertyName: '',
     room: null,
+    unit: null,
     originalReferer: '',
     guestsAmount: null,
     passCode: null,

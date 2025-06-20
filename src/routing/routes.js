@@ -5,7 +5,6 @@ import Instruction from '@/views/Confirmation/Instruction.vue';
 import Documents from '@/views/Confirmation/Documents.vue';
 import Payment from '@/views/Confirmation/Payment.vue';
 import Rules from '@/views/Confirmation/Rules.vue';
-import CheckInDetails from '@/views/Confirmation/CheckInDetails.vue';
 import BookingInfo from '@/views/Confirmation/BookingInfo.vue';
 import CheckOutDetails from '@/views/Checkout/CheckOutDetails.vue';
 import Home from '@/views/Home.vue';
@@ -27,7 +26,6 @@ const routes = [
           { path: ':orderId/rules', component: Rules },
           { path: ':orderId/documents', component: Documents },
           { path: ':orderId/payment', component: Payment },
-          { path: ':orderId/checkin-details', component: CheckInDetails },
           { path: ':orderId/booking-info', component: BookingInfo },
         ],
       },
