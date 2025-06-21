@@ -37,17 +37,41 @@
     { value: 19, label: t('guest.cityTaxExemptionOptions.19') },
   ];
 
+  const latinOnlyValidator = (rule, value, callback) => {
+    if (!value || /^[a-zA-Z\s]+$/.test(value)) {
+      callback();
+    } else {
+      callback(new Error(t('guest.validation.latinOnly')));
+    }
+  };
+
+  const checkOutDateValidator = (rule, value, callback) => {
+    if (!value || new Date(`${localGuest.checkOutDate}T${localGuest.checkOutTime}:00`) <= new Date(`${props.checkOutDate}T11:00:00`)) {
+      callback();
+    } else {
+      callback(new Error(t('guest.validation.checkOutDate', { date: props.checkOutDate })));
+    }
+  };
+
   const rules = {
-    firstName: [{ required: true, message: t('guest.validation', { field: t('guest.firstName') }), trigger: 'blur' }],
-    lastName: [{ required: true, message: t('guest.validation', { field: t('guest.lastName') }), trigger: 'blur' }],
-    dateOfBirth: [{ required: true, message: t('guest.validation', { field: t('guest.dateOfBirth') }), trigger: 'blur' }],
-    gender: [{ required: true, message: t('guest.validation', { field: t('guest.gender') }), trigger: 'blur' }],
-    nationality: [{ required: true, message: t('guest.validation', { field: t('guest.nationality') }), trigger: 'blur' }],
-    documentType: [{ required: true, message: t('guest.validation', { field: t('guest.documentType') }), trigger: 'blur' }],
-    documentNumber: [{ required: true, message: t('guest.validation', { field: t('guest.documentNumber') }), trigger: 'blur' }],
-    checkOutDate: [{ required: true, message: t('guest.validation', { field: t('guest.checkOutDate') }), trigger: 'blur' }],
-    checkOutTime: [{ required: true, message: t('guest.validation', { field: t('guest.checkOutTime') }), trigger: 'blur' }],
-    cityTaxExemption: [{ required: true, message: t('guest.validation', { field: t('guest.cityTaxExemption') }), trigger: 'blur' }],
+    firstName: [
+      { required: true, message: t('guest.validation.required', { field: t('guest.firstName') }), trigger: 'blur' },
+      { validator: latinOnlyValidator, trigger: 'blur' },
+    ],
+    lastName: [
+      { required: true, message: t('guest.validation.required', { field: t('guest.lastName') }), trigger: 'blur' },
+      { validator: latinOnlyValidator, trigger: 'blur' },
+    ],
+    dateOfBirth: [{ required: true, message: t('guest.validation.required', { field: t('guest.dateOfBirth') }), trigger: 'blur' }],
+    gender: [{ required: true, message: t('guest.validation.required', { field: t('guest.gender') }), trigger: 'blur' }],
+    nationality: [{ required: true, message: t('guest.validation.required', { field: t('guest.nationality') }), trigger: 'blur' }],
+    documentType: [{ required: true, message: t('guest.validation.required', { field: t('guest.documentType') }), trigger: 'blur' }],
+    documentNumber: [{ required: true, message: t('guest.validation.required', { field: t('guest.documentNumber') }), trigger: 'blur' }],
+    checkOutDate: [
+      { required: true, message: t('guest.validation.required', { field: t('guest.checkOutDate') }), trigger: 'blur' },
+      { validator: checkOutDateValidator, trigger: 'blur' },
+    ],
+    cityTaxExemption: [{ required: true, message: t('guest.validation.required', { field: t('guest.cityTaxExemption') }), trigger: 'blur' }],
   };
 
   const countries = iso.all().map(item => ({ value: item.alpha2, label: item.country }));
@@ -159,6 +183,7 @@
               v-model="localGuest.checkOutDate"
               type="date"
               :placeholder="t('guest.pickADate')"
+              value-format="YYYY-MM-DD"
               style="width: 100%"
           />
         </el-col>
