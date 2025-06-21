@@ -201,7 +201,11 @@ export default Object.freeze({
         18: 'Exemption - volunteers to eliminate natural disasters',
         19: 'Exemption - police officers on duty',
       },
-      validation: 'Enter your {field}',
+      validation: {
+        required: 'Enter your {field}',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
     }
   },
   ru: {
@@ -387,7 +391,11 @@ export default Object.freeze({
       checkOutTime: 'Время выезда',
       cityTaxExemption: 'Освобождение от городского налога',
       select: 'Выбрать',
-      validation: 'Введите {field}',
+      validation: {
+        required: 'Введите {field}',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
       cityTaxExemptionOptions: {
         0: 'Без льготы',
         1: 'Освобождение — дети до 7 лет',
@@ -592,7 +600,11 @@ export default Object.freeze({
       checkOutTime: '退房时间',
       cityTaxExemption: '城市税豁免',
       select: '选择',
-      validation: '请输入{field}',
+      validation: {
+        required: '请输入{field}',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
       cityTaxExemptionOptions: {
         0: '无豁免',
         1: '豁免 - 7 岁以下儿童',
@@ -797,7 +809,11 @@ export default Object.freeze({
       checkOutTime: 'Vrijeme odjave',
       cityTaxExemption: 'Izuzeće od boravišne pristojbe',
       select: 'Odaberi',
-      validation: 'Unesite {field}',
+      validation: {
+        required: 'Unesite {field}',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
       cityTaxExemptionOptions: {
         0: 'Bez izuzeća',
         1: 'Izuzeće – djeca do 7 godina',
@@ -1002,7 +1018,11 @@ export default Object.freeze({
       checkOutTime: 'Heure de départ',
       cityTaxExemption: 'Exonération de la taxe de séjour',
       select: 'Sélectionner',
-      validation: 'Veuillez saisir {field}',
+      validation: {
+        required: 'Veuillez saisir {field}',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
       cityTaxExemptionOptions: {
         0: 'Aucune exonération',
         1: 'Exonération – enfants jusqu’à 7 ans',
@@ -1207,7 +1227,11 @@ export default Object.freeze({
       checkOutTime: 'Abreisezeit',
       cityTaxExemption: 'Befreiung von der Kurtaxe',
       select: 'Auswählen',
-      validation: 'Bitte geben Sie {field} ein',
+      validation: {
+        required: 'Bitte geben Sie {field} ein',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
       cityTaxExemptionOptions: {
         0: 'Keine Befreiung',
         1: 'Befreiung – Kinder bis 7 Jahre',
@@ -1412,7 +1436,11 @@ export default Object.freeze({
       checkOutTime: 'Ora di check-out',
       cityTaxExemption: 'Esenzione tassa di soggiorno',
       select: 'Seleziona',
-      validation: 'Inserisci {field}',
+      validation: {
+        required: 'Inserisci {field}',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
       cityTaxExemptionOptions: {
         0: 'Nessuna esenzione',
         1: 'Esenzione – bambini fino a 7 anni',
@@ -1617,7 +1645,11 @@ export default Object.freeze({
       checkOutTime: 'Godzina wymeldowania',
       cityTaxExemption: 'Zwolnienie z podatku miejskiego',
       select: 'Wybierz',
-      validation: 'Wprowadź {field}',
+      validation: {
+        required: 'Wprowadź {field}',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
       cityTaxExemptionOptions: {
         0: 'Brak zwolnienia',
         1: 'Zwolnienie – dzieci do 7 lat',
@@ -1822,7 +1854,11 @@ export default Object.freeze({
       checkOutTime: 'Čas odjave',
       cityTaxExemption: 'Oprostitev turistične takse',
       select: 'Izberi',
-      validation: 'Vnesite {field}',
+      validation: {
+        required: 'Vnesite {field}',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
       cityTaxExemptionOptions: {
         0: 'Brez oprostitve',
         1: 'Oprostitev – otroci do 7 let',
@@ -2027,7 +2063,11 @@ export default Object.freeze({
       checkOutTime: 'Hora de salida',
       cityTaxExemption: 'Exención de tasa turística',
       select: 'Seleccionar',
-      validation: 'Introduce tu {field}',
+      validation: {
+        required: 'Introduce tu {field}',
+        latinOnly: 'Only latin characters are allowed',
+        checkOutDate: 'Check-out time no later than 11:00, {date}',
+      },
       cityTaxExemptionOptions: {
         0: 'Sin exención',
         1: 'Exención – niños hasta 7 años',
