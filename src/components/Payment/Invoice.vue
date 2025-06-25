@@ -1,20 +1,5 @@
 <script setup>
-  import { useBookingStore } from '@/stores/booking';
-
   defineProps({ booking: Object });
-
-  const bookingStore = useBookingStore();
-  const { bookings } = bookingStore;
-
-  bookings.forEach(booking => {
-    if (booking.debt === 0) {
-      booking.paymentStatus = 'paid';
-      booking.checkIn = true;
-    }
-  });
-
-  const getDebt = () => Math.max(bookings.reduce((debt, booking) => (debt + booking.debt), 0), 0);
-  const getDebtFormatted = () => getDebt().toFixed(2);
 
   const getDebtItems = (booking) => booking.invoiceItems.filter(item => item.type === 'charge' && item.description && item.amount && item.qty);
   const getPaymentItems = (booking) => booking.invoiceItems.filter(item => item.type === 'payment');
@@ -39,5 +24,4 @@
       {{ invoice.description }}: <strong>{{ invoice.lineTotal }} €</strong>
     </li>
   </ul>
-  <p><strong>{{ $t('payment.debt', { debt: getDebtFormatted() }) }}</strong></p>
 </template>

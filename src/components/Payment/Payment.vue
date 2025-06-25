@@ -126,6 +126,7 @@
 </script>
 
 <template>
+  <p><strong>{{ $t('payment.debt', { debt: getDebtFormatted() }) }}</strong></p>
   <el-row :gutter="20" v-if="getDebt() !== 0">
     <el-col :xs="24" :sm="16" :md="8">
       <div class="container" v-loading="loading" >
