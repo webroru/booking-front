@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
   import Documents from '@/components/Documents/Documents.vue';
@@ -9,7 +9,7 @@
   import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
 
   const bookingStore = useBookingStore();
-  const { bookings } = bookingStore;
+  const { bookings, updateBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
   const showRulesDialog = ref(false);
@@ -30,6 +30,16 @@
   };
 
   const hasDebt = () => bookings.find(booking => booking.debt > 0) !== undefined;
+
+  onMounted(async () => {
+    for (const booking of bookings) {
+      if (!booking.checkIn) {
+        booking.checkIn = true;
+        await updateBooking(booking);
+      }
+    }
+  });
+
 </script>
 
 <template>
