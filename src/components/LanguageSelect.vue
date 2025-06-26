@@ -1,4 +1,5 @@
 <script setup>
+  import { ref } from 'vue';
   import 'flag-icons/css/flag-icons.min.css';
   import { useI18n } from 'vue-i18n';
   import ISO6391 from 'iso-639-1';
@@ -7,6 +8,12 @@
   const infoStore = useInfoStore();
   const { getInfo } = infoStore;
   const { availableLocales, locale } = useI18n({ useScope: 'global' });
+  const value = ref('en');
+
+  const faClass = (locale) => {
+    return `fi fi-${locale === 'en' ? 'gb' : locale === 'sl' ? 'si' : locale === 'zh' ? 'cn' : locale}`;
+  };
+
   const changeLanguage = (language) => {
     locale.value = language;
     getInfo(language);
@@ -14,51 +21,35 @@
 </script>
 
 <template>
-  <el-scrollbar always>
-    <div class="flags">
-      <div class="flag" v-for="locale in availableLocales" :key="locale">
-        <a href="#" @click.prevent="changeLanguage(locale)">
-          <span :class="`fi fi-${locale === 'en' ? 'gb' : locale === 'sl' ? 'si' : locale === 'zh' ? 'cn' : locale}`"></span>
-          <p>{{ ISO6391.getName(locale) }}</p>
-        </a>
+  <el-select v-model="value" @change="changeLanguage" style="width: 80px">
+    <template #label="{ value }">
+      <div class="flex items-center">
+        <span class="container">
+          <span :class="faClass(value)"></span>
+        </span>
       </div>
-    </div>
-  </el-scrollbar>
+    </template>
+    <el-option
+        v-for="locale in availableLocales"
+        :key="locale"
+        :label="locale"
+        :value="locale"
+    >
+      <div class="flex items-center">
+        <span class="container">
+          <span :class="faClass(locale)"></span>
+        </span>
+        <span>{{ ISO6391.getName(locale) }}</span>
+      </div>
+    </el-option>
+  </el-select>
 </template>
 
 <style scoped>
-  a {
-    color: #666;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    text-decoration: none;
-  }
-
-  .flags {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .flag {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 50px;
-    margin: 10px;
-    text-align: center;
-    border-radius: 4px;
+  .container {
     background: var(--el-color-primary-light-9);
-  }
-
-  p {
-    margin: 5px 0 0;
-  }
-
-  .fi {
-    height: 100%;
-    width: 100%;
+    border-radius: 4px;
+    margin-right: 8px;
+    padding: 4px;
   }
 </style>
