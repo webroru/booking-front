@@ -74,13 +74,9 @@
   <div class="common-layout">
     <el-container>
       <el-main>
-        <el-row>
+        <el-row justify="center" align="middle">
           <el-col style="text-align: center">
-            {{ date }}
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24">
+            <span class="date">{{ date }}</span>
             <LanguageSelect/>
           </el-col>
         </el-row>
@@ -122,5 +118,9 @@
 
   .card {
     margin-bottom: 10px;
+  }
+
+  .date {
+    margin-right: 15px;
   }
 </style>
