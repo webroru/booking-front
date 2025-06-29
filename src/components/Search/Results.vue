@@ -1,24 +1,23 @@
 <script setup>
   import { computed } from 'vue';
-  import { useBookingStore } from '@/stores/booking';
 
-  defineProps({
-    bookings: Object,
+  const props = defineProps({
+    bookings: Array
   });
 
   const emit = defineEmits(['selectBooking']);
-  const store = useBookingStore();
-  const { bookings } = store;
 
   const tableData = computed(() => {
-    return bookings.map(booking => ({
+    return props.bookings.map(booking => ({
       ...booking,
       fullName: `${booking.firstName} ${booking.lastName}`,
     }));
   });
 
   const handleCurrentChange = (val) => {
-    emit('selectBooking', val.orderId);
+    if (val) {
+      emit('selectBooking', val.orderId);
+    }
   };
 </script>
 
