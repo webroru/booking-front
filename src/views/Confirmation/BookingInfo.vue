@@ -48,8 +48,8 @@
     <el-col :span="16">
       <el-descriptions :title="booking.propertyName" border :column="1" class="description">
         <el-descriptions-item :label="$t('bookingInfo.roomNumber')">{{ booking.room }} <b>{{ booking.unit ? '№: ' + booking.unit : '' }}</b></el-descriptions-item>
-        <el-descriptions-item :label="$t('bookingInfo.checkIn')">{{ booking.checkInDate }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('bookingInfo.checkOut')">{{ booking.checkOutDate }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.checkIn')">{{ booking.checkInDate }}, 14:00</el-descriptions-item>
+        <el-descriptions-item :label="$t('bookingInfo.checkOut')">{{ booking.checkOutDate }}, 11:00</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.fullName')">{{ booking.firstName }} {{ booking.lastName }}</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.debt')">{{ Math.max(booking.debt, 0) }} €</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.smartLockCode')"><b>{{ booking.passCode }}</b></el-descriptions-item>
