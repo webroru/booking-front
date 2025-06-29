@@ -2,10 +2,11 @@
   import { ref, reactive, computed } from 'vue';
   import { ElNotification } from 'element-plus';
   import { useI18n } from 'vue-i18n';
+  import { useRoute } from 'vue-router';
+  import { InfoFilled } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
   import GuestName from '@/components/Documents/GuestName.vue';
-  import { InfoFilled } from '@element-plus/icons-vue';
   import GuestForm from '@/components/Documents/GuestForm.vue';
 
   const props = defineProps({ booking: Object });
@@ -14,6 +15,7 @@
   const { t } = useI18n();
   const loading = ref(false);
   const showRequirement = ref(true);
+  const route = useRoute();
 
   const localBooking = reactive(props.booking);
   const initialGuest = {
@@ -34,6 +36,8 @@
   const children = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 7 && getAges(guest) < 18 ? 1 : 0), 0));
   const preschoolers = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 4 && getAges(guest) < 7 ? 1 : 0), 0));
   const toddlers = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) < 4 ? 1 : 0), 0));
+
+  const isNextDisabled = computed(() => props.booking.guests.length === 0);
 
   const getAges = guest => new Date().getFullYear() - new Date(guest.dateOfBirth).getFullYear();
 
@@ -198,6 +202,9 @@
         </template>
       </div>
       <p v-if="showExtraPay()"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment() }) }}</strong></p>
+      <router-link v-if="route.path.includes('documents')" :to="`/confirmation/${booking.orderId}/payment`" :class="{ disabled: isNextDisabled }">
+        <el-button :disabled="isNextDisabled">{{ $t('common.next') }}</el-button>
+      </router-link>
     </el-col>
   </el-row>
 </template>
