@@ -11,16 +11,7 @@
 
   const tableData = computed(() => {
     return props.bookings.map(booking => {
-      let result = `${booking.firstName} ${booking.lastName}, ${booking.propertyName}`;
-      if (booking.checkIn) {
-        result += ', ' + t('search.checkIn');
-      }
-
-      if (booking.checkOut) {
-        result += ', ' + t('search.checkOut');
-      }
-
-      result += ', ' + t('search.originalReferer') + ': ' + booking.originalReferer;
+      let result = `${booking.firstName} ${booking.lastName}, ${booking.propertyName}, ${booking.checkInDate} — ${booking.checkOutDate}, ` + t('search.originalReferer') + ': ' + booking.originalReferer;
 
       return { result, orderId: booking.orderId };
     });
