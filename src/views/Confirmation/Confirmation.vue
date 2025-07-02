@@ -3,6 +3,7 @@
   import { useRoute } from 'vue-router';
   import { useBookingStore } from '@/stores/booking';
   import NextButton from '@/components/Confirmation/NextButton.vue';
+  import PrevButton from '@/components/Confirmation/PrevButton.vue';
 
   const bookingStore = useBookingStore();
   const { bookings } = bookingStore;
@@ -48,7 +49,7 @@
   <router-view></router-view>
 
   <div class="navigation">
-    <next-button prev/>
+    <prev-button />
     <next-button :disabled="isNextDisabled "/>
   </div>
 </template>
