@@ -202,7 +202,7 @@
         </template>
       </div>
       <p v-if="showExtraPay()"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment() }) }}</strong></p>
-      <router-link v-if="route.path.includes('documents')" :to="`/confirmation/${booking.orderId}/payment`" :class="{ disabled: isNextDisabled }">
+      <router-link v-if="route.path.includes('documents')" :to="`/confirmation/${booking.orderId}/` + (booking.debt > 0 ? 'payment' : 'booking-info')" :class="{ disabled: isNextDisabled }">
         <el-button :disabled="isNextDisabled">{{ $t('common.next') }}</el-button>
       </router-link>
     </el-col>
