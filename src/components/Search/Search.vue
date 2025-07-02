@@ -46,7 +46,7 @@
 <template>
   <el-form v-loading="loading" label-width="auto" label-position="top" @submit.prevent="onSubmit">
     <el-form-item :label="$t('search.label')">
-      <el-input v-model="query">
+      <el-input v-model="query" class="input">
         <template #append>
           <el-button :icon="Search" @click="onSubmit" />
         </template>
@@ -62,3 +62,9 @@
   </div>
   <p v-else>{{ $t('search.restriction') }}</p>
 </template>
+
+<style scoped>
+  .input {
+    font-size: 16px;
+  }
+</style>
