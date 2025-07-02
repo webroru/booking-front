@@ -2,9 +2,6 @@
   import { useBookingStore } from '@/stores/booking';
   import { useRoute } from 'vue-router';
 
-  defineProps({
-    disabled: Boolean,
-  });
   const bookingStore = useBookingStore();
   const route = useRoute();
   const { bookings } = bookingStore;
@@ -23,12 +20,10 @@
 
   const nextStep = () => {
     let stepIndex = currentStep();
-    if (bookings.every(booking => booking.checkIn) && stepIndex === 0) {
-      return `/confirmation/${bookings[0]?.orderId}/booking-info`;
-    }
-    stepIndex++;
+
+    stepIndex--;
     if (step[stepIndex] === 'payment' && bookings.every(booking => booking.debt <= 0)) {
-      stepIndex++;
+      stepIndex--;
     }
     if (stepIndex < 0) {
       return '/';
@@ -38,11 +33,8 @@
 </script>
 
 <template>
-  <router-link v-if="!isLastStep()" :to="nextStep()" :class="{ disabled }">
-    <el-button  :disabled="disabled"><b>{{ $t('common.next') }}</b></el-button>
-  </router-link>
-  <router-link v-if="isLastStep()" to="/">
-    <el-button>{{ $t('common.exit') }}</el-button>
+  <router-link v-if="!isLastStep()" :to="nextStep()">
+    <el-button>{{ $t('common.back') }}</el-button>
   </router-link>
 </template>
 
@@ -50,9 +42,5 @@
   a {
     margin-top: 12px;
     text-decoration: none;
-  }
-
-  .disabled {
-    pointer-events: none;
   }
 </style>
