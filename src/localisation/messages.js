@@ -106,7 +106,7 @@ export default Object.freeze({
     },
     rules: {
       header: 'Living Rules',
-      agree: 'I am agree',
+      agree: 'I agree',
     },
     tax: {
       guestLimit: 'We can\'t revive guest more than {limit} guests',

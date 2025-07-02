@@ -15,6 +15,8 @@
   const { t } = useI18n();
   const loading = ref(false);
   const showRequirement = ref(true);
+  const showGuestForm = ref(false);
+  const showSmartCapture = ref(true);
   const route = useRoute();
 
   const localBooking = reactive(props.booking);
@@ -58,7 +60,6 @@
   const isLessDocs = () => localBooking.guestsAmount > adults.value + children.value + preschoolers.value + toddlers.value;
   const extraPayment = () => (Math.min(localBooking.capacity, confirmedGuests()) - localBooking.guestsAmount) * bookedNights() * localBooking.extraPerson;
 
-  const showGuestForm = ref(false);
 
   let isGuestLimitShow = false;
   let isExtraGuestShow = false;
@@ -96,6 +97,7 @@
     });
     Object.assign(guest.value, initialGuest);
     showGuestForm.value = true;
+    showSmartCapture.value = false;
   };
 
   const onGuestAdd = async (guest) => {
@@ -105,6 +107,7 @@
     await updateBooking(localBooking);
     loading.value = false;
     showGuestForm.value = false;
+    showSmartCapture.value = true;
     update();
   };
 
@@ -133,6 +136,7 @@
         type: 'error',
       });
       showGuestForm.value = true;
+      showSmartCapture.value = false;
     }
 
     return true;
@@ -188,7 +192,7 @@
   <h2>{{ $t('documents.mandatory', { id: booking.orderId }) }}</h2>
   <el-row :gutter="20">
     <el-col :xs="24" :md="16">
-      <div>
+      <div v-if="showSmartCapture">
         <smart-capture @recognize="onRecognize" @error="onRecognizeError" />
       </div>
       <p v-if="showRequirement" class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</p>
@@ -203,7 +207,7 @@
       </div>
       <p v-if="showExtraPay()"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment() }) }}</strong></p>
       <router-link v-if="route.path.includes('documents')" :to="`/confirmation/${booking.orderId}/` + (booking.debt > 0 ? 'payment' : 'booking-info')" :class="{ disabled: isNextDisabled }">
-        <el-button :disabled="isNextDisabled">{{ $t('common.next') }}</el-button>
+        <el-button :disabled="isNextDisabled"><b>{{ $t('common.next') }}</b></el-button>
       </router-link>
     </el-col>
   </el-row>
