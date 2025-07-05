@@ -30,6 +30,7 @@
       :cell-style="{ cursor: 'pointer' }"
       highlight-current-row
       @current-change="handleCurrentChange"
+      style="format-detection: none"
   >
     <el-table-column type="index" width="50" />
     <el-table-column prop="result" />
