@@ -1,11 +1,17 @@
 <script setup>
   import { computed, reactive, ref, watch, onMounted } from 'vue';
   import { useI18n } from 'vue-i18n';
+  import { InfoFilled } from '@element-plus/icons-vue';
   import iso from 'iso-3166-1';
+  import MakePhoto from '@/components/Photos/MakePhoto.vue';
+  import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
+  import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
+  import {ElMessage} from "element-plus";
 
   const { t } = useI18n();
   const emit = defineEmits(['submit']);
   const props = defineProps({
+    id: Number,
     guest: Object,
     checkInDate: String,
     checkOutDate: String,
@@ -13,6 +19,9 @@
 
   const formRef = ref(null);
   const isMobile = ref(false);
+  const showMakePhoto = ref(false);
+  const isCameraEnabled = ref(false);
+  const hasExemptionPhoto = ref(false);
   const localGuest = reactive({ ...props.guest });
   localGuest.cityTaxExemption = 0;
   localGuest.checkOutDate = props.checkOutDate || '';
@@ -109,7 +118,21 @@
     return isChildren.value || isPreschoolers.value || isSameDayCheckout.value;
   });
 
+  const closeMakePhoto = () => {
+    isCameraEnabled.value = false;
+    showMakePhoto.value = false;
+  };
+
+  const openMakePhoto = () => {
+    isCameraEnabled.value = true;
+    showMakePhoto.value = true;
+  };
+
   const submit = (form) => {
+    if (localGuest.cityTaxExemption > 0 && !hasExemptionPhoto.value) {
+      ElMessage.error(t('guest.validation.exemptionDoc'));
+      return;
+    }
     form.validate((valid) => {
       if (valid) {
         emit('submit', localGuest);
@@ -220,6 +243,26 @@
         />
       </el-select>
     </el-form-item>
+    <el-form-item prop="exemptionDoc" v-show="false">
+      <el-input v-model="localGuest.exemptionDoc" />
+    </el-form-item>
+    <div v-if="localGuest.cityTaxExemption > 0" class="photo">
+      <p class="info"><el-icon><InfoFilled /></el-icon> {{ $t('guest.cityTaxExemptionDocument') }}</p>
+      <upload-photo :order-id="id" @photo-added="hasExemptionPhoto = true" />
+      <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
+
+      <div class="output">
+        <show-photos :order-id="id" @photos-removed="hasExemptionPhoto = false" />
+      </div>
+
+      <el-dialog
+          v-model="showMakePhoto"
+          :title="$t('photos.makePhotoTitle')" width="80%"
+          :before-close="closeMakePhoto">
+        <make-photo :is-camera-enabled="isCameraEnabled" :order-id="id" @photo-taken="hasExemptionPhoto = true" />
+      </el-dialog>
+    </div>
+
     <el-form-item>
       <el-button type="primary" @click="submit(formRef)">{{ $t('guest.add') }}</el-button>
     </el-form-item>
@@ -227,6 +270,13 @@
 </template>
 
 <style scoped>
+  .info {
+    background: var(--el-color-primary-light-5);
+    border-radius: 4px;
+    padding: 4px;
+    vertical-align: baseline;
+    line-height: 1.5;
+  }
   .text-center {
     text-align: center;
   }
@@ -236,5 +286,13 @@
   }
   .input {
     font-size: 16px;
+  }
+  .photo {
+    margin: 20px 0;
+  }
+  .output {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
   }
 </style>
