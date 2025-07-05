@@ -3,11 +3,11 @@
   import { usePhotosStore } from '@/stores/photos';
   import ShowPhotos from './ShowPhotos.vue';
 
-  // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     isCameraEnabled: Boolean,
     orderId: Number,
   });
+  const emit = defineEmits(['photo-taken']);
 
   const photosStore = usePhotosStore();
   const { addPhoto } = photosStore;
@@ -57,6 +57,7 @@
       await addPhoto(props.orderId, blob);
       loading.value = false;
     });
+    emit('photo-taken');
   };
 
   const stopStreaming = () => {

@@ -12,10 +12,15 @@
     orderId: Number,
   });
 
+  const emit = defineEmits(['photos-removed']);
+
   const remove = async (index) => {
     loading.value = true;
     await removePhoto(props.orderId, getIdByIndex(index));
     loading.value = false;
+    if (photosBlobs.length === 0) {
+      emit('photos-removed');
+    }
   };
   const getBlobUrl = (blob) => window.URL.createObjectURL(blob);
   const getIdByIndex = (index) => Object.keys(photosBlobs[props.orderId])[index];
