@@ -201,7 +201,14 @@
         <smart-capture @recognize="onRecognize" @error="onRecognizeError" />
       </div>
       <p v-if="showRequirement" class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</p>
-      <guest-form v-if="showGuestForm" :guest="guest" :check-in-date="localBooking.checkInDate" :check-out-date="localBooking.checkOutDate" @submit="onGuestAdd" />
+      <guest-form
+          v-if="showGuestForm"
+          :guest="guest"
+          :check-in-date="localBooking.checkInDate"
+          :check-out-date="localBooking.checkOutDate"
+          :id="localBooking.orderId"
+          @submit="onGuestAdd"
+      />
     </el-col>
     <el-col :xs="24" :md="8">
       <h3>{{ $t('documents.guests') }}:</h3>

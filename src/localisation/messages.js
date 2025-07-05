@@ -182,6 +182,7 @@ export default Object.freeze({
       checkOutTime: 'Check-out time',
       cityTaxExemption: 'City tax exemption',
       select: 'Select',
+      cityTaxExemptionDocument: 'Provide a document providing a discount on city tax',
       cityTaxExemptionOptions: {
         0: 'No exemption',
         1: 'Exemption - children up to 7 years',
@@ -205,6 +206,7 @@ export default Object.freeze({
         required: 'Enter your {field}',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: 'Please provide a document that confirms the exemption from the city tax',
       },
     }
   },
@@ -395,7 +397,9 @@ export default Object.freeze({
         required: 'Введите {field}',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: 'Пожалуйста, предоставьте документ, подтверждающий освобождение от городского налога',
       },
+      cityTaxExemptionDocument: 'Предоставьте документ, подтверждающий льготу по городскому налогу',
       cityTaxExemptionOptions: {
         0: 'Без льготы',
         1: 'Освобождение — дети до 7 лет',
@@ -604,7 +608,9 @@ export default Object.freeze({
         required: '请输入{field}',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: '请提供确认城市税减免的文件',
       },
+      cityTaxExemptionDocument: '提供证明城市税减免的文件',
       cityTaxExemptionOptions: {
         0: '无豁免',
         1: '豁免 - 7 岁以下儿童',
@@ -813,7 +819,9 @@ export default Object.freeze({
         required: 'Unesite {field}',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: 'Molimo priložite dokument koji potvrđuje izuzeće od boravišne pristojbe',
       },
+      cityTaxExemptionDocument: 'Priložite dokument koji potvrđuje izuzeće od boravišne pristojbe',
       cityTaxExemptionOptions: {
         0: 'Bez izuzeća',
         1: 'Izuzeće – djeca do 7 godina',
@@ -1022,7 +1030,9 @@ export default Object.freeze({
         required: 'Veuillez saisir {field}',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: 'Veuillez fournir un document confirmant l’exonération de la taxe de séjour',
       },
+      cityTaxExemptionDocument: 'Fournir un document justifiant l’exonération de la taxe de séjour',
       cityTaxExemptionOptions: {
         0: 'Aucune exonération',
         1: 'Exonération – enfants jusqu’à 7 ans',
@@ -1231,7 +1241,9 @@ export default Object.freeze({
         required: 'Bitte geben Sie {field} ein',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: 'Bitte fügen Sie ein Dokument hinzu, das die Befreiung von der Kurtaxe bestätigt',
       },
+      cityTaxExemptionDocument: 'Bitte fügen Sie ein Dokument hinzu, das die Befreiung von der Kurtaxe bestätigt',
       cityTaxExemptionOptions: {
         0: 'Keine Befreiung',
         1: 'Befreiung – Kinder bis 7 Jahre',
@@ -1440,7 +1452,9 @@ export default Object.freeze({
         required: 'Inserisci {field}',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: 'Aggiungi un documento che confermi l’esenzione dalla tassa di soggiorno',
       },
+      cityTaxExemptionDocument: 'Aggiungi un documento che giustifichi l’esenzione dalla tassa di soggiorno',
       cityTaxExemptionOptions: {
         0: 'Nessuna esenzione',
         1: 'Esenzione – bambini fino a 7 anni',
@@ -1649,7 +1663,9 @@ export default Object.freeze({
         required: 'Wprowadź {field}',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: 'Dodaj dokument potwierdzający zwolnienie z podatku miejskiego',
       },
+      cityTaxExemptionDocument: 'Dodaj dokument potwierdzający zwolnienie z podatku miejskiego',
       cityTaxExemptionOptions: {
         0: 'Brak zwolnienia',
         1: 'Zwolnienie – dzieci do 7 lat',
@@ -1858,7 +1874,9 @@ export default Object.freeze({
         required: 'Vnesite {field}',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: 'Dodajte dokument, ki potrjuje oprostitev turistične takse',
       },
+      cityTaxExemptionDocument: 'Dodajte dokument, ki potrjuje oprostitev turistične takse',
       cityTaxExemptionOptions: {
         0: 'Brez oprostitve',
         1: 'Oprostitev – otroci do 7 let',
@@ -2067,7 +2085,9 @@ export default Object.freeze({
         required: 'Introduce tu {field}',
         latinOnly: 'Only latin characters are allowed',
         checkOutDate: 'Check-out time no later than 11:00, {date}',
+        exemptionDoc: 'Añade un documento que confirme la exención de la tasa turística',
       },
+      cityTaxExemptionDocument: 'Añade un documento que justifique la exención de la tasa turística',
       cityTaxExemptionOptions: {
         0: 'Sin exención',
         1: 'Exención – niños hasta 7 años',
