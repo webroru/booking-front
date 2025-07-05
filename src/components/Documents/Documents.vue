@@ -101,6 +101,7 @@
   };
 
   const onGuestAdd = async (guest) => {
+    scrollToTop();
     loading.value = true;
     localBooking.guests.push(guest);
     setBooking(localBooking);
@@ -185,6 +186,10 @@
         });
       }, 0);
     }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 </script>
 

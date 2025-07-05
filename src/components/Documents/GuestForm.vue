@@ -138,10 +138,10 @@
   <h4 v-if="localGuest.firstName && localGuest.lastName">{{ localGuest.firstName }} {{localGuest.lastName }}</h4>
   <el-form ref="formRef" :model="localGuest" label-width="auto" :rules="rules" class="guest-form">
     <el-form-item v-show="!guest.firstName" :label="t('guest.firstName')" :label-position="labelPosition" prop="firstName" required>
-      <el-input v-model="localGuest.firstName" />
+      <el-input v-model="localGuest.firstName" class="input" />
     </el-form-item>
     <el-form-item v-show="!guest.lastName" :label="t('guest.lastName')" :label-position="labelPosition" prop="lastName" required>
-      <el-input v-model="localGuest.lastName" />
+      <el-input v-model="localGuest.lastName" class="input" />
     </el-form-item>
     <el-form-item v-show="!guest.dateOfBirth" :label="t('guest.dateOfBirth')" :label-position="labelPosition" prop="dateOfBirth" required>
         <el-date-picker
@@ -174,7 +174,7 @@
       </el-radio-group>
     </el-form-item>
     <el-form-item v-show="!guest.documentNumber" :label="t('guest.documentNumber')" :label-position="labelPosition" prop="documentNumber" required>
-      <el-input v-model="localGuest.documentNumber" />
+      <el-input v-model="localGuest.documentNumber" class="input" />
     </el-form-item>
     <el-form-item :label="t('guest.checkOutDate')" :label-position="labelPosition" prop="checkOutDate" required>
       <el-row justify="space-between">
@@ -230,5 +230,8 @@
   .guest-form {
     margin-top: 20px;
     max-width: 590px
+  }
+  .input {
+    font-size: 16px;
   }
 </style>
