@@ -1,4 +1,4 @@
-export default Object.freeze({cityTaxExemptionDocument: 'Bitte fügen Sie ein Dokument hinzu, das die Befreiung von der Kurtaxe bestätigt',
+export default Object.freeze({
   en: {
     app: {
       bookingFor: 'The booking for {name}, booking № {orderId}, referer: {referer}',

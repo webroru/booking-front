@@ -2,11 +2,11 @@
   import { computed, reactive, ref, watch, onMounted } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { InfoFilled } from '@element-plus/icons-vue';
+  import { ElMessage } from 'element-plus';
   import iso from 'iso-3166-1';
   import MakePhoto from '@/components/Photos/MakePhoto.vue';
   import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
   import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
-  import {ElMessage} from "element-plus";
 
   const { t } = useI18n();
   const emit = defineEmits(['submit']);
@@ -243,18 +243,13 @@
         />
       </el-select>
     </el-form-item>
-    <el-form-item prop="exemptionDoc" v-show="false">
-      <el-input v-model="localGuest.exemptionDoc" />
-    </el-form-item>
     <div v-if="localGuest.cityTaxExemption > 0" class="photo">
       <p class="info"><el-icon><InfoFilled /></el-icon> {{ $t('guest.cityTaxExemptionDocument') }}</p>
       <upload-photo :order-id="id" @photo-added="hasExemptionPhoto = true" />
       <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
-
       <div class="output">
         <show-photos :order-id="id" @photos-removed="hasExemptionPhoto = false" />
       </div>
-
       <el-dialog
           v-model="showMakePhoto"
           :title="$t('photos.makePhotoTitle')" width="80%"
@@ -262,7 +257,6 @@
         <make-photo :is-camera-enabled="isCameraEnabled" :order-id="id" @photo-taken="hasExemptionPhoto = true" />
       </el-dialog>
     </div>
-
     <el-form-item>
       <el-button type="primary" @click="submit(formRef)">{{ $t('guest.add') }}</el-button>
     </el-form-item>
