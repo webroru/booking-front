@@ -164,6 +164,7 @@
             :key="country.value"
             :label="country.label"
             :value="country.value"
+            class="input"
         />
       </el-select>
     </el-form-item>
@@ -185,6 +186,7 @@
               :placeholder="t('guest.pickADate')"
               value-format="YYYY-MM-DD"
               style="width: 100%"
+              class="input"
           />
         </el-col>
         <el-col :span="2" class="text-center hidden-xs-only">
@@ -198,6 +200,7 @@
               step="01:00"
               end="23:00"
               :placeholder="t('guest.pickATime')"
+              class="input"
           />
         </el-col>
       </el-row>
