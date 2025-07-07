@@ -7,7 +7,6 @@
   const { photosBlobs, removePhoto } = photosStore;
   const loading = ref(false);
 
-  // eslint-disable-next-line no-unused-vars
   const props = defineProps({
     orderId: Number,
   });
