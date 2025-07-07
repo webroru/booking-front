@@ -1,43 +1,16 @@
-import config from '@/config';
+import apiClient from './apiClient';
 
-const addPhotoApi = async (bookingId, data) => {
-  const url = `${config.apiUrl}/api/booking/${bookingId}/photo`;
-
-  let json = [];
+export async function addPhotoApi(bookingId, data) {
   const formData = new FormData();
   formData.append('photo', data);
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      body: formData,
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
+  return await apiClient.post(`/api/booking/${bookingId}/photo`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    }
+  });
+}
 
-  return json;
-};
-
-const removePhotoApi = async (bookingId, photoId) => {
-  const url = `${config.apiUrl}/api/booking/${bookingId}/photo/${photoId}`;
-
-  let json = [];
-
-  try {
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json'
-      },
-    });
-    json = await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-
-  return json;
-};
-
-export { addPhotoApi, removePhotoApi };
+export async function removePhotoApi(bookingId, photoId) {
+  return await apiClient.delete(`/api/booking/${bookingId}/photo/${photoId}`);
+}
