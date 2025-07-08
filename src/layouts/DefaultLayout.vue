@@ -12,7 +12,7 @@
   const photosStore = usePhotosStore();
   const { clearPhotosStore, syncPhotos } = photosStore;
   const bookingStore = useBookingStore();
-  const { bookings, resetBooking, searchBooking, setBookings } = bookingStore;
+  const { booking, bookings, resetBooking, searchBooking, setBookings } = bookingStore;
   const infoStore = useInfoStore();
   const { getInfo } = infoStore;
   const date = ref('');
@@ -82,7 +82,7 @@
         </el-row>
         <el-row>
           <el-col :xs="24" :sm="8" :md="6">
-            <el-card v-for="booking in bookings" :key="booking.orderId" class="card">
+            <el-card class="card">
               {{
                 $t('app.bookingFor', {
                   name: booking.firstName,
