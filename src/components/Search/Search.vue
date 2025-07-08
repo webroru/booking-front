@@ -9,7 +9,7 @@
 
   const { t } = useI18n();
   const store = useBookingStore();
-  const { setBookings, searchBooking } = store;
+  const { setBookings, searchBooking, setCurrentBooking } = store;
   const photosStore = usePhotosStore();
   const { syncPhotos } = photosStore;
 
@@ -35,10 +35,12 @@
 
   const onSelectBooking = (id) => {
     let bookings = [data.value.find(booking => booking.orderId === id)];
-    if (bookings[0].groupId) {
+    let selectedBooking = bookings[0];
+    if (selectedBooking.groupId) {
       bookings = data.value.filter(booking => booking.groupId);
     }
     setBookings(bookings);
+    setCurrentBooking(selectedBooking);
     syncPhotos();
   };
 </script>

@@ -3,10 +3,7 @@
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
   import Documents from '@/components/Documents/Documents.vue';
-  import MakePhoto from '@/components/Photos/MakePhoto.vue';
   import Rules from '@/components/Rules.vue';
-  import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
-  import UploadPhoto from '@/components/Photos/UploadPhoto.vue';
 
   const bookingStore = useBookingStore();
   const { bookings, updateBooking } = bookingStore;
@@ -16,18 +13,6 @@
   const showHowToMakeInDialog = ref(false);
   const showFacilitiesDialog = ref(false);
   const showextrasDialog = ref(false);
-  const showMakePhoto = ref(false);
-  const isCameraEnabled = ref(false);
-
-  const closeMakePhoto = () => {
-    isCameraEnabled.value = false;
-    showMakePhoto.value = false;
-  };
-
-  const openMakePhoto = () => {
-    isCameraEnabled.value = true;
-    showMakePhoto.value = true;
-  };
 
   const hasDebt = () => bookings.find(booking => booking.debt > 0) !== undefined;
 
@@ -39,7 +24,6 @@
       }
     }
   });
-
 </script>
 
 <template>
@@ -56,7 +40,7 @@
       </el-descriptions>
 
       <p>{{ $t('bookingInfo.photoDocuments') }}</p>
-      <documents :booking="booking" />
+      <documents />
     </el-col>
   </el-row>
   <router-link v-if="hasDebt()" :to="`/confirmation/${bookings[0].orderId}/payment`">

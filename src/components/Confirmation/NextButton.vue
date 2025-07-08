@@ -7,7 +7,7 @@
   });
   const bookingStore = useBookingStore();
   const route = useRoute();
-  const { bookings } = bookingStore;
+  const { booking, bookings } = bookingStore;
 
   const step = [
     'search',
@@ -24,7 +24,7 @@
   const nextStep = () => {
     let stepIndex = currentStep();
     if (bookings.every(booking => booking.checkIn) && stepIndex === 0) {
-      return `/confirmation/${bookings[0]?.orderId}/booking-info`;
+      return `/confirmation/${booking?.orderId}/booking-info`;
     }
     stepIndex++;
     if (step[stepIndex] === 'payment' && bookings.every(booking => booking.debt <= 0)) {
@@ -33,7 +33,7 @@
     if (stepIndex < 0) {
       return '/';
     }
-    return stepIndex === 0 ? '/confirmation/search' : `/confirmation/${bookings[0]?.orderId}/${step[stepIndex]}`;
+    return stepIndex === 0 ? '/confirmation/search' : `/confirmation/${booking?.orderId}/${step[stepIndex]}`;
   };
 </script>
 

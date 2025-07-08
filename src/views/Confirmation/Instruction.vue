@@ -26,7 +26,6 @@
   
   watch(() => booking.checkInDate, (checkInDate) => {
     if (checkInDate) {
-      console.log(checkInDate);
       showDialog.value = isCheckinNotToday();
     }
   });
