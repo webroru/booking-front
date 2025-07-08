@@ -84,11 +84,11 @@
 <template>
   <el-row v-loading="loading">
     <el-col :span="12">
-      <div class="camera">
-        <video ref="video" autoplay muted playsinline @canplay="adjustVideoSize"></video>
-      </div>
       <div class="output">
         <show-photos :order-id="orderId" />
+      </div>
+      <div class="camera">
+        <video ref="video" autoplay muted playsinline @canplay="adjustVideoSize"></video>
       </div>
       <canvas ref="canvas"></canvas>
     </el-col>
