@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, reactive, computed } from 'vue';
+  import { ref, computed } from 'vue';
   import { ElNotification } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import { useRoute } from 'vue-router';
@@ -9,9 +9,8 @@
   import GuestName from '@/components/Documents/GuestName.vue';
   import GuestForm from '@/components/Documents/GuestForm.vue';
 
-  const props = defineProps({ booking: Object });
   const store = useBookingStore();
-  const { setBooking, updateBooking } = store;
+  const { booking, bookings, updateBooking } = store;
   const { t } = useI18n();
   const loading = ref(false);
   const showRequirement = ref(true);
@@ -19,7 +18,6 @@
   const showSmartCapture = ref(true);
   const route = useRoute();
 
-  const localBooking = reactive(props.booking);
   const initialGuest = {
     firstName: '',
     lastName: '',
@@ -34,16 +32,16 @@
   };
   const guest = ref({ ...initialGuest });
 
-  const adults = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 18 ? 1 : 0), 0));
-  const children = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 7 && getAges(guest) < 18 ? 1 : 0), 0));
-  const preschoolers = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 4 && getAges(guest) < 7 ? 1 : 0), 0));
-  const toddlers = computed(() => localBooking.guests.reduce((acc, guest) => acc + (getAges(guest) < 4 ? 1 : 0), 0));
+  const adults = computed(() => booking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 18 ? 1 : 0), 0));
+  const children = computed(() => booking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 7 && getAges(guest) < 18 ? 1 : 0), 0));
+  const preschoolers = computed(() => booking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 4 && getAges(guest) < 7 ? 1 : 0), 0));
+  const toddlers = computed(() => booking.guests.reduce((acc, guest) => acc + (getAges(guest) < 4 ? 1 : 0), 0));
 
-  const isNextDisabled = computed(() => props.booking.guests.length === 0);
+  const isNextDisabled = computed(() => booking.guests.length === 0);
 
   const getAges = guest => new Date().getFullYear() - new Date(guest.dateOfBirth).getFullYear();
 
-  const bookedNights = () => Math.ceil((Date.parse(localBooking.checkOutDate) - Date.parse(localBooking.checkInDate)) / 1000 / 60 / 60 / 24);
+  const bookedNights = () => Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
   const showExtraPay = () => extraGuests() > 0 && extraPayment();
 
   const confirmedGuests = () => {
@@ -54,12 +52,13 @@
     return confirmedGuests;
   };
 
-  const isExtraGuest = () => confirmedGuests() > localBooking.guestsAmount;
-  const extraGuests = () => confirmedGuests() - localBooking.guestsAmount;
-  const isGuestLimit = () => confirmedGuests() > localBooking.capacity + 2;
-  const isLessDocs = () => localBooking.guestsAmount > adults.value + children.value + preschoolers.value + toddlers.value;
-  const extraPayment = () => (Math.min(localBooking.capacity, confirmedGuests()) - localBooking.guestsAmount) * bookedNights() * localBooking.extraPerson;
-
+  const totalGuestsAmount = bookings.reduce((total, booking) => total + (booking.guestsAmount || 0), 0);
+  const totalCapacity = bookings.reduce((total, booking) => total + (booking.capacity || 0), 0);
+  const isExtraGuest = () => confirmedGuests() > totalGuestsAmount;
+  const extraGuests = () => confirmedGuests() - totalGuestsAmount;
+  const isGuestLimit = () => confirmedGuests() > totalCapacity + 2;
+  const isLessDocs = () => totalGuestsAmount > adults.value + children.value + preschoolers.value + toddlers.value;
+  const extraPayment = () => (Math.min(totalCapacity, confirmedGuests()) - totalGuestsAmount) * bookedNights() * booking.extraPerson;
 
   let isGuestLimitShow = false;
   let isExtraGuestShow = false;
@@ -103,9 +102,8 @@
   const onGuestAdd = async (guest) => {
     scrollToTop();
     loading.value = true;
-    localBooking.guests.push(guest);
-    setBooking(localBooking);
-    await updateBooking(localBooking);
+    booking.guests.push(guest);
+    await updateBooking(booking);
     loading.value = false;
     showGuestForm.value = false;
     showSmartCapture.value = true;
@@ -114,9 +112,8 @@
 
   const onGuestRemove = async (index) => {
     loading.value = true;
-    localBooking.guests.splice(index, 1);
-    setBooking(localBooking);
-    await updateBooking(localBooking);
+    booking.guests.splice(index, 1);
+    await updateBooking(booking);
     loading.value = false;
   };
 
@@ -144,7 +141,7 @@
   };
 
   const isDuplicate = (guest) => {
-    return localBooking.guests.some(existingGuest => existingGuest.documentNumber === guest.documentNumber);
+    return booking.guests.some(existingGuest => existingGuest.documentNumber === guest.documentNumber);
   };
 
   const isRecognized = (guest) => {
@@ -158,7 +155,7 @@
       setTimeout(() => {
         ElNotification({
           title: 'Warning',
-          message: t('tax.guestLimit', { limit: localBooking.capacity }),
+          message: t('tax.guestLimit', { limit: totalCapacity }),
           type: 'warning',
           onClose: () => isGuestLimitShow = false,
         });
@@ -204,9 +201,9 @@
       <guest-form
           v-if="showGuestForm"
           :guest="guest"
-          :check-in-date="localBooking.checkInDate"
-          :check-out-date="localBooking.checkOutDate"
-          :id="localBooking.orderId"
+          :check-in-date="booking.checkInDate"
+          :check-out-date="booking.checkOutDate"
+          :id="booking.orderId"
           @submit="onGuestAdd"
       />
     </el-col>
