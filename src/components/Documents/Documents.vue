@@ -80,23 +80,23 @@
     showGuestForm.value = true;
   };
 
-  const onRecognizeError = () => {
-    if (++recognizeAttempts < 3) {
+  const onRecognizeError = (type) => {
+    if (type === 'fatal' || ++recognizeAttempts > 2) {
       ElNotification({
         title: 'Error',
-        message: t('documents.recognizeWarning'),
+        message: t('documents.recognizeError'),
         type: 'error',
       });
+      Object.assign(guest.value, initialGuest);
+      showGuestForm.value = true;
+      showSmartCapture.value = false;
       return;
     }
     ElNotification({
       title: 'Error',
-      message: t('documents.recognizeError'),
+      message: t('documents.recognizeWarning'),
       type: 'error',
     });
-    Object.assign(guest.value, initialGuest);
-    showGuestForm.value = true;
-    showSmartCapture.value = false;
   };
 
   const onGuestAdd = async (guest) => {
