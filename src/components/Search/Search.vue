@@ -38,6 +38,7 @@
     let selectedBooking = bookings[0];
     if (selectedBooking.groupId) {
       bookings = data.value.filter(booking => booking.groupId);
+      selectedBooking = data.value.find(booking => booking.orderId === selectedBooking.groupId);
     }
     setBookings(bookings);
     setCurrentBooking(selectedBooking);
