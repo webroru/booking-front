@@ -12,7 +12,7 @@
   const photosStore = usePhotosStore();
   const { clearPhotosStore, syncPhotos } = photosStore;
   const bookingStore = useBookingStore();
-  const { booking, bookings, resetBooking, searchBooking, setBookings } = bookingStore;
+  const { booking, bookings, resetBooking, searchBooking, setBookings, setCurrentBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { getInfo } = infoStore;
   const date = ref('');
@@ -63,7 +63,17 @@
         return;
       }
 
+      const selectedBooking = bookings.find(booking => booking.orderId === (bookings[0].groupId ? bookings[0].groupId : orderId));
       setBookings(bookings);
+      setCurrentBooking(selectedBooking);
+      if (orderId !== selectedBooking.orderId) {
+        await router.replace({
+          name: route.name,
+          params: { orderId: selectedBooking.orderId },
+          query: route.query,
+        });
+
+      }
       syncPhotos();
       loading.value = false;
     }
@@ -82,7 +92,7 @@
         </el-row>
         <el-row>
           <el-col :xs="24" :sm="8" :md="6">
-            <el-card class="card">
+            <el-card v-if="booking.orderId" class="card">
               {{
                 $t('app.bookingFor', {
                   name: booking.firstName,
