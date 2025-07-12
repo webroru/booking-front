@@ -243,7 +243,7 @@
         />
       </el-select>
     </el-form-item>
-    <div v-if="localGuest.cityTaxExemption > 0" class="photo">
+    <div v-if="localGuest.cityTaxExemption > 0 && localGuest.cityTaxExemption !== 1 && localGuest.cityTaxExemption !== 16" class="photo">
       <p class="info"><el-icon><InfoFilled /></el-icon> {{ $t('guest.cityTaxExemptionDocument') }}</p>
       <upload-photo :order-id="id" @photo-added="hasExemptionPhoto = true" />
       <el-button type="primary" @click="openMakePhoto">{{ $t('tax.makePhoto') }}</el-button>
