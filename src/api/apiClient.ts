@@ -1,7 +1,8 @@
 import axios from 'axios';
+import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import config from '@/config';
 
-const apiClient = axios.create({
+const apiClient: AxiosInstance = axios.create({
   baseURL: config.apiUrl || 'http://localhost:8080',
   timeout: 10000,
   headers: {
@@ -9,12 +10,9 @@ const apiClient = axios.create({
   },
 });
 
-// Перехватчики ошибок, токены, логгеры и прочее:
 apiClient.interceptors.response.use(
-  response => response,
-  error => {
-    return Promise.reject(error);
-  }
+    (response: AxiosResponse) => response,
+    (error: AxiosError) => Promise.reject(error)
 );
 
 export default apiClient;

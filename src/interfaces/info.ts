@@ -1,0 +1,16 @@
+export interface Info {
+  id: number,
+  hotelName: string,
+  address: string,
+  rules: string,
+  checkoutInfo: string,
+  callTime: string,
+  phoneNumber: string,
+  howToMakeIt: string,
+  facilities: string,
+  extras: string,
+  instruction: string,
+  cashPaymentInstruction: string,
+  paymentDisagree: string,
+  locale: string,
+}
