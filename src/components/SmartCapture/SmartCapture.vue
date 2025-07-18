@@ -14,7 +14,6 @@
   };
 
   const listener = (event) => {
-    console.log(event);
     if (event.detail.action !== 'PROCESS_FINISHED') {
       return;
     }
