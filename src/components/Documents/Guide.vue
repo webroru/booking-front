@@ -9,6 +9,8 @@
     import: 'default'
   });
 
+  console.log('images', images);
+
   const data = [
     {
       title: t('guide.p1.title'),
@@ -58,7 +60,7 @@
   ];
 
   data.forEach(item => {
-    item.image = images[`./images/${item.image}`];
+    item.image = images[`../../assets/images/documents/${item.image}`];
   });
 </script>
 
