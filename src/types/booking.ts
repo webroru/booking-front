@@ -1,4 +1,4 @@
-import type { Photo } from '@/interfaces/photo.ts';
+import type { Photo } from '@/types/photo.ts';
 
 export interface Booking {
     lastName: string;

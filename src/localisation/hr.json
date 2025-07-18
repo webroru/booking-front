@@ -1,0 +1,211 @@
+{
+  "app": {
+    "bookingFor": "Rezervacija za {name}, broj rezervacije {orderId}, izvor: {referer}",
+    "earlyCheckInWarning": "Prijava je moguća SAMO 4 dana prije dolaska. Bit će dostupna od {date}"
+  },
+  "common": {
+    "back": "Natrag",
+    "next": "Sljedeći korak",
+    "exit": "Izlaz",
+    "error": "Došlo je do pogreške, kontaktirajte podršku",
+    "close": "Zatvori",
+    "cancel": "Otkaži",
+    "done": "Gotovo"
+  },
+  "selectBooking": {
+    "haveBooking": "Imam rezervaciju",
+    "checkOut": "Odjava",
+    "wantToBook": "Želim rezervirati"
+  },
+  "confirmation": {
+    "search": "Pretraži",
+    "information": "Informacije",
+    "rules": "Pravila",
+    "documents": "Dokumenti",
+    "payment": "Plaćanje",
+    "checkInDetails": "Detalji prijave"
+  },
+  "instruction": {
+    "register": "Trebate registrirati svoje goste",
+    "pay": "i platiti boravišnu pristojbu",
+    "warning": "Molimo obratite pažnju. Danas nije vaš dan dolaska."
+  },
+  "payment": {
+    "debt": "Vaš dug je {debt} €",
+    "charges": "Naknade",
+    "payments": "Uplate",
+    "cash": "Ne mogu platiti karticom",
+    "success": "Hvala na uplati. Možete prijeći na sljedeći korak",
+    "pay": "Plati",
+    "total": "Ukupno",
+    "cashAgree": "Slažem se",
+    "disagree": "Ne slažem se s uplatom",
+    "disagreeHeader": "Ne slažem se s plaćanjem",
+    "payByCash": "Plaćanje gotovinom",
+    "cancelAgree": "Slažem se",
+    "qrcode": "Skenirajte QR-kod za nastavak na pametnom telefonu",
+    "details": "Detalji plaćanja za {orderId}"
+  },
+  "photos": {
+    "takePhoto": "Slikaj",
+    "remove": "Ukloni",
+    "upload": "Učitaj",
+    "makePhotoTitle": "Slikajte putovnicu ili osobnu iskaznicu",
+    "switch": "Zamijeni kameru"
+  },
+  "search": {
+    "fullName": "Puno ime",
+    "property": "Objekt",
+    "room": "Soba",
+    "checkIn": "Prijava",
+    "checkOut": "Odjava",
+    "originalReferer": "Izvor rezervacije",
+    "label": "Unesite prezime osobe koja je rezervirala ili broj rezervacije",
+    "choose": "Odaberite rezervaciju",
+    "restriction": "Registracija je moguća samo 4 dana prije dolaska"
+  },
+  "bookingInfo": {
+    "header": "Detalji rezervacije",
+    "roomNumber": "Broj sobe",
+    "checkIn": "Prijava",
+    "checkOut": "Odjava",
+    "fullName": "Puno ime",
+    "originalReferer": "Izvor rezervacije",
+    "smartLockCode": "Kôd za pametnu bravu",
+    "call": "Nazovite nas",
+    "rules": "Pravila",
+    "howToMakeIn": "Kako ući",
+    "facilities": "Sadržaji",
+    "extras": "Dodatne usluge",
+    "debt": "Dugovanje",
+    "photoDocuments": "Možete dodati fotografije osobne iskaznice ili putovnice",
+    "payDebt": "Plati dug"
+  },
+  "checkInDetails": {
+    "email": "Unesite svoju e-mail adresu",
+    "invalidEmail": "Neispravna e-mail adresa",
+    "sent": "Informacije su poslane na {email}",
+    "information": "Informacije o prijavi",
+    "askQuestion": "Postavite pitanje",
+    "feedback": "Pošaljite povratne informacije",
+    "sendToEmail": "Pošalji ove informacije na moju e-mail adresu"
+  },
+  "checkout": {
+    "search": "Pretraži",
+    "checkOutDetails": "Detalji odjave"
+  },
+  "checkOutDetails": {
+    "askQuestion": "Postavite pitanje",
+    "feedback": "Pošaljite povratne informacije",
+    "checkedOut": "Odjavio/la sam se"
+  },
+  "feedback": {
+    "sent": "Vaša poruka je poslana",
+    "validation": "Poruka ne smije biti prazna"
+  },
+  "rules": {
+    "header": "Kućni red",
+    "agree": "Slažem se"
+  },
+  "tax": {
+    "guestLimit": "Ne možemo primiti više od {limit} gostiju",
+    "extraGuest": "Morate platiti dodatno za dodatnog gosta",
+    "lessDocs": "Ne zaboravite dodati dokument za svakog gosta",
+    "makePhoto": "Slikaj"
+  },
+  "guide": {
+    "p0": "Ispod su zahtjevi za veličinu i kvalitetu slike dokumenta:",
+    "p1": {
+      "title": "Strani objekti i izobličenja",
+      "body": "Pazite da ništa ne zaklanja podatke. Kod skeniranja putovnice, stranice moraju biti jasno vidljive."
+    },
+    "p2": {
+      "title": "Dobra rasvjeta",
+      "body": "Dobra rasvjeta poboljšava prepoznavanje. Prejako ili pretamno svjetlo može ometati proces."
+    },
+    "p3": {
+      "title": "Izbjegavajte odsjaj",
+      "body": "Odsjaj otežava prepoznavanje. Ne koristite bljeskalicu."
+    },
+    "p4": {
+      "title": "Fokus i oštrina",
+      "body": "Slika mora biti jasna i bez zamućenja."
+    },
+    "p5": {
+      "title": "Kut",
+      "body": "Nagib dokumenta ne smije prelaziti 10° u bilo kojem smjeru."
+    },
+    "p6": {
+      "title": "Preuski rubovi",
+      "body": "Dokument bi trebao zauzimati 70–80% slike."
+    },
+    "p7": {
+      "title": "Preširoki rubovi",
+      "body": "Prazan prostor ne smije zauzimati više od 30%."
+    },
+    "p8": {
+      "title": "Kontrast",
+      "body": "Dokument mora biti jasno vidljiv u odnosu na pozadinu."
+    },
+    "p9": {
+      "title": "Rezolucija slike",
+      "body": "Preporučuje se korištenje kamere s barem Full HD rezolucijom (1920×1080) i autofokusom."
+    }
+  },
+  "documents": {
+    "mandatory": "Potrebno je registrirati sve goste prije prijave za rezervaciju {id}",
+    "requirement": "Potrebna je samo putovnica ili osobna iskaznica za skeniranje",
+    "duplicateGuest": "Već ste dodali dokument za ovog gosta",
+    "guests": "Registrirani gosti",
+    "recognizeError": "Nismo uspjeli prepoznati dokument. Molimo ispunite obrazac ispod",
+    "recognizeWarning": "Nismo prepoznali dokument. Provjerite fotografiju i pokušajte ponovno",
+    "partlyRecognize": "Neka polja nisu prepoznata. Molimo ispunite ih ručno",
+    "additionalInfo": "Molimo dodajte dodatne informacije o gostu"
+  },
+  "guest": {
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "dateOfBirth": "Datum rođenja",
+    "pickADate": "Odaberite datum",
+    "pickATime": "Odaberite vrijeme",
+    "gender": "Spol",
+    "male": "Muško",
+    "female": "Žensko",
+    "nationality": "Državljanstvo",
+    "documentType": "Vrsta dokumenta",
+    "passport": "Putovnica",
+    "id": "Osobna iskaznica",
+    "documentNumber": "Broj dokumenta",
+    "add": "Dodaj",
+    "checkOutDate": "Datum odjave",
+    "checkOutTime": "Vrijeme odjave",
+    "cityTaxExemption": "Izuzeće od boravišne pristojbe",
+    "select": "Odaberi",
+    "validation": {
+      "required": "Unesite {field}",
+      "latinOnly": "Only latin characters are allowed",
+      "checkOutDate": "Check-out time no later than 11:00, {date}",
+      "exemptionDoc": "Molimo priložite dokument koji potvrđuje izuzeće od boravišne pristojbe"
+    },
+    "cityTaxExemptionDocument": "Priložite dokument koji potvrđuje izuzeće od boravišne pristojbe",
+    "cityTaxExemptionOptions": {
+      "0": "Bez izuzeća",
+      "1": "Izuzeće – djeca do 7 godina",
+      "2": "Izuzeće – zbog medicinskih razloga",
+      "3": "Izuzeće – invaliditet",
+      "4": "Izuzeće – djeca s posebnim potrebama",
+      "5": "Izuzeće – obrazovni program",
+      "7": "Izuzeće – privremeni rad dulji od 30 dana",
+      "8": "Izuzeće – međunarodni ugovor",
+      "10": "Izuzeće – gradski propisi",
+      "11": "50% popusta – osobe od 7 do 18 godina",
+      "12": "50% popusta – omladinski hosteli IYHF",
+      "14": "50% popusta – gradski propisi",
+      "15": "Djelomična uplata – gradski propisi",
+      "16": "Bez plaćanja – dnevni boravak i sl.",
+      "17": "Izuzeće – članovi javnih organizacija",
+      "18": "Izuzeće – volonteri kod katastrofa",
+      "19": "Izuzeće – policajci na dužnosti"
+    }
+  }
+}

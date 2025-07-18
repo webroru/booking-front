@@ -1,5 +1,5 @@
 import apiClient from './apiClient';
-import type { Booking } from '@/interfaces/booking.ts';
+import type { Booking } from '@/types/booking.ts';
 
 interface MessageResponse {
   success: boolean;

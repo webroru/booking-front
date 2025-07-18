@@ -1,5 +1,5 @@
 import apiClient from './apiClient';
-import type { Info } from '@/interfaces/info.ts';
+import type { Info } from '@/types/info.ts';
 
 export async function getInfoApi(locale: string): Promise<Info> {
   const response =  await apiClient.get<Info>('/api/info', {

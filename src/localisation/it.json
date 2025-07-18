@@ -1,0 +1,211 @@
+{
+  "app": {
+    "bookingFor": "Prenotazione per {name}, n. ordine {orderId}, fonte: {referer}",
+    "earlyCheckInWarning": "È possibile registrarsi SOLO 4 giorni prima dell’arrivo. Registrazione disponibile dal {date}"
+  },
+  "common": {
+    "back": "Indietro",
+    "next": "Prossimo",
+    "exit": "Esci",
+    "error": "Si è verificato un errore, contatta il supporto",
+    "close": "Chiudi",
+    "cancel": "Annulla",
+    "done": "Fatto"
+  },
+  "selectBooking": {
+    "haveBooking": "Ho una prenotazione",
+    "checkOut": "Check-out",
+    "wantToBook": "Voglio prenotare"
+  },
+  "confirmation": {
+    "search": "Cerca",
+    "information": "Informazioni",
+    "rules": "Regole",
+    "documents": "Documenti",
+    "payment": "Pagamento",
+    "checkInDetails": "Dettagli del check-in"
+  },
+  "instruction": {
+    "register": "Devi registrare i tuoi ospiti",
+    "pay": "e pagare la tassa di soggiorno",
+    "warning": "Attenzione. Oggi non è il tuo giorno di arrivo."
+  },
+  "payment": {
+    "debt": "Il tuo debito è di {debt} €",
+    "charges": "Addebiti",
+    "payments": "Pagamenti",
+    "cash": "Non posso pagare con carta",
+    "success": "Grazie per il pagamento. Puoi procedere al prossimo passo",
+    "pay": "Paga",
+    "total": "Totale",
+    "cashAgree": "Accetto",
+    "disagree": "Non accetto il pagamento",
+    "disagreeHeader": "Pagamento contestato",
+    "payByCash": "Pagamento in contanti",
+    "cancelAgree": "Accetto",
+    "qrcode": "Scansiona il codice QR per continuare sullo smartphone",
+    "details": "Dettagli del pagamento per ordine {orderId}"
+  },
+  "photos": {
+    "takePhoto": "Scatta foto",
+    "remove": "Rimuovi",
+    "upload": "Carica",
+    "makePhotoTitle": "Scatta foto del passaporto o della carta d’identità",
+    "switch": "Cambia fotocamera"
+  },
+  "search": {
+    "fullName": "Nome completo",
+    "property": "Struttura",
+    "room": "Camera",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "originalReferer": "Fonte originale",
+    "label": "Inserisci il cognome o il numero di prenotazione",
+    "choose": "Scegli la tua prenotazione",
+    "restriction": "La registrazione è disponibile solo 4 giorni prima del check-in"
+  },
+  "bookingInfo": {
+    "header": "Dettagli della prenotazione",
+    "roomNumber": "Numero stanza",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "fullName": "Nome completo",
+    "originalReferer": "Fonte",
+    "smartLockCode": "Codice serratura smart",
+    "call": "Contattaci",
+    "rules": "Regole",
+    "howToMakeIn": "Come entrare",
+    "facilities": "Servizi",
+    "extras": "Extra",
+    "debt": "Debito",
+    "photoDocuments": "Puoi caricare le foto del tuo documento o passaporto",
+    "payDebt": "Paga il debito"
+  },
+  "checkInDetails": {
+    "email": "Inserisci la tua email",
+    "invalidEmail": "Email non valida",
+    "sent": "Informazioni inviate a {email}",
+    "information": "Informazioni check-in",
+    "askQuestion": "Fai una domanda",
+    "feedback": "Invia feedback",
+    "sendToEmail": "Invia queste informazioni alla mia email"
+  },
+  "checkout": {
+    "search": "Cerca",
+    "checkOutDetails": "Dettagli del check-out"
+  },
+  "checkOutDetails": {
+    "askQuestion": "Fai una domanda",
+    "feedback": "Invia feedback",
+    "checkedOut": "Ho effettuato il check-out"
+  },
+  "feedback": {
+    "sent": "Il tuo messaggio è stato inviato",
+    "validation": "Il messaggio non può essere vuoto"
+  },
+  "rules": {
+    "header": "Regolamento",
+    "agree": "Accetto"
+  },
+  "tax": {
+    "guestLimit": "Non possiamo ospitare più di {limit} ospiti",
+    "extraGuest": "Sarà richiesto un pagamento per ospiti extra",
+    "lessDocs": "Non dimenticare di aggiungere un documento per ogni ospite",
+    "makePhoto": "Scatta una foto"
+  },
+  "guide": {
+    "p0": "Di seguito i requisiti per dimensioni e qualità dell’immagine dei documenti:",
+    "p1": {
+      "title": "Oggetti estranei e distorsioni",
+      "body": "Assicurati che mani o oggetti non coprano i dati. Le pagine devono essere allineate e leggibili."
+    },
+    "p2": {
+      "title": "Buona illuminazione",
+      "body": "Una buona illuminazione aiuta il riconoscimento. Evita ombre o luci troppo forti."
+    },
+    "p3": {
+      "title": "Evita riflessi",
+      "body": "I riflessi compromettono la lettura. Evita il flash."
+    },
+    "p4": {
+      "title": "Messa a fuoco e nitidezza",
+      "body": "L’immagine deve essere chiara e senza sfocature."
+    },
+    "p5": {
+      "title": "Angolazione",
+      "body": "Il documento non deve essere inclinato oltre 10°."
+    },
+    "p6": {
+      "title": "Margini troppo stretti",
+      "body": "Il documento deve occupare circa il 70–80% dell’immagine."
+    },
+    "p7": {
+      "title": "Margini troppo ampi",
+      "body": "Lo sfondo non deve superare il 30% dell’immagine."
+    },
+    "p8": {
+      "title": "Contrasto",
+      "body": "Il documento deve contrastare bene con lo sfondo."
+    },
+    "p9": {
+      "title": "Risoluzione immagine",
+      "body": "Si consiglia una fotocamera Full HD (1920×1080) con autofocus."
+    }
+  },
+  "documents": {
+    "mandatory": "Devi registrare tutti gli ospiti prima del check-in per la prenotazione {id}",
+    "requirement": "È richiesto solo passaporto o carta d’identità per la scansione",
+    "duplicateGuest": "Hai già aggiunto un documento per questo ospite",
+    "guests": "Ospiti registrati",
+    "recognizeError": "Impossibile riconoscere il documento. Compila il modulo qui sotto",
+    "recognizeWarning": "Impossibile riconoscere il documento. Controlla la foto e riprova",
+    "partlyRecognize": "Alcuni campi non sono stati riconosciuti. Compilali manualmente",
+    "additionalInfo": "Aggiungi informazioni aggiuntive sull’ospite"
+  },
+  "guest": {
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "dateOfBirth": "Data di nascita",
+    "pickADate": "Seleziona una data",
+    "pickATime": "Seleziona un orario",
+    "gender": "Genere",
+    "male": "Maschio",
+    "female": "Femmina",
+    "nationality": "Nazionalità",
+    "documentType": "Tipo di documento",
+    "passport": "Passaporto",
+    "id": "Carta d’identità",
+    "documentNumber": "Numero documento",
+    "add": "Aggiungi",
+    "checkOutDate": "Data di check-out",
+    "checkOutTime": "Ora di check-out",
+    "cityTaxExemption": "Esenzione tassa di soggiorno",
+    "select": "Seleziona",
+    "validation": {
+      "required": "Inserisci {field}",
+      "latinOnly": "Only latin characters are allowed",
+      "checkOutDate": "Check-out time no later than 11:00, {date}",
+      "exemptionDoc": "Aggiungi un documento che confermi l’esenzione dalla tassa di soggiorno"
+    },
+    "cityTaxExemptionDocument": "Aggiungi un documento che giustifichi l’esenzione dalla tassa di soggiorno",
+    "cityTaxExemptionOptions": {
+      "0": "Nessuna esenzione",
+      "1": "Esenzione – bambini fino a 7 anni",
+      "2": "Esenzione – motivi medici",
+      "3": "Esenzione – disabilità",
+      "4": "Esenzione – bisogni speciali",
+      "5": "Esenzione – programma educativo",
+      "7": "Esenzione – lavoro temporaneo >30 giorni",
+      "8": "Esenzione – trattato internazionale",
+      "10": "Esenzione – regolamento comunale",
+      "11": "50% sconto – da 7 a 18 anni",
+      "12": "50% sconto – ostelli giovanili IYHF",
+      "14": "50% sconto – regolamento comunale",
+      "15": "Pagamento parziale – regolamento comunale",
+      "16": "Nessun pagamento – servizi giornalieri",
+      "17": "Esenzione – associazioni di interesse pubblico",
+      "18": "Esenzione – volontari per disastri",
+      "19": "Esenzione – agenti di polizia in servizio"
+    }
+  }
+}

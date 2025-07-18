@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
-import type { Info } from '@/interfaces/info.ts';
+import type { Info } from '@/types/info.ts';
 import { getInfoApi, sendToEmailApi } from '@/api/info';
 
 export const useInfoStore = defineStore('info', () => {

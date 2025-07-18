@@ -1,0 +1,211 @@
+{
+  "app": {
+    "bookingFor": "The booking for {name}, booking № {orderId}, referer: {referer}",
+    "earlyCheckInWarning": "You can register ONLY 4 days before ARRIVAL. You can register from {date}"
+  },
+  "common": {
+    "back": "Back",
+    "next": "Next step",
+    "exit": "Exit",
+    "error": "An error occurred please contact support",
+    "close": "Close",
+    "cancel": "Cancel",
+    "done": "Done"
+  },
+  "selectBooking": {
+    "haveBooking": "I have a booking",
+    "checkOut": "Check out",
+    "wantToBook": "I want to book"
+  },
+  "confirmation": {
+    "search": "Search",
+    "information": "Information",
+    "rules": "Rules",
+    "documents": "Documents",
+    "payment": "Payment",
+    "checkInDetails": "CheckIn Details"
+  },
+  "instruction": {
+    "register": "You should register your guests",
+    "pay": "and pay the city tax",
+    "warning": "Please pay attention. Your check-in is not today."
+  },
+  "payment": {
+    "debt": "Your debt is {debt} €",
+    "charges": "Charges",
+    "payments": "Payments",
+    "cash": "I can't pay by Card",
+    "success": "Thank you for your payment. You can go to the next step",
+    "pay": "Pay",
+    "total": "Total",
+    "cashAgree": "I am agree",
+    "disagree": "I am disagree with payment",
+    "disagreeHeader": "Payment disagree",
+    "payByCash": "Payment by cash",
+    "cancelAgree": "I am agree",
+    "qrcode": "You can scan the QR-code to continue on your smartphone",
+    "details": "Payment details for {orderId}"
+  },
+  "photos": {
+    "takePhoto": "Take photo",
+    "remove": "Remove",
+    "upload": "Upload",
+    "makePhotoTitle": "Make photos of yours Passports or Card IDs",
+    "switch": "Switch the camera"
+  },
+  "search": {
+    "fullName": "Full Name",
+    "property": "Property",
+    "room": "Room",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "originalReferer": "Original Referer",
+    "label": "Enter the surname who has created the booking or order number",
+    "choose": "Choose your Booking",
+    "restriction": "Registration is open 4 days before check-in only"
+  },
+  "bookingInfo": {
+    "header": "Details about your reservation",
+    "roomNumber": "Room Number",
+    "checkIn": "CheckIn",
+    "checkOut": "CheckOut",
+    "fullName": "Full Name",
+    "originalReferer": "Original Referer",
+    "smartLockCode": "Door code",
+    "call": "Phone us",
+    "rules": "Rules",
+    "howToMakeIn": "How to make in",
+    "facilities": "Facilities",
+    "extras": "Extras",
+    "debt": "Debt",
+    "photoDocuments": "You can add photos of your ID or passport",
+    "payDebt": "Pay your debt"
+  },
+  "checkInDetails": {
+    "email": "Please input your e-mail",
+    "invalidEmail": "Invalid Email",
+    "sent": "Information has been sent to {email}",
+    "information": "Check-in information",
+    "askQuestion": "Ask a question",
+    "feedback": "Send Feedback",
+    "sendToEmail": "Send this information to my email address"
+  },
+  "checkout": {
+    "search": "Search",
+    "checkOutDetails": "CheckOut Details"
+  },
+  "checkOutDetails": {
+    "askQuestion": "Ask a question",
+    "feedback": "Send Feedback",
+    "checkedOut": "I am checked out"
+  },
+  "feedback": {
+    "sent": "Your messge has been sent",
+    "validation": "Message can not be empty"
+  },
+  "rules": {
+    "header": "Living Rules",
+    "agree": "I agree"
+  },
+  "tax": {
+    "guestLimit": "We can't revive guest more than {limit} guests",
+    "extraGuest": "You will be required to pay for an additional guest",
+    "lessDocs": "Don't forget to add a document for each guest",
+    "makePhoto": "Make a photo"
+  },
+  "guide": {
+    "p0": "Below are the requirements for the size and quality of document images for successful image processing:",
+    "p1": {
+      "title": "Foreign objects and distortions",
+      "body": "Ensure that your hands or other objects do not cover the document data. When scanning a passport, ensure that the pages are aligned correctly and all data is clearly visible."
+    },
+    "p2": {
+      "title": "Good lighting",
+      "body": "Good lighting helps achieve better OCR results. If the image is too dark or too bright, the document may not be processed correctly."
+    },
+    "p3": {
+      "title": "Avoid reflections",
+      "body": "Glare and reflections interfere with processing and reduce data extraction accuracy. We recommend not using the mobile device's flash when taking pictures of documents."
+    },
+    "p4": {
+      "title": "Focus and sharpness",
+      "body": "Ensure that the image is clear and has no blurred areas."
+    },
+    "p5": {
+      "title": "Angle",
+      "body": "The tilt of the document should not exceed 10 degrees in any direction (horizontal or vertical)."
+    },
+    "p6": {
+      "title": "Margins (too small)",
+      "body": "Make sure there is minimal space around the document. It is recommended that the document occupy 70-80% of the image."
+    },
+    "p7": {
+      "title": "Margins (too large)",
+      "body": "Ensure that the space around the document does not occupy more than 20-30% of the image. It is recommended that the document occupy 70-80% of the image."
+    },
+    "p8": {
+      "title": "Contrast",
+      "body": "The document should contrast clearly with the background. A light document on a light background or a dark document on a dark background may not be recognized."
+    },
+    "p9": {
+      "title": "Image resolution",
+      "body": "To achieve good quality document recognition, it is recommended to provide images taken with a camera with a resolution of at least Full HD (1920×1080) and autofocus."
+    }
+  },
+  "documents": {
+    "mandatory": "You are required to register all guests prior to check-in for booking {id}",
+    "requirement": "Only a passport or ID is required for scanning",
+    "duplicateGuest": "You have already added a document for this guest",
+    "guests": "Registered guests",
+    "recognizeError": "We are unable to recognize the document. Pleas complete the form below",
+    "recognizeWarning": "We are unable to recognize the document. Please check the photo and try again",
+    "partlyRecognize": "Some fields are not recognized. Please fill in the fields below",
+    "additionalInfo": "Please add additional information about the guest"
+  },
+  "guest": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "dateOfBirth": "Date of birth",
+    "pickADate": "Pick a date",
+    "pickATime": "Pick a time",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "nationality": "Nationality",
+    "documentType": "Document type",
+    "passport": "Passport",
+    "id": "Id",
+    "documentNumber": "Document number",
+    "add": "Add",
+    "checkOutDate": "Check-out date",
+    "checkOutTime": "Check-out time",
+    "cityTaxExemption": "City tax exemption",
+    "select": "Select",
+    "cityTaxExemptionDocument": "Provide a document providing a discount on city tax",
+    "cityTaxExemptionOptions": {
+      "0": "No exemption",
+      "1": "Exemption - children up to 7 years",
+      "2": "Exemption - medical referral",
+      "3": "Exemption - disability, physical impairment",
+      "4": "Exemption - children with special needs",
+      "5": "Exemption - educational program",
+      "7": "Exemption - temporary work over 30 days",
+      "8": "Exemption - international treaty",
+      "10": "Exemption - municipal regulation",
+      "11": "Half payment (50%) - person from 7 to 18 years of age",
+      "12": "Half payment (50%) - youth hostels IYHF",
+      "14": "Half payment (50%) - municipal regulation",
+      "15": "Partial payment - municipal regulation",
+      "16": "No payment - not overnight services (daily rest, etc.)",
+      "17": "Exemption - participants through public interest societies",
+      "18": "Exemption - volunteers to eliminate natural disasters",
+      "19": "Exemption - police officers on duty"
+    },
+    "validation": {
+      "required": "Enter your {field}",
+      "latinOnly": "Only latin characters are allowed",
+      "checkOutDate": "Check-out time no later than 11:00, {date}",
+      "exemptionDoc": "Please provide a document that confirms the exemption from the city tax"
+    }
+  }
+}
