@@ -1,16 +1,16 @@
 import type { RouteRecordRaw } from 'vue-router';
-import Checkout from '@/views/Checkout/Checkout.vue';
-import Registration from "@/views/Registration.vue";
-import Search from '@/views/Confirmation/Search.vue';
-import Instruction from '@/views/Confirmation/Instruction.vue';
-import Documents from '@/views/Confirmation/Documents.vue';
-import Payment from '@/views/Confirmation/Payment.vue';
-import Rules from '@/views/Confirmation/Rules.vue';
-import BookingInfo from '@/views/Confirmation/BookingInfo.vue';
-import CheckOutDetails from '@/views/Checkout/CheckOutDetails.vue';
-import Home from '@/views/Home.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+import Home from '@/views/Home.vue';
+import BookingInfo from '@/views/Confirmation/BookingInfo.vue';
+import Checkout from '@/views/Checkout/Checkout.vue';
+import CheckOutDetails from '@/views/Checkout/CheckOutDetails.vue';
 import Confirmation from '@/views/Confirmation/Confirmation.vue';
+import Documents from '@/views/Confirmation/Documents.vue';
+import Instruction from '@/views/Confirmation/Instruction.vue';
+import Payment from '@/views/Confirmation/Payment.vue';
+import Registration from "@/views/Registration.vue";
+import Rules from '@/views/Confirmation/Rules.vue';
+import Search from '@/views/Confirmation/Search.vue';
 
 const routes: RouteRecordRaw[] = [
   {
