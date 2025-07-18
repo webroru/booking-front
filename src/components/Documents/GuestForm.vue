@@ -2,7 +2,6 @@
   import { computed, reactive, ref, watch, onMounted } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { InfoFilled } from '@element-plus/icons-vue';
-  import { ElMessage } from 'element-plus';
   import iso from 'iso-3166-1';
   import MakePhoto from '@/components/Photos/MakePhoto.vue';
   import ShowPhotos from '@/components/Photos/ShowPhotos.vue';
@@ -129,7 +128,7 @@
   };
 
   const submit = (form) => {
-    if (localGuest.cityTaxExemption > 0 && !hasExemptionPhoto.value) {
+    if (localGuest.cityTaxExemption > 1 && localGuest.cityTaxExemption !== 16 && !hasExemptionPhoto.value) {
       ElMessage.error(t('guest.validation.exemptionDoc'));
       return;
     }
