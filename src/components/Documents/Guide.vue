@@ -3,7 +3,7 @@
 
   const { t } = useI18n();
 
-  const images = import.meta.glob('./images/*.png', {
+  const images = import.meta.glob('../../assets/images/documents/*.png', {
     eager: true,
     query: '?url',
     import: 'default'

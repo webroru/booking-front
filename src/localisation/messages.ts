@@ -10,7 +10,7 @@ import ru from './ru.json';
 import sl from './sl.json';
 import zh from './zh.json';
 
-const messages: LocaleMessages<any> = {
+export default {
   de,
   en,
   es,
@@ -21,6 +21,4 @@ const messages: LocaleMessages<any> = {
   ru,
   sl,
   zh,
-};
-
-export default messages;
+} as LocaleMessages<any>;
