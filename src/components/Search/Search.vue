@@ -1,7 +1,6 @@
 <script setup>
   import { ref } from 'vue';
   import { Search } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { usePhotosStore } from '@/stores/photos';

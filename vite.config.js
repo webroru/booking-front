@@ -1,4 +1,9 @@
 import { fileURLToPath, URL } from 'url';
+import Components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import { visualizer } from 'rollup-plugin-visualizer';
+import AutoImport from 'unplugin-auto-import/vite';
+
 
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -13,6 +18,15 @@ export default defineConfig({
         },
       },
     }),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      dirs: [],
+      resolvers: [ElementPlusResolver({ importStyle: 'css' })],
+      dts: 'src/types/components.d.ts',
+    }),
+    visualizer({ open: true, filename: 'dist/stats.html', gzipSize: true, brotliSize: true }),
   ],
   resolve: {
     alias: {

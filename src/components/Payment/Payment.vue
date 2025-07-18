@@ -1,6 +1,5 @@
 <script setup>
   import { ref, onBeforeMount } from 'vue';
-  import { ElMessageBox } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import QrcodeVue from 'qrcode.vue';
   import { loadStripe } from '@stripe/stripe-js';

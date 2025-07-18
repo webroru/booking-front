@@ -9,8 +9,6 @@
     import: 'default'
   });
 
-  console.log('images', images);
-
   const data = [
     {
       title: t('guide.p1.title'),

@@ -1,6 +1,5 @@
 <script setup>
   import { ref, computed } from 'vue';
-  import { ElNotification } from 'element-plus';
   import { useI18n } from 'vue-i18n';
   import { useRoute } from 'vue-router';
   import { InfoFilled } from '@element-plus/icons-vue';
