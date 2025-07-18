@@ -1,0 +1,211 @@
+{
+  "app": {
+    "bookingFor": "Réservation pour {name}, n° {orderId}, source : {referer}",
+    "earlyCheckInWarning": "Vous pouvez vous enregistrer UNIQUEMENT 4 jours avant l’arrivée. Disponible à partir du {date}"
+  },
+  "common": {
+    "back": "Retour",
+    "next": "Étape suivante",
+    "exit": "Quitter",
+    "error": "Une erreur est survenue, veuillez contacter le support",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "done": "Terminé"
+  },
+  "selectBooking": {
+    "haveBooking": "J’ai une réservation",
+    "checkOut": "Départ",
+    "wantToBook": "Je souhaite réserver"
+  },
+  "confirmation": {
+    "search": "Rechercher",
+    "information": "Informations",
+    "rules": "Règlement",
+    "documents": "Documents",
+    "payment": "Paiement",
+    "checkInDetails": "Détails de l’enregistrement"
+  },
+  "instruction": {
+    "register": "Vous devez enregistrer vos invités",
+    "pay": "et payer la taxe de séjour",
+    "warning": "Attention. Ce n’est pas votre jour d’arrivée."
+  },
+  "payment": {
+    "debt": "Votre dette est de {debt} €",
+    "charges": "Frais",
+    "payments": "Paiements",
+    "cash": "Je ne peux pas payer par carte",
+    "success": "Merci pour votre paiement. Vous pouvez passer à l’étape suivante",
+    "pay": "Payer",
+    "total": "Total",
+    "cashAgree": "J’accepte",
+    "disagree": "Je ne suis pas d’accord avec le paiement",
+    "disagreeHeader": "Désaccord sur le paiement",
+    "payByCash": "Paiement en espèces",
+    "cancelAgree": "J’accepte",
+    "qrcode": "Scannez le QR code pour continuer sur votre smartphone",
+    "details": "Détails de paiement pour la commande {orderId}"
+  },
+  "photos": {
+    "takePhoto": "Prendre une photo",
+    "remove": "Supprimer",
+    "upload": "Téléverser",
+    "makePhotoTitle": "Prenez des photos de vos passeports ou cartes d’identité",
+    "switch": "Changer de caméra"
+  },
+  "search": {
+    "fullName": "Nom complet",
+    "property": "Établissement",
+    "room": "Chambre",
+    "checkIn": "Arrivée",
+    "checkOut": "Départ",
+    "originalReferer": "Source d’origine",
+    "label": "Entrez le nom de famille ou le numéro de réservation",
+    "choose": "Choisissez votre réservation",
+    "restriction": "L’enregistrement est ouvert uniquement 4 jours avant l’arrivée"
+  },
+  "bookingInfo": {
+    "header": "Détails de votre réservation",
+    "roomNumber": "Numéro de chambre",
+    "checkIn": "Arrivée",
+    "checkOut": "Départ",
+    "fullName": "Nom complet",
+    "originalReferer": "Source",
+    "smartLockCode": "Code de serrure intelligente",
+    "call": "Appelez-nous",
+    "rules": "Règlement",
+    "howToMakeIn": "Comment accéder",
+    "facilities": "Équipements",
+    "extras": "Suppléments",
+    "debt": "Dette",
+    "photoDocuments": "Vous pouvez ajouter des photos de votre pièce d’identité ou passeport",
+    "payDebt": "Régler la dette"
+  },
+  "checkInDetails": {
+    "email": "Veuillez saisir votre e-mail",
+    "invalidEmail": "Adresse e-mail invalide",
+    "sent": "Informations envoyées à {email}",
+    "information": "Informations d’enregistrement",
+    "askQuestion": "Poser une question",
+    "feedback": "Envoyer un avis",
+    "sendToEmail": "Envoyer ces informations par e-mail"
+  },
+  "checkout": {
+    "search": "Rechercher",
+    "checkOutDetails": "Détails du départ"
+  },
+  "checkOutDetails": {
+    "askQuestion": "Poser une question",
+    "feedback": "Envoyer un avis",
+    "checkedOut": "J’ai quitté les lieux"
+  },
+  "feedback": {
+    "sent": "Votre message a été envoyé",
+    "validation": "Le message ne peut pas être vide"
+  },
+  "rules": {
+    "header": "Règlement intérieur",
+    "agree": "J’accepte"
+  },
+  "tax": {
+    "guestLimit": "Nous ne pouvons pas accueillir plus de {limit} personnes",
+    "extraGuest": "Des frais supplémentaires s’appliqueront pour un invité supplémentaire",
+    "lessDocs": "N’oubliez pas de fournir un document pour chaque invité",
+    "makePhoto": "Prendre une photo"
+  },
+  "guide": {
+    "p0": "Voici les exigences relatives à la qualité et à la taille des images pour un traitement optimal :",
+    "p1": {
+      "title": "Objets étrangers et déformations",
+      "body": "Assurez-vous qu’aucun objet ne couvre le document. Toutes les données doivent être lisibles."
+    },
+    "p2": {
+      "title": "Bonne luminosité",
+      "body": "Une bonne lumière est essentielle pour une reconnaissance correcte."
+    },
+    "p3": {
+      "title": "Évitez les reflets",
+      "body": "Les reflets nuisent à la reconnaissance. Évitez d’utiliser le flash."
+    },
+    "p4": {
+      "title": "Mise au point et netteté",
+      "body": "L’image doit être claire, sans zone floue."
+    },
+    "p5": {
+      "title": "Inclinaison",
+      "body": "L’angle du document ne doit pas dépasser 10 degrés."
+    },
+    "p6": {
+      "title": "Marges trop petites",
+      "body": "Le document doit occuper environ 70 à 80 % de l’image."
+    },
+    "p7": {
+      "title": "Marges trop grandes",
+      "body": "L’espace vide ne doit pas excéder 30 % de l’image."
+    },
+    "p8": {
+      "title": "Contraste",
+      "body": "Le document doit être contrasté par rapport à l’arrière-plan."
+    },
+    "p9": {
+      "title": "Résolution",
+      "body": "Utilisez une caméra Full HD (1920×1080) avec autofocus pour de meilleurs résultats."
+    }
+  },
+  "documents": {
+    "mandatory": "Vous devez enregistrer tous les invités pour la réservation {id} avant l’arrivée",
+    "requirement": "Seul un passeport ou une carte d’identité est requis pour la numérisation",
+    "duplicateGuest": "Un document a déjà été ajouté pour cet invité",
+    "guests": "Invités enregistrés",
+    "recognizeError": "Impossible de reconnaître le document. Veuillez remplir le formulaire ci-dessous",
+    "recognizeWarning": "Le document n’a pas pu être reconnu. Vérifiez la photo et réessayez",
+    "partlyRecognize": "Certains champs n’ont pas été reconnus. Veuillez les remplir manuellement",
+    "additionalInfo": "Veuillez fournir des informations supplémentaires sur l’invité"
+  },
+  "guest": {
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "dateOfBirth": "Date de naissance",
+    "pickADate": "Choisir une date",
+    "pickATime": "Choisir une heure",
+    "gender": "Genre",
+    "male": "Homme",
+    "female": "Femme",
+    "nationality": "Nationalité",
+    "documentType": "Type de document",
+    "passport": "Passeport",
+    "id": "Carte d’identité",
+    "documentNumber": "Numéro du document",
+    "add": "Ajouter",
+    "checkOutDate": "Date de départ",
+    "checkOutTime": "Heure de départ",
+    "cityTaxExemption": "Exonération de la taxe de séjour",
+    "select": "Sélectionner",
+    "validation": {
+      "required": "Veuillez saisir {field}",
+      "latinOnly": "Only latin characters are allowed",
+      "checkOutDate": "Check-out time no later than 11:00, {date}",
+      "exemptionDoc": "Veuillez fournir un document confirmant l’exonération de la taxe de séjour"
+    },
+    "cityTaxExemptionDocument": "Fournir un document justifiant l’exonération de la taxe de séjour",
+    "cityTaxExemptionOptions": {
+      "0": "Aucune exonération",
+      "1": "Exonération – enfants jusqu’à 7 ans",
+      "2": "Exonération – pour raisons médicales",
+      "3": "Exonération – invalidité",
+      "4": "Exonération – besoins spécifiques",
+      "5": "Exonération – programme éducatif",
+      "7": "Exonération – travail temporaire de plus de 30 jours",
+      "8": "Exonération – traité international",
+      "10": "Exonération – règlement municipal",
+      "11": "Réduction 50 % – jeunes de 7 à 18 ans",
+      "12": "Réduction 50 % – auberges IYHF",
+      "14": "Réduction 50 % – selon règlement municipal",
+      "15": "Paiement partiel – selon règlement municipal",
+      "16": "Pas de paiement – usage journalier",
+      "17": "Exonération – membres d’associations d’intérêt public",
+      "18": "Exonération – volontaires en cas de catastrophe",
+      "19": "Exonération – policiers en service"
+    }
+  }
+}

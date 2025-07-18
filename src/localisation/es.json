@@ -1,0 +1,211 @@
+{
+  "app": {
+    "bookingFor": "Reserva para {name}, nº de reserva {orderId}, fuente: {referer}",
+    "earlyCheckInWarning": "Solo puedes registrarte 4 días antes de la llegada. Registro disponible desde {date}"
+  },
+  "common": {
+    "back": "Atrás",
+    "next": "Siguiente paso",
+    "exit": "Salir",
+    "error": "Ha ocurrido un error. Por favor, contacta con soporte",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "done": "Hecho"
+  },
+  "selectBooking": {
+    "haveBooking": "Tengo una reserva",
+    "checkOut": "Salida",
+    "wantToBook": "Quiero hacer una reserva"
+  },
+  "confirmation": {
+    "search": "Buscar",
+    "information": "Información",
+    "rules": "Normas",
+    "documents": "Documentos",
+    "payment": "Pago",
+    "checkInDetails": "Detalles de check-in"
+  },
+  "instruction": {
+    "register": "Debes registrar a tus huéspedes",
+    "pay": "y pagar la tasa turística",
+    "warning": "Atención. Hoy no es tu día de llegada."
+  },
+  "payment": {
+    "debt": "Tu deuda es de {debt} €",
+    "charges": "Cargos",
+    "payments": "Pagos",
+    "cash": "No puedo pagar con tarjeta",
+    "success": "Gracias por tu pago. Puedes continuar con el siguiente paso",
+    "pay": "Pagar",
+    "total": "Total",
+    "cashAgree": "Estoy de acuerdo",
+    "disagree": "No estoy de acuerdo con el pago",
+    "disagreeHeader": "Pago no aceptado",
+    "payByCash": "Pago en efectivo",
+    "cancelAgree": "Acepto",
+    "qrcode": "Escanea el código QR para continuar en tu teléfono",
+    "details": "Detalles del pago para el pedido {orderId}"
+  },
+  "photos": {
+    "takePhoto": "Tomar foto",
+    "remove": "Eliminar",
+    "upload": "Subir",
+    "makePhotoTitle": "Toma fotos de tu pasaporte o DNI",
+    "switch": "Cambiar cámara"
+  },
+  "search": {
+    "fullName": "Nombre completo",
+    "property": "Propiedad",
+    "room": "Habitación",
+    "checkIn": "Entrada",
+    "checkOut": "Salida",
+    "originalReferer": "Fuente original",
+    "label": "Introduce el apellido o el número de reserva",
+    "choose": "Elige tu reserva",
+    "restriction": "El registro solo está disponible 4 días antes de la entrada"
+  },
+  "bookingInfo": {
+    "header": "Detalles de tu reserva",
+    "roomNumber": "Número de habitación",
+    "checkIn": "Entrada",
+    "checkOut": "Salida",
+    "fullName": "Nombre completo",
+    "originalReferer": "Fuente",
+    "smartLockCode": "Código de cerradura inteligente",
+    "call": "Llámanos",
+    "rules": "Normas",
+    "howToMakeIn": "Cómo acceder",
+    "facilities": "Instalaciones",
+    "extras": "Extras",
+    "debt": "Deuda",
+    "photoDocuments": "Puedes subir fotos de tu pasaporte o documento de identidad",
+    "payDebt": "Pagar deuda"
+  },
+  "checkInDetails": {
+    "email": "Por favor, introduce tu correo electrónico",
+    "invalidEmail": "Correo electrónico no válido",
+    "sent": "La información ha sido enviada a {email}",
+    "information": "Información del check-in",
+    "askQuestion": "Hacer una pregunta",
+    "feedback": "Enviar comentario",
+    "sendToEmail": "Enviar esta información a mi correo electrónico"
+  },
+  "checkout": {
+    "search": "Buscar",
+    "checkOutDetails": "Detalles de salida"
+  },
+  "checkOutDetails": {
+    "askQuestion": "Hacer una pregunta",
+    "feedback": "Enviar comentario",
+    "checkedOut": "He realizado la salida"
+  },
+  "feedback": {
+    "sent": "Tu mensaje ha sido enviado",
+    "validation": "El mensaje no puede estar vacío"
+  },
+  "rules": {
+    "header": "Reglamento",
+    "agree": "Estoy de acuerdo"
+  },
+  "tax": {
+    "guestLimit": "No podemos recibir a más de {limit} huéspedes",
+    "extraGuest": "Se aplicará un cargo por huésped adicional",
+    "lessDocs": "No olvides añadir un documento para cada huésped",
+    "makePhoto": "Tomar foto"
+  },
+  "guide": {
+    "p0": "A continuación, se muestran los requisitos de calidad y tamaño de imagen para los documentos:",
+    "p1": {
+      "title": "Objetos extraños y distorsiones",
+      "body": "Asegúrate de que no haya manos u objetos cubriendo los datos. Las páginas deben estar rectas y legibles."
+    },
+    "p2": {
+      "title": "Buena iluminación",
+      "body": "La luz adecuada mejora el reconocimiento. Evita imágenes demasiado oscuras o brillantes."
+    },
+    "p3": {
+      "title": "Evitar reflejos",
+      "body": "Los reflejos dificultan el escaneo. Evita usar el flash."
+    },
+    "p4": {
+      "title": "Enfoque y nitidez",
+      "body": "La imagen debe estar enfocada y clara."
+    },
+    "p5": {
+      "title": "Ángulo",
+      "body": "El documento no debe estar inclinado más de 10°."
+    },
+    "p6": {
+      "title": "Márgenes pequeños",
+      "body": "El documento debe ocupar el 70–80% de la imagen."
+    },
+    "p7": {
+      "title": "Márgenes grandes",
+      "body": "El fondo no debe ocupar más del 30% de la imagen."
+    },
+    "p8": {
+      "title": "Contraste",
+      "body": "El documento debe tener un buen contraste con el fondo."
+    },
+    "p9": {
+      "title": "Resolución",
+      "body": "Usa una cámara con al menos resolución Full HD (1920×1080) y enfoque automático."
+    }
+  },
+  "documents": {
+    "mandatory": "Debes registrar a todos los huéspedes antes del check-in para la reserva {id}",
+    "requirement": "Solo se requiere pasaporte o DNI para escanear",
+    "duplicateGuest": "Ya has añadido un documento para este huésped",
+    "guests": "Huéspedes registrados",
+    "recognizeError": "No se pudo reconocer el documento. Por favor, completa el formulario",
+    "recognizeWarning": "No se reconoció el documento. Revisa la foto e inténtalo de nuevo",
+    "partlyRecognize": "Algunos campos no se reconocieron. Rellénalos manualmente",
+    "additionalInfo": "Por favor, añade información adicional sobre el huésped"
+  },
+  "guest": {
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "dateOfBirth": "Fecha de nacimiento",
+    "pickADate": "Selecciona una fecha",
+    "pickATime": "Selecciona una hora",
+    "gender": "Género",
+    "male": "Masculino",
+    "female": "Femenino",
+    "nationality": "Nacionalidad",
+    "documentType": "Tipo de documento",
+    "passport": "Pasaporte",
+    "id": "DNI",
+    "documentNumber": "Número de documento",
+    "add": "Añadir",
+    "checkOutDate": "Fecha de salida",
+    "checkOutTime": "Hora de salida",
+    "cityTaxExemption": "Exención de tasa turística",
+    "select": "Seleccionar",
+    "validation": {
+      "required": "Introduce tu {field}",
+      "latinOnly": "Only latin characters are allowed",
+      "checkOutDate": "Check-out time no later than 11:00, {date}",
+      "exemptionDoc": "Añade un documento que confirme la exención de la tasa turística"
+    },
+    "cityTaxExemptionDocument": "Añade un documento que justifique la exención de la tasa turística",
+    "cityTaxExemptionOptions": {
+      "0": "Sin exención",
+      "1": "Exención – niños hasta 7 años",
+      "2": "Exención – por motivos médicos",
+      "3": "Exención – discapacidad",
+      "4": "Exención – niños con necesidades especiales",
+      "5": "Exención – programa educativo",
+      "7": "Exención – trabajo temporal > 30 días",
+      "8": "Exención – tratado internacional",
+      "10": "Exención – normativa municipal",
+      "11": "50 % descuento – personas de 7 a 18 años",
+      "12": "50 % descuento – albergues juveniles IYHF",
+      "14": "50 % descuento – normativa municipal",
+      "15": "Pago parcial – normativa municipal",
+      "16": "Sin pago – servicios diarios sin pernocta",
+      "17": "Exención – entidades de interés público",
+      "18": "Exención – voluntarios en desastres naturales",
+      "19": "Exención – agentes de policía en servicio"
+    }
+  }
+}

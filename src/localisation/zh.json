@@ -1,0 +1,211 @@
+{
+  "app": {
+    "bookingFor": "为 {name} 的预订，订单号 {orderId}，来源：{referer}",
+    "earlyCheckInWarning": "您只能在入住前 4 天开始登记。您可以在 {date} 后进行登记"
+  },
+  "common": {
+    "back": "返回",
+    "next": "下一步",
+    "exit": "退出",
+    "error": "发生错误，请联系支持",
+    "close": "关闭",
+    "cancel": "取消",
+    "done": "完成"
+  },
+  "selectBooking": {
+    "haveBooking": "我有预订",
+    "checkOut": "退房",
+    "wantToBook": "我要预订"
+  },
+  "confirmation": {
+    "search": "搜索",
+    "information": "信息",
+    "rules": "规则",
+    "documents": "文件",
+    "payment": "付款",
+    "checkInDetails": "入住详情"
+  },
+  "instruction": {
+    "register": "您需要登记您的客人",
+    "pay": "并支付城市税",
+    "warning": "请注意，今天不是您的入住日期"
+  },
+  "payment": {
+    "debt": "您需支付 {debt} €",
+    "charges": "费用",
+    "payments": "付款记录",
+    "cash": "我无法使用银行卡付款",
+    "success": "感谢您的付款，您可以继续下一步",
+    "pay": "支付",
+    "total": "总计",
+    "cashAgree": "我同意",
+    "disagree": "我不同意该付款",
+    "disagreeHeader": "付款异议",
+    "payByCash": "现金支付",
+    "cancelAgree": "我同意",
+    "qrcode": "您可以扫描二维码以在手机上继续操作",
+    "details": "订单 {orderId} 的付款详情"
+  },
+  "photos": {
+    "takePhoto": "拍照",
+    "remove": "移除",
+    "upload": "上传",
+    "makePhotoTitle": "请拍摄护照或身份证照片",
+    "switch": "切换摄像头"
+  },
+  "search": {
+    "fullName": "全名",
+    "property": "物业",
+    "room": "房间",
+    "checkIn": "入住",
+    "checkOut": "退房",
+    "originalReferer": "来源",
+    "label": "请输入预订人姓氏或订单号",
+    "choose": "选择您的预订",
+    "restriction": "仅在入住前 4 天开放登记"
+  },
+  "bookingInfo": {
+    "header": "预订详情",
+    "roomNumber": "房号",
+    "checkIn": "入住",
+    "checkOut": "退房",
+    "fullName": "全名",
+    "originalReferer": "来源",
+    "smartLockCode": "智能门锁密码",
+    "call": "联系我们",
+    "rules": "规则",
+    "howToMakeIn": "如何进入",
+    "facilities": "设施",
+    "extras": "额外服务",
+    "debt": "欠款",
+    "photoDocuments": "您可以上传身份证或护照的照片",
+    "payDebt": "支付欠款"
+  },
+  "checkInDetails": {
+    "email": "请输入您的电子邮件",
+    "invalidEmail": "电子邮件格式无效",
+    "sent": "信息已发送至 {email}",
+    "information": "入住信息",
+    "askQuestion": "提出问题",
+    "feedback": "发送反馈",
+    "sendToEmail": "将此信息发送至我的邮箱"
+  },
+  "checkout": {
+    "search": "搜索",
+    "checkOutDetails": "退房详情"
+  },
+  "checkOutDetails": {
+    "askQuestion": "提出问题",
+    "feedback": "发送反馈",
+    "checkedOut": "我已退房"
+  },
+  "feedback": {
+    "sent": "您的消息已发送",
+    "validation": "消息不能为空"
+  },
+  "rules": {
+    "header": "住宿规则",
+    "agree": "我同意"
+  },
+  "tax": {
+    "guestLimit": "我们无法接待超过 {limit} 位客人",
+    "extraGuest": "需要为额外客人支付费用",
+    "lessDocs": "请为每位客人添加证件",
+    "makePhoto": "拍照"
+  },
+  "guide": {
+    "p0": "以下是文档图像尺寸和质量的要求：",
+    "p1": {
+      "title": "避免遮挡和扭曲",
+      "body": "请确保没有手或其他物体遮挡文件内容。护照页面应摆正，信息清晰可见。"
+    },
+    "p2": {
+      "title": "良好的光线",
+      "body": "良好的照明有助于识别。图片过暗或过亮都可能导致失败。"
+    },
+    "p3": {
+      "title": "避免反光",
+      "body": "反光会干扰识别，请避免使用闪光灯。"
+    },
+    "p4": {
+      "title": "清晰对焦",
+      "body": "图像应清晰，无模糊区域。"
+    },
+    "p5": {
+      "title": "角度控制",
+      "body": "文档倾斜角度不应超过 10 度。"
+    },
+    "p6": {
+      "title": "边距过小",
+      "body": "文档应占图像 70–80%。"
+    },
+    "p7": {
+      "title": "边距过大",
+      "body": "图像边缘空白不应超过 30%。"
+    },
+    "p8": {
+      "title": "对比度",
+      "body": "文档应与背景形成明显对比。"
+    },
+    "p9": {
+      "title": "图像分辨率",
+      "body": "建议使用至少为 Full HD（1920×1080）并带自动对焦的相机。"
+    }
+  },
+  "documents": {
+    "mandatory": "您需要在入住前为订单 {id} 注册所有客人",
+    "requirement": "仅需护照或身份证进行扫描",
+    "duplicateGuest": "您已为该客人添加了文件",
+    "guests": "已登记客人",
+    "recognizeError": "无法识别文件，请手动填写下面的表单",
+    "recognizeWarning": "无法识别，请检查照片并重试",
+    "partlyRecognize": "部分字段未识别，请手动填写",
+    "additionalInfo": "请补充客人信息"
+  },
+  "guest": {
+    "firstName": "名",
+    "lastName": "姓",
+    "dateOfBirth": "出生日期",
+    "pickADate": "选择日期",
+    "pickATime": "选择时间",
+    "gender": "性别",
+    "male": "男",
+    "female": "女",
+    "nationality": "国籍",
+    "documentType": "证件类型",
+    "passport": "护照",
+    "id": "身份证",
+    "documentNumber": "证件号码",
+    "add": "添加",
+    "checkOutDate": "退房日期",
+    "checkOutTime": "退房时间",
+    "cityTaxExemption": "城市税豁免",
+    "select": "选择",
+    "validation": {
+      "required": "请输入{field}",
+      "latinOnly": "Only latin characters are allowed",
+      "checkOutDate": "Check-out time no later than 11:00, {date}",
+      "exemptionDoc": "请提供确认城市税减免的文件"
+    },
+    "cityTaxExemptionDocument": "提供证明城市税减免的文件",
+    "cityTaxExemptionOptions": {
+      "0": "无豁免",
+      "1": "豁免 - 7 岁以下儿童",
+      "2": "豁免 - 医疗原因",
+      "3": "豁免 - 残障人士",
+      "4": "豁免 - 特殊儿童",
+      "5": "豁免 - 教育项目",
+      "7": "豁免 - 临时工作超过30天",
+      "8": "豁免 - 国际协议",
+      "10": "豁免 - 市政规定",
+      "11": "减免 50% - 7 至 18 岁",
+      "12": "减免 50% - 青年旅舍 IYHF",
+      "14": "减免 50% - 市政规定",
+      "15": "部分缴纳 - 市政规定",
+      "16": "无需缴纳 - 日间休息等非住宿服务",
+      "17": "豁免 - 公益组织成员",
+      "18": "豁免 - 灾害应急志愿者",
+      "19": "豁免 - 执勤警察"
+    }
+  }
+}

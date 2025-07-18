@@ -1,0 +1,211 @@
+{
+  "app": {
+    "bookingFor": "Rezerwacja dla {name}, numer rezerwacji {orderId}, źródło: {referer}",
+    "earlyCheckInWarning": "Możesz się zameldować TYLKO na 4 dni przed przyjazdem. Rejestracja będzie możliwa od {date}"
+  },
+  "common": {
+    "back": "Wstecz",
+    "next": "Następny krok",
+    "exit": "Wyjdź",
+    "error": "Wystąpił błąd, skontaktuj się z pomocą techniczną",
+    "close": "Zamknij",
+    "cancel": "Anuluj",
+    "done": "Gotowe"
+  },
+  "selectBooking": {
+    "haveBooking": "Mam rezerwację",
+    "checkOut": "Wymeldowanie",
+    "wantToBook": "Chcę zarezerwować"
+  },
+  "confirmation": {
+    "search": "Szukaj",
+    "information": "Informacje",
+    "rules": "Zasady",
+    "documents": "Dokumenty",
+    "payment": "Płatność",
+    "checkInDetails": "Szczegóły zameldowania"
+  },
+  "instruction": {
+    "register": "Musisz zarejestrować swoich gości",
+    "pay": "i zapłacić podatek miejski",
+    "warning": "Uwaga! Dzisiejszy dzień to nie jest data przyjazdu."
+  },
+  "payment": {
+    "debt": "Twój dług wynosi {debt} €",
+    "charges": "Opłaty",
+    "payments": "Płatności",
+    "cash": "Nie mogę zapłacić kartą",
+    "success": "Dziękujemy za płatność. Możesz przejść dalej",
+    "pay": "Zapłać",
+    "total": "Razem",
+    "cashAgree": "Zgadzam się",
+    "disagree": "Nie zgadzam się z płatnością",
+    "disagreeHeader": "Sprzeciw wobec płatności",
+    "payByCash": "Płatność gotówką",
+    "cancelAgree": "Zgadzam się",
+    "qrcode": "Zeskanuj kod QR, aby kontynuować na smartfonie",
+    "details": "Szczegóły płatności dla zamówienia {orderId}"
+  },
+  "photos": {
+    "takePhoto": "Zrób zdjęcie",
+    "remove": "Usuń",
+    "upload": "Prześlij",
+    "makePhotoTitle": "Zrób zdjęcie paszportu lub dowodu osobistego",
+    "switch": "Przełącz kamerę"
+  },
+  "search": {
+    "fullName": "Imię i nazwisko",
+    "property": "Obiekt",
+    "room": "Pokój",
+    "checkIn": "Zameldowanie",
+    "checkOut": "Wymeldowanie",
+    "originalReferer": "Oryginalne źródło",
+    "label": "Wpisz nazwisko lub numer rezerwacji",
+    "choose": "Wybierz rezerwację",
+    "restriction": "Rejestracja jest dostępna tylko 4 dni przed przyjazdem"
+  },
+  "bookingInfo": {
+    "header": "Szczegóły rezerwacji",
+    "roomNumber": "Numer pokoju",
+    "checkIn": "Zameldowanie",
+    "checkOut": "Wymeldowanie",
+    "fullName": "Imię i nazwisko",
+    "originalReferer": "Źródło",
+    "smartLockCode": "Kod zamka elektronicznego",
+    "call": "Zadzwoń do nas",
+    "rules": "Zasady",
+    "howToMakeIn": "Jak wejść",
+    "facilities": "Udogodnienia",
+    "extras": "Dodatki",
+    "debt": "Zadłużenie",
+    "photoDocuments": "Możesz dodać zdjęcie dowodu lub paszportu",
+    "payDebt": "Spłać zadłużenie"
+  },
+  "checkInDetails": {
+    "email": "Podaj swój e-mail",
+    "invalidEmail": "Nieprawidłowy adres e-mail",
+    "sent": "Informacja została wysłana na {email}",
+    "information": "Informacje o zameldowaniu",
+    "askQuestion": "Zadaj pytanie",
+    "feedback": "Wyślij opinię",
+    "sendToEmail": "Wyślij te informacje na mój e-mail"
+  },
+  "checkout": {
+    "search": "Szukaj",
+    "checkOutDetails": "Szczegóły wymeldowania"
+  },
+  "checkOutDetails": {
+    "askQuestion": "Zadaj pytanie",
+    "feedback": "Wyślij opinię",
+    "checkedOut": "Zostałem wymeldowany"
+  },
+  "feedback": {
+    "sent": "Wiadomość została wysłana",
+    "validation": "Wiadomość nie może być pusta"
+  },
+  "rules": {
+    "header": "Regulamin",
+    "agree": "Zgadzam się"
+  },
+  "tax": {
+    "guestLimit": "Nie możemy przyjąć więcej niż {limit} gości",
+    "extraGuest": "Dodatkowy gość podlega opłacie",
+    "lessDocs": "Nie zapomnij dodać dokumentu dla każdego gościa",
+    "makePhoto": "Zrób zdjęcie"
+  },
+  "guide": {
+    "p0": "Poniżej znajdują się wymagania dotyczące jakości i rozmiaru zdjęcia dokumentu:",
+    "p1": {
+      "title": "Przedmioty obce i zniekształcenia",
+      "body": "Upewnij się, że dokument jest czytelny i nic go nie zasłania."
+    },
+    "p2": {
+      "title": "Dobre oświetlenie",
+      "body": "Dobre światło poprawia rozpoznawanie tekstu. Unikaj cieni i refleksów."
+    },
+    "p3": {
+      "title": "Unikaj odbić światła",
+      "body": "Refleksy utrudniają rozpoznawanie. Nie używaj lampy błyskowej."
+    },
+    "p4": {
+      "title": "Ostrość i wyraźność",
+      "body": "Zdjęcie musi być ostre i dobrze widoczne."
+    },
+    "p5": {
+      "title": "Kąt nachylenia",
+      "body": "Dokument nie powinien być przechylony o więcej niż 10°."
+    },
+    "p6": {
+      "title": "Zbyt małe marginesy",
+      "body": "Dokument powinien zajmować 70–80% zdjęcia."
+    },
+    "p7": {
+      "title": "Zbyt duże marginesy",
+      "body": "Tło nie powinno zajmować więcej niż 30% zdjęcia."
+    },
+    "p8": {
+      "title": "Kontrast",
+      "body": "Dokument powinien wyraźnie odróżniać się od tła."
+    },
+    "p9": {
+      "title": "Rozdzielczość",
+      "body": "Użyj aparatu z rozdzielczością co najmniej Full HD (1920×1080) i autofokusem."
+    }
+  },
+  "documents": {
+    "mandatory": "Musisz zarejestrować wszystkich gości przed zameldowaniem dla rezerwacji {id}",
+    "requirement": "Wymagany jest tylko paszport lub dowód osobisty do zeskanowania",
+    "duplicateGuest": "Dokument dla tego gościa już został dodany",
+    "guests": "Zarejestrowani goście",
+    "recognizeError": "Nie udało się rozpoznać dokumentu. Uzupełnij formularz ręcznie",
+    "recognizeWarning": "Dokument nie został rozpoznany. Sprawdź zdjęcie i spróbuj ponownie",
+    "partlyRecognize": "Niektóre pola nie zostały rozpoznane. Uzupełnij je ręcznie",
+    "additionalInfo": "Dodaj dodatkowe informacje o gościu"
+  },
+  "guest": {
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "dateOfBirth": "Data urodzenia",
+    "pickADate": "Wybierz datę",
+    "pickATime": "Wybierz godzinę",
+    "gender": "Płeć",
+    "male": "Mężczyzna",
+    "female": "Kobieta",
+    "nationality": "Obywatelstwo",
+    "documentType": "Typ dokumentu",
+    "passport": "Paszport",
+    "id": "Dowód osobisty",
+    "documentNumber": "Numer dokumentu",
+    "add": "Dodaj",
+    "checkOutDate": "Data wymeldowania",
+    "checkOutTime": "Godzina wymeldowania",
+    "cityTaxExemption": "Zwolnienie z podatku miejskiego",
+    "select": "Wybierz",
+    "validation": {
+      "required": "Wprowadź {field}",
+      "latinOnly": "Only latin characters are allowed",
+      "checkOutDate": "Check-out time no later than 11:00, {date}",
+      "exemptionDoc": "Dodaj dokument potwierdzający zwolnienie z podatku miejskiego"
+    },
+    "cityTaxExemptionDocument": "Dodaj dokument potwierdzający zwolnienie z podatku miejskiego",
+    "cityTaxExemptionOptions": {
+      "0": "Brak zwolnienia",
+      "1": "Zwolnienie – dzieci do 7 lat",
+      "2": "Zwolnienie – względy medyczne",
+      "3": "Zwolnienie – niepełnosprawność",
+      "4": "Zwolnienie – dzieci z potrzebami specjalnymi",
+      "5": "Zwolnienie – program edukacyjny",
+      "7": "Zwolnienie – praca tymczasowa > 30 dni",
+      "8": "Zwolnienie – umowa międzynarodowa",
+      "10": "Zwolnienie – przepisy gminne",
+      "11": "50% zniżki – osoby w wieku 7–18 lat",
+      "12": "50% zniżki – schroniska młodzieżowe IYHF",
+      "14": "50% zniżki – przepisy gminne",
+      "15": "Częściowa opłata – przepisy gminne",
+      "16": "Brak opłaty – usługi dzienne",
+      "17": "Zwolnienie – organizacje pożytku publicznego",
+      "18": "Zwolnienie – wolontariusze w sytuacjach kryzysowych",
+      "19": "Zwolnienie – funkcjonariusze policji na służbie"
+    }
+  }
+}

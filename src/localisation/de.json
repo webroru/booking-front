@@ -1,0 +1,211 @@
+{
+  "app": {
+    "bookingFor": "Buchung für {name}, Buchungsnummer {orderId}, Quelle: {referer}",
+    "earlyCheckInWarning": "Die Anmeldung ist NUR 4 Tage vor Anreise möglich. Ab {date} verfügbar"
+  },
+  "common": {
+    "back": "Zurück",
+    "next": "Nächster Schritt",
+    "exit": "Beenden",
+    "error": "Ein Fehler ist aufgetreten. Bitte kontaktieren Sie den Support",
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "done": "Fertig"
+  },
+  "selectBooking": {
+    "haveBooking": "Ich habe eine Buchung",
+    "checkOut": "Abreise",
+    "wantToBook": "Ich möchte buchen"
+  },
+  "confirmation": {
+    "search": "Suchen",
+    "information": "Informationen",
+    "rules": "Regeln",
+    "documents": "Dokumente",
+    "payment": "Zahlung",
+    "checkInDetails": "Check-in-Details"
+  },
+  "instruction": {
+    "register": "Sie müssen Ihre Gäste registrieren",
+    "pay": "und die Kurtaxe bezahlen",
+    "warning": "Bitte beachten Sie: Heute ist nicht Ihr Anreisetag."
+  },
+  "payment": {
+    "debt": "Ihr ausstehender Betrag beträgt {debt} €",
+    "charges": "Gebühren",
+    "payments": "Zahlungen",
+    "cash": "Ich kann nicht mit Karte bezahlen",
+    "success": "Vielen Dank für Ihre Zahlung. Sie können mit dem nächsten Schritt fortfahren",
+    "pay": "Bezahlen",
+    "total": "Gesamt",
+    "cashAgree": "Ich stimme zu",
+    "disagree": "Ich stimme der Zahlung nicht zu",
+    "disagreeHeader": "Zahlung nicht akzeptiert",
+    "payByCash": "Barzahlung",
+    "cancelAgree": "Ich stimme zu",
+    "qrcode": "Scannen Sie den QR-Code, um mit Ihrem Smartphone fortzufahren",
+    "details": "Zahlungsdetails für Bestellung {orderId}"
+  },
+  "photos": {
+    "takePhoto": "Foto aufnehmen",
+    "remove": "Entfernen",
+    "upload": "Hochladen",
+    "makePhotoTitle": "Fotografieren Sie Ihren Reisepass oder Personalausweis",
+    "switch": "Kamera wechseln"
+  },
+  "search": {
+    "fullName": "Vollständiger Name",
+    "property": "Unterkunft",
+    "room": "Zimmer",
+    "checkIn": "Anreise",
+    "checkOut": "Abreise",
+    "originalReferer": "Ursprüngliche Quelle",
+    "label": "Geben Sie den Nachnamen oder die Buchungsnummer ein",
+    "choose": "Wählen Sie Ihre Buchung",
+    "restriction": "Die Registrierung ist nur 4 Tage vor Anreise möglich"
+  },
+  "bookingInfo": {
+    "header": "Buchungsdetails",
+    "roomNumber": "Zimmernummer",
+    "checkIn": "Anreise",
+    "checkOut": "Abreise",
+    "fullName": "Vollständiger Name",
+    "originalReferer": "Quelle",
+    "smartLockCode": "Smart-Lock-Code",
+    "call": "Rufen Sie uns an",
+    "rules": "Hausordnung",
+    "howToMakeIn": "Zugang erhalten",
+    "facilities": "Ausstattung",
+    "extras": "Zusatzleistungen",
+    "debt": "Schulden",
+    "photoDocuments": "Sie können Fotos Ihres Ausweises oder Reisepasses hochladen",
+    "payDebt": "Schulden begleichen"
+  },
+  "checkInDetails": {
+    "email": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+    "invalidEmail": "Ungültige E-Mail-Adresse",
+    "sent": "Informationen wurden an {email} gesendet",
+    "information": "Check-in-Informationen",
+    "askQuestion": "Frage stellen",
+    "feedback": "Feedback senden",
+    "sendToEmail": "Diese Informationen an meine E-Mail-Adresse senden"
+  },
+  "checkout": {
+    "search": "Suchen",
+    "checkOutDetails": "Abreisedetails"
+  },
+  "checkOutDetails": {
+    "askQuestion": "Frage stellen",
+    "feedback": "Feedback senden",
+    "checkedOut": "Ich habe ausgecheckt"
+  },
+  "feedback": {
+    "sent": "Ihre Nachricht wurde gesendet",
+    "validation": "Die Nachricht darf nicht leer sein"
+  },
+  "rules": {
+    "header": "Hausregeln",
+    "agree": "Ich stimme zu"
+  },
+  "tax": {
+    "guestLimit": "Wir können nicht mehr als {limit} Gäste aufnehmen",
+    "extraGuest": "Zusätzliche Gäste müssen bezahlt werden",
+    "lessDocs": "Bitte fügen Sie für jeden Gast ein Dokument hinzu",
+    "makePhoto": "Foto aufnehmen"
+  },
+  "guide": {
+    "p0": "Die folgenden Anforderungen gelten für Dokumentenfotos:",
+    "p1": {
+      "title": "Fremdkörper und Verzerrungen",
+      "body": "Stellen Sie sicher, dass keine Hände oder Objekte die Daten verdecken. Seiten müssen lesbar sein."
+    },
+    "p2": {
+      "title": "Gute Beleuchtung",
+      "body": "Gute Beleuchtung verbessert die Texterkennung. Vermeiden Sie zu dunkle oder helle Bilder."
+    },
+    "p3": {
+      "title": "Reflexionen vermeiden",
+      "body": "Reflexionen stören die Erkennung. Verwenden Sie möglichst keinen Blitz."
+    },
+    "p4": {
+      "title": "Fokus und Schärfe",
+      "body": "Das Bild muss klar und scharf sein."
+    },
+    "p5": {
+      "title": "Winkel",
+      "body": "Das Dokument sollte nicht mehr als 10 Grad geneigt sein."
+    },
+    "p6": {
+      "title": "Zu kleine Ränder",
+      "body": "Das Dokument sollte 70–80 % des Bildes einnehmen."
+    },
+    "p7": {
+      "title": "Zu große Ränder",
+      "body": "Der leere Raum sollte maximal 30 % betragen."
+    },
+    "p8": {
+      "title": "Kontrast",
+      "body": "Das Dokument sollte sich deutlich vom Hintergrund abheben."
+    },
+    "p9": {
+      "title": "Bildauflösung",
+      "body": "Verwenden Sie mindestens eine Full-HD-Kamera (1920×1080) mit Autofokus."
+    }
+  },
+  "documents": {
+    "mandatory": "Alle Gäste müssen vor der Anreise für Buchung {id} registriert werden",
+    "requirement": "Nur ein Reisepass oder Personalausweis wird benötigt",
+    "duplicateGuest": "Für diesen Gast wurde bereits ein Dokument hinzugefügt",
+    "guests": "Registrierte Gäste",
+    "recognizeError": "Dokument konnte nicht erkannt werden. Bitte füllen Sie das Formular unten aus",
+    "recognizeWarning": "Dokument nicht erkannt. Überprüfen Sie das Foto und versuchen Sie es erneut",
+    "partlyRecognize": "Einige Felder wurden nicht erkannt. Bitte manuell ausfüllen",
+    "additionalInfo": "Bitte geben Sie zusätzliche Informationen zum Gast ein"
+  },
+  "guest": {
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "dateOfBirth": "Geburtsdatum",
+    "pickADate": "Datum auswählen",
+    "pickATime": "Zeit auswählen",
+    "gender": "Geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "nationality": "Staatsangehörigkeit",
+    "documentType": "Dokumenttyp",
+    "passport": "Reisepass",
+    "id": "Personalausweis",
+    "documentNumber": "Dokumentnummer",
+    "add": "Hinzufügen",
+    "checkOutDate": "Abreisedatum",
+    "checkOutTime": "Abreisezeit",
+    "cityTaxExemption": "Befreiung von der Kurtaxe",
+    "select": "Auswählen",
+    "validation": {
+      "required": "Bitte geben Sie {field} ein",
+      "latinOnly": "Only latin characters are allowed",
+      "checkOutDate": "Check-out time no later than 11:00, {date}",
+      "exemptionDoc": "Bitte fügen Sie ein Dokument hinzu, das die Befreiung von der Kurtaxe bestätigt"
+    },
+    "cityTaxExemptionDocument": "Bitte fügen Sie ein Dokument hinzu, das die Befreiung von der Kurtaxe bestätigt",
+    "cityTaxExemptionOptions": {
+      "0": "Keine Befreiung",
+      "1": "Befreiung – Kinder bis 7 Jahre",
+      "2": "Befreiung – aus medizinischen Gründen",
+      "3": "Befreiung – Behinderung",
+      "4": "Befreiung – besondere Bedürfnisse",
+      "5": "Befreiung – Bildungsprogramm",
+      "7": "Befreiung – befristete Arbeit über 30 Tage",
+      "8": "Befreiung – internationales Abkommen",
+      "10": "Befreiung – kommunale Regelung",
+      "11": "50 % Ermäßigung – Personen von 7 bis 18 Jahren",
+      "12": "50 % Ermäßigung – Jugendherbergen (IYHF)",
+      "14": "50 % Ermäßigung – kommunale Regelung",
+      "15": "Teilzahlung – kommunale Regelung",
+      "16": "Keine Zahlung – Tagesaufenthalte usw.",
+      "17": "Befreiung – gemeinnützige Organisationen",
+      "18": "Befreiung – Freiwillige im Katastrophenschutz",
+      "19": "Befreiung – diensthabende Polizeibeamte"
+    }
+  }
+}

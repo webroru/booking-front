@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
 import { searchBookingApi, updateBookingApi, sendMessageApi } from '@/api/booking';
-import type { Booking } from '@/interfaces/booking.ts';
+import type { Booking } from '@/types/booking.ts';
 
 export const useBookingStore = defineStore('booking', () => {
   const booking = reactive<Booking>({
