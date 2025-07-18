@@ -23,7 +23,8 @@
       data.value = await searchBooking(query.value);
       if (data.value.length === 1) {
         setBookings(data.value);
-        syncPhotos();
+        setCurrentBooking(data.value[0]);
+        await syncPhotos();
       }
     } catch (error) {
       await ElMessageBox.alert(t('common.error'), 'Error', {
