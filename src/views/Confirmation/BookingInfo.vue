@@ -38,11 +38,10 @@
         <el-descriptions-item :label="$t('bookingInfo.debt')">{{ Math.max(booking.debt, 0) }} €</el-descriptions-item>
         <el-descriptions-item :label="$t('bookingInfo.smartLockCode')"><b>{{ booking.passCode }}</b></el-descriptions-item>
       </el-descriptions>
-
-      <p>{{ $t('bookingInfo.photoDocuments') }}</p>
-      <documents />
     </el-col>
   </el-row>
+  <p>{{ $t('bookingInfo.photoDocuments') }}</p>
+  <documents />
   <router-link v-if="hasDebt()" :to="`/confirmation/${bookings[0].orderId}/payment`">
     <el-button type="primary">{{ $t('bookingInfo.payDebt') }}</el-button>
   </router-link>
