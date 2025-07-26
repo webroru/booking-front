@@ -170,6 +170,7 @@
             v-model="localGuest.dateOfBirth"
             type="date"
             :placeholder="t('guest.pickADate')"
+            value-format="YYYY-MM-DD"
             style="width: 100%"
         />
     </el-form-item>

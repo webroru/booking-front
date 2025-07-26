@@ -18,6 +18,7 @@
   const route = useRoute();
 
   const initialGuest = {
+    id: null,
     firstName: '',
     lastName: '',
     dateOfBirth: '',
