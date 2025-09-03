@@ -128,7 +128,7 @@
   };
 
   const submit = (form) => {
-    if (localGuest.cityTaxExemption > 1 && localGuest.cityTaxExemption !== 16 && !hasExemptionPhoto.value) {
+    if (![0, 1, 11, 16].includes(localGuest.cityTaxExemption) && !hasExemptionPhoto.value) {
       ElMessage.error(t('guest.validation.exemptionDoc'));
       return;
     }
