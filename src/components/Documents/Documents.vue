@@ -76,7 +76,7 @@
       message: t('documents.additionalInfo'),
       type: 'info',
     });
-    guest.value = data;
+    Object.assign(guest.value, data);
     showGuestForm.value = true;
   };
 
