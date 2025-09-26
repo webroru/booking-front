@@ -38,9 +38,9 @@
         gender: getValueFromFieldList(fieldList, 'Sex'),
         firstName: getValueFromFieldList(fieldList, 'Given Names'),
         lastName: getValueFromFieldList(fieldList, 'Surname'),
-        nationality: getValueFromFieldList(fieldList, 'Nationality'),
+        //nationality: getValueFromFieldList(fieldList, 'Nationality'),
         dateOfBirth: getValueFromFieldList(fieldList, 'Date of Birth'),
-        documentType: getValueFromFieldList(fieldList, 'Document Class Code'),
+        //documentType: getValueFromFieldList(fieldList, 'Document Class Code'),
         documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
       };
       emit('recognize', data);
