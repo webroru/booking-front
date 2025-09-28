@@ -66,7 +66,7 @@
       };
       window.RegulaDocumentSDK.imageProcessParam = {
         processParam: {
-          scenario: 'MrzAndLocate',
+          scenario: 'Mrz',
         },
       };
 
@@ -87,7 +87,7 @@
       close-button="false"
       capture-button="false"
       copyright="false"
-      multipage-processing="true"
+      multipage-processing="false"
       start-screen="true"
       finish-screen="false"
   />
