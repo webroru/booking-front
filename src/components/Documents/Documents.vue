@@ -41,24 +41,23 @@
 
   const getAges = guest => new Date().getFullYear() - new Date(guest.dateOfBirth).getFullYear();
 
-  const bookedNights = () => Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24);
-  const showExtraPay = () => extraGuests() > 0 && extraPayment();
-
-  const confirmedGuests = () => {
+  const confirmedGuests = computed(() => {
     let confirmedGuests = adults.value + children.value + preschoolers.value;
     if (toddlers.value > 1) {
       confirmedGuests += toddlers.value - 1;
     }
     return confirmedGuests;
-  };
+  });
 
-  const totalGuestsAmount = bookings.reduce((total, booking) => total + (booking.guestsAmount || 0), 0);
-  const totalCapacity = bookings.reduce((total, booking) => total + (booking.capacity || 0), 0);
-  const isExtraGuest = () => confirmedGuests() > totalGuestsAmount;
-  const extraGuests = () => confirmedGuests() - totalGuestsAmount;
-  const isGuestLimit = () => confirmedGuests() > totalCapacity + 2;
-  const isLessDocs = () => totalGuestsAmount > adults.value + children.value + preschoolers.value + toddlers.value;
-  const extraPayment = () => (Math.min(totalCapacity, confirmedGuests()) - totalGuestsAmount) * bookedNights() * booking.extraPerson;
+  const totalGuestsAmount = computed(() => bookings.reduce((total, booking) => total + (booking.guestsAmount || 0), 0));
+  const totalCapacity = computed(() => bookings.reduce((total, booking) => total + (booking.capacity || 0), 0));
+  const isExtraGuest = computed(() => confirmedGuests.value > totalGuestsAmount.value);
+  const extraGuests = computed(() => confirmedGuests.value - totalGuestsAmount.value);
+  const isGuestLimit = computed(() => confirmedGuests.value > totalCapacity.value + 2);
+  const isLessDocs = computed(() => totalGuestsAmount.value > adults.value + children.value + preschoolers.value + toddlers.value);
+  const extraPayment = computed(() => (Math.min(totalCapacity.value, confirmedGuests.value) - totalGuestsAmount.value) * bookedNights.value * booking.extraPerson);
+  const bookedNights = computed(() => Math.ceil((Date.parse(booking.checkOutDate) - Date.parse(booking.checkInDate)) / 1000 / 60 / 60 / 24));
+  const showExtraPay = computed(() => extraGuests.value > 0 && extraPayment.value);
 
   let isGuestLimitShow = false;
   let isExtraGuestShow = false;
@@ -150,18 +149,18 @@
   };
 
   const update = () => {
-    if (isGuestLimit() && !isGuestLimitShow) {
+    if (isGuestLimit.value && !isGuestLimitShow) {
       isGuestLimitShow = true;
       setTimeout(() => {
         ElNotification({
           title: 'Warning',
-          message: t('tax.guestLimit', { limit: totalCapacity }),
+          message: t('tax.guestLimit', { limit: totalCapacity.value }),
           type: 'warning',
           onClose: () => isGuestLimitShow = false,
         });
       }, 0);
     }
-    if (isExtraGuest() && !isExtraGuestShow) {
+    if (isExtraGuest.value && !isExtraGuestShow) {
       isExtraGuestShow = true;
       setTimeout(() => {
         ElNotification({
@@ -172,7 +171,7 @@
         });
       }, 0);
     }
-    if (isLessDocs() && !isLessDocsShow) {
+    if (isLessDocs.value && !isLessDocsShow) {
       isLessDocsShow = true;
       setTimeout(() => {
         ElNotification({
@@ -214,7 +213,7 @@
           <guest-name v-if="guest.documentNumber" :guest="guest" :index="index" @remove="onGuestRemove" :key="guest.documentNumber" />
         </template>
       </div>
-      <p v-if="showExtraPay()"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment() }) }}</strong></p>
+      <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment }) }}</strong></p>
       <router-link v-if="route.path.includes('documents')" :to="`/confirmation/${booking.orderId}/` + (booking.debt > 0 ? 'payment' : 'booking-info')" :class="{ disabled: isNextDisabled }">
         <el-button :disabled="isNextDisabled"><b>{{ $t('common.next') }}</b></el-button>
       </router-link>
