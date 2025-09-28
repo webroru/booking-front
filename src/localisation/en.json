@@ -108,7 +108,7 @@
     "agree": "I agree"
   },
   "tax": {
-    "guestLimit": "We can't revive guest more than {limit} guests",
+    "guestLimit": "We can't accommodate more than {limit} guests",
     "extraGuest": "You will be required to pay for an additional guest",
     "lessDocs": "Don't forget to add a document for each guest",
     "makePhoto": "Make a photo"
