@@ -87,7 +87,7 @@
       close-button="false"
       capture-button="false"
       copyright="false"
-      multipage-processing="false"
+      multipage-processing="true"
       start-screen="true"
       finish-screen="false"
   />
