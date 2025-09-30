@@ -61,7 +61,7 @@
       window.RegulaDocumentSDK = new DocumentReaderService();
       window.RegulaDocumentSDK.recognizerProcessParam = {
         processParam: {
-          scenario: 'MrzAndLocate',
+          scenario: 'Mrz',
         },
       };
       window.RegulaDocumentSDK.imageProcessParam = {
