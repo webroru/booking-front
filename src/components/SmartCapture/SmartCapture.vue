@@ -2,6 +2,7 @@
   import { onMounted, ref, nextTick } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { defineComponents, DocumentReaderService, ErrorTypes } from '@regulaforensics/vp-frontend-document-components';
+  import iso from 'iso-3166-1';
 
   const { locale } = useI18n({ useScope: 'global' });
   const emit = defineEmits(['recognize', 'error']);
@@ -38,7 +39,7 @@
         gender: getValueFromFieldList(fieldList, 'Sex'),
         firstName: getValueFromFieldList(fieldList, 'Given Names'),
         lastName: getValueFromFieldList(fieldList, 'Surname'),
-        //nationality: getValueFromFieldList(fieldList, 'Nationality'),
+        nationality: iso.whereAlpha3(getValueFromFieldList(fieldList, 'Nationality code')).alpha2,
         dateOfBirth: getValueFromFieldList(fieldList, 'Date of Birth'),
         documentType: getValueFromFieldList(fieldList, 'Document Class Code') === 'P' ? 'PASSPORT' : 'ID',
         documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
