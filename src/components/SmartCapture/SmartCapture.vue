@@ -39,7 +39,7 @@
         gender: getValueFromFieldList(fieldList, 'Sex'),
         firstName: getValueFromFieldList(fieldList, 'Given Names'),
         lastName: getValueFromFieldList(fieldList, 'Surname'),
-        nationality: iso.whereAlpha3(getValueFromFieldList(fieldList, 'Nationality code')).alpha2,
+        nationality: iso.whereAlpha3(getValueFromFieldList(fieldList, 'Nationality Code')).alpha2,
         dateOfBirth: getValueFromFieldList(fieldList, 'Date of Birth'),
         documentType: getValueFromFieldList(fieldList, 'Document Class Code') === 'P' ? 'PASSPORT' : 'ID',
         documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
