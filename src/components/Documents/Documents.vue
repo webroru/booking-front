@@ -7,6 +7,7 @@
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
   import GuestName from '@/components/Documents/GuestName.vue';
   import GuestForm from '@/components/Documents/GuestForm.vue';
+  import NextButton from '@/components/Confirmation/NextButton.vue';
 
   const store = useBookingStore();
   const { booking, bookings, updateBooking } = store;
@@ -214,9 +215,7 @@
         </template>
       </div>
       <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment }) }}</strong></p>
-      <router-link v-if="route.path.includes('documents')" :to="`/confirmation/${booking.orderId}/` + (booking.debt > 0 ? 'payment' : 'booking-info')" :class="{ disabled: isNextDisabled }">
-        <el-button :disabled="isNextDisabled"><b>{{ $t('common.next') }}</b></el-button>
-      </router-link>
+      <next-button :disabled="isNextDisabled" />
     </el-col>
   </el-row>
 </template>

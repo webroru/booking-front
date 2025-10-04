@@ -23,11 +23,12 @@
 
   const nextStep = () => {
     let stepIndex = currentStep();
+    const getDebt = () => Math.max(bookings.reduce((debt, booking) => (debt + booking.debt), 0), 0);
     if (bookings.every(booking => booking.checkIn) && stepIndex === 0) {
       return `/confirmation/${booking?.orderId}/booking-info`;
     }
     stepIndex++;
-    if (step[stepIndex] === 'payment' && bookings.every(booking => booking.debt <= 0)) {
+    if (step[stepIndex] === 'payment' && getDebt() === 0) {
       stepIndex++;
     }
     if (stepIndex < 0) {
