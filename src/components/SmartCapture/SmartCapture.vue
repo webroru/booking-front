@@ -40,7 +40,7 @@
         lastName: getValueFromFieldList(fieldList, 'Surname'),
         //nationality: getValueFromFieldList(fieldList, 'Nationality'),
         dateOfBirth: getValueFromFieldList(fieldList, 'Date of Birth'),
-        //documentType: getValueFromFieldList(fieldList, 'Document Class Code'),
+        documentType: getValueFromFieldList(fieldList, 'Document Class Code') === 'P' ? 'PASSPORT' : 'ID',
         documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
       };
       emit('recognize', data);
