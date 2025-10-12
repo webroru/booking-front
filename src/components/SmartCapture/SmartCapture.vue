@@ -72,7 +72,7 @@
       };
 
       await defineComponents();
-      await window.RegulaDocumentSDK.initialize();
+      await window.RegulaDocumentSDK.initialize({ license: 'AAEAAA6b0qhEAKl3mXU6My41GU8ma9KFMyn+JYK+Z+M0CHWrd8yXrkjpW/bAzQC+tc8WWSyC6q/erl91ue8Yvr83Qgcq1M0etGZObTG16O2TgsLcV/YZa+j+DffGpI9FETQYK/RayniAAQ9t+qEJnw23N0qHXz3NjzZZnDwMH2aCXux+Gte5QID+06jmm6VQWP7QhMbq7Y5X62wB1pVyomzBeO/9CBDTOAJBz/9o1uAHYItPY1a3E8R3NJhYiPi9FTIycIWBAqBh6Nt6dDgmVYdBt99TrNU+3+qmsJNPBDsFQr4ubJJGTZnXuqpdLTfRLaxa/NliFy+uzo8d4/GpCCbIA8zkAAAAAAAAELUgEXSaO4XvYL3XaBlXi55yUZqcJHTYHkzu5lmKatMV6Ryun270DkBlORYsMtYitWNiFhsUPhGf8PkfYeC7PwU6VVwjshhaeRhbwE0oFOS+XsJ8Qv4QJFD19pV7nc0iBNnt6Ok1erduyQ9H4BHI2rVaVVq0VtJeoEce3HogU5p3XASdDCu1XVUoneVAbXF4oI4kAaFY+kIjJin/UNUOGSq5jbBKziRtGha64GrTch+IdofbTWdavxdd7WeL3eAzx5DLM0IYptJvGO9xAD1+ulFA3q178JkJBMY24W0sB03a' });
     } catch (error) {
       console.error('Error initializing RegulaDocumentSDK:', error);
       emit('error', 'fatal');
