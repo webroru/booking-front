@@ -63,7 +63,7 @@
         return;
       }
 
-      const selectedBooking = bookings.find(booking => booking.orderId === (bookings[0].groupId ? bookings[0].groupId : orderId));
+      const selectedBooking = bookings.find(booking => booking.orderId === (bookings[0].groupId ? bookings[0].groupId : orderId)) ?? bookings[0];
       setBookings(bookings);
       setCurrentBooking(selectedBooking);
       if (orderId !== selectedBooking.orderId) {
