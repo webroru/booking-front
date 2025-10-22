@@ -32,9 +32,26 @@
       ErrorTypes.BAD_CONFIGURATION,
     ];
 
-    if (event.detail.data.status === 1 && event.detail.data.response.text !== undefined) {
-      const fieldList = event.detail.data.response.text.fieldList;
+    if (event.detail.data.status === 0 && errors.includes(event.detail.data.reason)) {
+      emit('error', 'fatal');
+    } else {
+      emit('error');
+    }
+    reinitReader();
+  };
 
+  const getValueFromFieldList = (fieldList, fieldName) => {
+    return fieldList.find(item => item.fieldName === fieldName)?.value;
+  };
+
+  const recognizeListener = (response) => {
+    const hasMrzPosition = Array.isArray(response?.lowLvlResponse?.ContainerList?.List) &&
+        response.lowLvlResponse.ContainerList.List.some(
+            item => item?.MrzPosition !== undefined
+        );
+
+    if (hasMrzPosition) {
+      const fieldList = response.text.fieldList;
       const data = {
         gender: getValueFromFieldList(fieldList, 'Sex'),
         firstName: getValueFromFieldList(fieldList, 'Given Names'),
@@ -45,16 +62,8 @@
         documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
       };
       emit('recognize', data);
-    } else if (event.detail.data.status === 0 && errors.includes(event.detail.data.reason)) {
-      emit('error', 'fatal');
-    } else {
-      emit('error');
+      reinitReader();
     }
-    reinitReader();
-  };
-
-  const getValueFromFieldList = (fieldList, fieldName) => {
-    return fieldList.find(item => item.fieldName === fieldName)?.value;
   };
 
   onMounted(async () => {
@@ -70,9 +79,10 @@
           scenario: 'MrzAndLocate',
         },
       };
+      window.RegulaDocumentSDK.recognizeListener = recognizeListener;
 
       await defineComponents();
-      await window.RegulaDocumentSDK.initialize({ license: 'AAEAAA6b0qhEAKl3mXU6My41GU8ma9KFMyn+JYK+Z+M0CHWrd8yXrkjpW/bAzQC+tc8WWSyC6q/erl91ue8Yvr83Qgcq1M0etGZObTG16O2TgsLcV/YZa+j+DffGpI9FETQYK/RayniAAQ9t+qEJnw23N0qHXz3NjzZZnDwMH2aCXux+Gte5QID+06jmm6VQWP7QhMbq7Y5X62wB1pVyomzBeO/9CBDTOAJBz/9o1uAHYItPY1a3E8R3NJhYiPi9FTIycIWBAqBh6Nt6dDgmVYdBt99TrNU+3+qmsJNPBDsFQr4ubJJGTZnXuqpdLTfRLaxa/NliFy+uzo8d4/GpCCbIA8zkAAAAAAAAELUgEXSaO4XvYL3XaBlXi55yUZqcJHTYHkzu5lmKatMV6Ryun270DkBlORYsMtYitWNiFhsUPhGf8PkfYeC7PwU6VVwjshhaeRhbwE0oFOS+XsJ8Qv4QJFD19pV7nc0iBNnt6Ok1erduyQ9H4BHI2rVaVVq0VtJeoEce3HogU5p3XASdDCu1XVUoneVAbXF4oI4kAaFY+kIjJin/UNUOGSq5jbBKziRtGha64GrTch+IdofbTWdavxdd7WeL3eAzx5DLM0IYptJvGO9xAD1+ulFA3q178JkJBMY24W0sB03a' });
+      await window.RegulaDocumentSDK.initialize();
     } catch (error) {
       console.error('Error initializing RegulaDocumentSDK:', error);
       emit('error', 'fatal');
