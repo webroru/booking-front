@@ -32,7 +32,9 @@
       ErrorTypes.BAD_CONFIGURATION,
     ];
 
-    if (event.detail.data.status === 0 && errors.includes(event.detail.data.reason)) {
+    if (event.detail.data.status === 1 && event.detail.data.response.text !== undefined) {
+      emit('recognize', getDateFromFieldList(event.detail.data.response.text.fieldList));
+    } else if (event.detail.data.status === 0 && errors.includes(event.detail.data.reason)) {
       emit('error', 'fatal');
     } else {
       emit('error');
@@ -51,19 +53,21 @@
         );
 
     if (hasMrzPosition) {
-      const fieldList = response.text.fieldList;
-      const data = {
-        gender: getValueFromFieldList(fieldList, 'Sex'),
-        firstName: getValueFromFieldList(fieldList, 'Given Names'),
-        lastName: getValueFromFieldList(fieldList, 'Surname'),
-        nationality: countryToAlpha2(getValueFromFieldList(fieldList, 'Nationality')),
-        dateOfBirth: getValueFromFieldList(fieldList, 'Date of Birth'),
-        documentType: getValueFromFieldList(fieldList, 'Document Class Code') === 'P' ? 'PASSPORT' : 'ID',
-        documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
-      };
-      emit('recognize', data);
+      emit('recognize', getDateFromFieldList(response.text.fieldList));
       reinitReader();
     }
+  };
+
+  const getDateFromFieldList = (fieldList) => {
+    return {
+      gender: getValueFromFieldList(fieldList, 'Sex'),
+      firstName: getValueFromFieldList(fieldList, 'Given Names'),
+      lastName: getValueFromFieldList(fieldList, 'Surname'),
+      nationality: countryToAlpha2(getValueFromFieldList(fieldList, 'Nationality')),
+      dateOfBirth: getValueFromFieldList(fieldList, 'Date of Birth'),
+      documentType: getValueFromFieldList(fieldList, 'Document Class Code') === 'P' ? 'PASSPORT' : 'ID',
+      documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
+    };
   };
 
   onMounted(async () => {
