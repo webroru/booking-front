@@ -1,19 +1,13 @@
 <script setup>
-  import { ref } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import Rules from '@/components/Rules.vue';
 
   const bookingStore = useBookingStore();
-  const { bookings, updateBooking } = bookingStore;
-  const isRuleAccepted = ref(false);
+  const { booking, updateBooking } = bookingStore;
 
-  const acceptRule = (isRuleAccepted) => {
-    bookings.forEach(async booking => {
-      booking.isRuleAccepted = isRuleAccepted;
-      await updateBooking(booking);
-    });
+  const acceptRule = async () => {
+    await updateBooking(booking);
   };
-  isRuleAccepted.value = bookings.every(booking => booking.isRuleAccepted);
 </script>
 
 <template>
@@ -21,8 +15,8 @@
   <Rules />
   <div>
     <el-checkbox
-      v-model="isRuleAccepted"
-      @change="acceptRule(isRuleAccepted)"
+      v-model="booking.isRuleAccepted"
+      @change="acceptRule()"
       :label="$t('rules.agree')"
       size="large" />
   </div>
