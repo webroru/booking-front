@@ -6,7 +6,7 @@
   import PrevButton from '@/components/Confirmation/PrevButton.vue';
 
   const bookingStore = useBookingStore();
-  const { bookings } = bookingStore;
+  const { booking, bookings } = bookingStore;
 
   const route = useRoute();
   const active = computed(() => {
@@ -28,7 +28,7 @@
     const bookingHasNotBeenSelected = bookings.length === 0;
     const isBookingPaid = bookings.every(booking => ['paid', 'paid by cash'].includes(booking.paymentStatus));
     const bookingHasNotBeenPaid = active.value === 4 && !isBookingPaid;
-    const bookingRuleHasNotBeenAccepted = active.value === 2 && !bookings.every(booking => booking.isRuleAccepted);
+    const bookingRuleHasNotBeenAccepted = active.value === 2 && !booking.isRuleAccepted;
     const guests = bookings.reduce((total, booking) => total + booking.guests.length, 0);
     const guestsWereNotSpecified = active.value === 3 && guests === 0;
 
