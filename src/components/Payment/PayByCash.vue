@@ -9,7 +9,7 @@
   });
 
   const bookingStore = useBookingStore();
-  const { bookings, updateBooking } = bookingStore;
+  const { booking, updateBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { t } = useI18n();
   const { info } = infoStore;
@@ -17,12 +17,10 @@
   const show = ref(false);
   const checked = ref(false);
 
-  const handle = () => {
-    if (bookings.every(booking => booking.paymentStatus !== 'paid')) {
-      bookings.forEach(async booking => {
-        booking.paymentStatus = checked.value ? 'paid by cash' : '';
-        await updateBooking(booking);
-      });
+  const handle = async () => {
+    if (booking.paymentStatus !== 'paid') {
+      booking.paymentStatus = checked.value ? 'paid by cash' : '';
+      await updateBooking(booking);
     }
   };
 </script>

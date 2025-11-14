@@ -1,12 +1,12 @@
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, watch } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
   import Documents from '@/components/Documents/Documents.vue';
   import Rules from '@/components/Rules.vue';
 
   const bookingStore = useBookingStore();
-  const { bookings, updateBooking } = bookingStore;
+  const { booking, bookings, updateBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
   const showRulesDialog = ref(false);
@@ -16,12 +16,21 @@
 
   const hasDebt = () => bookings.find(booking => booking.debt > 0) !== undefined;
 
+  function waitForBookingReady() {
+    return new Promise(resolve => {
+      const stop = watch(
+          () => booking.orderId,
+          v => { if (v) { stop(); resolve() }},
+          { immediate: true }
+      )
+    })
+  }
+
   onMounted(async () => {
-    for (const booking of bookings) {
-      if (!booking.checkIn) {
-        booking.checkIn = true;
-        await updateBooking(booking);
-      }
+    await waitForBookingReady();
+    if (!booking.checkIn) {
+      booking.checkIn = true;
+      await updateBooking(booking);
     }
   });
 </script>

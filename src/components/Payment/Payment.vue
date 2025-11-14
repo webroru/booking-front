@@ -10,7 +10,7 @@
   import config from '@/config';
 
   const bookingStore = useBookingStore();
-  const { bookings, updateBooking } = bookingStore;
+  const { booking, bookings, updateBooking } = bookingStore;
   const { t } = useI18n();
 
   const instanceOptions = ref({
@@ -31,12 +31,10 @@
   const loading = ref(false);
   const paymentUrl = window.location.href;
 
-  bookings.forEach(booking => {
-    if (booking.debt === 0) {
-      booking.paymentStatus = 'paid';
-      booking.checkIn = true;
-    }
-  });
+  if (booking.debt === 0) {
+    booking.paymentStatus = 'paid';
+    booking.checkIn = true;
+  }
 
   const pay = async () => {
     isButtonDisabled.value = true;
@@ -64,11 +62,9 @@
       errorText.value = result.error.message;
       showError();
     } else {
-      for (const booking of bookings) {
-        booking.paymentStatus = 'paid';
-        booking.debt = 0;
-        await updateBooking(booking);
-      }
+      booking.paymentStatus = 'paid';
+      booking.debt = 0;
+      await updateBooking(booking);
       showSuccess();
     }
     isButtonDisabled.value = false;

@@ -58,7 +58,7 @@ export const useBookingStore = defineStore('booking', () => {
   };
 
   const sendMessage = async (orderId: number, text: string): Promise<void> => {
-    await sendMessageApi(orderId.toString(), text);
+    await sendMessageApi(orderId, text);
   };
 
   return {

@@ -5,20 +5,18 @@
   import { useInfoStore } from '@/stores/info';
 
   const bookingStore = useBookingStore();
-  const { bookings, updateBooking } = bookingStore;
+  const { booking, bookings, updateBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
   const show = ref(false);
   const checked = ref(false);
   const router = useRouter();
 
-  const handle = () => {
-    if (bookings.every(booking => booking.paymentStatus !== 'paid') && checked.value) {
-      bookings.foreach(async booking => {
-        booking.paymentStatus = 'disagree';
-        booking.checkIn = false;
-        await updateBooking(booking);
-      });
+  const handle = async () => {
+    if (booking.paymentStatus !== 'paid' && checked.value) {
+      booking.paymentStatus = 'disagree';
+      booking.checkIn = false;
+      await updateBooking(booking);
       router.push('/');
     }
   };
