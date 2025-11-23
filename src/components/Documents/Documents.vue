@@ -1,7 +1,6 @@
 <script setup>
   import { ref, computed } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { useRoute } from 'vue-router';
   import { InfoFilled } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
@@ -16,7 +15,6 @@
   const showRequirement = ref(true);
   const showGuestForm = ref(false);
   const showSmartCapture = ref(true);
-  const route = useRoute();
 
   const initialGuest = {
     id: null,
@@ -29,7 +27,7 @@
     documentNumber: '',
     checkOutTime: '',
     checkOutDate: '',
-    cityTaxExemption: 0,
+    cityTaxExemption: undefined,
   };
   const guest = ref({ ...initialGuest });
 

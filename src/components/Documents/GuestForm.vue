@@ -139,19 +139,22 @@
     });
   };
 
-  watch([isChildren, isPreschoolers, isSameDayCheckout], ([children, preschoolers, sameDay]) => {
-    if (children) {
+  const setCityTaxExemption = () => {
+    if (isChildren.value) {
       localGuest.cityTaxExemption = 11;
-    } else if (preschoolers) {
+    } else if (isPreschoolers.value) {
       localGuest.cityTaxExemption = 1;
-    } else if(sameDay) {
+    } else if(isSameDayCheckout.value) {
       localGuest.cityTaxExemption = 16;
     } else {
       localGuest.cityTaxExemption = 0;
     }
-  });
+  };
+
+  watch([isChildren, isPreschoolers, isSameDayCheckout], setCityTaxExemption);
 
   onMounted(() => {
+    setCityTaxExemption();
     isMobile.value = window.innerWidth < 768;
   });
 </script>
