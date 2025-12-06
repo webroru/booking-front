@@ -20,9 +20,18 @@
     return new Promise(resolve => {
       const stop = watch(
           () => booking.orderId,
-          v => { if (v) { stop(); resolve() }},
-          { immediate: true }
-      )
+          v => {
+            if (v) {
+              stop();
+              resolve();
+            }
+          }
+      );
+
+      if (booking.orderId) {
+        stop();
+        resolve();
+      }
     })
   }
 
