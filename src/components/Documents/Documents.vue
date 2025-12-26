@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import { ref, computed, onUnmounted } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { InfoFilled } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
@@ -94,7 +94,7 @@
     loading.value = false;
     showGuestForm.value = false;
     showSmartCapture.value = true;
-    update();
+    showWarnings();
   };
 
   const onGuestRemove = async (index) => {
@@ -136,7 +136,7 @@
       .every(key => guest[key] !== undefined);
   };
 
-  const update = () => {
+  const showWarnings = () => {
     if (isGuestLimit.value && !isGuestLimitShow) {
       isGuestLimitShow = true;
       setTimeout(() => {
@@ -196,7 +196,7 @@
     </el-col>
     <el-col :xs="24" :md="8">
       <h3>{{ $t('documents.guests') }}:</h3>
-      <div v-loading="loading">
+      <div v-loading="loading" class="guests">
         <template v-for="(guest, index) in booking.guests">
           <guest-name v-if="guest.documentNumber" :guest="guest" :index="index" @remove="onGuestRemove" :key="guest.documentNumber" />
         </template>
@@ -218,5 +218,9 @@
 
   .el-icon {
     vertical-align: middle;
+  }
+
+  .guests {
+    margin-bottom: 15px;
   }
 </style>
