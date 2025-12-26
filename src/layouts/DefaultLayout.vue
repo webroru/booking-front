@@ -72,10 +72,15 @@
           params: { orderId: selectedBooking.orderId },
           query: route.query,
         });
-
       }
       syncPhotos();
       loading.value = false;
+      if (route.name === 'Instruction' && selectedBooking.isRuleAccepted) {
+        await router.push({
+          name: 'Documents',
+          params: { orderId: route.params.orderId },
+        });
+      }
     }
   };
 </script>
