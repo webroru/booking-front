@@ -21,10 +21,7 @@
   const showMakePhoto = ref(false);
   const isCameraEnabled = ref(false);
   const hasExemptionPhoto = ref(false);
-  const localGuest = reactive({ ...props.guest });
-  localGuest.cityTaxExemption = 0;
-  localGuest.checkOutDate = props.checkOutDate || '';
-  localGuest.checkOutTime = '11:00';
+  const localGuest = reactive({});
   const cityTaxExemptionOptions = [
     { value: 0, label: t('guest.cityTaxExemptionOptions.0') },
     { value: 1, label: t('guest.cityTaxExemptionOptions.1') },
@@ -152,6 +149,18 @@
   };
 
   watch([isChildren, isPreschoolers, isSameDayCheckout], setCityTaxExemption);
+
+  watch(
+      () => props.guest,
+      (newGuest) => {
+        Object.assign(localGuest, newGuest ?? {});
+
+        localGuest.checkOutDate = props.checkOutDate || '';
+        localGuest.cityTaxExemption = 0;
+        localGuest.checkOutTime = '11:00';
+      },
+      { immediate: true, deep: true }
+  );
 
   onMounted(() => {
     setCityTaxExemption();

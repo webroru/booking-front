@@ -1,7 +1,7 @@
 <script setup>
   import { onMounted, ref, nextTick } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { defineComponents, DocumentReaderService, ErrorTypes } from '@regulaforensics/vp-frontend-document-components';
+  import { defineComponents, DocumentReaderService } from '@regulaforensics/vp-frontend-document-components';
   import { countryToAlpha2 } from 'country-to-iso';
 
   const { locale } = useI18n({ useScope: 'global' });
@@ -19,23 +19,8 @@
       return;
     }
 
-    const errors = [
-      ErrorTypes.WASM_ERROR,
-      ErrorTypes.WASM_LICENSE,
-      ErrorTypes.FILE_SIZE,
-      ErrorTypes.UNKNOWN_ERROR,
-      ErrorTypes.NO_CAMERA,
-      ErrorTypes.INCORRECT_CAMERA_ID,
-      ErrorTypes.CONNECTION_ERROR,
-      ErrorTypes.HTTP_NOT_SUPPORTED,
-      ErrorTypes.INSECURE_PAGE_CONTEXT,
-      ErrorTypes.BAD_CONFIGURATION,
-    ];
-
     if (event.detail.data.status === 1 && event.detail.data.response.text !== undefined) {
       emit('recognize', getDateFromFieldList(event.detail.data.response.text.fieldList));
-    } else if (event.detail.data.status === 0 && errors.includes(event.detail.data.reason)) {
-      emit('error', 'fatal');
     } else {
       emit('error');
     }

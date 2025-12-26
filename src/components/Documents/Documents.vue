@@ -61,11 +61,9 @@
   let isGuestLimitShow = false;
   let isExtraGuestShow = false;
   let isLessDocsShow = false;
-  let recognizeAttempts = 0;
 
   const onRecognize = (data) => {
     showRequirement.value = false;
-    recognizeAttempts = 0;
     if (!validate(data)) {
       return;
     }
@@ -79,22 +77,13 @@
   };
 
   const onRecognizeError = (type) => {
-    if (type === 'fatal' || ++recognizeAttempts > 2) {
-      ElNotification({
-        title: 'Error',
-        message: t('documents.recognizeError'),
-        type: 'error',
-      });
-      Object.assign(guest.value, initialGuest);
-      showGuestForm.value = true;
-      showSmartCapture.value = false;
-      return;
-    }
     ElNotification({
       title: 'Error',
-      message: t('documents.recognizeWarning'),
+      message: t('documents.recognizeError'),
       type: 'error',
     });
+    Object.assign(guest.value, initialGuest);
+    showGuestForm.value = true;
   };
 
   const onGuestAdd = async (guest) => {
