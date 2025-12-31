@@ -26,7 +26,7 @@
 
   const isNextDisabledCondition = () => {
     const bookingHasNotBeenSelected = bookings.length === 0;
-    const isBookingPaid = bookings.every(booking => ['paid', 'paid by cash'].includes(booking.paymentStatus));
+    const isBookingPaid = ['paid', 'paid by cash'].includes(booking.paymentStatus);
     const bookingHasNotBeenPaid = active.value === 4 && !isBookingPaid;
     const bookingRuleHasNotBeenAccepted = active.value === 2 && !booking.isRuleAccepted;
     const guests = bookings.reduce((total, booking) => total + booking.guests.length, 0);
