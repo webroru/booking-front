@@ -44,12 +44,13 @@
   };
 
   const getDateFromFieldList = (fieldList) => {
+    const dateOfBirth = getValueFromFieldList(fieldList, 'Date of Birth');
     return {
       gender: getValueFromFieldList(fieldList, 'Sex'),
       firstName: getValueFromFieldList(fieldList, 'Given Names'),
       lastName: getValueFromFieldList(fieldList, 'Surname'),
       nationality: countryToAlpha2(getValueFromFieldList(fieldList, 'Nationality')),
-      dateOfBirth: getValueFromFieldList(fieldList, 'Date of Birth'),
+      dateOfBirth: /^\d{4}-\d{2}-\d{2}$/.test(dateOfBirth) ? dateOfBirth : undefined,
       documentType: getValueFromFieldList(fieldList, 'Document Class Code') === 'P' ? 'PASSPORT' : 'ID',
       documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
     };
