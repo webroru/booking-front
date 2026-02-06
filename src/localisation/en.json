@@ -160,7 +160,8 @@
     "recognizeError": "We are unable to recognize the document. Pleas complete the form below",
     "recognizeWarning": "We are unable to recognize the document. Please check the photo and try again",
     "partlyRecognize": "Some fields are not recognized. Please fill in the fields below",
-    "additionalInfo": "Please add additional information about the guest"
+    "additionalInfo": "Please add additional information about the guest",
+    "registeredGuestsOutOfTotal": "{registered} registered guests out of {total}"
   },
   "guest": {
     "firstName": "First name",

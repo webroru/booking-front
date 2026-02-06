@@ -1,7 +1,7 @@
 <script setup>
   import { ref, computed } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { InfoFilled } from '@element-plus/icons-vue';
+  import { InfoFilled, WarningFilled } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
   import GuestName from '@/components/Documents/GuestName.vue';
@@ -15,6 +15,7 @@
   const showRequirement = ref(true);
   const showGuestForm = ref(false);
   const showSmartCapture = ref(true);
+  const canGoNext = ref(false);
 
   const initialGuest = {
     id: null,
@@ -37,6 +38,7 @@
   const toddlers = computed(() => booking.guests.reduce((acc, guest) => acc + (getAges(guest) < 4 ? 1 : 0), 0));
 
   const isNextDisabled = computed(() => booking.guests.length === 0);
+  const isAllGustsRegistered = computed(() => booking.guests.length >= totalGuestsAmount.value);
 
   const getAges = guest => new Date().getFullYear() - new Date(guest.dateOfBirth).getFullYear();
 
@@ -184,7 +186,7 @@
       <div v-if="showSmartCapture">
         <smart-capture @recognize="onRecognize" @error="onRecognizeError" />
       </div>
-      <p v-if="showRequirement" class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</p>
+      <p v-if="showRequirement" class="info"><el-icon><info-filled /></el-icon> {{ $t('documents.requirement') }}</p>
       <guest-form
           v-if="showGuestForm"
           :guest="guest"
@@ -195,6 +197,7 @@
       />
     </el-col>
     <el-col :xs="24" :md="8">
+      <p v-if="!isAllGustsRegistered" class="danger"><el-icon><warning-filled /></el-icon> {{ $t('documents.registeredGuestsOutOfTotal', { registered: booking.guests.length, total: totalGuestsAmount }) }}</p>
       <h3>{{ $t('documents.guests') }}:</h3>
       <div v-loading="loading" class="guests">
         <template v-for="(guest, index) in booking.guests">
@@ -202,7 +205,7 @@
         </template>
       </div>
       <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment }) }}</strong></p>
-      <next-button :disabled="isNextDisabled" />
+      <next-button :class="{ 'glow-button': isAllGustsRegistered }" :disabled="isNextDisabled" />
     </el-col>
   </el-row>
 </template>
@@ -214,6 +217,30 @@
     padding: 4px;
     vertical-align: baseline;
     line-height: 1.5;
+  }
+
+  .danger {
+    background: var(--el-color-danger-light-5);
+    border-radius: 4px;
+    padding: 4px;
+    vertical-align: baseline;
+    line-height: 1.5;
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
+    }
+    50% {
+      box-shadow: 0 0 12px rgba(64, 158, 255, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
+    }
+  }
+
+  :deep(.glow-button) {
+    animation: glow 2s infinite;
   }
 
   .el-icon {
