@@ -160,7 +160,9 @@
     "recognizeError": "Impossible de reconnaître le document. Veuillez remplir le formulaire ci-dessous",
     "recognizeWarning": "Le document n’a pas pu être reconnu. Vérifiez la photo et réessayez",
     "partlyRecognize": "Certains champs n’ont pas été reconnus. Veuillez les remplir manuellement",
-    "additionalInfo": "Veuillez fournir des informations supplémentaires sur l’invité"
+    "additionalInfo": "Veuillez fournir des informations supplémentaires sur l’invité",
+    "temporaryAccess": "Obtenir un code temporaire",
+    "temporaryAccessWarning": "Veuillez noter ! Vous n'avez pas enregistré tous les invités. Un code temporaire vous sera fourni pour entrer dans l'hôtel. Veuillez enregistrer tous les invités pour recevoir un code permanent."
   },
   "guest": {
     "firstName": "Prénom",

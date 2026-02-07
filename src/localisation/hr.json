@@ -160,7 +160,9 @@
     "recognizeError": "Nismo uspjeli prepoznati dokument. Molimo ispunite obrazac ispod",
     "recognizeWarning": "Nismo prepoznali dokument. Provjerite fotografiju i pokušajte ponovno",
     "partlyRecognize": "Neka polja nisu prepoznata. Molimo ispunite ih ručno",
-    "additionalInfo": "Molimo dodajte dodatne informacije o gostu"
+    "additionalInfo": "Molimo dodajte dodatne informacije o gostu",
+    "temporaryAccess": "Dobijte privremeni kod",
+    "temporaryAccessWarning": "Molimo vas, imajte na umu! Niste registrirali sve goste. Dobićete privremeni kod za ulazak u hotel. Molimo registrirajte sve goste da biste dobili trajni kod."
   },
   "guest": {
     "firstName": "Ime",

@@ -1,20 +1,22 @@
 <script setup>
   import { ref, computed } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { InfoFilled } from '@element-plus/icons-vue';
+  import { useRouter } from 'vue-router';
+  import { InfoFilled, WarningFilled } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
   import GuestName from '@/components/Documents/GuestName.vue';
   import GuestForm from '@/components/Documents/GuestForm.vue';
-  import NextButton from '@/components/Confirmation/NextButton.vue';
 
   const store = useBookingStore();
   const { booking, bookings, updateBooking } = store;
   const { t } = useI18n();
+  const router = useRouter();
   const loading = ref(false);
   const showRequirement = ref(true);
   const showGuestForm = ref(false);
   const showSmartCapture = ref(true);
+  const showDialog = ref(false);
 
   const initialGuest = {
     id: null,
@@ -37,6 +39,7 @@
   const toddlers = computed(() => booking.guests.reduce((acc, guest) => acc + (getAges(guest) < 4 ? 1 : 0), 0));
 
   const isNextDisabled = computed(() => booking.guests.length === 0);
+  const isAllGustsRegistered = computed(() => booking.guests.length >= totalGuestsAmount.value);
 
   const getAges = guest => new Date().getFullYear() - new Date(guest.dateOfBirth).getFullYear();
 
@@ -172,6 +175,24 @@
     }
   };
 
+  const onNextClick = () => {
+    if (isAllGustsRegistered) {
+      showDialog.value = true;
+    } else {
+      router.push(nextStep());
+    }
+  }
+
+  const confirm = () => {
+    showDialog.value = false
+    router.push(nextStep());
+  }
+
+  const nextStep = () => {
+    const getDebt = () => Math.max(bookings.reduce((debt, booking) => (debt + booking.debt), 0), 0);
+    return getDebt() ? `/confirmation/${booking?.orderId}/payment` : `/confirmation/${booking?.orderId}/booking-info`;
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -184,7 +205,7 @@
       <div v-if="showSmartCapture">
         <smart-capture @recognize="onRecognize" @error="onRecognizeError" />
       </div>
-      <p v-if="showRequirement" class="info"><el-icon><InfoFilled /></el-icon> {{ $t('documents.requirement') }}</p>
+      <p v-if="showRequirement" class="info"><el-icon><info-filled /></el-icon> {{ $t('documents.requirement') }}</p>
       <guest-form
           v-if="showGuestForm"
           :guest="guest"
@@ -195,16 +216,26 @@
       />
     </el-col>
     <el-col :xs="24" :md="8">
+      <p v-if="!isAllGustsRegistered" class="danger"><el-icon><warning-filled /></el-icon> {{ $t('documents.registeredGuestsOutOfTotal', { registered: booking.guests.length, total: totalGuestsAmount }) }}</p>
       <h3>{{ $t('documents.guests') }}:</h3>
       <div v-loading="loading" class="guests">
-        <template v-for="(guest, index) in booking.guests">
-          <guest-name v-if="guest.documentNumber" :guest="guest" :index="index" @remove="onGuestRemove" :key="guest.documentNumber" />
-        </template>
+        <guest-name v-for="index in Math.max(booking.guests.length, totalGuestsAmount)" :guest="booking.guests[index - 1] ?? null" :index="index" @remove="onGuestRemove" :key="`guest_${index}`" />
       </div>
       <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment }) }}</strong></p>
-      <next-button :disabled="isNextDisabled" />
+      <el-button @click="onNextClick" :class="{ 'glow-button': isAllGustsRegistered }" :disabled="isNextDisabled">
+        <b>{{ isAllGustsRegistered ? $t('common.next') : $t('documents.temporaryAccess') }}</b>
+      </el-button>
     </el-col>
   </el-row>
+  <el-dialog v-model="showDialog" title="Warning" width="80%">
+    {{ $t('documents.temporaryAccessWarning') }}
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="showDialog = false">{{ $t('common.cancel') }}</el-button>
+        <el-button type="primary" @click="confirm">{{ $t('common.next') }}</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped>
@@ -214,6 +245,30 @@
     padding: 4px;
     vertical-align: baseline;
     line-height: 1.5;
+  }
+
+  .danger {
+    background: var(--el-color-danger-light-5);
+    border-radius: 4px;
+    padding: 4px;
+    vertical-align: baseline;
+    line-height: 1.5;
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
+    }
+    50% {
+      box-shadow: 0 0 12px rgba(64, 158, 255, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
+    }
+  }
+
+  :deep(.glow-button) {
+    animation: glow 2s infinite;
   }
 
   .el-icon {

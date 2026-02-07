@@ -160,7 +160,10 @@
     "recognizeError": "We are unable to recognize the document. Pleas complete the form below",
     "recognizeWarning": "We are unable to recognize the document. Please check the photo and try again",
     "partlyRecognize": "Some fields are not recognized. Please fill in the fields below",
-    "additionalInfo": "Please add additional information about the guest"
+    "additionalInfo": "Please add additional information about the guest",
+    "registeredGuestsOutOfTotal": "{registered} registered guests out of {total}",
+    "temporaryAccess": "Get a temporary code",
+    "temporaryAccessWarning": "Please note! You have not registered all guests. You will be given a temporary code to enter the hotel. Please register all guests to receive a permanent code."
   },
   "guest": {
     "firstName": "First name",

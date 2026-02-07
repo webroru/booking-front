@@ -160,7 +160,9 @@
     "recognizeError": "Dokument konnte nicht erkannt werden. Bitte füllen Sie das Formular unten aus",
     "recognizeWarning": "Dokument nicht erkannt. Überprüfen Sie das Foto und versuchen Sie es erneut",
     "partlyRecognize": "Einige Felder wurden nicht erkannt. Bitte manuell ausfüllen",
-    "additionalInfo": "Bitte geben Sie zusätzliche Informationen zum Gast ein"
+    "additionalInfo": "Bitte geben Sie zusätzliche Informationen zum Gast ein",
+    "temporaryAccess": "Einen temporären Code erhalten",
+    "temporaryAccessWarning": "Bitte beachten! Sie haben nicht alle Gäste registriert. Sie erhalten einen temporären Code, um das Hotel zu betreten. Bitte registrieren Sie alle Gäste, um einen permanenten Code zu erhalten."
   },
   "guest": {
     "firstName": "Vorname",
