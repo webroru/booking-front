@@ -6,10 +6,6 @@
     disabled: Boolean,
   });
 
-  defineOptions({
-    inheritAttrs: false,
-  })
-
   const bookingStore = useBookingStore();
   const route = useRoute();
   const { booking, bookings } = bookingStore;
@@ -45,7 +41,7 @@
 
 <template>
   <router-link v-if="!isLastStep()" :to="nextStep()" :class="{ disabled }">
-    <el-button v-bind="$attrs" :disabled="disabled"><b>{{ $t('common.next') }}</b></el-button>
+    <el-button :disabled="disabled"><b>{{ $t('common.next') }}</b></el-button>
   </router-link>
   <router-link v-if="isLastStep()" to="/">
     <el-button>{{ $t('common.exit') }}</el-button>
