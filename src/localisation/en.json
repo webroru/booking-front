@@ -165,6 +165,17 @@
     "temporaryAccess": "Get a temporary code",
     "temporaryAccessWarning": "Please note! You have not registered all guests. You will be given a temporary code to enter the hotel. Please register all guests to receive a permanent code."
   },
+  de.json
+  en.json
+  es.json
+  fr.json
+  hr.json
+  it.json
+  messages.ts
+  pl.json
+  ru.json
+  sl.json
+  zh.json
   "guest": {
     "firstName": "First name",
     "lastName": "Last name",
