@@ -1,21 +1,22 @@
 <script setup>
   import { ref, computed } from 'vue';
   import { useI18n } from 'vue-i18n';
+  import { useRouter } from 'vue-router';
   import { InfoFilled, WarningFilled } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
   import GuestName from '@/components/Documents/GuestName.vue';
   import GuestForm from '@/components/Documents/GuestForm.vue';
-  import NextButton from '@/components/Confirmation/NextButton.vue';
 
   const store = useBookingStore();
   const { booking, bookings, updateBooking } = store;
   const { t } = useI18n();
+  const router = useRouter();
   const loading = ref(false);
   const showRequirement = ref(true);
   const showGuestForm = ref(false);
   const showSmartCapture = ref(true);
-  const canGoNext = ref(false);
+  const showDialog = ref(false);
 
   const initialGuest = {
     id: null,
@@ -174,6 +175,24 @@
     }
   };
 
+  const onNextClick = () => {
+    if (isAllGustsRegistered) {
+      showDialog.value = true;
+    } else {
+      router.push(nextStep());
+    }
+  }
+
+  const confirm = () => {
+    showDialog.value = false
+    router.push(nextStep());
+  }
+
+  const nextStep = () => {
+    const getDebt = () => Math.max(bookings.reduce((debt, booking) => (debt + booking.debt), 0), 0);
+    return getDebt() ? `/confirmation/${booking?.orderId}/payment` : `/confirmation/${booking?.orderId}/booking-info`;
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -205,9 +224,20 @@
         </template>
       </div>
       <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment }) }}</strong></p>
-      <next-button :class="{ 'glow-button': isAllGustsRegistered }" :disabled="isNextDisabled" />
+      <el-button @click="onNextClick" :class="{ 'glow-button': isAllGustsRegistered }" :disabled="isNextDisabled">
+        <b>{{ isAllGustsRegistered ? $t('common.next') : $t('documents.temporaryAccess') }}</b>
+      </el-button>
     </el-col>
   </el-row>
+  <el-dialog v-model="showDialog" title="Warning" width="80%">
+    {{ $t('documents.temporaryAccessWarning') }}
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="showDialog = false">{{ $t('common.cancel') }}</el-button>
+        <el-button type="primary" @click="confirm">{{ $t('common.next') }}</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped>

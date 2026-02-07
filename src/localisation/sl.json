@@ -160,7 +160,9 @@
     "recognizeError": "Ni bilo mogoče prepoznati dokumenta. Prosimo, izpolnite obrazec spodaj",
     "recognizeWarning": "Dokument ni bil prepoznan. Preverite fotografijo in poskusite znova",
     "partlyRecognize": "Nekatera polja niso bila prepoznana. Izpolnite jih ročno",
-    "additionalInfo": "Dodajte dodatne informacije o gostu"
+    "additionalInfo": "Dodajte dodatne informacije o gostu",
+    "temporaryAccess": "Pridobite začasno kodo",
+    "temporaryAccessWarning": "Prosimo, upoštevajte! Niste registrirali vseh gostov. Dobili boste začasno kodo za vstop v hotel. Registrirajte vse goste, da boste prejeli stalno kodo."
   },
   "guest": {
     "firstName": "Ime",
