@@ -219,9 +219,7 @@
       <p v-if="!isAllGustsRegistered" class="danger"><el-icon><warning-filled /></el-icon> {{ $t('documents.registeredGuestsOutOfTotal', { registered: booking.guests.length, total: totalGuestsAmount }) }}</p>
       <h3>{{ $t('documents.guests') }}:</h3>
       <div v-loading="loading" class="guests">
-        <template v-for="(guest, index) in booking.guests">
-          <guest-name v-if="guest.documentNumber" :guest="guest" :index="index" @remove="onGuestRemove" :key="guest.documentNumber" />
-        </template>
+        <guest-name v-for="index in Math.max(booking.guests.length, totalGuestsAmount)" :guest="booking.guests[index - 1] ?? null" :index="index" @remove="onGuestRemove" :key="`guest_${index}`" />
       </div>
       <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment }) }}</strong></p>
       <el-button @click="onNextClick" :class="{ 'glow-button': isAllGustsRegistered }" :disabled="isNextDisabled">
