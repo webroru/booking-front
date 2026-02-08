@@ -176,7 +176,7 @@
   };
 
   const onNextClick = () => {
-    if (isAllGustsRegistered) {
+    if (!isAllGustsRegistered.value) {
       showDialog.value = true;
     } else {
       router.push(nextStep());
