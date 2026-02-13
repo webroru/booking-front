@@ -70,28 +70,28 @@
   <el-button type="primary" @click="showFacilitiesDialog = true">{{ $t('bookingInfo.facilities') }}</el-button>
   <el-button type="primary" @click="showextrasDialog = true">{{ $t('bookingInfo.extras') }}</el-button>
 
-  <el-dialog v-model="showRulesDialog" :title="$t('bookingInfo.rules')" width="80%">
+  <el-dialog v-model="showRulesDialog" width="80%">
     <Rules />
     <template #footer>
       <el-button @click="showRulesDialog = false">{{ $t('common.close') }}</el-button>
     </template>
   </el-dialog>
 
-  <el-dialog v-model="showHowToMakeInDialog" :title="$t('bookingInfo.rules')" width="30%">
+  <el-dialog v-model="showHowToMakeInDialog" width="30%">
     <div v-html="info.howToMakeIt"></div>
     <template #footer>
       <el-button @click="showHowToMakeInDialog = false">{{ $t('common.close') }}</el-button>
     </template>
   </el-dialog>
 
-  <el-dialog v-model="showFacilitiesDialog" :title="$t('bookingInfo.rules')" width="30%">
+  <el-dialog v-model="showFacilitiesDialog" width="30%">
     <div v-html="info.facilities"></div>
     <template #footer>
       <el-button @click="showFacilitiesDialog = false">{{ $t('common.close') }}</el-button>
     </template>
   </el-dialog>
 
-  <el-dialog v-model="showextrasDialog" :title="$t('bookingInfo.rules')" width="30%">
+  <el-dialog v-model="showextrasDialog" width="30%">
     <div v-html="info.extras"></div>
     <template #footer>
       <el-button @click="showextrasDialog = false">{{ $t('common.close') }}</el-button>
