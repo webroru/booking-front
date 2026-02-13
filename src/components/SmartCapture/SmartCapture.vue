@@ -51,9 +51,15 @@
       lastName: getValueFromFieldList(fieldList, 'Surname'),
       nationality: countryToAlpha2(getValueFromFieldList(fieldList, 'Nationality')),
       dateOfBirth: /^\d{4}-\d{2}-\d{2}$/.test(dateOfBirth) ? dateOfBirth : undefined,
-      documentType: getValueFromFieldList(fieldList, 'Document Class Code') === 'P' ? 'PASSPORT' : 'ID',
+      documentType: getDocumentType(getValueFromFieldList(fieldList, 'Document Class Code')),
       documentNumber: getValueFromFieldList(fieldList, 'Document Number'),
     };
+  };
+
+  const getDocumentType = (docClassCode) => {
+    if (docClassCode === 'P') return 'PASSPORT';
+    if (docClassCode === 'V') return 'DRIVER';
+    return 'ID';
   };
 
   onMounted(async () => {

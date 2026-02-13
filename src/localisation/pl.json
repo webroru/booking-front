@@ -177,6 +177,7 @@
     "documentType": "Typ dokumentu",
     "passport": "Paszport",
     "id": "Dowód osobisty",
+    "driver": "Prawo jazdy",
     "documentNumber": "Numer dokumentu",
     "add": "Dodaj",
     "checkOutDate": "Data wymeldowania",

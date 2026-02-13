@@ -177,6 +177,7 @@
     "documentType": "Dokumenttyp",
     "passport": "Reisepass",
     "id": "Personalausweis",
+    "driver": "Führerschein",
     "documentNumber": "Dokumentnummer",
     "add": "Hinzufügen",
     "checkOutDate": "Abreisedatum",

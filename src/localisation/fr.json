@@ -177,6 +177,7 @@
     "documentType": "Type de document",
     "passport": "Passeport",
     "id": "Carte d’identité",
+    "driver": "Permis de conduire",
     "documentNumber": "Numéro du document",
     "add": "Ajouter",
     "checkOutDate": "Date de départ",

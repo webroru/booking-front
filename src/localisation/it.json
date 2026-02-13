@@ -177,6 +177,7 @@
     "documentType": "Tipo di documento",
     "passport": "Passaporto",
     "id": "Carta d’identità",
+    "driver": "Patente di guida",
     "documentNumber": "Numero documento",
     "add": "Aggiungi",
     "checkOutDate": "Data di check-out",

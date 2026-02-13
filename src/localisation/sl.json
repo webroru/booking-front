@@ -177,6 +177,7 @@
     "documentType": "Vrsta dokumenta",
     "passport": "Potni list",
     "id": "Osebna izkaznica",
+    "driver": "Vozniško dovoljenje",
     "documentNumber": "Številka dokumenta",
     "add": "Dodaj",
     "checkOutDate": "Datum odjave",

@@ -177,6 +177,7 @@
     "documentType": "Vrsta dokumenta",
     "passport": "Putovnica",
     "id": "Osobna iskaznica",
+    "driver": "Vozačka dozvola",
     "documentNumber": "Broj dokumenta",
     "add": "Dodaj",
     "checkOutDate": "Datum odjave",

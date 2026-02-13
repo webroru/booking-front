@@ -177,6 +177,7 @@
     "documentType": "Tipo de documento",
     "passport": "Pasaporte",
     "id": "DNI",
+    "driver": "Carnet de conducir",
     "documentNumber": "Número de documento",
     "add": "Añadir",
     "checkOutDate": "Fecha de salida",

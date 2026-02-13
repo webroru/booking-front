@@ -177,6 +177,7 @@
     "documentType": "证件类型",
     "passport": "护照",
     "id": "身份证",
+    "driver": "驾驶执照",
     "documentNumber": "证件号码",
     "add": "添加",
     "checkOutDate": "退房日期",

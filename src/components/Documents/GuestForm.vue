@@ -207,6 +207,7 @@
       <el-radio-group v-model="localGuest.documentType">
         <el-radio value="PASSPORT">{{ $t('guest.passport') }}</el-radio>
         <el-radio value="ID">{{ $t('guest.id') }}</el-radio>
+        <el-radio value="DRIVER">{{ $t('guest.driver') }}</el-radio>
       </el-radio-group>
     </el-form-item>
     <el-form-item v-show="!guest.documentNumber" :label="t('guest.documentNumber')" :label-position="labelPosition" prop="documentNumber" required>

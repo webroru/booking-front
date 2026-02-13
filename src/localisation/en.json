@@ -178,6 +178,7 @@
     "documentType": "Document type",
     "passport": "Passport",
     "id": "Id",
+    "driver": "driver's license",
     "documentNumber": "Document number",
     "add": "Add",
     "checkOutDate": "Check-out date",
