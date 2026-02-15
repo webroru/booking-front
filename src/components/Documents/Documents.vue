@@ -222,7 +222,12 @@
         <guest-name v-for="index in Math.max(booking.guests.length, totalGuestsAmount)" :guest="booking.guests[index - 1] ?? null" :index="index" @remove="onGuestRemove" :key="`guest_${index}`" />
       </div>
       <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment }) }}</strong></p>
-      <el-button @click="onNextClick" :class="{ 'glow-button': isAllGustsRegistered }" :disabled="isNextDisabled">
+      <el-button
+          v-if="router.currentRoute.value.name === 'Documents'"
+          @click="onNextClick"
+          :class="{ 'glow-button': isAllGustsRegistered }"
+          :disabled="isNextDisabled"
+      >
         <b>{{ isAllGustsRegistered ? $t('common.next') : $t('documents.temporaryAccess') }}</b>
       </el-button>
     </el-col>
