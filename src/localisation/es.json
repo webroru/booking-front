@@ -161,7 +161,7 @@
     "recognizeWarning": "No se reconoció el documento. Revisa la foto e inténtalo de nuevo",
     "partlyRecognize": "Algunos campos no se reconocieron. Rellénalos manualmente",
     "additionalInfo": "Por favor, añade información adicional sobre el huésped",
-    "temporaryAccess": "Obtener un código temporal",
+    "temporaryAccess": "Obtener acceso temporal",
     "temporaryAccessWarning": "¡Atención! No ha registrado a todos los huéspedes. Se le proporcionará un código temporal para entrar al hotel. Por favor, registre a todos los huéspedes para recibir un código permanente."
   },
   "guest": {

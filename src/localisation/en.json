@@ -162,7 +162,7 @@
     "partlyRecognize": "Some fields are not recognized. Please fill in the fields below",
     "additionalInfo": "Please add additional information about the guest",
     "registeredGuestsOutOfTotal": "{registered} registered guests out of {total}",
-    "temporaryAccess": "Get a temporary code",
+    "temporaryAccess": "Get Temporary Access",
     "temporaryAccessWarning": "Please note! You have not registered all guests. You will be given a temporary code to enter the hotel. Please register all guests to receive a permanent code."
   },
   "guest": {

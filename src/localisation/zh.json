@@ -161,7 +161,7 @@
     "recognizeWarning": "无法识别，请检查照片并重试",
     "partlyRecognize": "部分字段未识别，请手动填写",
     "additionalInfo": "请补充客人信息",
-    "temporaryAccess": "获取临时代码",
+    "temporaryAccess": "获取临时访问权限",
     "temporaryAccessWarning": "请注意！您尚未注册所有客人。您将获得一个临时代码以进入酒店。请注册所有客人以获取永久代码。"
   },
   "guest": {
