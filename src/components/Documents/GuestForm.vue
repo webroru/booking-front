@@ -97,7 +97,7 @@
   });
 
   const labelPosition = computed(() => (isMobile.value ? 'top' : 'left'));
-  const isChildren = computed(() => guestAge.value !== null && guestAge.value >= 7 && guestAge.value <= 18);
+  const isChildren = computed(() => guestAge.value !== null && guestAge.value >= 7 && guestAge.value < 18);
   const isPreschoolers = computed(() => guestAge.value !== null && guestAge.value < 7);
   const isSameDayCheckout = computed(() => {
     if (!props.checkInDate || !localGuest.checkOutDate) return false;
