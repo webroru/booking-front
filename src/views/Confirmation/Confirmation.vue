@@ -50,7 +50,7 @@
 
   <div class="navigation">
     <prev-button />
-    <next-button :disabled="isNextDisabled "/>
+    <next-button />
   </div>
 </template>
 
