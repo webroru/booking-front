@@ -1,12 +1,16 @@
 <script setup>
-  import { ref, watch } from 'vue';
+  import { ref, watch, onMounted } from 'vue';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
+  import { useNavigationStore } from '@/stores/navigation';
 
   const bookingStore = useBookingStore();
   const { booking } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
+  const navigation = useNavigationStore();
+  const { button } = navigation;
+
   const showDialog = ref((() => {
     if (!booking.checkInDate) {
       return false;
@@ -23,12 +27,23 @@
     const chechIn = new Date(booking.checkInDate);
     return today < chechIn;
   };
-  
+
   watch(() => booking.checkInDate, (checkInDate) => {
     if (checkInDate) {
       showDialog.value = isCheckinNotToday();
     }
   });
+
+  watch(
+      () => booking?.orderId,
+      (orderId) => {
+        if (!orderId) return
+
+        button.disabled = false
+        button.to = `/confirmation/${orderId}/rules`
+      },
+      { immediate: true }
+  )
 </script>
 
 <template>
