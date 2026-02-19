@@ -18,12 +18,15 @@
   watch(
       booking,
       (booking) => {
-        if (!booking.orderId) return;
+        if (!booking.orderId) {
+          return;
+        }
 
         button.label = t('common.next');
         button.variant = 'primary';
         button.disabled = !booking.isRuleAccepted;
         button.to = `/confirmation/${booking.orderId}/documents`;
+        button.confirmation = null;
       },
       { immediate: true }
   )
