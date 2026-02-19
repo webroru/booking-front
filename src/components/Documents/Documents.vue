@@ -1,22 +1,24 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import {ref, computed, watch} from 'vue';
+  import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
-  import { useRouter } from 'vue-router';
   import { InfoFilled, WarningFilled } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
+  import { useNavigationStore } from '@/stores/navigation';
   import SmartCapture from '@/components/SmartCapture/SmartCapture.vue';
   import GuestName from '@/components/Documents/GuestName.vue';
   import GuestForm from '@/components/Documents/GuestForm.vue';
 
   const store = useBookingStore();
   const { booking, bookings, updateBooking } = store;
+  const navigation = useNavigationStore();
+  const { button } = navigation;
   const { t } = useI18n();
-  const router = useRouter();
+  const route = useRoute()
   const loading = ref(false);
   const showRequirement = ref(true);
   const showGuestForm = ref(false);
   const showSmartCapture = ref(true);
-  const showDialog = ref(false);
 
   const initialGuest = {
     id: null,
@@ -38,7 +40,6 @@
   const preschoolers = computed(() => booking.guests.reduce((acc, guest) => acc + (getAges(guest) >= 4 && getAges(guest) < 7 ? 1 : 0), 0));
   const toddlers = computed(() => booking.guests.reduce((acc, guest) => acc + (getAges(guest) < 4 ? 1 : 0), 0));
 
-  const isNextDisabled = computed(() => booking.guests.length === 0);
   const isAllGustsRegistered = computed(() => booking.guests.length >= totalGuestsAmount.value);
 
   const getAges = guest => new Date().getFullYear() - new Date(guest.dateOfBirth).getFullYear();
@@ -175,27 +176,35 @@
     }
   };
 
-  const onNextClick = () => {
-    if (!isAllGustsRegistered.value) {
-      showDialog.value = true;
-    } else {
-      router.push(nextStep());
-    }
-  }
-
-  const confirm = () => {
-    showDialog.value = false
-    router.push(nextStep());
-  }
-
-  const nextStep = () => {
-    const getDebt = () => Math.max(bookings.reduce((debt, booking) => (debt + booking.debt), 0), 0);
-    return getDebt() ? `/confirmation/${booking?.orderId}/payment` : `/confirmation/${booking?.orderId}/booking-info`;
-  };
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const getNextRoute = (orderId) => {
+    const getDebt = () => Math.max(bookings.reduce((debt, booking) => (debt + booking.debt), 0), 0);
+    return getDebt() ? `/confirmation/${orderId}/payment` : `/confirmation/${orderId}/booking-info`;
+  }
+
+  watch(
+    booking,
+    (booking) => {
+      if (!booking.orderId || route.name !== 'Documents') return;
+
+      button.disabled = booking.guests.length === 0;
+      button.to = getNextRoute(booking.orderId);
+
+      if (!isAllGustsRegistered.value) {
+        button.variant = 'warning';
+        button.label = t('documents.temporaryAccess');
+        button.confirmation = t('documents.temporaryAccessWarning');
+      } else {
+        button.variant = 'primary';
+        button.label = t('common.next');
+        button.confirmation = null;
+      }
+    },
+    { immediate: true }
+  )
 </script>
 
 <template>
@@ -222,25 +231,8 @@
         <guest-name v-for="index in Math.max(booking.guests.length, totalGuestsAmount)" :guest="booking.guests[index - 1] ?? null" :index="index" @remove="onGuestRemove" :key="`guest_${index}`" />
       </div>
       <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment }) }}</strong></p>
-      <el-button
-          v-if="router.currentRoute.value.name === 'Documents'"
-          @click="onNextClick"
-          :class="{ 'glow-button': isAllGustsRegistered }"
-          :disabled="isNextDisabled"
-      >
-        <b>{{ isAllGustsRegistered ? $t('common.next') : $t('documents.temporaryAccess') }}</b>
-      </el-button>
     </el-col>
   </el-row>
-  <el-dialog v-model="showDialog" title="Warning" width="80%">
-    {{ $t('documents.temporaryAccessWarning') }}
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="showDialog = false">{{ $t('common.cancel') }}</el-button>
-        <el-button type="primary" @click="confirm">{{ $t('common.next') }}</el-button>
-      </span>
-    </template>
-  </el-dialog>
 </template>
 
 <style scoped>
@@ -258,22 +250,6 @@
     padding: 4px;
     vertical-align: baseline;
     line-height: 1.5;
-  }
-
-  @keyframes glow {
-    0% {
-      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
-    }
-    50% {
-      box-shadow: 0 0 12px rgba(64, 158, 255, 0.6);
-    }
-    100% {
-      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
-    }
-  }
-
-  :deep(.glow-button) {
-    animation: glow 2s infinite;
   }
 
   .el-icon {

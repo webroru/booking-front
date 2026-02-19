@@ -1,60 +1,72 @@
 <script setup>
-  import { useBookingStore } from '@/stores/booking';
-  import { useRoute } from 'vue-router';
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
+  import { useNavigationStore } from '@/stores/navigation';
 
-  defineProps({
-    disabled: Boolean,
-  });
+  const router = useRouter()
+  const navigation = useNavigationStore();
+  const { button } = navigation;
+  const showDialog = ref(false);
 
-  const bookingStore = useBookingStore();
-  const route = useRoute();
-  const { booking, bookings } = bookingStore;
-
-  const step = [
-    'search',
-    'instruction',
-    'rules',
-    'documents',
-    'payment',
-    'booking-info',
-  ];
-
-  const currentStep = () => step.findIndex(path => route.path.includes(path));
-  const isLastStep = () => currentStep() >= 5;
-
-  const nextStep = () => {
-    let stepIndex = currentStep();
-    const getDebt = () => Math.max(bookings.reduce((debt, booking) => (debt + booking.debt), 0), 0);
-    if (bookings.every(booking => booking.checkIn) && stepIndex === 0) {
-      return `/confirmation/${booking?.orderId}/booking-info`;
+  const onClick = () => {
+    if (button.confirmation) {
+      showDialog.value = true;
+    } else {
+      router.push(button.to);
     }
-    stepIndex++;
-    if (step[stepIndex] === 'payment' && getDebt() === 0) {
-      stepIndex++;
-    }
-    if (stepIndex < 0) {
-      return '/';
-    }
-    return stepIndex === 0 ? '/confirmation/search' : `/confirmation/${booking?.orderId}/${step[stepIndex]}`;
-  };
+  }
+
+  const confirm = () => {
+    showDialog.value = false
+    router.push(button.to);
+  }
 </script>
 
 <template>
-  <router-link v-if="!isLastStep()" :to="nextStep()" :class="{ disabled }">
-    <el-button :disabled="disabled"><b>{{ $t('common.next') }}</b></el-button>
-  </router-link>
-  <router-link v-if="isLastStep()" to="/">
-    <el-button>{{ $t('common.exit') }}</el-button>
-  </router-link>
+  <el-button
+      class="button"
+      :type="button.variant"
+      :disabled="button.disabled"
+      :class="{ disabled: button.disabled, 'glow-button': !button.disabled && button.variant === 'primary' }"
+      @click="onClick"
+  >
+    <b>{{ button.label }}</b>
+  </el-button>
+
+  <el-dialog v-model="showDialog" title="Warning" width="80%">
+    {{ $t('documents.temporaryAccessWarning') }}
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="showDialog = false">{{ $t('common.cancel') }}</el-button>
+        <el-button type="primary" @click="confirm">{{ $t('common.next') }}</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped>
-  a {
+  .button {
     margin-top: 12px;
     text-decoration: none;
   }
 
   .disabled {
     pointer-events: none;
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
+    }
+    50% {
+      box-shadow: 0 0 12px rgba(64, 158, 255, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
+    }
+  }
+
+  .glow-button {
+    animation: glow 2s infinite;
   }
 </style>

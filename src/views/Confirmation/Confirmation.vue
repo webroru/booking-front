@@ -1,20 +1,15 @@
 <script setup>
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
-  import { useBookingStore } from '@/stores/booking';
   import NextButton from '@/components/Confirmation/NextButton.vue';
   import PrevButton from '@/components/Confirmation/PrevButton.vue';
-
-  const bookingStore = useBookingStore();
-  const { booking, bookings } = bookingStore;
 
   const route = useRoute();
   const active = computed(() => {
     const stepIndex = step.findIndex(path => route.path.includes(path));
     return stepIndex === 6 ? stepIndex - 1 : stepIndex;
   });
-  const isNextDisabled = computed(() => isNextDisabledCondition());
-  
+
   const step = [
     'search',
     'instruction',
@@ -23,17 +18,6 @@
     'payment',
     'booking-info',
   ];
-
-  const isNextDisabledCondition = () => {
-    const bookingHasNotBeenSelected = bookings.length === 0;
-    const isBookingPaid = ['paid', 'paid by cash'].includes(booking.paymentStatus);
-    const bookingHasNotBeenPaid = active.value === 4 && !isBookingPaid;
-    const bookingRuleHasNotBeenAccepted = active.value === 2 && !booking.isRuleAccepted;
-    const guests = bookings.reduce((total, booking) => total + booking.guests.length, 0);
-    const guestsWereNotSpecified = active.value === 3 && guests === 0;
-
-    return bookingHasNotBeenSelected || bookingHasNotBeenPaid || bookingRuleHasNotBeenAccepted || guestsWereNotSpecified;
-  };
 </script>
 
 <template>
@@ -50,7 +34,7 @@
 
   <div class="navigation">
     <prev-button />
-    <next-button :disabled="isNextDisabled "/>
+    <next-button />
   </div>
 </template>
 

@@ -1,7 +1,9 @@
 <script setup>
   import { ref, onMounted, watch } from 'vue';
+  import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { useInfoStore } from '@/stores/info';
+  import { useNavigationStore } from '@/stores/navigation';
   import Documents from '@/components/Documents/Documents.vue';
   import Rules from '@/components/Rules.vue';
 
@@ -9,10 +11,13 @@
   const { booking, bookings, updateBooking } = bookingStore;
   const infoStore = useInfoStore();
   const { info } = infoStore;
+  const navigation = useNavigationStore();
+  const { button } = navigation;
+  const { t } = useI18n();
   const showRulesDialog = ref(false);
   const showHowToMakeInDialog = ref(false);
   const showFacilitiesDialog = ref(false);
-  const showextrasDialog = ref(false);
+  const showExtrasDialog = ref(false);
 
   const hasDebt = () => bookings.find(booking => booking.debt > 0) !== undefined;
 
@@ -42,6 +47,22 @@
       await updateBooking(booking);
     }
   });
+
+  watch(
+    booking,
+    (booking) => {
+      if (!booking.orderId) {
+        return;
+      }
+
+      button.label = t('common.exit');
+      button.variant = 'primary';
+      button.disabled = false;
+      button.to = '/';
+      button.confirmation = null;
+    },
+    { immediate: true }
+  )
 </script>
 
 <template>
@@ -68,7 +89,7 @@
   <el-button type="primary" @click="showRulesDialog = true">{{ $t('bookingInfo.rules') }}</el-button>
   <el-button type="primary" @click="showHowToMakeInDialog = true">{{ $t('bookingInfo.howToMakeIn') }}</el-button>
   <el-button type="primary" @click="showFacilitiesDialog = true">{{ $t('bookingInfo.facilities') }}</el-button>
-  <el-button type="primary" @click="showextrasDialog = true">{{ $t('bookingInfo.extras') }}</el-button>
+  <el-button type="primary" @click="showExtrasDialog = true">{{ $t('bookingInfo.extras') }}</el-button>
 
   <el-dialog v-model="showRulesDialog" width="80%">
     <Rules />
@@ -91,10 +112,10 @@
     </template>
   </el-dialog>
 
-  <el-dialog v-model="showextrasDialog" width="30%">
+  <el-dialog v-model="showExtrasDialog" width="30%">
     <div v-html="info.extras"></div>
     <template #footer>
-      <el-button @click="showextrasDialog = false">{{ $t('common.close') }}</el-button>
+      <el-button @click="showExtrasDialog = false">{{ $t('common.close') }}</el-button>
     </template>
   </el-dialog>
 </template>

@@ -1,16 +1,19 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
   import { Search } from '@element-plus/icons-vue';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { usePhotosStore } from '@/stores/photos';
+  import { useNavigationStore } from '@/stores/navigation';
   import Results from './Results.vue';
 
   const { t } = useI18n();
-  const store = useBookingStore();
-  const { setBookings, searchBooking, setCurrentBooking } = store;
+  const bookingStore = useBookingStore();
+  const { booking, bookings, setBookings, searchBooking, setCurrentBooking } = bookingStore;
   const photosStore = usePhotosStore();
   const { syncPhotos } = photosStore;
+  const navigation = useNavigationStore();
+  const { button } = navigation;
 
   const query = ref();
   const data = ref([]);
@@ -23,6 +26,7 @@
       if (data.value.length === 1) {
         setBookings(data.value);
         setCurrentBooking(data.value[0]);
+        button.disabled = false;
         await syncPhotos();
       }
     } catch (error) {
@@ -33,7 +37,7 @@
     loading.value = false;
   };
 
-  const onSelectBooking = (id) => {
+  const onSelectBooking = async (id) => {
     let bookings = [data.value.find(booking => booking.orderId === id)];
     let selectedBooking = bookings[0];
     if (selectedBooking.groupId) {
@@ -42,8 +46,25 @@
     }
     setBookings(bookings);
     setCurrentBooking(selectedBooking);
-    syncPhotos();
+    button.disabled = false;
+    await syncPhotos();
   };
+
+  const getNextRoute = (orderId) => {
+    return bookings.every(b => b.checkIn) ? `/confirmation/${orderId}/booking-info` : `/confirmation/${orderId}/instruction`;
+  }
+
+  watch(
+    () => booking?.orderId,
+    (orderId) => {
+      if (!orderId) return
+
+      button.disabled = false;
+      button.label = t('common.next');
+      button.to = getNextRoute(orderId);
+    },
+    { immediate: true }
+  )
 </script>
 
 <template>
