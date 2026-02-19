@@ -186,24 +186,24 @@
   }
 
   watch(
-      booking,
-      (booking) => {
-        if (!booking.orderId || route.name !== 'Documents') return;
+    booking,
+    (booking) => {
+      if (!booking.orderId || route.name !== 'Documents') return;
 
-        button.disabled = booking.guests.length === 0;
-        button.to = getNextRoute(booking.orderId);
+      button.disabled = booking.guests.length === 0;
+      button.to = getNextRoute(booking.orderId);
 
-        if (!isAllGustsRegistered.value) {
-          button.variant = 'warning';
-          button.label = t('documents.temporaryAccess');
-          button.confirmation = t('documents.temporaryAccessWarning');
-        } else {
-          button.variant = 'primary';
-          button.label = t('common.next');
-          button.confirmation = null;
-        }
-      },
-      { immediate: true }
+      if (!isAllGustsRegistered.value) {
+        button.variant = 'warning';
+        button.label = t('documents.temporaryAccess');
+        button.confirmation = t('documents.temporaryAccessWarning');
+      } else {
+        button.variant = 'primary';
+        button.label = t('common.next');
+        button.confirmation = null;
+      }
+    },
+    { immediate: true }
   )
 </script>
 
