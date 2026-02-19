@@ -1,16 +1,19 @@
 <script setup>
-  import { ref, onBeforeMount } from 'vue';
+  import {ref, onBeforeMount, watch} from 'vue';
   import { useI18n } from 'vue-i18n';
   import QrcodeVue from 'qrcode.vue';
   import { loadStripe } from '@stripe/stripe-js';
   import { StripeElements, StripeElement } from 'vue-stripe-js';
   import { useBookingStore } from '@/stores/booking';
+  import { useNavigationStore } from '@/stores/navigation';
   import PayByCash from '@/components/Payment/PayByCash.vue';
   import Disagree from '@/components/Payment/Disagree.vue';
   import config from '@/config';
 
   const bookingStore = useBookingStore();
   const { booking, bookings, updateBooking } = bookingStore;
+  const navigation = useNavigationStore();
+  const { button } = navigation;
   const { t } = useI18n();
 
   const instanceOptions = ref({
@@ -117,6 +120,22 @@
       stripeLoaded.value = true;
     });
   });
+
+  watch(
+      booking,
+      (booking) => {
+        if (!booking.orderId) {
+          return;
+        }
+
+        button.label = t('common.next');
+        button.variant = 'primary';
+        button.disabled = !['paid', 'paid by cash'].includes(booking.paymentStatus);
+        button.to = `/confirmation/${booking.orderId}/booking-info`;
+        button.confirmation = null;
+      },
+      { immediate: true }
+  )
 </script>
 
 <template>

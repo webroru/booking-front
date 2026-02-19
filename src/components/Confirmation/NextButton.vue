@@ -1,9 +1,8 @@
 <script setup>
   import { ref } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
+  import { useRouter } from 'vue-router';
   import { useNavigationStore } from '@/stores/navigation';
 
-  const route = useRoute();
   const router = useRouter()
   const navigation = useNavigationStore();
   const { button } = navigation;
@@ -25,6 +24,7 @@
 
 <template>
   <el-button
+      class="button"
       :type="button.variant"
       :disabled="button.disabled"
       :class="{ disabled: button.disabled, 'glow-button': !button.disabled && button.variant === 'primary' }"
@@ -32,10 +32,6 @@
   >
     <b>{{ button.label }}</b>
   </el-button>
-
-<!--  <router-link v-else to="/">-->
-<!--    <el-button>{{ $t('common.exit') }}</el-button>-->
-<!--  </router-link>-->
 
   <el-dialog v-model="showDialog" title="Warning" width="80%">
     {{ $t('documents.temporaryAccessWarning') }}
@@ -49,28 +45,28 @@
 </template>
 
 <style scoped>
-a {
-  margin-top: 12px;
-  text-decoration: none;
-}
-
-.disabled {
-  pointer-events: none;
-}
-
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 0 rgba(64, 158, 255, 0);
+  .button {
+    margin-top: 12px;
+    text-decoration: none;
   }
-  50% {
-    box-shadow: 0 0 12px rgba(64, 158, 255, 0.6);
-  }
-  100% {
-    box-shadow: 0 0 0 rgba(64, 158, 255, 0);
-  }
-}
 
-.glow-button {
-  animation: glow 2s infinite;
-}
+  .disabled {
+    pointer-events: none;
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
+    }
+    50% {
+      box-shadow: 0 0 12px rgba(64, 158, 255, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 0 rgba(64, 158, 255, 0);
+    }
+  }
+
+  .glow-button {
+    animation: glow 2s infinite;
+  }
 </style>

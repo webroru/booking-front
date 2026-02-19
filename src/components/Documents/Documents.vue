@@ -1,7 +1,7 @@
 <script setup>
   import {ref, computed, watch} from 'vue';
+  import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
-  import { useRouter } from 'vue-router';
   import { InfoFilled, WarningFilled } from '@element-plus/icons-vue';
   import { useBookingStore } from '@/stores/booking';
   import { useNavigationStore } from '@/stores/navigation';
@@ -14,12 +14,11 @@
   const navigation = useNavigationStore();
   const { button } = navigation;
   const { t } = useI18n();
-  const router = useRouter();
+  const route = useRoute()
   const loading = ref(false);
   const showRequirement = ref(true);
   const showGuestForm = ref(false);
   const showSmartCapture = ref(true);
-  const showDialog = ref(false);
 
   const initialGuest = {
     id: null,
@@ -177,11 +176,6 @@
     }
   };
 
-  const confirm = () => {
-    showDialog.value = false
-    router.push(getNextRoute(booking.orderId));
-  }
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -194,7 +188,7 @@
   watch(
       booking,
       (booking) => {
-        if (!booking.orderId) return;
+        if (!booking.orderId || route.name !== 'Documents') return;
 
         button.disabled = booking.guests.length === 0;
         button.to = getNextRoute(booking.orderId);
@@ -239,15 +233,6 @@
       <p v-if="showExtraPay"><strong>{{ $t('tax.extraPay', { extraPayment: extraPayment }) }}</strong></p>
     </el-col>
   </el-row>
-  <el-dialog v-model="showDialog" title="Warning" width="80%">
-    {{ $t('documents.temporaryAccessWarning') }}
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="showDialog = false">{{ $t('common.cancel') }}</el-button>
-        <el-button type="primary" @click="confirm">{{ $t('common.next') }}</el-button>
-      </span>
-    </template>
-  </el-dialog>
 </template>
 
 <style scoped>

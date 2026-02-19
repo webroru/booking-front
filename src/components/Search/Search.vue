@@ -59,8 +59,9 @@
       (orderId) => {
         if (!orderId) return
 
-        button.disabled = false
-        button.to = getNextRoute(orderId)
+        button.disabled = false;
+        button.label = t('common.next');
+        button.to = getNextRoute(orderId);
       },
       { immediate: true }
   )
