@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-import { reactive, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useBookingStore } from '@/stores/booking'
 
@@ -12,6 +11,7 @@ export const useNavigationStore = defineStore('navigation', () => {
         label: t('common.next'),
         disabled: true,
         variant: 'primary',
+        confirmation: null,
         to: '/',
     })
 
