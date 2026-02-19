@@ -49,19 +49,19 @@
   });
 
   watch(
-      booking,
-      (booking) => {
-        if (!booking.orderId) {
-          return;
-        }
+    booking,
+    (booking) => {
+      if (!booking.orderId) {
+        return;
+      }
 
-        button.label = t('common.exit');
-        button.variant = 'primary';
-        button.disabled = false;
-        button.to = '/';
-        button.confirmation = null;
-      },
-      { immediate: true }
+      button.label = t('common.exit');
+      button.variant = 'primary';
+      button.disabled = false;
+      button.to = '/';
+      button.confirmation = null;
+    },
+    { immediate: true }
   )
 </script>
 

@@ -1,5 +1,5 @@
 <script setup>
-  import { watch } from "vue";
+  import { watch } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { useBookingStore } from '@/stores/booking';
   import { useNavigationStore } from '@/stores/navigation';
@@ -16,19 +16,19 @@
   };
 
   watch(
-      booking,
-      (booking) => {
-        if (!booking.orderId) {
-          return;
-        }
+    booking,
+    (booking) => {
+      if (!booking.orderId) {
+        return;
+      }
 
-        button.label = t('common.next');
-        button.variant = 'primary';
-        button.disabled = !booking.isRuleAccepted;
-        button.to = `/confirmation/${booking.orderId}/documents`;
-        button.confirmation = null;
-      },
-      { immediate: true }
+      button.label = t('common.next');
+      button.variant = 'primary';
+      button.disabled = !booking.isRuleAccepted;
+      button.to = `/confirmation/${booking.orderId}/documents`;
+      button.confirmation = null;
+    },
+    { immediate: true }
   )
 </script>
 

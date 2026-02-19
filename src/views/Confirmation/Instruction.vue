@@ -35,14 +35,14 @@
   });
 
   watch(
-      () => booking?.orderId,
-      (orderId) => {
-        if (!orderId) return
+    () => booking?.orderId,
+    (orderId) => {
+      if (!orderId) return
 
-        button.disabled = false
-        button.to = `/confirmation/${orderId}/rules`
-      },
-      { immediate: true }
+      button.disabled = false
+      button.to = `/confirmation/${orderId}/rules`
+    },
+    { immediate: true }
   )
 </script>
 

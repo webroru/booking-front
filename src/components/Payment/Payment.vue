@@ -1,5 +1,5 @@
 <script setup>
-  import {ref, onBeforeMount, watch} from 'vue';
+  import { ref, onBeforeMount, watch } from 'vue';
   import { useI18n } from 'vue-i18n';
   import QrcodeVue from 'qrcode.vue';
   import { loadStripe } from '@stripe/stripe-js';
@@ -122,19 +122,19 @@
   });
 
   watch(
-      booking,
-      (booking) => {
-        if (!booking.orderId) {
-          return;
-        }
+    booking,
+    (booking) => {
+      if (!booking.orderId) {
+        return;
+      }
 
-        button.label = t('common.next');
-        button.variant = 'primary';
-        button.disabled = !['paid', 'paid by cash'].includes(booking.paymentStatus);
-        button.to = `/confirmation/${booking.orderId}/booking-info`;
-        button.confirmation = null;
-      },
-      { immediate: true }
+      button.label = t('common.next');
+      button.variant = 'primary';
+      button.disabled = !['paid', 'paid by cash'].includes(booking.paymentStatus);
+      button.to = `/confirmation/${booking.orderId}/booking-info`;
+      button.confirmation = null;
+    },
+    { immediate: true }
   )
 </script>
 
