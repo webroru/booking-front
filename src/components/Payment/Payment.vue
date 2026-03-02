@@ -7,7 +7,6 @@
   import { useBookingStore } from '@/stores/booking';
   import { useNavigationStore } from '@/stores/navigation';
   import PayByCash from '@/components/Payment/PayByCash.vue';
-  import Disagree from '@/components/Payment/Disagree.vue';
   import config from '@/config';
 
   const bookingStore = useBookingStore();
@@ -151,7 +150,6 @@
         <button @click="pay" :disabled="isButtonDisabled">{{ $t('payment.pay') }}</button>
         <p class="card-error" role="alert">{{ errorText }}</p>
         <pay-by-cash :debt="getDebtFormatted()" />
-        <disagree />
       </div>
     </el-col>
     <el-col :xs="24" :sm="8" :md="8">
